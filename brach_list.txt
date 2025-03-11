@@ -1,0 +1,906 @@
+Branch: gen_nGenParts
+Type: UInt_t
+--------------------------------
+Branch: gen_pdgId
+Type: vector<int>
+--------------------------------
+Branch: gen_pt
+Type: vector<float>
+--------------------------------
+Branch: gen_phi
+Type: vector<float>
+--------------------------------
+Branch: gen_eta
+Type: vector<float>
+--------------------------------
+Branch: gen_charge
+Type: vector<short>
+--------------------------------
+Branch: event_runNumber
+Type: Int_t
+--------------------------------
+Branch: event_lumiBlock
+Type: Int_t
+--------------------------------
+Branch: event_eventNumber
+Type: Long64_t
+--------------------------------
+Branch: event_timeStamp
+Type: ULong64_t
+--------------------------------
+Branch: event_bunchCrossing
+Type: Int_t
+--------------------------------
+Branch: event_orbitNumber
+Type: Long64_t
+--------------------------------
+Branch: environment_truePileUp
+Type: Short_t
+--------------------------------
+Branch: environment_actualPileUp
+Type: Short_t
+--------------------------------
+Branch: environment_instLumi
+Type: Int_t
+--------------------------------
+Branch: environment_nPV
+Type: Short_t
+--------------------------------
+Branch: environment_pv_x
+Type: Float_t
+--------------------------------
+Branch: environment_pv_y
+Type: Float_t
+--------------------------------
+Branch: environment_pv_z
+Type: Float_t
+--------------------------------
+Branch: environment_pv_xxErr
+Type: Float_t
+--------------------------------
+Branch: environment_pv_yyErr
+Type: Float_t
+--------------------------------
+Branch: environment_pv_zzErr
+Type: Float_t
+--------------------------------
+Branch: environment_pv_xyErr
+Type: Float_t
+--------------------------------
+Branch: environment_pv_xzErr
+Type: Float_t
+--------------------------------
+Branch: environment_pv_yzErr
+Type: Float_t
+--------------------------------
+Branch: digi_nDigis
+Type: UInt_t
+--------------------------------
+Branch: digi_wheel
+Type: vector<short>
+--------------------------------
+Branch: digi_sector
+Type: vector<short>
+--------------------------------
+Branch: digi_station
+Type: vector<short>
+--------------------------------
+Branch: digi_superLayer
+Type: vector<short>
+--------------------------------
+Branch: digi_layer
+Type: vector<short>
+--------------------------------
+Branch: digi_wire
+Type: vector<short>
+--------------------------------
+Branch: digi_time
+Type: vector<float>
+--------------------------------
+Branch: ph2Digi_nDigis
+Type: UInt_t
+--------------------------------
+Branch: ph2Digi_wheel
+Type: vector<short>
+--------------------------------
+Branch: ph2Digi_sector
+Type: vector<short>
+--------------------------------
+Branch: ph2Digi_station
+Type: vector<short>
+--------------------------------
+Branch: ph2Digi_superLayer
+Type: vector<short>
+--------------------------------
+Branch: ph2Digi_layer
+Type: vector<short>
+--------------------------------
+Branch: ph2Digi_wire
+Type: vector<short>
+--------------------------------
+Branch: ph2Digi_time
+Type: vector<float>
+--------------------------------
+Branch: seg_nSegments
+Type: UInt_t
+--------------------------------
+Branch: seg_wheel
+Type: vector<short>
+--------------------------------
+Branch: seg_sector
+Type: vector<short>
+--------------------------------
+Branch: seg_station
+Type: vector<short>
+--------------------------------
+Branch: seg_hasPhi
+Type: vector<short>
+--------------------------------
+Branch: seg_hasZed
+Type: vector<short>
+--------------------------------
+Branch: seg_posLoc_x
+Type: vector<float>
+--------------------------------
+Branch: seg_posLoc_y
+Type: vector<float>
+--------------------------------
+Branch: seg_posLoc_z
+Type: vector<float>
+--------------------------------
+Branch: seg_dirLoc_x
+Type: vector<float>
+--------------------------------
+Branch: seg_dirLoc_y
+Type: vector<float>
+--------------------------------
+Branch: seg_dirLoc_z
+Type: vector<float>
+--------------------------------
+Branch: seg_posLoc_x_SL1
+Type: vector<float>
+--------------------------------
+Branch: seg_posLoc_x_SL3
+Type: vector<float>
+--------------------------------
+Branch: seg_posLoc_x_midPlane
+Type: vector<float>
+--------------------------------
+Branch: seg_posGlb_phi
+Type: vector<float>
+--------------------------------
+Branch: seg_posGlb_eta
+Type: vector<float>
+--------------------------------
+Branch: seg_dirGlb_phi
+Type: vector<float>
+--------------------------------
+Branch: seg_dirGlb_eta
+Type: vector<float>
+--------------------------------
+Branch: seg_hitsExpPos
+Type: TClonesArray
+--------------------------------
+Branch: seg_hitsExpPosCh
+Type: TClonesArray
+--------------------------------
+Branch: seg_hitsExpWire
+Type: TClonesArray
+--------------------------------
+Branch: seg_phi_t0
+Type: vector<float>
+--------------------------------
+Branch: seg_phi_vDrift
+Type: vector<float>
+--------------------------------
+Branch: seg_phi_normChi2
+Type: vector<float>
+--------------------------------
+Branch: seg_phi_nHits
+Type: vector<short>
+--------------------------------
+Branch: seg_phiHits_pos
+Type: TClonesArray
+--------------------------------
+Branch: seg_phiHits_posCh
+Type: TClonesArray
+--------------------------------
+Branch: seg_phiHits_posErr
+Type: TClonesArray
+--------------------------------
+Branch: seg_phiHits_side
+Type: TClonesArray
+--------------------------------
+Branch: seg_phiHits_wire
+Type: TClonesArray
+--------------------------------
+Branch: seg_phiHits_wirePos
+Type: TClonesArray
+--------------------------------
+Branch: seg_phiHits_layer
+Type: TClonesArray
+--------------------------------
+Branch: seg_phiHits_superLayer
+Type: TClonesArray
+--------------------------------
+Branch: seg_phiHits_time
+Type: TClonesArray
+--------------------------------
+Branch: seg_phiHits_timeCali
+Type: TClonesArray
+--------------------------------
+Branch: seg_z_normChi2
+Type: vector<float>
+--------------------------------
+Branch: seg_z_nHits
+Type: vector<short>
+--------------------------------
+Branch: seg_zHits_pos
+Type: TClonesArray
+--------------------------------
+Branch: seg_zHits_posCh
+Type: TClonesArray
+--------------------------------
+Branch: seg_zHits_posErr
+Type: TClonesArray
+--------------------------------
+Branch: seg_zHits_side
+Type: TClonesArray
+--------------------------------
+Branch: seg_zHits_wire
+Type: TClonesArray
+--------------------------------
+Branch: seg_zHits_wirePos
+Type: TClonesArray
+--------------------------------
+Branch: seg_zHits_layer
+Type: TClonesArray
+--------------------------------
+Branch: seg_zHits_time
+Type: TClonesArray
+--------------------------------
+Branch: seg_zHits_timeCali
+Type: TClonesArray
+--------------------------------
+Branch: ph2Seg_nSegments
+Type: UInt_t
+--------------------------------
+Branch: ph2Seg_wheel
+Type: vector<short>
+--------------------------------
+Branch: ph2Seg_sector
+Type: vector<short>
+--------------------------------
+Branch: ph2Seg_station
+Type: vector<short>
+--------------------------------
+Branch: ph2Seg_hasPhi
+Type: vector<short>
+--------------------------------
+Branch: ph2Seg_hasZed
+Type: vector<short>
+--------------------------------
+Branch: ph2Seg_posLoc_x
+Type: vector<float>
+--------------------------------
+Branch: ph2Seg_posLoc_y
+Type: vector<float>
+--------------------------------
+Branch: ph2Seg_posLoc_z
+Type: vector<float>
+--------------------------------
+Branch: ph2Seg_dirLoc_x
+Type: vector<float>
+--------------------------------
+Branch: ph2Seg_dirLoc_y
+Type: vector<float>
+--------------------------------
+Branch: ph2Seg_dirLoc_z
+Type: vector<float>
+--------------------------------
+Branch: ph2Seg_posLoc_x_SL1
+Type: vector<float>
+--------------------------------
+Branch: ph2Seg_posLoc_x_SL3
+Type: vector<float>
+--------------------------------
+Branch: ph2Seg_posLoc_x_midPlane
+Type: vector<float>
+--------------------------------
+Branch: ph2Seg_posGlb_phi
+Type: vector<float>
+--------------------------------
+Branch: ph2Seg_posGlb_eta
+Type: vector<float>
+--------------------------------
+Branch: ph2Seg_dirGlb_phi
+Type: vector<float>
+--------------------------------
+Branch: ph2Seg_dirGlb_eta
+Type: vector<float>
+--------------------------------
+Branch: ph2Seg_hitsExpPos
+Type: TClonesArray
+--------------------------------
+Branch: ph2Seg_hitsExpPosCh
+Type: TClonesArray
+--------------------------------
+Branch: ph2Seg_hitsExpWire
+Type: TClonesArray
+--------------------------------
+Branch: ph2Seg_phi_t0
+Type: vector<float>
+--------------------------------
+Branch: ph2Seg_phi_vDrift
+Type: vector<float>
+--------------------------------
+Branch: ph2Seg_phi_normChi2
+Type: vector<float>
+--------------------------------
+Branch: ph2Seg_phi_nHits
+Type: vector<short>
+--------------------------------
+Branch: ph2Seg_phiHits_pos
+Type: TClonesArray
+--------------------------------
+Branch: ph2Seg_phiHits_posCh
+Type: TClonesArray
+--------------------------------
+Branch: ph2Seg_phiHits_posErr
+Type: TClonesArray
+--------------------------------
+Branch: ph2Seg_phiHits_side
+Type: TClonesArray
+--------------------------------
+Branch: ph2Seg_phiHits_wire
+Type: TClonesArray
+--------------------------------
+Branch: ph2Seg_phiHits_wirePos
+Type: TClonesArray
+--------------------------------
+Branch: ph2Seg_phiHits_layer
+Type: TClonesArray
+--------------------------------
+Branch: ph2Seg_phiHits_superLayer
+Type: TClonesArray
+--------------------------------
+Branch: ph2Seg_phiHits_time
+Type: TClonesArray
+--------------------------------
+Branch: ph2Seg_phiHits_timeCali
+Type: TClonesArray
+--------------------------------
+Branch: ph2Seg_z_normChi2
+Type: vector<float>
+--------------------------------
+Branch: ph2Seg_z_nHits
+Type: vector<short>
+--------------------------------
+Branch: ph2Seg_zHits_pos
+Type: TClonesArray
+--------------------------------
+Branch: ph2Seg_zHits_posCh
+Type: TClonesArray
+--------------------------------
+Branch: ph2Seg_zHits_posErr
+Type: TClonesArray
+--------------------------------
+Branch: ph2Seg_zHits_side
+Type: TClonesArray
+--------------------------------
+Branch: ph2Seg_zHits_wire
+Type: TClonesArray
+--------------------------------
+Branch: ph2Seg_zHits_wirePos
+Type: TClonesArray
+--------------------------------
+Branch: ph2Seg_zHits_layer
+Type: TClonesArray
+--------------------------------
+Branch: ph2Seg_zHits_time
+Type: TClonesArray
+--------------------------------
+Branch: ph2Seg_zHits_timeCali
+Type: TClonesArray
+--------------------------------
+Branch: mu_nMuons
+Type: UInt_t
+--------------------------------
+Branch: mu_pt
+Type: vector<float>
+--------------------------------
+Branch: mu_phi
+Type: vector<float>
+--------------------------------
+Branch: mu_eta
+Type: vector<float>
+--------------------------------
+Branch: mu_charge
+Type: vector<short>
+--------------------------------
+Branch: mu_isGlobal
+Type: vector<bool>
+--------------------------------
+Branch: mu_isStandalone
+Type: vector<bool>
+--------------------------------
+Branch: mu_isTracker
+Type: vector<bool>
+--------------------------------
+Branch: mu_isTrackerArb
+Type: vector<bool>
+--------------------------------
+Branch: mu_isRPC
+Type: vector<bool>
+--------------------------------
+Branch: mu_firesIsoTrig
+Type: vector<bool>
+--------------------------------
+Branch: mu_firesTrig
+Type: vector<bool>
+--------------------------------
+Branch: mu_isLoose
+Type: vector<bool>
+--------------------------------
+Branch: mu_isMedium
+Type: vector<bool>
+--------------------------------
+Branch: mu_isTight
+Type: vector<bool>
+--------------------------------
+Branch: mu_trkIso03
+Type: vector<float>
+--------------------------------
+Branch: mu_pfIso04
+Type: vector<float>
+--------------------------------
+Branch: mu_trk_dxy
+Type: vector<float>
+--------------------------------
+Branch: mu_trk_dz
+Type: vector<float>
+--------------------------------
+Branch: mu_trk_algo
+Type: vector<int>
+--------------------------------
+Branch: mu_trk_origAlgo
+Type: vector<int>
+--------------------------------
+Branch: mu_trk_numberOfValidPixelHits
+Type: vector<int>
+--------------------------------
+Branch: mu_trk_numberOfValidTrackerLayers
+Type: vector<int>
+--------------------------------
+Branch: mu_trkMu_stationMask
+Type: vector<unsigned int>
+--------------------------------
+Branch: mu_trkMu_numberOfMatchedStations
+Type: vector<int>
+--------------------------------
+Branch: mu_trkMu_numberOfMatchedRPCLayers
+Type: vector<int>
+--------------------------------
+Branch: mu_staMu_numberOfValidMuonHits
+Type: vector<int>
+--------------------------------
+Branch: mu_staMu_normChi2
+Type: vector<float>
+--------------------------------
+Branch: mu_glbMu_normChi2
+Type: vector<float>
+--------------------------------
+Branch: mu_nMatches
+Type: vector<unsigned int>
+--------------------------------
+Branch: mu_matches_wheel
+Type: TClonesArray
+--------------------------------
+Branch: mu_matches_sector
+Type: TClonesArray
+--------------------------------
+Branch: mu_matches_station
+Type: TClonesArray
+--------------------------------
+Branch: mu_matches_x
+Type: TClonesArray
+--------------------------------
+Branch: mu_matches_y
+Type: TClonesArray
+--------------------------------
+Branch: mu_matches_phi
+Type: TClonesArray
+--------------------------------
+Branch: mu_matches_eta
+Type: TClonesArray
+--------------------------------
+Branch: mu_matches_edgeX
+Type: TClonesArray
+--------------------------------
+Branch: mu_matches_edgeY
+Type: TClonesArray
+--------------------------------
+Branch: mu_matches_dXdZ
+Type: TClonesArray
+--------------------------------
+Branch: mu_matches_dYdZ
+Type: TClonesArray
+--------------------------------
+Branch: mu_staMu_nMatchSeg
+Type: vector<unsigned int>
+--------------------------------
+Branch: mu_staMu_matchSegIdx
+Type: TClonesArray
+--------------------------------
+Branch: ltTwinMuxIn_nTrigs
+Type: UInt_t
+--------------------------------
+Branch: ltTwinMuxIn_wheel
+Type: vector<short>
+--------------------------------
+Branch: ltTwinMuxIn_sector
+Type: vector<short>
+--------------------------------
+Branch: ltTwinMuxIn_station
+Type: vector<short>
+--------------------------------
+Branch: ltTwinMuxIn_quality
+Type: vector<short>
+--------------------------------
+Branch: ltTwinMuxIn_phi
+Type: vector<int>
+--------------------------------
+Branch: ltTwinMuxIn_phiB
+Type: vector<int>
+--------------------------------
+Branch: ltTwinMuxIn_posLoc_x
+Type: vector<float>
+--------------------------------
+Branch: ltTwinMuxIn_dirLoc_phi
+Type: vector<float>
+--------------------------------
+Branch: ltTwinMuxIn_BX
+Type: vector<short>
+--------------------------------
+Branch: ltTwinMuxIn_is2nd
+Type: vector<short>
+--------------------------------
+Branch: ltTwinMuxOut_nTrigs
+Type: UInt_t
+--------------------------------
+Branch: ltTwinMuxOut_wheel
+Type: vector<short>
+--------------------------------
+Branch: ltTwinMuxOut_sector
+Type: vector<short>
+--------------------------------
+Branch: ltTwinMuxOut_station
+Type: vector<short>
+--------------------------------
+Branch: ltTwinMuxOut_quality
+Type: vector<short>
+--------------------------------
+Branch: ltTwinMuxOut_rpcBit
+Type: vector<short>
+--------------------------------
+Branch: ltTwinMuxOut_phi
+Type: vector<int>
+--------------------------------
+Branch: ltTwinMuxOut_phiB
+Type: vector<int>
+--------------------------------
+Branch: ltTwinMuxOut_posLoc_x
+Type: vector<float>
+--------------------------------
+Branch: ltTwinMuxOut_dirLoc_phi
+Type: vector<float>
+--------------------------------
+Branch: ltTwinMuxOut_BX
+Type: vector<short>
+--------------------------------
+Branch: ltTwinMuxOut_is2nd
+Type: vector<short>
+--------------------------------
+Branch: ltBmtfIn_nTrigs
+Type: UInt_t
+--------------------------------
+Branch: ltBmtfIn_wheel
+Type: vector<short>
+--------------------------------
+Branch: ltBmtfIn_sector
+Type: vector<short>
+--------------------------------
+Branch: ltBmtfIn_station
+Type: vector<short>
+--------------------------------
+Branch: ltBmtfIn_quality
+Type: vector<short>
+--------------------------------
+Branch: ltBmtfIn_phi
+Type: vector<int>
+--------------------------------
+Branch: ltBmtfIn_phiB
+Type: vector<int>
+--------------------------------
+Branch: ltBmtfIn_posLoc_x
+Type: vector<float>
+--------------------------------
+Branch: ltBmtfIn_dirLoc_phi
+Type: vector<float>
+--------------------------------
+Branch: ltBmtfIn_BX
+Type: vector<short>
+--------------------------------
+Branch: ltBmtfIn_is2nd
+Type: vector<short>
+--------------------------------
+Branch: ltTwinMuxInTh_nTrigs
+Type: UInt_t
+--------------------------------
+Branch: ltTwinMuxInTh_wheel
+Type: vector<short>
+--------------------------------
+Branch: ltTwinMuxInTh_sector
+Type: vector<short>
+--------------------------------
+Branch: ltTwinMuxInTh_station
+Type: vector<short>
+--------------------------------
+Branch: ltTwinMuxInTh_BX
+Type: vector<short>
+--------------------------------
+Branch: ltTwinMuxInTh_hitMap
+Type: vector<unsigned short>
+--------------------------------
+Branch: ltBmtfInTh_nTrigs
+Type: UInt_t
+--------------------------------
+Branch: ltBmtfInTh_wheel
+Type: vector<short>
+--------------------------------
+Branch: ltBmtfInTh_sector
+Type: vector<short>
+--------------------------------
+Branch: ltBmtfInTh_station
+Type: vector<short>
+--------------------------------
+Branch: ltBmtfInTh_BX
+Type: vector<short>
+--------------------------------
+Branch: ltBmtfInTh_hitMap
+Type: vector<unsigned short>
+--------------------------------
+Branch: ph2TpgPhiHw_nTrigs
+Type: UInt_t
+--------------------------------
+Branch: ph2TpgPhiHw_wheel
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgPhiHw_sector
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgPhiHw_station
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgPhiHw_quality
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgPhiHw_superLayer
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgPhiHw_rpcFlag
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgPhiHw_chi2
+Type: vector<int>
+--------------------------------
+Branch: ph2TpgPhiHw_phi
+Type: vector<int>
+--------------------------------
+Branch: ph2TpgPhiHw_phiB
+Type: vector<int>
+--------------------------------
+Branch: ph2TpgPhiHw_posLoc_x
+Type: vector<float>
+--------------------------------
+Branch: ph2TpgPhiHw_dirLoc_phi
+Type: vector<float>
+--------------------------------
+Branch: ph2TpgPhiHw_BX
+Type: vector<int>
+--------------------------------
+Branch: ph2TpgPhiHw_t0
+Type: vector<int>
+--------------------------------
+Branch: ph2TpgPhiHw_index
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgPhiEmuHb_nTrigs
+Type: UInt_t
+--------------------------------
+Branch: ph2TpgPhiEmuHb_wheel
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgPhiEmuHb_sector
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgPhiEmuHb_station
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgPhiEmuHb_quality
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgPhiEmuHb_superLayer
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgPhiEmuHb_rpcFlag
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgPhiEmuHb_chi2
+Type: vector<int>
+--------------------------------
+Branch: ph2TpgPhiEmuHb_phi
+Type: vector<int>
+--------------------------------
+Branch: ph2TpgPhiEmuHb_phiB
+Type: vector<int>
+--------------------------------
+Branch: ph2TpgPhiEmuHb_posLoc_x
+Type: vector<float>
+--------------------------------
+Branch: ph2TpgPhiEmuHb_dirLoc_phi
+Type: vector<float>
+--------------------------------
+Branch: ph2TpgPhiEmuHb_BX
+Type: vector<int>
+--------------------------------
+Branch: ph2TpgPhiEmuHb_t0
+Type: vector<int>
+--------------------------------
+Branch: ph2TpgPhiEmuHb_index
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgPhiEmuAm_nTrigs
+Type: UInt_t
+--------------------------------
+Branch: ph2TpgPhiEmuAm_wheel
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgPhiEmuAm_sector
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgPhiEmuAm_station
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgPhiEmuAm_quality
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgPhiEmuAm_superLayer
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgPhiEmuAm_rpcFlag
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgPhiEmuAm_chi2
+Type: vector<int>
+--------------------------------
+Branch: ph2TpgPhiEmuAm_phi
+Type: vector<int>
+--------------------------------F
+Branch: ph2TpgPhiEmuAm_phiB
+Type: vector<int>
+--------------------------------
+Branch: ph2TpgPhiEmuAm_posLoc_x
+Type: vector<float>
+--------------------------------
+Branch: ph2TpgPhiEmuAm_dirLoc_phi
+Type: vector<float>
+--------------------------------
+Branch: ph2TpgPhiEmuAm_BX
+Type: vector<int>
+--------------------------------
+Branch: ph2TpgPhiEmuAm_t0
+Type: vector<int>
+--------------------------------
+Branch: ph2TpgPhiEmuAm_index
+Type: vector<short>
+--------------------------------
+Branch: tfBmtfOut_nBmtfCands
+Type: UInt_t
+--------------------------------
+Branch: tfBmtfOut_pt
+Type: vector<float>
+--------------------------------
+Branch: tfBmtfOut_bx
+Type: vector<int>
+--------------------------------
+Branch: tfBmtfOut_phi
+Type: vector<float>
+--------------------------------
+Branch: tfBmtfOut_eta
+Type: vector<float>
+--------------------------------
+Branch: tfBmtfOut_dxy
+Type: vector<int>
+--------------------------------
+Branch: tfBmtfOut_qual
+Type: vector<int>
+--------------------------------
+Branch: tfBmtfOut_etaFine
+Type: vector<int>
+--------------------------------
+Branch: tfBmtfOut_matchedTpIdx
+Type: TClonesArray
+--------------------------------
+Branch: ph2TpgThetaHw_nTrigs
+Type: UInt_t
+--------------------------------
+Branch: ph2TpgThetaHw_wheel
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgThetaHw_sector
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgThetaHw_station
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgThetaHw_quality
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgThetaHw_rpcFlag
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgThetaHw_chi2
+Type: vector<int>
+--------------------------------
+Branch: ph2TpgThetaHw_z
+Type: vector<int>
+--------------------------------
+Branch: ph2TpgThetaHw_k
+Type: vector<int>
+--------------------------------
+Branch: ph2TpgThetaHw_BX
+Type: vector<int>
+--------------------------------
+Branch: ph2TpgThetaHw_t0
+Type: vector<int>
+--------------------------------
+Branch: ph2TpgThetaHw_index
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgThetaEmuAm_nTrigs
+Type: UInt_t
+--------------------------------
+Branch: ph2TpgThetaEmuAm_wheel
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgThetaEmuAm_sector
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgThetaEmuAm_station
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgThetaEmuAm_quality
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgThetaEmuAm_rpcFlag
+Type: vector<short>
+--------------------------------
+Branch: ph2TpgThetaEmuAm_chi2
+Type: vector<int>
+--------------------------------
+Branch: ph2TpgThetaEmuAm_z
+Type: vector<int>
+--------------------------------
+Branch: ph2TpgThetaEmuAm_k
+Type: vector<int>
+--------------------------------
+Branch: ph2TpgThetaEmuAm_BX
+Type: vector<int>
+--------------------------------
+Branch: ph2TpgThetaEmuAm_t0
+Type: vector<int>
+--------------------------------
+Branch: ph2TpgThetaEmuAm_index
+Type: vector<short>
+--------------------------------
