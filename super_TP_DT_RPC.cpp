@@ -12,6 +12,7 @@ void super_TP_DT_RPC() {
     std::vector<std::string> file_names = { "input/DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC.root", 
                                             "input/DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC.root"    };
 
+    // Loop input Files                                                    
     for (size_t l = 0; l < file_names.size(); ++l) {
 
         std::string pathDqmRPCfile = file_names[l];
@@ -345,7 +346,7 @@ void super_TP_DT_RPC() {
 
 
                 // -----------------------------
-                // Loop in the Segments (Reco Muons)
+                // Loop in the Segments (Reco Muons - Segments)
                 // -----------------------------
                 std::vector<double> DeltaR_values;
                 std::vector<double> idx_DeltaR_values;
