@@ -328,16 +328,16 @@ void super_TP_DT_RPC() {
             std::vector<int> seg_matched_index;
             std::vector<double> seg_matched_DeltaR;
             for (int j = 0; j < gen_nGenParts; ++j) {
-                // std::cout << "==============================================================================" << std::endl;
-                // std::cout << "Entry " << i << ", Element " << j << "| " << "gen pt: "<< gen_pt->at(j) << " | " << "gen eta: "<< gen_eta->at(j) << " | gen phi: "<< gen_phi->at(j) << std::endl;
-                // std::cout << "==============================================================================" << std::endl;
-                // std::cout << "====================================================== Debug 1" << std::endl;
+                std::cout << "==============================================================================" << std::endl;
+                std::cout << "Entry " << i << ", Element " << j << "| " << "gen pt: "<< gen_pt->at(j) << " | " << "gen eta: "<< gen_eta->at(j) << " | gen phi: "<< gen_phi->at(j) << std::endl;
+                std::cout << "==============================================================================" << std::endl;
+                std::cout << "====================================================== Debug 1" << std::endl;
 
-                // if ( gen_pt->at(j) < 20. ) {
-                //     seg_matched_index.push_back(-99); // -99 indicates no match
-                //     seg_matched_DeltaR.push_back(-99);
-                //     continue;
-                // }
+                if ( gen_pt->at(j) < 20. ) {
+                    seg_matched_index.push_back(-99); // -99 indicates no match
+                    seg_matched_DeltaR.push_back(-99);
+                    continue;
+                }
 
                 histogram_gen_pdgId->Fill(gen_pdgId->at(j));
                 histogram_gen_pt->Fill(gen_pt->at(j));
@@ -346,32 +346,35 @@ void super_TP_DT_RPC() {
 
 
                 // -----------------------------
-                // Loop in the Segments (Reco Muons - Segments)
+                // Loop in the Segments (Reco Muons)
                 // -----------------------------
                 std::vector<double> DeltaR_values;
                 std::vector<double> idx_DeltaR_values;
                 for (int k = 0; k < ph2Seg_nSegments; ++k) {
 
+                    double deltaR = 0.;
+
                     // -------------------------------------
                     // Segments quality selection
                     // -------------------------------------
-                    if ( ph2Seg_phi_t0->at(k) > 15 || ph2Seg_phi_t0->at(k) < -15 ) continue; // time window
+                    // std::cout << " idx: " << k  << " | ph2Seg_phi_t0: " <<  ph2Seg_phi_t0->at(k) << std::endl;
+                    if ( abs(ph2Seg_phi_t0->at(k)) > 15 ) continue; // time window
+
+                    double muSegDPhi = abs(deltaPhifunction(gen_phi->at(j), ph2Seg_posGlb_phi->at(k))) ;
+                    double muSegDEta = abs(gen_eta->at(j)-ph2Seg_posGlb_eta->at(k)) ;
+
+                    if ( muSegDPhi > 0.1 ) continue;
+                    if ( muSegDEta > 0.15 ) continue;
                     if ( ph2Seg_phi_nHits->at(k) < 4 ) continue; // at least 4 hits in the r-φ
                     // station 4 does not have r-z hits
                     if (ph2Seg_station->at(k) != 4 )
                         if (ph2Seg_z_nHits->at(k) < 4 ) continue; // at least 4 hits in the r-z
 
-                    // -------------------------------------
-                    // Delta R Calculation and Selection
-                    // -------------------------------------
-                    double deltaR = 0;
-                    double deltaPhi = 0;
                     deltaR = deltaRfunction(gen_eta->at(j), gen_phi->at(j), ph2Seg_posGlb_eta->at(k), ph2Seg_posGlb_phi->at(k)) ;
-                    if (deltaR > 0.2 ) continue;
 
                     // deltaPhi = deltaPhifunction(gen_phi->at(j), ph2Seg_posGlb_phi->at(k)) ;
-                    // std::cout << " idx: " << k  << " | deltaR: " <<  deltaR << " | deltaPhi: " <<  deltaPhi << " | eta: " 
-                    // <<  ph2Seg_posGlb_eta->at(k) << " | phi: " <<  ph2Seg_posGlb_phi->at(k) << std::endl;
+                    // std::cout << " idx: " << k  << " | deltaR: " <<  deltaR << " | muSegDPhi: " <<  muSegDPhi << " | muSegDEta: " 
+                    // <<  muSegDEta << std::endl;
 
                     DeltaR_values.push_back(deltaR);
                     idx_DeltaR_values.push_back(k);
@@ -582,8 +585,7 @@ void super_TP_DT_RPC() {
                 double tp_t0 = ph2TpgPhiEmuAm_t0->at( tp_matched_index[k] );
 
 
-
-                // if ( tp_BX < 18  || tp_BX > 22 ) continue;
+                if ( tp_BX < 18  || tp_BX > 22 ) continue;
 
 
                 std::vector<double> shif_correction;
@@ -668,7 +670,10 @@ void super_TP_DT_RPC() {
                 // Numerator
                 // -----------------------------------------
                 double deltaPhi = deltaPhifunction( gen_phi->at(k) , ph2Seg_posGlb_phi->at(seg_matched_index[k]) );
-                if ( abs(deltaPhi) > 0.1 ) continue;
+
+                // std::cout << "deltaPhi: " << abs(deltaPhi) << "  |  gen_phi: " << gen_phi->at(k) << " |  ph2Seg_posGlb_phi: "  <<  ph2Seg_posGlb_phi->at(seg_matched_index[k]) << std::endl ;
+
+                // if ( abs(deltaPhi) > 0.1 ) continue;
 
                 if ( tp_BX < 19  || tp_BX > 21 ) continue;
 

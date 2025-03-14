@@ -274,7 +274,7 @@ void plot_eff(){
     text->Draw();
     
 
-    // canvas->SetGridy();
+    canvas->SetGridy();
     canvas->SetGridx();
 
     
