@@ -328,10 +328,10 @@ void super_TP_DT_RPC() {
             std::vector<int> seg_matched_index;
             std::vector<double> seg_matched_DeltaR;
             for (int j = 0; j < gen_nGenParts; ++j) {
-                std::cout << "==============================================================================" << std::endl;
-                std::cout << "Entry " << i << ", Element " << j << "| " << "gen pt: "<< gen_pt->at(j) << " | " << "gen eta: "<< gen_eta->at(j) << " | gen phi: "<< gen_phi->at(j) << std::endl;
-                std::cout << "==============================================================================" << std::endl;
-                std::cout << "====================================================== Debug 1" << std::endl;
+                // std::cout << "==============================================================================" << std::endl;
+                // std::cout << "Entry " << i << ", Element " << j << "| " << "gen pt: "<< gen_pt->at(j) << " | " << "gen eta: "<< gen_eta->at(j) << " | gen phi: "<< gen_phi->at(j) << std::endl;
+                // std::cout << "==============================================================================" << std::endl;
+                // std::cout << "====================================================== Debug 1" << std::endl;
 
                 if ( gen_pt->at(j) < 20. ) {
                     seg_matched_index.push_back(-99); // -99 indicates no match
@@ -583,6 +583,8 @@ void super_TP_DT_RPC() {
                 int station_idx = ph2TpgPhiEmuAm_station->at( tp_matched_index[k] );
                 double tp_BX = ph2TpgPhiEmuAm_BX->at( tp_matched_index[k] );
                 double tp_t0 = ph2TpgPhiEmuAm_t0->at( tp_matched_index[k] );
+
+                // std::cout << "tp_BX: " << tp_BX  << " | tp_t0: " << tp_t0 << std::endl;
 
 
                 if ( tp_BX < 18  || tp_BX > 22 ) continue;

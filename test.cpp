@@ -106,48 +106,94 @@ void test() {
         // Loop in the events
         // ------------------------------------------------------------------------------
 
-        nEntries = 100;   // 100   nEntries
+        nEntries = 10;   // 100   nEntries
         std::cout << "Total entries:" << nEntries <<std::endl;
 
 
 
-        for (Long64_t i = 0; i < nEntries; ++i) { 
+        for (Long64_t iEvent = 0; iEvent < nEntries; ++iEvent) { 
 
-            tree->GetEntry(i);
+            tree->GetEntry(iEvent);
 
-            branch_gen_nGenParts->GetEntry(i);
+            branch_gen_nGenParts->GetEntry(iEvent);
 
             // -----------------------------
             // loop Gen Particle
             // -----------------------------
-            for (int j = 0; j < gen_nGenParts; ++j) {
+            for (int iGen = 0; iGen < gen_nGenParts; ++iGen) {
+
+                std::cout << "==============================================================================" << std::endl;
+                std::cout << "iEvent " << iEvent << ", iGen " << iGen << " | " << "gen pt: "<< gen_pt->at(iGen) << " | " << "gen eta: "<< gen_eta->at(iGen) << " | gen phi: "<< gen_phi->at(iGen) << std::endl;
+                std::cout << "==============================================================================" << std::endl;
+
+                // pT Selection
+                if ( gen_pt->at(iGen) < 20. ) continue;
 
 
                 // -----------------------------
-                // Loop in the Segments (Reco Muons - Segments)
+                // Loop in the Segments (Reco Muons)
                 // -----------------------------
-                for (int k = 0; k < ph2Seg_nSegments; ++k) {
+                std::vector<double> segDeltaR;
+                std::vector<double> idx_segDeltaR;
+                for (int iSeg = 0; iSeg < ph2Seg_nSegments; ++iSeg) {
+
+                    double deltaR = 0.;
 
                     // -------------------------------------
                     // Segments quality selection
                     // -------------------------------------
-                    if ( ph2Seg_phi_t0->at(k) > 15 || ph2Seg_phi_t0->at(k) < -15 ) continue; // time window
-                    if ( ph2Seg_phi_nHits->at(k) < 4 ) continue; // at least 4 hits in the r-φ
-                    // station 4 does not have r-z hits
-                    if (ph2Seg_station->at(k) != 4 )
-                        if (ph2Seg_z_nHits->at(k) < 4 ) continue; // at least 4 hits in the r-z
+                    // std::cout << " idx: " << iSeg  << " | ph2Seg_phi_t0: " <<  ph2Seg_phi_t0->at(k) << std::endl;
+                    if ( abs(ph2Seg_phi_t0->at(iSeg)) > 15 ) continue; // time window
 
-                    // -------------------------------------
-                    // Delta R Calculation and Selection
-                    // -------------------------------------
-                    double deltaR = 0;
-                    double deltaPhi = 0;
-                    deltaR = deltaRfunction(gen_eta->at(j), gen_phi->at(j), ph2Seg_posGlb_eta->at(k), ph2Seg_posGlb_phi->at(k)) ;
-                    if (deltaR > 0.2 ) continue;
+                    double muSegDPhi = abs(deltaPhifunction(gen_phi->at(iGen), ph2Seg_posGlb_phi->at(iSeg))) ;
+                    double muSegDEta = abs(gen_eta->at(iGen)-ph2Seg_posGlb_eta->at(iSeg)) ;
+
+                    if ( muSegDPhi > 0.1 ) continue;
+                    if ( muSegDEta > 0.15 ) continue;
+                    if ( ph2Seg_phi_nHits->at(iSeg) < 4 ) continue; // at least 4 hits in the r-φ
+                    // station 4 does not have r-z hits
+                    if (ph2Seg_station->at(iSeg) != 4 )
+                        if (ph2Seg_z_nHits->at(iSeg) < 4 ) continue; // at least 4 hits in the r-z
+
+
+                    // std::cout << "Seg " << iSeg << std::endl;
+
+
+                    deltaR = deltaRfunction(gen_eta->at(iGen), gen_phi->at(iGen), ph2Seg_posGlb_eta->at(iSeg), ph2Seg_posGlb_phi->at(iSeg)) ;
+
+                    segDeltaR.push_back(deltaR);
+                    idx_segDeltaR.push_back(iSeg);
                     
                 }
 
+                // Print elements of the vector
+                for (size_t iElemt = 0; iElemt < segDeltaR.size(); ++iElemt) {
+                    std::cout << segDeltaR[iElemt] << " ";
+                }
+                std::cout << std::endl;
+                // Print elements of the vector
+                for (size_t iElemt = 0; iElemt < idx_segDeltaR.size(); ++iElemt) {
+                    std::cout << idx_segDeltaR[iElemt] << " ";
+                }
+                std::cout << std::endl;
 
+
+                for (size_t iElemt = 0; iElemt < idx_segDeltaR.size(); ++iElemt) {
+
+
+                    for (int iTrigAM = 0; iTrigAM < ph2TpgPhiEmuAm_nTrigs; ++iTrigAM){
+                    
+                        // std::cout << "iTrigAM: " << iTrigAM << " | Tpt0: "  << ph2TpgPhiEmuAm_t0->at(iTrigAM)  << std::endl;
+    
+                        
+    
+    
+    
+                    }
+                    
+                }
+
+                
 
             }
 
