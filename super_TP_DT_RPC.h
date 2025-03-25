@@ -27,7 +27,7 @@
 #include <TEfficiency.h>
 
 
-
+std::map<std::string, TH1*> m_plots;
 
 void printProgress(double percentage) {
     int barWidth = 70; // Width of the progress bar
