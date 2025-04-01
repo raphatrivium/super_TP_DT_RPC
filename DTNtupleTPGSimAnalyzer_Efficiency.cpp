@@ -18,7 +18,7 @@ Double_t trigPhiInRad(Double_t trigPhi, Int_t sector)
 //   return sum;
 // }
 
-void test2() {
+void DTNtupleTPGSimAnalyzer_Efficiency() {
 
 
     std::map<std::string, TH1*> m_plots;
@@ -452,8 +452,8 @@ void test2() {
                         m_plots["hPrimPsiAM"] -> Fill( ph2TpgPhiEmuAm_dirLoc_phi->at(iTrigAM) );
                         m_plots["hDeltaPhiAM"] -> Fill( segTrigAMDPhi );
                         m_plots2["hBXvsPrimPsiAM"] -> Fill ( trigAMBX - 20 , atan ( (ph2Seg_dirLoc_x->at(iSeg) / ph2Seg_dirLoc_z->at(iSeg)) ) * 360 / (2*TMath::Pi()));
-                        if (segNHits == 8)
-                        m_plots["SegEff_" + chambTag + "_AM_matched"] -> Fill(segWh);
+                        if (segNHits == 8) 
+                            m_plots["SegEff_" + chambTag + "_AM_matched"] -> Fill(segWh);
                         m_plots["SegEff_" + chambTag + "_AM_total"] -> Fill(segWh);
                         m_plots2["hSegmentPsiVSDeltaT0AM"]->Fill(  atan ( (ph2Seg_dirLoc_x->at(iSeg) / ph2Seg_dirLoc_z->at(iSeg)) ) * 360 / (2*TMath::Pi()) , ph2TpgPhiEmuAm_t0->at(iTrigAM) - 20*25 - ph2Seg_phi_t0->at(iSeg) );
 
@@ -502,7 +502,7 @@ void test2() {
                             // cout << "Eficiente!" << endl;
                             
                             std::cout << "NUMERATOR Here: " << std::endl;
-                            // numTP++;
+                            numTP++;
 
                             m_plots["Eff_" + chambTag + "_AM_matched"]->Fill(segWh);
                             m_plots["EffEta_" + chambTag + "_AM_matched"]->Fill(gen_eta->at(iGenPart));
@@ -554,7 +554,7 @@ void test2() {
     }
 
 
-    const std::string& outputDir = "test2";
+    const std::string& outputDir = "DTNtupleTPGSimAnalyzer_Efficiency";
 
     // Create the directory if it doesn't exist
     if (gSystem->AccessPathName(outputDir.c_str())) {

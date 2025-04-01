@@ -43,6 +43,12 @@ void super_TP_DT_RPC() {
         TTree *tree = (TTree*)dir->Get("DTTREE");
         Long64_t nEntries = tree->GetEntries();
 
+
+        // ------------------------------------------------------------------
+        // Variables
+        // ------------------------------------------------------------------
+        int testCounter = 0;
+
         // ------------------------------------------------------------------
         // Get Branch
         // ------------------------------------------------------------------
@@ -1332,6 +1338,8 @@ void super_TP_DT_RPC() {
         nume =  histogram_ph2TpgPhiEmuAm_BX_wheel_p1_station_2_matched_numerator->GetEntries();
         deno =  histogram_ph2TpgPhiEmuAm_BX_wheel_p1_station_2_matched->GetEntries();
         effi = nume/deno;
+        std::cout << "  nume W+1 MB2: " << nume << std::endl;
+        std::cout << "  deno W+1 MB2: " << deno << std::endl;
         std::cout << "effi W+1 MB2: " << effi << std::endl;
 
         nume =  histogram_ph2TpgPhiEmuAm_BX_wheel_p1_station_3_matched_numerator->GetEntries();
@@ -1397,7 +1405,7 @@ void super_TP_DT_RPC() {
         // Close the file
         file2->Close();
 
-    } // END Loop in the events
+    } // END Loop files
     
 
     std::cout << "--------------------------------" << std::endl;
