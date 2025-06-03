@@ -486,6 +486,28 @@ void super_TP_DT_RPC() {
                     // if ( ph2TpgPhiEmuAm_BX->at(k) < 18 ) continue; // time window
                     // if ( ph2TpgPhiEmuAm_BX->at(k) > 22 ) continue; // time window
 
+                    std::cout << "TP Wh: " << ph2TpgPhiEmuAm_wheel->at(k) << " | TP St: " << ph2TpgPhiEmuAm_station->at(k) << " | TP sec: " << ph2TpgPhiEmuAm_sector->at(k) << " | TP phi: " << ph2TpgPhiEmuAm_phi->at(k) << " | TP posLoc_x: " << ph2TpgPhiEmuAm_posLoc_x->at(k) << std::endl;
+
+
+                    // std::vector<float> *ph2TpgPhiEmuAm_BX = nullptr;
+                    // tree->SetBranchAddress("ph2TpgPhiEmuAm_BX", &ph2TpgPhiEmuAm_BX);
+                    // std::vector<float> *ph2TpgPhiEmuAm_phi = nullptr;
+                    // tree->SetBranchAddress("ph2TpgPhiEmuAm_phi", &ph2TpgPhiEmuAm_phi);
+                    // std::vector<float> *ph2TpgPhiEmuAm_wheel = nullptr;
+                    // tree->SetBranchAddress("ph2TpgPhiEmuAm_wheel", &ph2TpgPhiEmuAm_wheel);
+                    // std::vector<float> *ph2TpgPhiEmuAm_sector = nullptr;
+                    // tree->SetBranchAddress("ph2TpgPhiEmuAm_sector", &ph2TpgPhiEmuAm_sector);
+                    // std::vector<float> *ph2TpgPhiEmuAm_station = nullptr;
+                    // tree->SetBranchAddress("ph2TpgPhiEmuAm_station", &ph2TpgPhiEmuAm_station);
+                    // std::vector<float> *ph2TpgPhiEmuAm_superLayer = nullptr;
+                    // tree->SetBranchAddress("ph2TpgPhiEmuAm_superLayer", &ph2TpgPhiEmuAm_superLayer);
+                    // std::vector<float> *ph2TpgPhiEmuAm_posLoc_x = nullptr;
+                    // tree->SetBranchAddress("ph2TpgPhiEmuAm_posLoc_x", &ph2TpgPhiEmuAm_posLoc_x);
+                    // std::vector<float> *ph2TpgPhiEmuAm_t0 = nullptr;
+                    // tree->SetBranchAddress("ph2TpgPhiEmuAm_t0", &ph2TpgPhiEmuAm_t0);
+                    // std::vector<float> *ph2TpgPhiEmuAm_quality = nullptr;
+                    // tree->SetBranchAddress("ph2TpgPhiEmuAm_quality", &ph2TpgPhiEmuAm_quality);
+
                     if ( ph2Seg_wheel->at(seg_matched_index[j]) != ph2TpgPhiEmuAm_wheel->at(k) ) continue;
                     if ( ph2Seg_station->at(seg_matched_index[j]) != ph2TpgPhiEmuAm_station->at(k) ) continue;
 

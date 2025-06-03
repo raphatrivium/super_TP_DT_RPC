@@ -32,14 +32,14 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
 
     m_plots["hSegmentPsi"] = new TH1D("hSegmentPsi", "Segment Psi distribution ; Psi; Entries", 200, -60, +60);
     m_plots2["hSegmentPsiVST0"] = new TH2D("hSegmentPsiVST0", "Segment Psi distribution vs segment t0; Psi; Segment t0 (ns)", 200, -50, +50, 200, -100, 100);
-    m_plots["hGenSegDeltaPhi"] = new TH1D("hGenSegDeltaPhi", "Gen Muon - Segment Delta Phi distribution ; Delta Phi; Entries", 600, 0, 10);
-    m_plots["hGenSegDeltaEta"] = new TH1D("hGenSegDeltaEta", "Gen Muon - Segment Delta Eta distribution ; Delta Eta; Entries", 600, 0, 3);
+    m_plots["hGenSegDeltaPhi"] = new TH1D("hGenSegDeltaPhi", "Gen Muon - Segment Delta Phi distribution ; Delta Phi; Entries", 600, 0, 0.5);
+    m_plots["hGenSegDeltaEta"] = new TH1D("hGenSegDeltaEta", "Gen Muon - Segment Delta Eta distribution ; Delta Eta; Entries", 600, 0, 0.5);
     for (const auto & chamb : chambTag) {
         for (const auto & wheel : wheelTag) {
             m_plots["hGenSegDeltaPhi"+wheel+chamb] = new TH1D(("hGenSegDeltaPhi"+wheel+chamb).c_str(),
-            "Gen Muon - Segment Delta Phi distribution ; Delta Phi; Entries", 600, 0, 10);
+            "Gen Muon - Segment Delta Phi distribution ; Delta Phi; Entries", 600, 0, 0.5);
             m_plots["hGenSegDeltaEta"+wheel+chamb] = new TH1D(("hGenSegDeltaEta"+wheel+chamb).c_str(),
-            "Gen Muon - Segment Delta Eta distribution ; Delta Eta; Entries", 600, 0, 3);
+            "Gen Muon - Segment Delta Eta distribution ; Delta Eta; Entries", 600, 0,  0.5);
         }
     }
 
@@ -98,8 +98,12 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
         }
     }
 
-    std::string file_name = "input/DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC.root";
 
+    // ------------------------------------------------------------------------------
+    // INPUT FILES
+    // ------------------------------------------------------------------------------
+    // std::string file_name = "input/DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC.root";
+    std::string file_name = "input/DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2.root";
 
     std::string pathDqmRPCfile = file_name;
     std::cout << "-------------------------------------------" <<std::endl;
@@ -239,9 +243,10 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
     nEntries = nEntries;   // 100   nEntries
     std::cout << "Total entries:" << nEntries <<std::endl;
 
-
-
     for (Long64_t iEvent = 0; iEvent < nEntries; ++iEvent) { 
+
+        numTP = 0;
+        denTP = 0;
 
         tree->GetEntry(iEvent);
 
@@ -249,11 +254,11 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
 
         // -----------------------------
         // loop Gen Particle
-        // -----------------------------
+        // -----------------------------        
         for (int iGenPart = 0; iGenPart < gen_nGenParts; ++iGenPart) {
 
             std::cout << "==============================================================================" << std::endl;
-            std::cout << "iEvent " << iEvent << ", iGenPart " << iGenPart << " | " << "gen pt: "<< gen_pt->at(iGenPart) << " | " << "gen eta: "<< gen_eta->at(iGenPart) << " | gen phi: "<< gen_phi->at(iGenPart) << std::endl;
+            std::cout << "iEvent " << iEvent << ", iGenPart " << iGenPart <<  " | gen_nGenParts: " << gen_nGenParts << " | " << "gen pt: "<< gen_pt->at(iGenPart) << " | " << "gen eta: "<< gen_eta->at(iGenPart) << " | gen phi: "<< gen_phi->at(iGenPart) << std::endl;
             std::cout << "==============================================================================" << std::endl;
 
             if (std::abs(gen_pdgId->at(iGenPart)) != 13 || gen_pt->at(iGenPart) < m_minMuPt) continue;
@@ -313,7 +318,11 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
             // HIGHHIGHQ 8 -> 4+4
 
             TString quality_;
-            quality_ = "All"; 
+            quality_ = "All";
+            
+            // quality_ = "Q8";
+
+            
 
             int LOWQ = 1;
             int CLOWQ = 2;
@@ -496,7 +505,7 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                             // cout << "Efficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) << " Primitive iTrig " << bestTPAM << " out of " <<  ph2TpgPhiEmuAm_nTrigs  << " Quality: " << ph2TpgPhiEmuAm_quality->at(bestTPAM) << " t0=" << ph2TpgPhiEmuAm_t0->at(bestTPAM)  <<endl;
                             // cout << "Eficiente!" << endl;
 
-                            cout << iEvent << " " << 1 << " "<< segWh << " " << segSec << " " << segSt << " " << ph2Seg_phi_nHits->at(iSeg) << " " <<endl;
+                            // cout << iEvent << " " << 1 << " "<< segWh << " " << segSec << " " << segSt << " " << ph2Seg_phi_nHits->at(iSeg) << " " <<endl;
                             // cout << "Efficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) <<endl;
                             cout << "Efficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) << " Primitive iTrig " << bestTPAM << " out of " <<  ph2TpgPhiEmuAm_nTrigs  << " Quality: " << ph2TpgPhiEmuAm_quality->at(bestTPAM) << " t0=" << ph2TpgPhiEmuAm_t0->at(bestTPAM)  <<endl;
                             // cout << "Eficiente!" << endl;
@@ -517,7 +526,7 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                             // cout << "Inefficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) <<endl;
                             // cout << "Inefficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) << " Primitive iTrig " << bestTPAM << " out of " <<  ph2TpgPhiEmuAm_nTrigs  <<endl;
 
-                            cout << iEvent << " " << -1 << " "<< segWh << " " << segSec << " " << segSt << " " << ph2Seg_phi_nHits->at(iSeg) <<endl;
+                            // cout << iEvent << " " << -1 << " "<< segWh << " " << segSec << " " << segSt << " " << ph2Seg_phi_nHits->at(iSeg) <<endl;
                             // cout << "Inefficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) <<endl;
                             cout << "Inefficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) << " Primitive iTrig " << bestTPAM << " out of " <<  ph2TpgPhiEmuAm_nTrigs  <<endl;
                         }
@@ -550,11 +559,19 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
             }
         }
 
-
+        // double eff = numTP / denTP;
+        std::cout << "**********************" <<  std::endl;
+        std::cout << "Numerator per Event: "<<  numTP << std::endl;
+        std::cout << "DENOMINATOR per Event: "<<  denTP << std::endl;
+        std::cout << "**********************" <<  std::endl;   
     }
 
 
     const std::string& outputDir = "DTNtupleTPGSimAnalyzer_Efficiency";
+    const std::string& outputFile = "DTNtupleTPGSimAnalyzer_Efficiency.root";
+
+    // Create a new ROOT file (recreate will overwrite existing file)
+    TFile outFile(outputFile.c_str(), "RECREATE");
 
     // Create the directory if it doesn't exist
     if (gSystem->AccessPathName(outputDir.c_str())) {
@@ -571,6 +588,9 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
             continue;
         }
 
+        // Write the histogram to the file
+        hist->Write();
+
         // Create a canvas to draw the histogram
         TCanvas canvas("canvas", "canvas", 800, 600);
         hist->Draw();
@@ -582,9 +602,10 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
 
     std::cout << "All plots saved in: " << outputDir << std::endl;
 
-    
+    // Close the file (optional, as it will be automatically closed when outFile goes out of scope)
+    outFile.Close();
 
-
+    std::cout << "All histograms saved in ROOT file: " << outputFile << std::endl;
 
 
     std::cout << "NUMERATOR Here:   " << numTP << std::endl;
@@ -594,6 +615,115 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
 
     std::cout << "total Eff: " << totalEff << std::endl;
 
+
+    // MAKING EFFICIENCY PLOTS
+
+    for (int i = 0; i < 4; ++i){
+
+        int chamberNumber = i+1;  // example value
+        // Get the histograms from your map
+        TH1* hTotal = m_plots["Eff_MB" + std::to_string(chamberNumber) + "_AM+RPC_total"];
+        TH1* hMatched = m_plots["Eff_MB" + std::to_string(chamberNumber) + "_AM+RPC_matched"];
+
+        // TH1* hTotal = m_plots["Eff_MB+"strchamberNumber"+_AM+RPC_total"];
+        // TH1* hMatched = m_plots["Eff_MB"strchamberNumber"_AM+RPC_matched"];
+
+        // Check if histograms exist
+        if (!hTotal || !hMatched) {
+            std::cerr << "Error: Required histograms not found in map!" << std::endl;
+            return;
+        }
+    
+        // Create the efficiency plot
+        TEfficiency* effPlot = new TEfficiency(*hMatched, *hTotal);
+        std::string effName = "Eff_MB" + std::to_string(chamberNumber) + "_AM+RPC";
+        effPlot->SetName( effName.c_str() );  // Convert to const char*
+        std::string title = effName + "; Sector ;Efficiency";
+        effPlot->SetTitle(title.c_str());
+
+        // Style the efficiency plot
+        effPlot->SetLineColor(kBlue);
+        effPlot->SetMarkerColor(kBlue);
+        effPlot->SetMarkerStyle(20);
+
+        // effPlot->GetYaxis()->SetRangeUser(0.0, 1.0);
+
+        // Draw the efficiency plot
+        TCanvas cEff = new TCanvas("cEff", "Efficiency Plot", 800, 600);
+        cEff.SetGridy();
+        cEff.SetGridx();
+        effPlot->Draw("AP");  // "AP" for axis and points
+
+        // Save the plot in the output directory
+        std::string outputPath = outputDir + "/eff/" + effName.c_str() + ".png";
+        cEff.SaveAs(outputPath.c_str());
+
+    }
+
+    for (int i = 0; i < 4; ++i){
+
+        int chamberNumber = i+1;  // example value
+        // Get the histograms from your map
+        TH1* hTotal = m_plots["Eff_MB" + std::to_string(chamberNumber) + "_AM_total"];
+        TH1* hMatched = m_plots["Eff_MB" + std::to_string(chamberNumber) + "_AM_matched"];
+
+        // Check if histograms exist
+        if (!hTotal || !hMatched) {
+            std::cerr << "Error: Required histograms not found in map!" << std::endl;
+            return;
+        }
+    
+        // Create the efficiency plot
+        TEfficiency* effPlot = new TEfficiency(*hMatched, *hTotal);
+        std::string effName = "Eff_MB" + std::to_string(chamberNumber) + "_AM";
+        effPlot->SetName( effName.c_str() );  // Convert to const char*
+        std::string title = effName + "; Sector ;Efficiency";
+        effPlot->SetTitle(title.c_str());
+
+        // Style the efficiency plot
+        effPlot->SetLineColor(kBlue);
+        effPlot->SetMarkerColor(kBlue);
+        effPlot->SetMarkerStyle(20);
+
+        // Draw the efficiency plot
+        TCanvas cEff = new TCanvas("cEff", "Efficiency Plot", 800, 600);
+        cEff.SetGridy();
+        cEff.SetGridx();
+        effPlot->Draw("AP");  // "AP" for axis and points
+
+        // Save the plot in the output directory
+        std::string outputPath = outputDir + "/eff/" + effName.c_str() + ".png";
+        cEff.SaveAs(outputPath.c_str());
+
+    }
+        
+    // // Get the histograms from your map
+    // TH1* hTotal = m_plots["Eff_MB1_AM+RPC_total"];
+    // TH1* hMatched = m_plots["Eff_MB1_AM+RPC_matched"];
+
+    // // Check if histograms exist
+    // if (!hTotal || !hMatched) {
+    //     std::cerr << "Error: Required histograms not found in map!" << std::endl;
+    //     return;
+    // }
+
+    // // Create the efficiency plot
+    // TEfficiency* effPlot = new TEfficiency(*hMatched, *hTotal);
+    // effPlot->SetName("Efficiency_MB1_AM+RPC");
+    // effPlot->SetTitle("Efficiency MB1 AM+RPC;X-axis Title;Efficiency");
+
+    // // Style the efficiency plot
+    // effPlot->SetLineColor(kBlue);
+    // effPlot->SetMarkerColor(kBlue);
+    // effPlot->SetMarkerStyle(20);
+
+    // // Draw the efficiency plot
+    // TCanvas cEff = new TCanvas("cEff", "Efficiency Plot", 800, 600);
+    // effPlot->Draw("AP");  // "AP" for axis and points
+
+    // // Save the plot in the output directory
+    // std::string outputPath = outputDir + "/eff/" + "Eff_MB1_AM+RPC_total" + ".png";
+    // cEff.SaveAs(outputPath.c_str());
     
 
 } // END Program
