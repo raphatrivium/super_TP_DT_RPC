@@ -7,7 +7,7 @@ The most important file is ```DTNtupleTPGSimAnalyzer_Efficiency.cpp```.
 
 It is based on the official DT efficiency script: https://github.com/jaimeleonh/DTNtuples/blob/unifiedPerf/test/DTNtupleTPGSimAnalyzer_Efficiency.C
 
-## cript Logic 
+## Code Logic 
 
 ![logic script](logic_script.png)
 
