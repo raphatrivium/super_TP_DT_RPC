@@ -608,8 +608,8 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
     std::cout << "All histograms saved in ROOT file: " << outputFile << std::endl;
 
 
-    std::cout << "NUMERATOR Here:   " << numTP << std::endl;
-    std::cout << "DENOMINATOR Here: " << denTP << std::endl;
+    std::cout << "NUMERATOR:   " << numTP << std::endl;
+    std::cout << "DENOMINATOR : " << denTP << std::endl;
 
     double totalEff = double(numTP)/double(denTP);
 
@@ -617,6 +617,7 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
 
 
     // MAKING EFFICIENCY PLOTS
+    // This block will be improved
 
     for (int i = 0; i < 4; ++i){
 
@@ -697,33 +698,5 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
 
     }
         
-    // // Get the histograms from your map
-    // TH1* hTotal = m_plots["Eff_MB1_AM+RPC_total"];
-    // TH1* hMatched = m_plots["Eff_MB1_AM+RPC_matched"];
-
-    // // Check if histograms exist
-    // if (!hTotal || !hMatched) {
-    //     std::cerr << "Error: Required histograms not found in map!" << std::endl;
-    //     return;
-    // }
-
-    // // Create the efficiency plot
-    // TEfficiency* effPlot = new TEfficiency(*hMatched, *hTotal);
-    // effPlot->SetName("Efficiency_MB1_AM+RPC");
-    // effPlot->SetTitle("Efficiency MB1 AM+RPC;X-axis Title;Efficiency");
-
-    // // Style the efficiency plot
-    // effPlot->SetLineColor(kBlue);
-    // effPlot->SetMarkerColor(kBlue);
-    // effPlot->SetMarkerStyle(20);
-
-    // // Draw the efficiency plot
-    // TCanvas cEff = new TCanvas("cEff", "Efficiency Plot", 800, 600);
-    // effPlot->Draw("AP");  // "AP" for axis and points
-
-    // // Save the plot in the output directory
-    // std::string outputPath = outputDir + "/eff/" + "Eff_MB1_AM+RPC_total" + ".png";
-    // cEff.SaveAs(outputPath.c_str());
-    
 
 } // END Program
