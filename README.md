@@ -15,7 +15,7 @@ The files used as input can be found in this link: https://ragomesd.web.cern.ch/
 
 Create a folder called ```input``` and put the files there.
 
-To run the ```DTNtupleTPGSimAnalyzer_Efficiency.cpp``` script you can run locally with
+You run the ```DTNtupleTPGSimAnalyzer_Efficiency.cpp``` script locally with
 
 ```
 root -l -b -q DTNtupleTPGSimAnalyzer_Efficiency.cpp++
