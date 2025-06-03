@@ -1,0 +1,56 @@
+==============================================================================
+iEvent 1763, iGenPart 3 | gen_nGenParts: 8 | gen pt: 151.488 | gen eta: 0.486698 | gen phi: 0.428617
+==============================================================================
+Loop in the Segments and Gen Particle Matching 
+Number of ph2 Segments in this event: 66
+ 
+ ------------------------------------------- 
+Best Segments Index
+1 , 36 , 47 , 55 ,  
+ ------------------------------------------- 
+Best Segments Number of Hits
+8 , 7 , 7 , 8 ,  
+  Loop best segments 
+  --------------
+  Segment Index 1
+      Loop in the AM TP 
+      Total number of TP in this event: 225
+      iTrigAM: 3 | Wheel: 1 | Sector: 2 | Station: 1 | trigAMBX: 20 | segTrigAMDPhi: 0.039733
+      iTrigAM: 172 | Wheel: 1 | Sector: 2 | Station: 1 | trigAMBX: 20 | segTrigAMDPhi: 0.0772103
+            Fill MATCHING Histograms (Efficient)
+            bestTPAM: 3
+            Fill TOTAL Histograms
+  --------------
+  Segment Index 36
+      Loop in the AM TP 
+      Total number of TP in this event: 225
+      iTrigAM: 62 | Wheel: 1 | Sector: 2 | Station: 2 | trigAMBX: 18 | segTrigAMDPhi: 0.0457009
+      iTrigAM: 63 | Wheel: 1 | Sector: 2 | Station: 2 | trigAMBX: 20 | segTrigAMDPhi: 0.0466287
+      iTrigAM: 188 | Wheel: 1 | Sector: 2 | Station: 2 | trigAMBX: 25 | segTrigAMDPhi: 0.0825706
+      iTrigAM: 189 | Wheel: 1 | Sector: 2 | Station: 2 | trigAMBX: 20 | segTrigAMDPhi: 0.0757468
+            Fill MATCHING Histograms (Efficient)
+            bestTPAM: 63
+            Fill TOTAL Histograms
+  --------------
+  Segment Index 47
+      Loop in the AM TP 
+      Total number of TP in this event: 225
+      iTrigAM: 79 | Wheel: 1 | Sector: 2 | Station: 3 | trigAMBX: 20 | segTrigAMDPhi: 0.0455564
+      iTrigAM: 80 | Wheel: 1 | Sector: 2 | Station: 3 | trigAMBX: 20 | segTrigAMDPhi: 0.0460081
+      iTrigAM: 201 | Wheel: 1 | Sector: 2 | Station: 3 | trigAMBX: 25 | segTrigAMDPhi: 0.072095
+            Fill MATCHING Histograms (Efficient)
+            bestTPAM: 79
+            Fill TOTAL Histograms
+  --------------
+  Segment Index 55
+      Loop in the AM TP 
+      Total number of TP in this event: 225
+      iTrigAM: 90 | Wheel: 1 | Sector: 2 | Station: 4 | trigAMBX: 20 | segTrigAMDPhi: 0.045813
+            Fill MATCHING Histograms (Efficient)
+            bestTPAM: 90
+            Fill TOTAL Histograms
+**********************
+Numerator per Gen: 4
+DENOMINATOR per Gen: 4
+**********************
+

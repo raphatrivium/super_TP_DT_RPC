@@ -227,10 +227,6 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
     
     double m_maxSegT0 = 15;
 
-    int numTPAll = 0;
-    int denTPAll = 0;
-    int numTPEvent = 0;
-    int denTPEvent = 0;
     int numTP = 0;
     int denTP = 0;
 
@@ -253,16 +249,13 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
         tree->GetEntry(iEvent);
         
         branch_gen_nGenParts->GetEntry(iEvent);
-
-        numTPEvent = 0;
-        denTPEvent = 0;
         
         // -----------------------------
         // loop Gen Particle
         // -----------------------------        
         for (int iGenPart = 0; iGenPart < gen_nGenParts; ++iGenPart) {
-            int numTP = 0;
-            int denTP = 0;
+            numTP = 0;
+            denTP = 0;
             
             std::cout << "==============================================================================" << std::endl;
             std::cout << "iEvent " << iEvent << ", iGenPart " << iGenPart <<  " | gen_nGenParts: " << gen_nGenParts << " | " << "gen pt: "<< gen_pt->at(iGenPart) << " | " << "gen eta: "<< gen_eta->at(iGenPart) << " | gen phi: "<< gen_phi->at(iGenPart) << std::endl;
@@ -514,101 +507,96 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                             bestSegTrigAMDPhiNoBX = segTrigAMDPhi;
                         }
 
+                        // ----------------------------
+                        // NUMERATOR (I think)
+                        // ----------------------------
+                        if (bestTPAM > -1 && ph2Seg_phi_t0->at(iSeg) > -500)
+                        {
+                            std::cout << "            Fill MATCHING Histograms (Efficient)" << std::endl;
+
+                            // cout << iEvent << " " << 1 << " "<< segWh << " " << segSec << " " << segSt << " " << ph2Seg_phi_nHits->at(iSeg) << " " << getPh1Hits(segWh,segSec,segSt) << " " << getPh2Hits(segWh,segSec,segSt) <<endl;
+                            //        cout << "Efficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) <<endl;
+                            // cout << "Efficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) << " Primitive iTrig " << bestTPAM << " out of " <<  ph2TpgPhiEmuAm_nTrigs  << " Quality: " << ph2TpgPhiEmuAm_quality->at(bestTPAM) << " t0=" << ph2TpgPhiEmuAm_t0->at(bestTPAM)  <<endl;
+                            // cout << "Eficiente!" << endl;
+
+                            // cout << iEvent << " " << 1 << " "<< segWh << " " << segSec << " " << segSt << " " << ph2Seg_phi_nHits->at(iSeg) << " " <<endl;
+                            // cout << "Efficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) <<endl;
+                            // cout << "Efficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) << " Primitive iTrig " << bestTPAM << " out of " <<  ph2TpgPhiEmuAm_nTrigs  << " Quality: " << ph2TpgPhiEmuAm_quality->at(bestTPAM) << " t0=" << ph2TpgPhiEmuAm_t0->at(bestTPAM)  <<endl;
+                            // cout << "Eficiente!" << endl;
+                            
+                            // std::cout << "NUMERATOR Here: " << std::endl;
+                            numTP++;
+
+                            m_plots["Eff_" + chambTag + "_AM_matched"]->Fill(segWh);
+                            m_plots["EffEta_" + chambTag + "_AM_matched"]->Fill(gen_eta->at(iGenPart));
+                            m_plots["hEffvsSlopeAM" + chambTag + whTag + "matched"] -> Fill(atan ( (ph2Seg_dirLoc_x->at(iSeg) / ph2Seg_dirLoc_z->at(iSeg)) ) * 360 / (2*TMath::Pi()) );
+                            // if (DM_) m_plots["hEffvsLxyAM" + chambTag + whTag + "matched"] -> Fill( gen_lxy->at(iGenPart) );
+                            // if (DM_) m_plots["hEffvsLxyAMmatched"] -> Fill( gen_lxy->at(iGenPart) );
+                            m_plots["hEffvsSlopeAMmatched"] -> Fill(atan ( (ph2Seg_dirLoc_x->at(iSeg) / ph2Seg_dirLoc_z->at(iSeg)) ) * 360 / (2*TMath::Pi()) );
+                            if (AMRPCflag > 0) m_plots["Eff_" + chambTag + "_AM+RPC_matched"]->Fill(segWh);
+                            
+                        } else if (bestTPAM  < 0 && ph2Seg_phi_t0->at(iSeg) > -500) {
+                            // cout << iEvent << " " << -1 << " "<< segWh << " " << segSec << " " << segSt << " " << ph2Seg_phi_nHits->at(iSeg) << " " << getPh1Hits(segWh,segSec,segSt) << " " << getPh2Hits(segWh,segSec,segSt) <<endl;
+                            // cout << "Inefficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) <<endl;
+                            // cout << "Inefficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) << " Primitive iTrig " << bestTPAM << " out of " <<  ph2TpgPhiEmuAm_nTrigs  <<endl;
+
+                            // cout << iEvent << " " << -1 << " "<< segWh << " " << segSec << " " << segSt << " " << ph2Seg_phi_nHits->at(iSeg) <<endl;
+                            // cout << "Inefficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) <<endl;
+                            // cout << "Inefficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) << " Primitive iTrig " << bestTPAM << " out of " <<  ph2TpgPhiEmuAm_nTrigs  <<endl;
+                        }
+                        if (bestTPNoBXAM > -1 && ph2Seg_phi_t0->at(iSeg) > -500)
+                        {
+                            m_plots["EffNoBX_" + chambTag + "_AM_matched"]->Fill(segWh);
+                        }
+                        
+                        // ----------------------------
+                        // DENOMINATOR (I think)
+                        // ----------------------------
+                        if (ph2Seg_phi_t0->at(iSeg) > -500)
+                        // if (ph2Seg_phi_t0->at(iSeg) > -500 && (segTrigAMDPhi < m_maxSegTrigDPhi) )  // For test
+                        {
+                            std::cout << "            Fill TOTAL Histograms" << std::endl;
+
+                            m_plots["Eff_" + chambTag + "_AM_total"]->Fill(segWh);
+                            m_plots["EffNoBX_" + chambTag + "_AM_total"]->Fill(segWh);
+                            m_plots["EffEta_" + chambTag + "_AM_total"]->Fill(gen_eta->at(iGenPart));
+                            m_plots["hEffvsSlopeAM" + chambTag + whTag + "total"] -> Fill(atan ( (ph2Seg_dirLoc_x->at(iSeg) / ph2Seg_dirLoc_z->at(iSeg)) ) * 360 / (2*TMath::Pi()) );
+                            m_plots["hEffvsSlopeAMtotal"] -> Fill(atan ( (ph2Seg_dirLoc_x->at(iSeg) / ph2Seg_dirLoc_z->at(iSeg)) ) * 360 / (2*TMath::Pi()) );
+                            // if (DM_) m_plots["hEffvsLxyAM" + chambTag + whTag + "total"] -> Fill( gen_lxy->at(iGenPart) );
+                            // if (DM_) m_plots["hEffvsLxyAMtotal"] -> Fill( gen_lxy->at(iGenPart) );
+                            m_plots["Eff_" + chambTag + "_AM+RPC_total"]->Fill(segWh);
+
+                            // std::cout << "DENOMINATOR Here: " << std::endl;
+                            denTP++;
+                        }
+
                     } // End Conditional Matching
 
-                } // End Loop TP        
+                    bestTPAM = -1;
+                    bestTPNoBXAM = -1;
+                    AMRPCflag= -1;
+                    bestSegTrigAMDPhi = 1000;
+                    bestSegTrigAMDPhiNoBX = 1000;
+                    bestAMDPhi = 0;
+                    besttrigAMBX = 0;  
 
-                // ----------------------------
-                // NUMERATOR (I think)
-                // ----------------------------
-                if (bestTPAM > -1 && ph2Seg_phi_t0->at(iSeg) > -500)
-                {
-                    std::cout << "            Fill MATCHING Histograms (Efficient)" << std::endl;
-                    std::cout << "            bestTPAM: "<< bestTPAM << std::endl;
-
-                    // cout << iEvent << " " << 1 << " "<< segWh << " " << segSec << " " << segSt << " " << ph2Seg_phi_nHits->at(iSeg) << " " << getPh1Hits(segWh,segSec,segSt) << " " << getPh2Hits(segWh,segSec,segSt) <<endl;
-                    //        cout << "Efficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) <<endl;
-                    // cout << "Efficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) << " Primitive iTrig " << bestTPAM << " out of " <<  ph2TpgPhiEmuAm_nTrigs  << " Quality: " << ph2TpgPhiEmuAm_quality->at(bestTPAM) << " t0=" << ph2TpgPhiEmuAm_t0->at(bestTPAM)  <<endl;
-                    // cout << "Eficiente!" << endl;
-
-                    // cout << iEvent << " " << 1 << " "<< segWh << " " << segSec << " " << segSt << " " << ph2Seg_phi_nHits->at(iSeg) << " " <<endl;
-                    // cout << "Efficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) <<endl;
-                    // cout << "Efficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) << " Primitive iTrig " << bestTPAM << " out of " <<  ph2TpgPhiEmuAm_nTrigs  << " Quality: " << ph2TpgPhiEmuAm_quality->at(bestTPAM) << " t0=" << ph2TpgPhiEmuAm_t0->at(bestTPAM)  <<endl;
-                    // cout << "Eficiente!" << endl;
-                    
-                    // std::cout << "NUMERATOR Here: " << std::endl;
-                    numTP++;
-                    numTPEvent++;
-                    numTPAll++;
-
-                    m_plots["Eff_" + chambTag + "_AM_matched"]->Fill(segWh);
-                    m_plots["EffEta_" + chambTag + "_AM_matched"]->Fill(gen_eta->at(iGenPart));
-                    m_plots["hEffvsSlopeAM" + chambTag + whTag + "matched"] -> Fill(atan ( (ph2Seg_dirLoc_x->at(iSeg) / ph2Seg_dirLoc_z->at(iSeg)) ) * 360 / (2*TMath::Pi()) );
-                    // if (DM_) m_plots["hEffvsLxyAM" + chambTag + whTag + "matched"] -> Fill( gen_lxy->at(iGenPart) );
-                    // if (DM_) m_plots["hEffvsLxyAMmatched"] -> Fill( gen_lxy->at(iGenPart) );
-                    m_plots["hEffvsSlopeAMmatched"] -> Fill(atan ( (ph2Seg_dirLoc_x->at(iSeg) / ph2Seg_dirLoc_z->at(iSeg)) ) * 360 / (2*TMath::Pi()) );
-                    if (AMRPCflag > 0) m_plots["Eff_" + chambTag + "_AM+RPC_matched"]->Fill(segWh);
-                    
-                } else if (bestTPAM  < 0 && ph2Seg_phi_t0->at(iSeg) > -500) {
-                    // cout << iEvent << " " << -1 << " "<< segWh << " " << segSec << " " << segSt << " " << ph2Seg_phi_nHits->at(iSeg) << " " << getPh1Hits(segWh,segSec,segSt) << " " << getPh2Hits(segWh,segSec,segSt) <<endl;
-                    // cout << "Inefficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) <<endl;
-                    // cout << "Inefficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) << " Primitive iTrig " << bestTPAM << " out of " <<  ph2TpgPhiEmuAm_nTrigs  <<endl;
-
-                    // cout << iEvent << " " << -1 << " "<< segWh << " " << segSec << " " << segSt << " " << ph2Seg_phi_nHits->at(iSeg) <<endl;
-                    // cout << "Inefficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) <<endl;
-                    // cout << "Inefficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) << " Primitive iTrig " << bestTPAM << " out of " <<  ph2TpgPhiEmuAm_nTrigs  <<endl;
-                }
-                if (bestTPNoBXAM > -1 && ph2Seg_phi_t0->at(iSeg) > -500)
-                {
-                    m_plots["EffNoBX_" + chambTag + "_AM_matched"]->Fill(segWh);
-                }
-                        
-                // ----------------------------
-                // DENOMINATOR (I think)
-                // ----------------------------
-                if (ph2Seg_phi_t0->at(iSeg) > -500)
-                // if (ph2Seg_phi_t0->at(iSeg) > -500 && (segTrigAMDPhi < m_maxSegTrigDPhi) )  // For test
-                {
-                    std::cout << "            Fill TOTAL Histograms" << std::endl;
-
-                    m_plots["Eff_" + chambTag + "_AM_total"]->Fill(segWh);
-                    m_plots["EffNoBX_" + chambTag + "_AM_total"]->Fill(segWh);
-                    m_plots["EffEta_" + chambTag + "_AM_total"]->Fill(gen_eta->at(iGenPart));
-                    m_plots["hEffvsSlopeAM" + chambTag + whTag + "total"] -> Fill(atan ( (ph2Seg_dirLoc_x->at(iSeg) / ph2Seg_dirLoc_z->at(iSeg)) ) * 360 / (2*TMath::Pi()) );
-                    m_plots["hEffvsSlopeAMtotal"] -> Fill(atan ( (ph2Seg_dirLoc_x->at(iSeg) / ph2Seg_dirLoc_z->at(iSeg)) ) * 360 / (2*TMath::Pi()) );
-                    // if (DM_) m_plots["hEffvsLxyAM" + chambTag + whTag + "total"] -> Fill( gen_lxy->at(iGenPart) );
-                    // if (DM_) m_plots["hEffvsLxyAMtotal"] -> Fill( gen_lxy->at(iGenPart) );
-                    m_plots["Eff_" + chambTag + "_AM+RPC_total"]->Fill(segWh);
-
-                    // std::cout << "DENOMINATOR Here: " << std::endl;
-                    denTP++;
-                    denTPEvent++;
-                    denTPAll++;
-                }
+                } // End Loop TP
 
             } // End Loop best segments 
 
-            // double eff = numTP / denTP;
             std::cout << "**********************" <<  std::endl;
-            std::cout << "Numerator per Gen: "<<  numTP << std::endl;
-            std::cout << "DENOMINATOR per Gen: "<<  denTP << std::endl;
-            // std::cout << "eff per Event: "<<  eff << std::endl;
-            std::cout << "**********************" <<  std::endl;  
-
+            std::cout << "Numerator per Event: "<<  numTP << std::endl;
+            std::cout << "DENOMINATOR per Event: "<<  denTP << std::endl;
+            std::cout << "**********************" <<  std::endl;   
         } // END Loop Gen 
 
+        // double eff = numTP / denTP;
         // std::cout << "**********************" <<  std::endl;
-        std::cout << "Numerator Event: "<<  numTPEvent << std::endl;
-        std::cout << "DENOMINATOR Event: "<<  denTPEvent << std::endl;
+        // std::cout << "Numerator per Event: "<<  numTP << std::endl;
+        // std::cout << "DENOMINATOR per Event: "<<  denTP << std::endl;
         // std::cout << "**********************" <<  std::endl;   
+    }
 
-    } // END Loop Event 
-
-
-    std::cout << "**********************" <<  std::endl;
-    std::cout << "Numerator : "<<  numTPAll << std::endl;
-    std::cout << "DENOMINATOR : "<<  denTPAll << std::endl;
-    std::cout << "**********************" <<  std::endl; 
 
     const std::string& outputDir = "DTNtupleTPGSimAnalyzer_Efficiency";
     const std::string& outputFile = "DTNtupleTPGSimAnalyzer_Efficiency.root";
@@ -640,7 +628,7 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
 
         // Save the plot in the output directory
         std::string outputPath = outputDir + "/" + name + ".png";
-        canvas.SaveAs(outputPath.c_str());
+        // canvas.SaveAs(outputPath.c_str());
     }
 
     std::cout << "All plots saved in: " << outputDir << std::endl;
@@ -651,12 +639,12 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
     std::cout << "All histograms saved in ROOT file: " << outputFile << std::endl;
 
 
-    // std::cout << "NUMERATOR  Event:   " << numTP << std::endl;
-    // std::cout << "DENOMINATOR  Event: " << denTP << std::endl;
+    std::cout << "NUMERATOR:   " << numTP << std::endl;
+    std::cout << "DENOMINATOR : " << denTP << std::endl;
 
-    // double totalEff = double(numTP)/double(denTP);
+    double totalEff = double(numTP)/double(denTP);
 
-    // std::cout << "total Eff Event: " << totalEff << std::endl;
+    std::cout << "total Eff: " << totalEff << std::endl;
 
 
     // MAKING EFFICIENCY PLOTS
@@ -700,7 +688,7 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
 
         // Save the plot in the output directory
         std::string outputPath = outputDir + "/eff/" + effName.c_str() + ".png";
-        cEff.SaveAs(outputPath.c_str());
+        // cEff.SaveAs(outputPath.c_str());
 
     }
 
@@ -737,7 +725,7 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
 
         // Save the plot in the output directory
         std::string outputPath = outputDir + "/eff/" + effName.c_str() + ".png";
-        cEff.SaveAs(outputPath.c_str());
+        // cEff.SaveAs(outputPath.c_str());
 
     }
         
