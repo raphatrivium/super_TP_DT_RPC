@@ -7,9 +7,12 @@ The most important file is ```DTNtupleTPGSimAnalyzer_Efficiency.cpp```.
 
 It is based on the official DT efficiency script: https://github.com/jaimeleonh/DTNtuples/blob/unifiedPerf/test/DTNtupleTPGSimAnalyzer_Efficiency.C
 
+## cript Logic 
 
-# ![logic script](logic_script.png)
+![logic script](logic_script.png)
 
+
+## Run Script
 
 The files used as input can be found in this link: https://ragomesd.web.cern.ch/RPC_DT/input/
 
@@ -31,6 +34,7 @@ root -l -b -q DTNtupleTPGSimAnalyzer_Efficiency.cpp++
 
 I am using pre-compiled binary distribution ROOT 6.34.00. If you need more information access this adress: https://root.cern/install/
 
+## Folders
 
 In the folder ```DTNtupleTPGSimAnalyzer_Efficiency``` you can see the control plots.
 
