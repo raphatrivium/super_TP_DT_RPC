@@ -2,6 +2,8 @@
 #include "TMath.h" 
 #include <TSystem.h> // For gSystem->mkdir()
 
+#include <fstream>  // Required for file operations
+
 Double_t trigPhiInRad(Double_t trigPhi, Int_t sector)
 {
   return trigPhi / 65536. * 0.8 + TMath::Pi() / 6 * (sector - 1);
@@ -19,6 +21,9 @@ Double_t trigPhiInRad(Double_t trigPhi, Int_t sector)
 // }
 
 void DTNtupleTPGSimAnalyzer_Efficiency() {
+
+
+    std::ofstream effFile("output.txt");
 
 
     std::map<std::string, TH1*> m_plots;
@@ -593,7 +598,15 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
             std::cout << "Numerator per Gen: "<<  numTP << std::endl;
             std::cout << "DENOMINATOR per Gen: "<<  denTP << std::endl;
             // std::cout << "eff per Event: "<<  eff << std::endl;
-            std::cout << "**********************" <<  std::endl;  
+            std::cout << "**********************" <<  std::endl;
+            
+            
+            // Writing in a txt file
+            if (effFile.is_open()) {
+            effFile << iGenPart << "\t" << numTP << "\t" << denTP << std::endl;
+            } else {
+                std::cerr << "Error opening file!" << std::endl;
+            }
 
         } // END Loop Gen 
 
@@ -604,6 +617,7 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
 
     } // END Loop Event 
 
+    effFile.close();  // Close the file
 
     std::cout << "**********************" <<  std::endl;
     std::cout << "Numerator : "<<  numTPAll << std::endl;
