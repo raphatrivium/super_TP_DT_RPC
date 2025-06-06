@@ -25,6 +25,10 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
 
     std::ofstream effFile("output.txt");
 
+    // effFile << "iEvent" << "\t" << "iGenPart" << "\t" << "Matching" << "\t" << "Total" << std::endl;
+
+    effFile << std::left << std::setw(10) << "iEvent" << std::setw(10) << "iGenPart" << std::setw(10) << "Matching" << std::setw(10) << "Total" << std::endl;
+
 
     std::map<std::string, TH1*> m_plots;
     std::map<std::string, TH2*> m_plots2;
@@ -448,7 +452,8 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                 }
 
                 // ==================== VARIABLES FOR THE ANALYTICAL METHOD ALGORITHM
-                Int_t    bestTPAM = -1;
+                // Int_t    bestTPAM = -1;
+                Int_t    bestTPAM = -999; // For test
                 Int_t    bestTPNoBXAM = -1;
                 Int_t    AMRPCflag= -1;
                 Double_t bestSegTrigAMDPhi = 1000;
@@ -478,6 +483,9 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                         Double_t trigGlbPhi    = trigPhiInRad(ph2TpgPhiEmuAm_phi->at(iTrigAM),trigAMSec);
                         Double_t finalAMDPhi   = ph2Seg_posGlb_phi->at(iSeg) - trigGlbPhi;
                         Double_t segTrigAMDPhi = abs(acos(cos(finalAMDPhi)));
+
+                        
+                        // if (segTrigAMDPhi > m_maxSegTrigDPhi) continue; // For test
 
                         std::cout << "      iTrigAM: " << iTrigAM << " | Wheel: "<< trigAMWh << " | Sector: " << trigAMSec << " | Station: " << trigAMSt << " | trigAMBX: " << trigAMBX << " | segTrigAMDPhi: " << segTrigAMDPhi <<  std::endl;
 
@@ -517,6 +525,13 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                         {
                             bestTPNoBXAM          = iTrigAM;
                             bestSegTrigAMDPhiNoBX = segTrigAMDPhi;
+                        }
+
+                        // For test. This is to apply the 0.1 cut in the denominator as well
+                        if ((segTrigAMDPhi < m_maxSegTrigDPhi) && (bestSegTrigAMDPhi > segTrigAMDPhi) && (ph2TpgPhiEmuAm_quality->at(iTrigAM) >= minQuality)){
+
+                            bestTPAM = -1;
+
                         }
 
                     } // End Conditional Matching
@@ -571,8 +586,8 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                 // ----------------------------
                 // DENOMINATOR (I think)
                 // ----------------------------
-                if (ph2Seg_phi_t0->at(iSeg) > -500)
-                // if (ph2Seg_phi_t0->at(iSeg) > -500 && (segTrigAMDPhi < m_maxSegTrigDPhi) )  // For test
+                // if (ph2Seg_phi_t0->at(iSeg) > -500)
+                if (  bestTPAM > -500 && ph2Seg_phi_t0->at(iSeg) > -500) // For test. This is to apply the 0.1 cut in the denominator as well
                 {
                     std::cout << "            Fill TOTAL Histograms" << std::endl;
 
@@ -603,7 +618,8 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
             
             // Writing in a txt file
             if (effFile.is_open()) {
-            effFile << iGenPart << "\t" << numTP << "\t" << denTP << std::endl;
+            // effFile << iEvent << "\t" << iGenPart << "\t" << numTP << "\t" << denTP << std::endl;
+            effFile << std::left << std::setw(10) << iEvent << std::setw(10) << iGenPart << std::setw(10) << numTP << std::setw(10) << denTP << std::endl;
             } else {
                 std::cerr << "Error opening file!" << std::endl;
             }
