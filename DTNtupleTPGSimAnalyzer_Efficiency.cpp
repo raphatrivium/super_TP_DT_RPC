@@ -9,6 +9,13 @@ Double_t trigPhiInRad(Double_t trigPhi, Int_t sector)
   return trigPhi / 65536. * 0.8 + TMath::Pi() / 6 * (sector - 1);
 }
 
+
+Double_t trigPhiInRad(Double_t trigPhi, Int_t sector)
+{
+  double PHIRES_CONV = 131072; 
+  return trigPhi / PHIRES_CONV + TMath::Pi() / 6 * (sector - 1);
+}
+
 // int getPh1Hits(int wh, int se, int st)
 // {
 //   int sum = 0;
@@ -344,7 +351,7 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
             
             // quality_ = "Q8";
 
-            
+            // enum MP_QUALITY { NOPATH = 0, LOWQ = 1, CLOWQ = 2, HIGHQ = 3, CHIGHQ = 4, LOWLOWQ = 6, HIGHLOWQ = 7, HIGHHIGHQ = 8 };
 
             int LOWQ = 1;
             int CLOWQ = 2;
@@ -439,6 +446,7 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                 std::string whTag    = whTags.at(segWh + 2);
                 std::string secTag   = secTags.at(segSec - 1);
 
+                std::cout << "  Seg Wheel: " << segSec << " | Seg Sector: "<< segSec << " | Seg Station: " << segSt <<  std::endl;
 
                 if (ph2Seg_phi_t0->at(iSeg) > -500)
                 {
@@ -468,6 +476,9 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                 std::cout << "      Total number of TP in this event: "<< ph2TpgPhiEmuAm_nTrigs << std::endl;  
                 for (std::size_t iTrigAM = 0; iTrigAM < ph2TpgPhiEmuAm_nTrigs; ++iTrigAM){
 
+                    // if 
+                    // std::cout << "      Loop in the AM TP " << std::endl;
+
                     Int_t trigAMWh  = ph2TpgPhiEmuAm_wheel->at(iTrigAM);
                     Int_t trigAMSec = ph2TpgPhiEmuAm_sector->at(iTrigAM);
                     Int_t trigAMSt  = ph2TpgPhiEmuAm_station->at(iTrigAM);
@@ -483,6 +494,10 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                         Double_t trigGlbPhi    = trigPhiInRad(ph2TpgPhiEmuAm_phi->at(iTrigAM),trigAMSec);
                         Double_t finalAMDPhi   = ph2Seg_posGlb_phi->at(iSeg) - trigGlbPhi;
                         Double_t segTrigAMDPhi = abs(acos(cos(finalAMDPhi)));
+
+                        std::cout << "      trigGlbPhi:    " << trigGlbPhi <<  std::endl;
+                        std::cout << "      finalAMDPhi:   " << finalAMDPhi <<  std::endl;
+                        std::cout << "      segTrigAMDPhi: " << segTrigAMDPhi <<  std::endl;
 
                         
                         // if (segTrigAMDPhi > m_maxSegTrigDPhi) continue; // For test
@@ -528,11 +543,11 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                         }
 
                         // For test. This is to apply the 0.1 cut in the denominator as well
-                        if ((segTrigAMDPhi < m_maxSegTrigDPhi) && (bestSegTrigAMDPhi > segTrigAMDPhi) && (ph2TpgPhiEmuAm_quality->at(iTrigAM) >= minQuality)){
+                        // if ((segTrigAMDPhi < m_maxSegTrigDPhi) && (bestSegTrigAMDPhi > segTrigAMDPhi) && (ph2TpgPhiEmuAm_quality->at(iTrigAM) >= minQuality)){
 
-                            bestTPAM = -1;
+                        //     bestTPAM = -1;
 
-                        }
+                        // }
 
                     } // End Conditional Matching
 
@@ -543,8 +558,8 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                 // ----------------------------
                 if (bestTPAM > -1 && ph2Seg_phi_t0->at(iSeg) > -500)
                 {
-                    std::cout << "            Fill MATCHING Histograms (Efficient)" << std::endl;
-                    std::cout << "            bestTPAM: "<< bestTPAM << std::endl;
+                    std::cout << "  Fill MATCHING Histograms (Efficient)" << std::endl;
+                    std::cout << "  bestTPAM: "<< bestTPAM << std::endl;
 
                     // cout << iEvent << " " << 1 << " "<< segWh << " " << segSec << " " << segSt << " " << ph2Seg_phi_nHits->at(iSeg) << " " << getPh1Hits(segWh,segSec,segSt) << " " << getPh2Hits(segWh,segSec,segSt) <<endl;
                     //        cout << "Efficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) <<endl;
@@ -586,10 +601,10 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                 // ----------------------------
                 // DENOMINATOR (I think)
                 // ----------------------------
-                // if (ph2Seg_phi_t0->at(iSeg) > -500)
-                if (  bestTPAM > -500 && ph2Seg_phi_t0->at(iSeg) > -500) // For test. This is to apply the 0.1 cut in the denominator as well
+                if (ph2Seg_phi_t0->at(iSeg) > -500)
+                // if (  bestTPAM > -500 && ph2Seg_phi_t0->at(iSeg) > -500) // For test. This is to apply the 0.1 cut in the denominator as well
                 {
-                    std::cout << "            Fill TOTAL Histograms" << std::endl;
+                    std::cout << "  Fill TOTAL Histograms" << std::endl;
 
                     m_plots["Eff_" + chambTag + "_AM_total"]->Fill(segWh);
                     m_plots["EffNoBX_" + chambTag + "_AM_total"]->Fill(segWh);
