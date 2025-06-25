@@ -352,7 +352,6 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
             // quality_ = "Q8";
 
             // enum MP_QUALITY { NOPATH = 0, LOWQ = 1, CLOWQ = 2, HIGHQ = 3, CHIGHQ = 4, LOWLOWQ = 6, HIGHLOWQ = 7, HIGHHIGHQ = 8 };
-
             int LOWQ = 1;
             int CLOWQ = 2;
             int HIGHQ = 3;
