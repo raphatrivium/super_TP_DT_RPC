@@ -4,9 +4,15 @@
 
 #include <fstream>  // Required for file operations
 
+// Double_t trigPhiInRad(Double_t trigPhi, Int_t sector)
+// {
+//   return trigPhi / 65536. * 0.8 + TMath::Pi() / 6 * (sector - 1);
+// }
+
 Double_t trigPhiInRad(Double_t trigPhi, Int_t sector)
 {
-  return trigPhi / 65536. * 0.8 + TMath::Pi() / 6 * (sector - 1);
+  double PHIRES_CONV = 65536/0.5; 
+  return trigPhi / PHIRES_CONV + TMath::Pi() / 6 * (sector - 1);
 }
 
 // int getPh1Hits(int wh, int se, int st)
@@ -39,6 +45,7 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
     std::vector<std::string> chambTag = {"MB1",     "MB2", "MB3", "MB4"};
     std::vector<std::string> wheelTag = {"Wh.-2","Wh.-1","Wh.0","Wh.+1","Wh.+2",};
 
+
     m_plots["hSegmentPsi"] = new TH1D("hSegmentPsi", "Segment Psi distribution ; Psi; Entries", 200, -60, +60);
     m_plots2["hSegmentPsiVST0"] = new TH2D("hSegmentPsiVST0", "Segment Psi distribution vs segment t0; Psi; Segment t0 (ns)", 200, -50, +50, 200, -100, 100);
     m_plots["hGenSegDeltaPhi"] = new TH1D("hGenSegDeltaPhi", "Gen Muon - Segment Delta Phi distribution ; Delta Phi; Entries", 600, 0, 0.5);
@@ -49,6 +56,17 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
             "Gen Muon - Segment Delta Phi distribution ; Delta Phi; Entries", 600, 0, 0.5);
             m_plots["hGenSegDeltaEta"+wheel+chamb] = new TH1D(("hGenSegDeltaEta"+wheel+chamb).c_str(),
             "Gen Muon - Segment Delta Eta distribution ; Delta Eta; Entries", 600, 0,  0.5);
+
+
+            // m_plots["hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched"] = new TH1D(("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str(),
+            // "Trigger Primitive Timing ; Time of the TPs associated with prompt muons [ns]; Entries", 40, 0, 700);
+
+            // m_plots["hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched"] = new TH1D(("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str(),
+            // "Trigger Primitive Timing ; Time of the TPs associated with prompt muons [ns]; Entries", 40, 630, 650);
+
+            m_plots["hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched"] = new TH1D( ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str(),
+            ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched; Time of the TPs associated with prompt muons [ns]; Entries").c_str(), 27, -10, 10);
+
         }
     }
 
@@ -112,7 +130,12 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
     // INPUT FILES
     // ------------------------------------------------------------------------------
     // std::string file_name = "input/DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC.root";
-    std::string file_name = "input/DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2.root";
+
+    // std::string file_name = "input/DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
+    std::string file_name = "input/DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
+
+
+    
 
     std::string pathDqmRPCfile = file_name;
     std::cout << "-------------------------------------------" <<std::endl;
@@ -176,15 +199,10 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
     tree->SetBranchAddress("ph2Seg_phi_nHits", &ph2Seg_phi_nHits);
     std::vector<float> *ph2Seg_z_nHits = nullptr;
     tree->SetBranchAddress("ph2Seg_z_nHits", &ph2Seg_z_nHits);
-
     std::vector<float> *ph2Seg_dirLoc_x = nullptr;
     tree->SetBranchAddress("ph2Seg_dirLoc_x", &ph2Seg_dirLoc_x);
     std::vector<float> *ph2Seg_dirLoc_z = nullptr;
     tree->SetBranchAddress("ph2Seg_dirLoc_z", &ph2Seg_dirLoc_z);
-
-
-    
-    
 
     // ------------------------------------------------------------------------------
     TBranch *branch_ph2TpgPhiEmuAm_nTrigs = tree->GetBranch("ph2TpgPhiEmuAm_nTrigs");
@@ -213,7 +231,6 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
     tree->SetBranchAddress("ph2TpgPhiEmuAm_rpcFlag", &ph2TpgPhiEmuAm_rpcFlag);
     std::vector<float> *ph2TpgPhiEmuAm_index = nullptr;
     tree->SetBranchAddress("ph2TpgPhiEmuAm_index", &ph2TpgPhiEmuAm_index);
-
     std::vector<float> *ph2TpgPhiEmuAm_dirLoc_phi = nullptr;
     tree->SetBranchAddress("ph2TpgPhiEmuAm_dirLoc_phi", &ph2TpgPhiEmuAm_dirLoc_phi);
     
@@ -461,6 +478,8 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                 Double_t bestAMDPhi = 0;
                 Int_t    besttrigAMBX = 0;
 
+                Double_t trigAMt0 = -999;
+
                 // -----------------------------
                 // Loop in the AM TP
                 // -----------------------------
@@ -525,21 +544,23 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                         {
                             bestTPNoBXAM          = iTrigAM;
                             bestSegTrigAMDPhiNoBX = segTrigAMDPhi;
+                            trigAMt0 = ph2TpgPhiEmuAm_t0->at(iTrigAM);
+
                         }
 
                         // For test. This is to apply the 0.1 cut in the denominator as well
-                        if ((segTrigAMDPhi < m_maxSegTrigDPhi) && (bestSegTrigAMDPhi > segTrigAMDPhi) && (ph2TpgPhiEmuAm_quality->at(iTrigAM) >= minQuality)){
+                        // if ((segTrigAMDPhi < m_maxSegTrigDPhi) && (bestSegTrigAMDPhi > segTrigAMDPhi) && (ph2TpgPhiEmuAm_quality->at(iTrigAM) >= minQuality)){
 
-                            bestTPAM = -1;
+                        //     bestTPAM = -1;
 
-                        }
+                        // }
 
                     } // End Conditional Matching
 
                 } // End Loop TP        
 
                 // ----------------------------
-                // NUMERATOR (I think)
+                // NUMERATOR
                 // ----------------------------
                 if (bestTPAM > -1 && ph2Seg_phi_t0->at(iSeg) > -500)
                 {
@@ -568,7 +589,13 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                     // if (DM_) m_plots["hEffvsLxyAMmatched"] -> Fill( gen_lxy->at(iGenPart) );
                     m_plots["hEffvsSlopeAMmatched"] -> Fill(atan ( (ph2Seg_dirLoc_x->at(iSeg) / ph2Seg_dirLoc_z->at(iSeg)) ) * 360 / (2*TMath::Pi()) );
                     if (AMRPCflag > 0) m_plots["Eff_" + chambTag + "_AM+RPC_matched"]->Fill(segWh);
-                    
+
+                    std::cout << "            trigAMt0: "<< trigAMt0 << std::endl;
+                    // trigAMt0 = (trigAMt0 * 25 / 32); // DCS to ns   OBS: Need to change the range in the histogram to [-10,10]
+                    trigAMt0 = (trigAMt0 * 25 / 32) -500;
+                    std::cout << "            trigAMt0: "<< trigAMt0 << std::endl;
+                    m_plots["hPh2TpgPhiEmuAmT0"+whTag+chambTag+"_matched"]->Fill(trigAMt0);
+
                 } else if (bestTPAM  < 0 && ph2Seg_phi_t0->at(iSeg) > -500) {
                     // cout << iEvent << " " << -1 << " "<< segWh << " " << segSec << " " << segSt << " " << ph2Seg_phi_nHits->at(iSeg) << " " << getPh1Hits(segWh,segSec,segSt) << " " << getPh2Hits(segWh,segSec,segSt) <<endl;
                     // cout << "Inefficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) <<endl;
@@ -584,10 +611,10 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                 }
                         
                 // ----------------------------
-                // DENOMINATOR (I think)
+                // DENOMINATOR
                 // ----------------------------
-                // if (ph2Seg_phi_t0->at(iSeg) > -500)
-                if (  bestTPAM > -500 && ph2Seg_phi_t0->at(iSeg) > -500) // For test. This is to apply the 0.1 cut in the denominator as well
+                if (ph2Seg_phi_t0->at(iSeg) > -500)
+                // if (  bestTPAM > -500 && ph2Seg_phi_t0->at(iSeg) > -500) // For test. This is to apply the 0.1 cut in the denominator as well
                 {
                     std::cout << "            Fill TOTAL Histograms" << std::endl;
 
@@ -640,11 +667,17 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
     std::cout << "DENOMINATOR : "<<  denTPAll << std::endl;
     std::cout << "**********************" <<  std::endl; 
 
-    const std::string& outputDir = "DTNtupleTPGSimAnalyzer_Efficiency";
+    const std::string& outputDir = "DTNtupleTPGSimAnalyzer_Efficiency/";
     const std::string& outputFile = "DTNtupleTPGSimAnalyzer_Efficiency.root";
 
     // Create a new ROOT file (recreate will overwrite existing file)
     TFile outFile(outputFile.c_str(), "RECREATE");
+
+    // Check if file opened successfully
+    if (!outFile.IsOpen()) {
+        std::cerr << "Error: Could not create file " << outputFile << std::endl;
+        return;
+    }
 
     // Create the directory if it doesn't exist
     if (gSystem->AccessPathName(outputDir.c_str())) {
@@ -661,7 +694,7 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
             continue;
         }
 
-        // Write the histogram to the file
+        // Write the histogram to the root file
         hist->Write();
 
         // Create a canvas to draw the histogram
@@ -669,7 +702,7 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
         hist->Draw();
 
         // Save the plot in the output directory
-        std::string outputPath = outputDir + "/" + name + ".png";
+        std::string outputPath = outputDir + name + ".png";
         canvas.SaveAs(outputPath.c_str());
     }
 
@@ -677,17 +710,7 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
 
     // Close the file (optional, as it will be automatically closed when outFile goes out of scope)
     outFile.Close();
-
     std::cout << "All histograms saved in ROOT file: " << outputFile << std::endl;
-
-
-    // std::cout << "NUMERATOR  Event:   " << numTP << std::endl;
-    // std::cout << "DENOMINATOR  Event: " << denTP << std::endl;
-
-    // double totalEff = double(numTP)/double(denTP);
-
-    // std::cout << "total Eff Event: " << totalEff << std::endl;
-
 
     // MAKING EFFICIENCY PLOTS
     // This block will be improved
