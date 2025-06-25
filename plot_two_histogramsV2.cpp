@@ -202,12 +202,8 @@ void plot_two_histogramsV2() {
     std::vector<std::string> chambTag = {"MB1", "MB2", "MB3", "MB4"};
     std::vector<std::string> wheelTag = {"Wh.-2","Wh.-1","Wh.0","Wh.+1","Wh.+2",};
 
-
-    // TH1F *hist1 = (TH1F*)file1->Get("hPh2TpgPhiEmuAmT0Wh.0MB1");
-    // TH1F *hist2 = (TH1F*)file2->Get("hPh2TpgPhiEmuAmT0Wh.0MB1");
     TH1F *hist1;
     TH1F *hist2;
-
 
     // ----------------------------------------------------------
     // ----Time of the TPs associated with prompt muons [ns]-----
@@ -218,21 +214,13 @@ void plot_two_histogramsV2() {
             hist1 = (TH1F*)file1->Get(("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str());
             hist2 = (TH1F*)file2->Get(("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str());
 
-            plot_two_histograms_function2( hist1, hist2, "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched", "Time of the TPs associated with prompt muons [ns]", "MB1 W-2", true);
+            plot_two_histograms_function2( hist1, hist2, "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched", "Time of the TPs associated with prompt muons [ns]", (wheel+" "+chamb).c_str(), true);
 
             // m_plots["hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched"] = new TH1D( ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str(),
             // ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched; Time of the TPs associated with prompt muons [ns]; Entries").c_str(), 27, -10, 10);
 
         }
     }
-
-
-    // ----------------------------------------------------------
-    // ----Time of the TPs associated with prompt muons [ns]-----
-    // ----------------------------------------------------------
-    // hist1 = (TH1F*)file1->Get("histogram_ph2TpgPhiEmuAm_t0_wheel_m2_station_1_matched");
-    // hist2 = (TH1F*)file2->Get("histogram_ph2TpgPhiEmuAm_t0_wheel_m2_station_1_matched");
-    // plot_two_histograms_function2( hist1, hist2, "histogram_ph2TpgPhiEmuAm_t0_wheel_m2_station_1_matched", "Time of the TPs associated with prompt muons [ns]", "MB1 W-2", true);
 
 
     std::cout << "--------------------------------" << std::endl;
