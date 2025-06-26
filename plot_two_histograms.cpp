@@ -27,7 +27,7 @@ double get_entries(  TH1F *hist) {
     return totalEntries;
 }
 
-void plot_two_histograms_function2(  TH1F *hist1, TH1F *hist2, 
+void plot_two_histograms_function(  TH1F *hist1, TH1F *hist2, 
                                     std::string str_name,
                                      std::string str_Xaxis,
                                     std::string str_leg = "",
@@ -186,7 +186,7 @@ void plot_two_histograms_function2(  TH1F *hist1, TH1F *hist2,
 
 }
 
-void plot_two_histogramsV2() {
+void plot_two_histograms() {
 
     // Open the two ROOT files
     TFile *file1 = TFile::Open("DTNtupleTPGSimAnalyzer_Efficiency/noRPC/DTNtupleTPGSimAnalyzer_Efficiency.root");
@@ -214,10 +214,13 @@ void plot_two_histogramsV2() {
             hist1 = (TH1F*)file1->Get(("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str());
             hist2 = (TH1F*)file2->Get(("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str());
 
-            plot_two_histograms_function2( hist1, hist2, "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched", "Time of the TPs associated with prompt muons [ns]", (wheel+" "+chamb).c_str(), true);
+            std::string wheel2 = wheel;
+            wheel2 = wheel2.erase(1, 2);  // Removes "W." :   "Wh.-2"→ "W-2"
 
-            // m_plots["hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched"] = new TH1D( ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str(),
-            // ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched; Time of the TPs associated with prompt muons [ns]; Entries").c_str(), 27, -10, 10);
+            plot_two_histograms_function(  hist1, hist2, 
+                                            "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched", 
+                                            "Time of the TPs associated with prompt muons [ns]", (wheel2+" "+chamb).c_str(), 
+                                            true);
 
         }
     }

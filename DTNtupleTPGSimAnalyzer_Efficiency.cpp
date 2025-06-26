@@ -1,3 +1,7 @@
+// This code is a modificated version file to run locally of the DTNtupleTPGSimAnalyzer_Efficiency.cpp 
+// that can be found in the github: 
+// https://github.com/jaimeleonh/DTNtuples/blob/unifiedPerf/test/DTNtupleTPGSimAnalyzer_Efficiency.C
+
 #include "super_TP_DT_RPC.h"
 #include "TMath.h" 
 #include <TSystem.h> // For gSystem->mkdir()
