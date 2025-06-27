@@ -189,10 +189,10 @@ void plot_two_histograms_function(  TH1F *hist1, TH1F *hist2,
 void plot_two_histograms() {
 
     // Open the two ROOT files
-    TFile *file1 = TFile::Open("DTNtupleTPGSimAnalyzer_Efficiency/noRPC/DTNtupleTPGSimAnalyzer_Efficiency.root");
-    TFile *file2 = TFile::Open("DTNtupleTPGSimAnalyzer_Efficiency/RPC/DTNtupleTPGSimAnalyzer_Efficiency.root");
+    TFile *fileNoRPC = TFile::Open("DTNtupleTPGSimAnalyzer_Efficiency/noRPC/DTNtupleTPGSimAnalyzer_Efficiency.root");
+    TFile *fileRPC = TFile::Open("DTNtupleTPGSimAnalyzer_Efficiency/RPC/DTNtupleTPGSimAnalyzer_Efficiency.root");
 
-    if (!file1 || !file2) {
+    if (!fileNoRPC || !fileRPC) {
         std::cout << "Error: Could not open one or both files!" << std::endl;
         return;
     }
@@ -215,7 +215,7 @@ void plot_two_histograms() {
             hist2 = (TH1F*)file2->Get(("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str());
 
             std::string wheel2 = wheel;
-            wheel2 = wheel2.erase(1, 2);  // Removes "W." :   "Wh.-2"→ "W-2"
+            wheel2 = wheel2.erase(1, 2);  // Removes "W.": "Wh.-2"→ "W-2"
 
             plot_two_histograms_function(  hist1, hist2, 
                                             "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched", 
