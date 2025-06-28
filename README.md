@@ -14,9 +14,7 @@ It is based on the official DT efficiency script: https://github.com/jaimeleonh/
 
 ## Run Script
 
-The files used as input can be found in this link: https://ragomesd.web.cern.ch/RPC_DT/input/
-
-Create a folder called ```input``` and put the files there.
+The files used as input can be found in this link: https://ragomesd.web.cern.ch/RPC_DT/dtntuples/step2/
 
 You run the ```DTNtupleTPGSimAnalyzer_Efficiency.cpp``` script locally with
 
@@ -36,6 +34,6 @@ I am using pre-compiled binary distribution ROOT 6.34.00. If you need more infor
 
 ## Folders
 
-In the folder ```DTNtupleTPGSimAnalyzer_Efficiency``` you can see the control plots.
+In the folder ```Doutput/noRPCoutput/noRPC``` you can see the control plots.
 
 In the folder ```DTNtupleTPGSimAnalyzer_Efficiency/eff``` you can see the efficiency plots.

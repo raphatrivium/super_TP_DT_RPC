@@ -1,4 +1,35 @@
-#include "DTNtupleTPGSimAnalyzer.h"
+#include <iostream>
+#include <string>
+#include <typeinfo> // see the type of a variable
+#include <fstream> // create and write file
+#include <vector>
+#include <filesystem>
+#include <cmath>
+#include <unordered_map>
+#include <set>
+#include <iomanip> // For std::setprecision
+
+#include <TFile.h>
+#include <TDirectoryFile.h>
+#include <TKey.h>
+#include <TH1.h>
+#include <TH1F.h>
+#include <TH2F.h>
+#include <THStack.h>
+#include <TCanvas.h>
+#include <TPad.h>
+#include <TLegend.h>
+#include <TText.h>
+#include <TLatex.h>
+#include <TObjArray.h>
+#include <TBranch.h>
+#include <TLeaf.h>
+#include <TTree.h>
+#include <TEfficiency.h>
+#include "TMath.h" 
+#include <TSystem.h> // For gSystem->mkdir()
+#include <TLine.h>
+
 
 
 double get_entries(  TH1F *hist) {
@@ -15,7 +46,29 @@ double get_entries(  TH1F *hist) {
     return totalEntries;
 }
 
-void plot_two_histograms_function(  TH1F *hist1, TH1F *hist2, 
+Double_t trigPhiInRad(Double_t trigPhi, Int_t sector)
+{
+  double PHIRES_CONV = 65536/0.5; 
+  return trigPhi / PHIRES_CONV + TMath::Pi() / 6 * (sector - 1);
+}
+
+// Double_t trigPhiInRad(Double_t trigPhi, Int_t sector)
+// {
+//   return trigPhi / 65536. * 0.8 + TMath::Pi() / 6 * (sector - 1);
+// }
+
+// int getPh1Hits(int wh, int se, int st)
+// {
+//   int sum = 0;
+//   for (unsigned int i = 0; i < digi_nDigis; i++){
+//     if ( digi_wheel->at(i) == wh &&
+//       digi_sector->at(i) == se &&
+//     digi_station->at(i) == st ) sum++;
+//   }
+//   return sum;
+// }
+
+void plot_histograms(  TH1F *hist1, TH1F *hist2, 
                                     std::string str_name,
                                      std::string str_Xaxis,
                                     std::string str_leg = "",
@@ -171,51 +224,5 @@ void plot_two_histograms_function(  TH1F *hist1, TH1F *hist2,
     canvas->Update(); // Update the canvas to display the histograms
     canvas->SaveAs(("DTNtupleTPGSimAnalyzer_Efficiency/t0/"+str_name+".png").c_str()); // Save the canvas as an image
     canvas->SaveAs(("DTNtupleTPGSimAnalyzer_Efficiency/t0/"+str_name+".pdf").c_str()); // Save the canvas as PDF
-
-}
-
-void plot_two_histograms() {
-
-    // Open the two ROOT files
-    TFile *fileNoRPC = TFile::Open("output/noRPC/DTNtupleTPGSimAnalyzer_Efficiency.root");
-    TFile *fileRPC = TFile::Open("output/RPC/DTNtupleTPGSimAnalyzer_Efficiency.root");
-
-    if (!fileNoRPC || !fileRPC) {
-        std::cout << "Error: Could not open one or both files!" << std::endl;
-        return;
-    }
-
-    // std::vector<std::string> algoTag  = {"AM", "AM+RPC", "Ph1"};
-    // std::vector<std::string> totalTag = {"matched", "total"};
-    std::vector<std::string> chambTag = {"MB1", "MB2", "MB3", "MB4"};
-    std::vector<std::string> wheelTag = {"Wh.-2","Wh.-1","Wh.0","Wh.+1","Wh.+2",};
-
-    TH1F *hist1;
-    TH1F *hist2;
-
-    // ----------------------------------------------------------
-    // ----Time of the TPs associated with prompt muons [ns]-----
-    // ----------------------------------------------------------
-    for (const auto & chamb : chambTag) {
-        for (const auto & wheel : wheelTag) {
-            
-            hist1 = (TH1F*)fileNoRPC->Get(("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str());
-            hist2 = (TH1F*)fileRPC->Get(("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str());
-
-            std::string wheel2 = wheel;
-            wheel2 = wheel2.erase(1, 2);  // Removes "W.": "Wh.-2"→ "W-2"
-
-            plot_two_histograms_function(  hist1, hist2, 
-                                            "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched", 
-                                            "Time of the TPs associated with prompt muons [ns]", (wheel2+" "+chamb).c_str(), 
-                                            true);
-
-        }
-    }
-
-
-    std::cout << "--------------------------------" << std::endl;
-    std::cout << "END PROGRAM" << std::endl;
-    std::cout << "--------------------------------" << std::endl;
 
 }

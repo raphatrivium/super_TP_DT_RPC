@@ -2,8 +2,8 @@
 // that can be found in the github: 
 // https://github.com/jaimeleonh/DTNtuples/blob/unifiedPerf/test/DTNtupleTPGSimAnalyzer_Efficiency.C
 
-#include "DTNtupleTPGSimAnalyzer_Efficiency.h"
 
+#include "DTNtupleTPGSimAnalyzer.h"
 
 void DTNtupleTPGSimAnalyzer_Efficiency() {
 
@@ -621,28 +621,27 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
     std::cout << "**********************" <<  std::endl; 
 
     std::string outputDir = "";
+    std::string histoDir = "";
+    std::string effDir = "";
     if (file_name.find("noRPC") != std::string::npos) 
     {
         std::cout << "Found 'noRPC' in the filename!" << std::endl;
         outputDir = "output/noRPC/";
+        histoDir =  "output/noRPC/histograms/";
+        effDir =    "output/noRPC/histograms/effPlots/";
+        
     } 
     else {
         std::cout << "'noRPC' not found." << std::endl;
         outputDir = "output/RPC/";
+        histoDir =  "output/RPC/histograms/";
+        effDir =    "output/RPC/histograms/effPlots/";
     }
-
-    const std::string& histoDir = "output/histograms/";
-    const std::string& effDir = "output/histograms/effPlots/";
 
     // Create the directory if it doesn't exist
     if (gSystem->AccessPathName(outputDir.c_str())) {
         gSystem->mkdir(outputDir.c_str(), true); // true = recursive
     }
-
-    std::cout << "**********************" <<  std::endl;
-    std::cout << "DIRECTORY : "<<  outputDir << "CREATED : " << std::endl;
-    std::cout << "  "<< std::endl;
-    std::cout << "**********************" <<  std::endl; 
 
     if (gSystem->AccessPathName(histoDir.c_str())) {
         gSystem->mkdir(histoDir.c_str(), true); // true = recursive
@@ -692,53 +691,53 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
     // -------------------------------------------
     // This block will be improved
 
-    for (int i = 0; i < 4; ++i){
+    // for (int i = 0; i < 4; ++i){
 
-        std::vector<std::string> algoTag2  = {"AM","AM+RPC"};
-        for (const auto & algo : algoTag2)
-        {
-            int chamberNumber = i+1;
+    //     std::vector<std::string> algoTag2  = {"AM","AM+RPC"};
+    //     for (const auto & algo : algoTag2)
+    //     {
+    //         int chamberNumber = i+1;
 
-            // Get the histograms from your map
-            std::string hname = "Eff_MB" + std::to_string(chamberNumber) + "_"+algo+"_total";
-            std::cout << "hname: " << hname << std::endl;
+    //         // Get the histograms from your map
+    //         std::string hname = "Eff_MB" + std::to_string(chamberNumber) + "_"+algo+"_total";
+    //         std::cout << "hname: " << hname << std::endl;
 
-            TH1* hTotal = m_plots[hname.c_str()];
-            hname = "Eff_MB" + std::to_string(chamberNumber) + "_"+algo+"_matched";
-            std::cout << "hname: " << hname << std::endl;
-            TH1* hMatched = m_plots[hname.c_str()];
+    //         TH1* hTotal = m_plots[hname.c_str()];
+    //         hname = "Eff_MB" + std::to_string(chamberNumber) + "_"+algo+"_matched";
+    //         std::cout << "hname: " << hname << std::endl;
+    //         TH1* hMatched = m_plots[hname.c_str()];
 
-            // Check if histograms exist
-            if (!hTotal || !hMatched) {
-                std::cerr << "Error: Required histograms not found in map!" << std::endl;
-                return;
-            }
+    //         // Check if histograms exist
+    //         if (!hTotal || !hMatched) {
+    //             std::cerr << "Error: Required histograms not found in map!" << std::endl;
+    //             return;
+    //         }
         
-            // Create the efficiency plot
-            TEfficiency* effPlot = new TEfficiency(*hMatched, *hTotal);
-            // std::string effName = "Eff_MB" + std::to_string(chamberNumber) + "_AM+RPC";
-            effPlot->SetName( ("Eff_MB" + std::to_string(chamberNumber)+"_"+algo).c_str() );  // Convert to const char*
-            std::string title = "Eff_MB"+std::to_string(chamberNumber)+"_"+algo+"; Sector ;Efficiency";
-            effPlot->SetTitle(title.c_str());
+    //         // Create the efficiency plot
+    //         TEfficiency* effPlot = new TEfficiency(*hMatched, *hTotal);
+    //         // std::string effName = "Eff_MB" + std::to_string(chamberNumber) + "_AM+RPC";
+    //         effPlot->SetName( ("Eff_MB" + std::to_string(chamberNumber)+"_"+algo).c_str() );  // Convert to const char*
+    //         std::string title = "Eff_MB"+std::to_string(chamberNumber)+"_"+algo+"; Sector ;Efficiency";
+    //         effPlot->SetTitle(title.c_str());
 
-            // Style the efficiency plot
-            effPlot->SetLineColor(kBlue);
-            effPlot->SetMarkerColor(kBlue);
-            effPlot->SetMarkerStyle(20);
+    //         // Style the efficiency plot
+    //         effPlot->SetLineColor(kBlue);
+    //         effPlot->SetMarkerColor(kBlue);
+    //         effPlot->SetMarkerStyle(20);
 
-            // effPlot->GetYaxis()->SetRangeUser(0.0, 1.0);
+    //         // effPlot->GetYaxis()->SetRangeUser(0.0, 1.0);
 
-            // Draw the efficiency plot
-            TCanvas cEff = new TCanvas("cEff", "Efficiency Plot", 800, 600);
-            cEff.SetGridy();
-            cEff.SetGridx();
-            effPlot->Draw("AP");  // "AP" for axis and points
+    //         // Draw the efficiency plot
+    //         TCanvas cEff = new TCanvas("cEff", "Efficiency Plot", 800, 600);
+    //         cEff.SetGridy();
+    //         cEff.SetGridx();
+    //         effPlot->Draw("AP");  // "AP" for axis and points
 
-            // Save the plot in the output directory as "png" or "pdf"
-            // std::string outputPath = effDir + effName.c_str() + ".png";
-            cEff.SaveAs((effDir+"Eff_MB"+std::to_string(chamberNumber)+"_"+algo+ ".png").c_str());
-        }
-    }
+    //         // Save the plot in the output directory as "png" or "pdf"
+    //         // std::string outputPath = effDir + effName.c_str() + ".png";
+    //         cEff.SaveAs((effDir+"Eff_MB"+std::to_string(chamberNumber)+"_"+algo+ ".png").c_str());
+    //     }
+    // }
 
 
 } // END Program
