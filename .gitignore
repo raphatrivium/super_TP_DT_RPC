@@ -1,8 +1,7 @@
 # Prerequisites
 *.d
 
-input/*
-output/*
+input/*.root
 
 # Compiled Object files
 *.slo
