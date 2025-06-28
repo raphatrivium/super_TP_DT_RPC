@@ -211,8 +211,8 @@ void plot_two_histograms() {
     for (const auto & chamb : chambTag) {
         for (const auto & wheel : wheelTag) {
             
-            hist1 = (TH1F*)file1->Get(("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str());
-            hist2 = (TH1F*)file2->Get(("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str());
+            hist1 = (TH1F*)fileNoRPC->Get(("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str());
+            hist2 = (TH1F*)fileRPC->Get(("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str());
 
             std::string wheel2 = wheel;
             wheel2 = wheel2.erase(1, 2);  // Removes "W.": "Wh.-2"→ "W-2"

@@ -92,21 +92,16 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
     // ------------------------------------------------------------------------------
     // INPUT FILES
     // ------------------------------------------------------------------------------
-    
-    // std::string file_name = "input/DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
-    std::string file_name = "input/DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
+    std::string file_name = "input/DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
+    // std::string file_name = "input/DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
 
-
-    
-
-    std::string pathDqmRPCfile = file_name;
     std::cout << "-------------------------------------------" <<std::endl;
-    std::cout << pathDqmRPCfile << "\n" <<std::endl;
+    std::cout << file_name << "\n" <<std::endl;
     std::cout << "-------------------------------------------" <<std::endl;
 
     // ---------------------------------
     // Open the ROOT file
-    TFile *file = new TFile( (pathDqmRPCfile).c_str() );
+    TFile *file = new TFile( (file_name).c_str() );
 
     // ---------------------------------
     // Open TDirectoryFile
@@ -232,7 +227,7 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
     // Loop in the events
     // ------------------------------------------------------------------------------
 
-    nEntries = nEntries;   // 100   nEntries
+    nEntries = 5;   // 100   nEntries
     std::cout << "Total entries:" << nEntries <<std::endl;
 
     for (Long64_t iEvent = 0; iEvent < nEntries; ++iEvent) { 
@@ -625,8 +620,17 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
     std::cout << "DENOMINATOR : "<<  denTPAll << std::endl;
     std::cout << "**********************" <<  std::endl; 
 
-    // const std::string& outputDir = "DTNtupleTPGSimAnalyzer_Efficiency/";
-    const std::string& outputDir = "output/";
+    std::string outputDir = "";
+    if (file_name.find("noRPC") != std::string::npos) 
+    {
+        std::cout << "Found 'noRPC' in the filename!" << std::endl;
+        outputDir = "output/noRPC/";
+    } 
+    else {
+        std::cout << "'noRPC' not found." << std::endl;
+        outputDir = "output/RPC/";
+    }
+
     const std::string& histoDir = "output/histograms/";
     const std::string& effDir = "output/histograms/effPlots/";
 
@@ -635,12 +639,15 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
         gSystem->mkdir(outputDir.c_str(), true); // true = recursive
     }
 
-    // Create the directory if it doesn't exist
+    std::cout << "**********************" <<  std::endl;
+    std::cout << "DIRECTORY : "<<  outputDir << "CREATED : " << std::endl;
+    std::cout << "  "<< std::endl;
+    std::cout << "**********************" <<  std::endl; 
+
     if (gSystem->AccessPathName(histoDir.c_str())) {
         gSystem->mkdir(histoDir.c_str(), true); // true = recursive
     }
 
-    // Create the directory if it doesn't exist
     if (gSystem->AccessPathName(effDir.c_str())) {
         gSystem->mkdir(effDir.c_str(), true); // true = recursive
     }
@@ -655,31 +662,30 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
     }
 
     // -------------------------------------------
-    // Loop over the map and save each histogram
+    // Loop over the map to save each histogram in the root file and as png
     // -------------------------------------------
-    // for (const auto& pair : m_plots) {
-    //     const std::string& name = pair.first;
-    //     TH1* hist = pair.second;
+    for (const auto& pair : m_plots) {
+        const std::string& name = pair.first;
+        TH1* hist = pair.second;
 
-    //     if (!hist) {
-    //         std::cerr << "Warning: Histogram '" << name << "' is null!" << std::endl;
-    //         continue;
-    //     }
-    //     hist->Write(); // Write the histogram to the root file
+        if (!hist) {
+            std::cerr << "Warning: Histogram '" << name << "' is null!" << std::endl;
+            continue;
+        }
+        hist->Write(); // Write the histogram to the root file
 
-    //     // Create a canvas to draw the histogram
-    //     TCanvas canvas("canvas", "canvas", 800, 600);
-    //     hist->Draw();
+        // Create a canvas to draw the histogram
+        TCanvas canvas("canvas", "canvas", 800, 600);
+        hist->Draw();
 
-    //     // Save the plot in the output directory
-    //     // std::string outputPath = (histoDir + name + ".png");
-    //     canvas.SaveAs((histoDir + name + ".png").c_str());
-    // }
-    // // Close the file (optional, as it will be automatically closed when outFile goes out of scope)
-    // outFile.Close();
-    // std::cout << "All histograms saved in ROOT file: " << outputFile << std::endl;
+        // Save the plot in the output directory
+        canvas.SaveAs((histoDir + name + ".png").c_str());
+    }
+    // Close the file (optional, as it will be automatically closed when outFile goes out of scope)
+    outFile.Close();
+    std::cout << "All histograms saved in ROOT file: " << outputFile << std::endl;
     
-    // std::cout << "All plots saved in: " << outputDir << std::endl;
+    std::cout << "All plots saved in: " << outputDir << std::endl;
 
     // -------------------------------------------
     // MAKING EFFICIENCY PLOTS
@@ -688,14 +694,19 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
 
     for (int i = 0; i < 4; ++i){
 
-        std::vector<std::string> algoTag2  = {"AM" "AM+RPC"};
+        std::vector<std::string> algoTag2  = {"AM","AM+RPC"};
         for (const auto & algo : algoTag2)
         {
             int chamberNumber = i+1;
 
             // Get the histograms from your map
-            TH1* hTotal = m_plots["Eff_MB" + std::to_string(chamberNumber) + ("_"+algo+"_total").c_str()];
-            TH1* hMatched = m_plots["Eff_MB" + std::to_string(chamberNumber) + ("_"+algo+"_matched").c_str()];
+            std::string hname = "Eff_MB" + std::to_string(chamberNumber) + "_"+algo+"_total";
+            std::cout << "hname: " << hname << std::endl;
+
+            TH1* hTotal = m_plots[hname.c_str()];
+            hname = "Eff_MB" + std::to_string(chamberNumber) + "_"+algo+"_matched";
+            std::cout << "hname: " << hname << std::endl;
+            TH1* hMatched = m_plots[hname.c_str()];
 
             // Check if histograms exist
             if (!hTotal || !hMatched) {
@@ -725,88 +736,9 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
 
             // Save the plot in the output directory as "png" or "pdf"
             // std::string outputPath = effDir + effName.c_str() + ".png";
-            cEff.SaveAs((effDir+"Eff_MB"+std::to_string(chamberNumber)+"_"+algo).c_str());
+            cEff.SaveAs((effDir+"Eff_MB"+std::to_string(chamberNumber)+"_"+algo+ ".png").c_str());
         }
     }
 
-    // for (int i = 0; i < 4; ++i){
-
-    //     int chamberNumber = i+1;  // example value
-    //     // Get the histograms from your map
-    //     TH1* hTotal = m_plots["Eff_MB" + std::to_string(chamberNumber) + "_AM+RPC_total"];
-    //     TH1* hMatched = m_plots["Eff_MB" + std::to_string(chamberNumber) + "_AM+RPC_matched"];
-
-    //     // TH1* hTotal = m_plots["Eff_MB+"strchamberNumber"+_AM+RPC_total"];
-    //     // TH1* hMatched = m_plots["Eff_MB"strchamberNumber"_AM+RPC_matched"];
-
-    //     // Check if histograms exist
-    //     if (!hTotal || !hMatched) {
-    //         std::cerr << "Error: Required histograms not found in map!" << std::endl;
-    //         return;
-    //     }
-    
-    //     // Create the efficiency plot
-    //     TEfficiency* effPlot = new TEfficiency(*hMatched, *hTotal);
-    //     std::string effName = "Eff_MB" + std::to_string(chamberNumber) + "_AM+RPC";
-    //     effPlot->SetName( effName.c_str() );  // Convert to const char*
-    //     std::string title = effName + "; Sector ;Efficiency";
-    //     effPlot->SetTitle(title.c_str());
-
-    //     // Style the efficiency plot
-    //     effPlot->SetLineColor(kBlue);
-    //     effPlot->SetMarkerColor(kBlue);
-    //     effPlot->SetMarkerStyle(20);
-
-    //     // effPlot->GetYaxis()->SetRangeUser(0.0, 1.0);
-
-    //     // Draw the efficiency plot
-    //     TCanvas cEff = new TCanvas("cEff", "Efficiency Plot", 800, 600);
-    //     cEff.SetGridy();
-    //     cEff.SetGridx();
-    //     effPlot->Draw("AP");  // "AP" for axis and points
-
-    //     // Save the plot in the output directory
-    //     std::string outputPath = outputDir + "/eff/" + effName.c_str() + ".png";
-    //     cEff.SaveAs(outputPath.c_str());
-
-    // }
-
-    // for (int i = 0; i < 4; ++i){
-
-    //     int chamberNumber = i+1;  // example value
-    //     // Get the histograms from your map
-    //     TH1* hTotal = m_plots["Eff_MB" + std::to_string(chamberNumber) + "_AM_total"];
-    //     TH1* hMatched = m_plots["Eff_MB" + std::to_string(chamberNumber) + "_AM_matched"];
-
-    //     // Check if histograms exist
-    //     if (!hTotal || !hMatched) {
-    //         std::cerr << "Error: Required histograms not found in map!" << std::endl;
-    //         return;
-    //     }
-    
-    //     // Create the efficiency plot
-    //     TEfficiency* effPlot = new TEfficiency(*hMatched, *hTotal);
-    //     std::string effName = "Eff_MB" + std::to_string(chamberNumber) + "_AM";
-    //     effPlot->SetName( effName.c_str() );  // Convert to const char*
-    //     std::string title = effName + "; Sector ;Efficiency";
-    //     effPlot->SetTitle(title.c_str());
-
-    //     // Style the efficiency plot
-    //     effPlot->SetLineColor(kBlue);
-    //     effPlot->SetMarkerColor(kBlue);
-    //     effPlot->SetMarkerStyle(20);
-
-    //     // Draw the efficiency plot
-    //     TCanvas cEff = new TCanvas("cEff", "Efficiency Plot", 800, 600);
-    //     cEff.SetGridy();
-    //     cEff.SetGridx();
-    //     effPlot->Draw("AP");  // "AP" for axis and points
-
-    //     // Save the plot in the output directory
-    //     std::string outputPath = outputDir + "/eff/" + effName.c_str() + ".png";
-    //     cEff.SaveAs(outputPath.c_str());
-
-    // }
-        
 
 } // END Program
