@@ -3,6 +3,14 @@
 
 input/*.root
 
+# Ignore all contents of this folder
+input/*
+# Except the folder itself and optional .gitkeep
+!input/.gitkeep
+
+output/*
+!output/.gitkeep
+
 # Compiled Object files
 *.slo
 *.lo
