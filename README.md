@@ -1,9 +1,6 @@
 # Super Trigger Primitives DT + RPC
 
-
-Scripts to calculate the trigger primitive efficiency.
-
-The most important file is ```DTNtupleTPGSimAnalyzer_Efficiency.cpp```.
+Scripts to calculate the trigger primitive efficiency and produce plots
 
 It is based on the official DT efficiency script: https://github.com/jaimeleonh/DTNtuples/blob/unifiedPerf/test/DTNtupleTPGSimAnalyzer_Efficiency.C
 
@@ -30,10 +27,18 @@ root -l -b -q DTNtupleTPGSimAnalyzer_Efficiency.cpp++
 
 ```++```: To compile the script
 
-I am using pre-compiled binary distribution ROOT 6.34.00. If you need more information access this adress: https://root.cern/install/
 
-## Folders
+After, you run ```plot_histograms.cpp```.
+```
+root -l -b -q plot_histograms.cpp++
+```
 
-In the folder ```Doutput/noRPCoutput/noRPC``` you can see the control plots.
+I am using pre-compiled binary distribution ROOT 6.36.000 If you need more information access this adress: https://root.cern/install/
 
-In the folder ```DTNtupleTPGSimAnalyzer_Efficiency/eff``` you can see the efficiency plots.
+## Importante Folders
+
+After you running the scripts above, you can check the histograms in the ```output``` folder
+
+```output/noRPC/histograms/``` : Control plots.
+```output/noRPC/histograms/effPlots/``` : Efficiency plots.
+```output/t0/``` : time of the triggers primitives.
