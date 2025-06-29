@@ -68,12 +68,51 @@ Double_t trigPhiInRad(Double_t trigPhi, Int_t sector)
 //   return sum;
 // }
 
-void plot_histograms(  TH1F *hist1, TH1F *hist2, 
-                                    std::string str_name,
-                                     std::string str_Xaxis,
-                                    std::string str_leg = "",
-                                    bool norm=false,
-                                    bool logYflag=false) {
+void plot_eff(  std::string hName,
+                TH1F *hMatched, 
+                TH1F *hTotal,
+                std::string saveDir ) 
+{
+
+    // Check if histograms exist
+    if (!hMatched || !hTotal) {
+        std::cerr << "Error: Required histograms not found!" << std::endl;
+        return;
+    }
+
+    // Create the efficiency plot
+    TEfficiency* effPlot = new TEfficiency(*hMatched, *hTotal);
+    effPlot->SetName( hName.c_str() );  // Convert to const char*
+    effPlot->SetTitle( (hName+"; Sector ; Efficiency").c_str());
+    
+    // Style the efficiency plot
+    effPlot->SetLineColor(kBlue);
+    effPlot->SetMarkerColor(kBlue);
+    effPlot->SetMarkerStyle(20);
+
+    // effPlot->GetYaxis()->SetRangeUser(0.0, 1.0);
+
+    // Draw the efficiency plot
+    TCanvas cEff = new TCanvas("cEff", "Efficiency Plot", 800, 600);
+    cEff.SetGridy();
+    cEff.SetGridx();
+    effPlot->Draw("AP");  // "AP" for axis and points
+
+    // Save the plot in the output directory as "png" or/and "pdf"
+    cEff.SaveAs((saveDir+hName+".png").c_str());
+    cEff.SaveAs((saveDir+hName+".pdf").c_str());
+
+}
+
+void plot_two_histograms(   TH1F *hist1, 
+                            TH1F *hist2, 
+                            std::string str_name,
+                            std::string str_Xaxis,
+                            std::string str_leg = "",
+                            std::string saveDir = "",
+                            bool norm=false,
+                            bool logYflag=false) 
+{
 
     if (!hist1 || !hist2) {
         std::cerr << "Error: Could not retrieve one or both histograms!" << std::endl;
@@ -101,7 +140,6 @@ void plot_histograms(  TH1F *hist1, TH1F *hist2,
     uncertainty = round(uncertainty*100);
     uncertainty = uncertainty/100;
     std::cout<< "uncertainty 1: " <<  uncertainty << std::endl;
-
     std::string str_stddev1 = "#sigma = "+(std::to_string(stddev1)).substr(0, 4)+ "#pm" +(std::to_string(uncertainty)).substr(0, 4);
 
     // std::string str_stddev2 = "#sigma = "+(std::to_string(stddev2)).substr(0, 4);
@@ -110,8 +148,6 @@ void plot_histograms(  TH1F *hist1, TH1F *hist2,
     uncertainty = round(uncertainty*100);
     uncertainty = uncertainty/100;
     std::cout<< "uncertainty 2: " <<  uncertainty << std::endl;
-    
-
     std::string str_stddev2 = "#sigma = "+(std::to_string(stddev2)).substr(0, 4)+ "#pm" +(std::to_string(uncertainty)).substr(0, 4);
 
     hist1->SetTitle("");
@@ -222,7 +258,7 @@ void plot_histograms(  TH1F *hist1, TH1F *hist2,
     // if (norm) text2->Draw();
 
     canvas->Update(); // Update the canvas to display the histograms
-    canvas->SaveAs(("DTNtupleTPGSimAnalyzer_Efficiency/t0/"+str_name+".png").c_str()); // Save the canvas as an image
-    canvas->SaveAs(("DTNtupleTPGSimAnalyzer_Efficiency/t0/"+str_name+".pdf").c_str()); // Save the canvas as PDF
+    canvas->SaveAs((saveDir+str_name+".png").c_str()); // Save the canvas as an image
+    canvas->SaveAs((saveDir+str_name+".pdf").c_str()); // Save the canvas as PDF
 
 }

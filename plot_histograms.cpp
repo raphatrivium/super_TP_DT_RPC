@@ -1,10 +1,5 @@
 #include "DTNtupleTPGSimAnalyzer.h"
 
-
-
-
-
-
 void plot_histograms() {
 
     // Open the two ROOT files
@@ -21,44 +16,67 @@ void plot_histograms() {
     std::vector<std::string> chambTag = {"MB1", "MB2", "MB3", "MB4"};
     std::vector<std::string> wheelTag = {"Wh.-2","Wh.-1","Wh.0","Wh.+1","Wh.+2",};
 
-    TH1F *hist1;
-    TH1F *hist2;
+    std::string effDir  = "output/noRPC/histograms/effPlots/";
+    std::string effDir2 = "output/RPC/histograms/effPlots/";
+
+    // Create the directory if it doesn't exist
+    if (gSystem->AccessPathName(effDir.c_str())) {
+        gSystem->mkdir(effDir.c_str(), true); // true = recursive
+    }
+    if (gSystem->AccessPathName(effDir2.c_str())) {
+        gSystem->mkdir(effDir2.c_str(), true); // true = recursive
+    }
 
     // -------------------------------------------
     // MAKING EFFICIENCY PLOTS
     // -------------------------------------------
+    TH1F *hTotal;
+    TH1F *hMatched;
     for (int i = 0; i < 4; ++i){
-        for (const auto & algo : algoTag2)
+        for (const auto & algo : algoTag)
         {
             int chamberNumber = i+1;
+            std::string hName = "hEff_MB" + std::to_string(chamberNumber) + "_"+algo;
 
-            // Get the histograms from your map
-            std::string hname = "Eff_MB" + std::to_string(chamberNumber) + "_"+algo+"_total";
+            // NoRPC
+            hTotal =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
+            hMatched = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
+            plot_eff( hName, hMatched, hTotal, effDir);
 
-
-
+            // RPC
+            hTotal =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
+            hMatched = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
+            plot_eff( hName, hMatched, hTotal, effDir2 );
+            
         }
-
-
     }
-
-
+    
     // ----------------------------------------------------------
     // ----Time of the TPs associated with prompt muons [ns]-----
     // ----------------------------------------------------------
+    std::string saveDir = "output/t0/";
+    // Create the directory if it doesn't exist
+    if (gSystem->AccessPathName(saveDir.c_str())) {
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
+    TH1F *hist1;
+    TH1F *hist2;
     for (const auto & chamb : chambTag) {
         for (const auto & wheel : wheelTag) {
             
-            hist1 = (TH1F*)fileNoRPC->Get(("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str());
-            hist2 = (TH1F*)fileRPC->Get(("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str());
+            std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
+            hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
+            hist2 = (TH1F*)fileRPC->Get(hName.c_str());
 
             std::string wheel2 = wheel;
             wheel2 = wheel2.erase(1, 2);  // Removes "W.": "Wh.-2"→ "W-2"
 
-            plot_two_histograms_function(  hist1, hist2, 
-                                            "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched", 
-                                            "Time of the TPs associated with prompt muons [ns]", (wheel2+" "+chamb).c_str(), 
-                                            true);
+            plot_two_histograms( hist1, hist2, 
+                                "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched", 
+                                "Time of the TPs associated with prompt muons [ns]", (wheel2+" "+chamb).c_str(),
+                                saveDir, 
+                                true);
 
         }
     }
