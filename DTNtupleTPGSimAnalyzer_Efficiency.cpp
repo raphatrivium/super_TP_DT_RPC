@@ -631,7 +631,6 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
             outputDir = "output/noRPC/";
             histoDir =  "output/noRPC/histograms/";
             effDir =    "output/noRPC/histograms/effPlots/";
-            
         } 
         else {
             std::cout << "'noRPC' not found." << std::endl;
