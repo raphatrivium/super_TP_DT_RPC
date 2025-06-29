@@ -37,8 +37,10 @@ I am using pre-compiled binary distribution ROOT 6.36.000 If you need more infor
 
 ## Importante Folders
 
-After you running the scripts above, you can check the histograms in the ```output``` folder
+After you running the scripts above, you can check the histograms in the ```output``` folder:
 
 ```output/noRPC/histograms/``` : Control plots.
+
 ```output/noRPC/histograms/effPlots/``` : Efficiency plots.
+
 ```output/t0/``` : time of the triggers primitives.
