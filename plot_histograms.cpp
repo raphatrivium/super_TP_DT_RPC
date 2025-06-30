@@ -72,9 +72,10 @@ void plot_histograms() {
             std::string wheel2 = wheel;
             wheel2 = wheel2.erase(1, 2);  // Removes "W.": "Wh.-2"→ "W-2"
 
-            plot_two_histograms( hist1, hist2, 
+            plot_t0_histograms( hist1, hist2, 
                                 "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched", 
-                                "Time of the TPs associated with prompt muons [ns]", (wheel2+" "+chamb).c_str(),
+                                "Time of the TPs associated with prompt muons [ns]", 
+                                (wheel2+" "+chamb).c_str(),
                                 saveDir, 
                                 true);
 

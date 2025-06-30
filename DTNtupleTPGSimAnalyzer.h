@@ -104,7 +104,7 @@ void plot_eff(  std::string hName,
 
 }
 
-void plot_two_histograms(   TH1F *hist1, 
+void plot_t0_histograms(   TH1F *hist1, 
                             TH1F *hist2, 
                             std::string str_name,
                             std::string str_Xaxis,
@@ -131,24 +131,42 @@ void plot_two_histograms(   TH1F *hist1,
 
     // // Extract the first four characters
     // std::string firstFourChars = originalString.substr(0, 4);
+    std::cout<< "------------------------------------------------ " << std::endl;
+    std::cout<< "   " << str_leg << std::endl;
+
 
     double N;
-    double uncertainty;
+    double uncertainty1;
+    double uncertainty2;
     // std::string str_stddev1 = "#sigma = "+(std::to_string(stddev1)).substr(0, 4);
     N = hist1->GetEntries();                    // Get the number of entries (N)
-    uncertainty = stddev1 / std::sqrt(2 * N);   // Calculate the uncertainty of the standard deviation
-    uncertainty = round(uncertainty*100);
-    uncertainty = uncertainty/100;
-    std::cout<< "uncertainty 1: " <<  uncertainty << std::endl;
-    std::string str_stddev1 = "#sigma = "+(std::to_string(stddev1)).substr(0, 4)+ "#pm" +(std::to_string(uncertainty)).substr(0, 4);
+    uncertainty1 = stddev1 / std::sqrt(2 * N);   // Calculate the uncertainty of the standard deviation
+    uncertainty1 = round(uncertainty1*100);
+    uncertainty1 = uncertainty1/100;
+    std::cout<< "uncertainty NoRPC: " <<  uncertainty1 << std::endl;
+    std::string str_stddev1 = "#sigma = "+(std::to_string(stddev1)).substr(0, 4)+ "#pm" +(std::to_string(uncertainty1)).substr(0, 4);
 
     // std::string str_stddev2 = "#sigma = "+(std::to_string(stddev2)).substr(0, 4);
     N = hist2->GetEntries();
-    uncertainty = stddev2 / std::sqrt(2 * N);
-    uncertainty = round(uncertainty*100);
-    uncertainty = uncertainty/100;
-    std::cout<< "uncertainty 2: " <<  uncertainty << std::endl;
-    std::string str_stddev2 = "#sigma = "+(std::to_string(stddev2)).substr(0, 4)+ "#pm" +(std::to_string(uncertainty)).substr(0, 4);
+    uncertainty2 = stddev2 / std::sqrt(2 * N);
+    uncertainty2 = round(uncertainty2*100);
+    uncertainty2 = uncertainty2/100;
+    std::cout<< "uncertainty RPC  : " <<  uncertainty2 << std::endl;
+    std::string str_stddev2 = "#sigma = "+(std::to_string(stddev2)).substr(0, 4)+ "#pm" +(std::to_string(uncertainty2)).substr(0, 4);
+
+    // Time improvement calculations
+
+    double delta = (stddev1 - stddev2);
+    double improvement = delta*100/ stddev1;
+    double sigImp = (uncertainty1-uncertainty2)*100/uncertainty1;
+    double sigDelta = sqrt( pow(uncertainty1,2) + pow(uncertainty2,2) );
+    double zScore = delta/sigDelta;
+    std::cout<< "delta: " <<  delta << std::endl;
+    std::cout<< "Improvement: " <<  improvement <<  " %" << std::endl;
+    std::cout<< "Uncertainty Improvement: " <<  sigImp <<  " %" << std::endl;
+    std::cout<< "Segma Delta (Combined Uncertainty): " <<  sigDelta << std::endl;
+    std::cout<< "Z (Z Score): " <<  zScore << "  (If Z > 2, the difference is statistically significant.)" <<  std::endl;
+     std::cout<< "------------------------------------------------ " << std::endl;
 
     hist1->SetTitle("");
     hist2->SetTitle("");
@@ -211,6 +229,8 @@ void plot_two_histograms(   TH1F *hist1,
     latex.DrawLatex(0.1,0.91, "CMS ");  // (#it{...} makes the text italic)
     latex.SetTextSize(0.035);
     latex.DrawLatex(0.18,0.91, "#it{Phase-2 Simulation}");  // (#it{...} makes the text italic)
+    latex.SetTextSize(0.04);
+    latex.DrawLatex(0.74,0.8, "p_{T}>20 GeV");  // (#it{...} makes the text italic)
 
     text = new TText(0.04,0.82,"a.u."); // Events
     text->SetNDC();
@@ -224,24 +244,24 @@ void plot_two_histograms(   TH1F *hist1,
     text->SetTextSize(0.05);
     text->Draw();
 
-    // text = new TText(0.6,0.91,"Normalized");
-    // text->SetNDC(); // To use the canvas coordinates
-    // // text->SetTextAlign(31);
-    // text->SetTextSize(0.03);
-    // if (norm) text->Draw();
-
     text = new TText(0.68,0.91,"PU 200 (14 TeV)");
     text->SetNDC(); // To use the canvas coordinates
     // text->SetTextAlign(31);
-    text->SetTextSize(0.045);
+    text->SetTextSize(0.04);
     if (norm) text->Draw();
 
 
     text = new TText(0.74,0.85,str_leg.c_str());
     text->SetNDC(); // To use the canvas coordinates
     // text->SetTextAlign(31);
-    text->SetTextSize(0.05);
+    text->SetTextSize(0.04);
     if (norm) text->Draw();
+
+    // text = new TText(0.74,0.8, "$p_{T}>20$ GeV");
+    // text->SetNDC(); // To use the canvas coordinates
+    // // text->SetTextAlign(31);
+    // text->SetTextSize(0.04);
+    // if (norm) text->Draw();
 
     // // // Create a legend
     TLegend *legend = new TLegend(0.13, 0.5, 0.35, 0.85); // Adjust the coordinates as needed
