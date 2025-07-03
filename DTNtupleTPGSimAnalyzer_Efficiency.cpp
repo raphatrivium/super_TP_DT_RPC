@@ -14,6 +14,8 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
     std::vector<std::string> file_names  = {"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root", 
                                             "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"};
 
+    // std::vector<std::string> file_names  = { "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"};                                        
+
     for (const auto & file_name : file_names)
     {                                 
 
@@ -29,6 +31,9 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
         std::vector<std::string> totalTag = {"matched", "total"};
         std::vector<std::string> chambTag = {"MB1",     "MB2", "MB3", "MB4"};
         std::vector<std::string> wheelTag = {"Wh.-2","Wh.-1","Wh.0","Wh.+1","Wh.+2",};
+
+        m_plots["hGenSegments"] = new TH1D("hGenSegments", "Segments per Generated Muons ; Segments per Gen; Entries", 6, 0, 6);
+        m_plots["hGenTP"] = new TH1D("hGenTP", "Trigger Primitives per Generated Muons ; Trigger Primitives per Gen; Entries", 6, 0, 6);
 
         m_plots["hSegmentPsi"] = new TH1D("hSegmentPsi", "Segment Psi distribution ; Psi; Entries", 200, -60, +60);
         m_plots2["hSegmentPsiVST0"] = new TH2D("hSegmentPsiVST0", "Segment Psi distribution vs segment t0; Psi; Segment t0 (ns)", 200, -50, +50, 200, -100, 100);
@@ -244,10 +249,13 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
             
             // -----------------------------
             // loop Gen Particle
-            // -----------------------------        
+            // -----------------------------
+
             for (int iGenPart = 0; iGenPart < gen_nGenParts; ++iGenPart) {
                 int numTP = 0;
                 int denTP = 0;
+                int NbestSegment = 0;
+                int Ntrigger = 0;
                 
                 std::cout << "==============================================================================" << std::endl;
                 std::cout << "iEvent " << iEvent << ", iGenPart " << iGenPart <<  " | gen_nGenParts: " << gen_nGenParts << " | " << "gen pt: "<< gen_pt->at(iGenPart) << " | " << "gen eta: "<< gen_eta->at(iGenPart) << " | gen phi: "<< gen_phi->at(iGenPart) << std::endl;
@@ -291,6 +299,8 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                         //   if (abs(seg_wheel->at(iSeg))==2 && segSt==4) cout << "Found!" << endl;
                     }
                 }// END loop segments
+                
+
                 
 
                 // Print elements of the vector for test
@@ -388,6 +398,8 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                     std::cout << "  --------------" << std::endl;
                     std::cout << "  Segment Index " << iSeg << std::endl; 
                     if (iSeg == 999) continue;
+
+                    NbestSegment++;
 
                     Int_t segSt    = ph2Seg_station->at(iSeg);
                     Int_t segNHits = ph2Seg_phi_nHits->at(iSeg);
@@ -533,6 +545,8 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                         std::cout << "  Fill MATCHING Histograms (Efficient)" << std::endl;
                         std::cout << "  bestTPAM: "<< bestTPAM << std::endl;
 
+                        Ntrigger++;
+
                         // cout << iEvent << " " << 1 << " "<< segWh << " " << segSec << " " << segSt << " " << ph2Seg_phi_nHits->at(iSeg) << " " << getPh1Hits(segWh,segSec,segSt) << " " << getPh2Hits(segWh,segSec,segSt) <<endl;
                         //        cout << "Efficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) <<endl;
                         // cout << "Efficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) << " Primitive iTrig " << bestTPAM << " out of " <<  ph2TpgPhiEmuAm_nTrigs  << " Quality: " << ph2TpgPhiEmuAm_quality->at(bestTPAM) << " t0=" << ph2TpgPhiEmuAm_t0->at(bestTPAM)  <<endl;
@@ -601,6 +615,9 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
 
                 } // End Loop best segments 
 
+                m_plots["hGenSegments"] -> Fill( NbestSegment );
+                m_plots["hGenTP"] -> Fill( Ntrigger );
+
                 // double eff = numTP / denTP;
                 std::cout << "**********************" <<  std::endl;
                 std::cout << "Numerator per Gen: "<<  numTP << std::endl;
@@ -608,7 +625,8 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                 // std::cout << "eff per Event: "<<  eff << std::endl;
                 std::cout << "**********************" <<  std::endl;
                 
-            } // END Loop Gen 
+            } // END Loop Gen
+            
 
             // std::cout << "**********************" <<  std::endl;
             std::cout << "Numerator Event: "<<  numTPEvent << std::endl;
