@@ -62,8 +62,8 @@ void plot_histograms() {
 
     TH1F *hist1;
     TH1F *hist2;
-    for (const auto & chamb : chambTag) {
-        for (const auto & wheel : wheelTag) {
+    for (const auto & wheel : wheelTag) {
+        for (const auto & chamb : chambTag) {
             
             std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
             hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
