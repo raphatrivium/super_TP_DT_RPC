@@ -7,6 +7,8 @@
 
 void DTNtupleTPGSimAnalyzer_Efficiency() {
 
+    bool testFlag = true;
+
     // ------------------------------------------------------------------------------
     // INPUT FILES
     // ------------------------------------------------------------------------------
@@ -14,7 +16,8 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
     std::vector<std::string> file_names  = {"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root", 
                                             "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"};
 
-    // std::vector<std::string> file_names  = { "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"};                                        
+    if (testFlag) file_names  = {"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"};
+
 
     for (const auto & file_name : file_names)
     {                                 
@@ -34,6 +37,7 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
 
         m_plots["hGenSegments"] = new TH1D("hGenSegments", "Segments per Generated Muons ; Segments per Gen; Entries", 6, 0, 6);
         m_plots["hGenTP"] = new TH1D("hGenTP", "Trigger Primitives per Generated Muons ; Trigger Primitives per Gen; Entries", 6, 0, 6);
+        m_plots2["hGenIdxVsNSeg"] = new TH2D("hGenVsNSeg", "GenMuon Index vs Number of Segments; GenMuon Index; Number of Segments", 3750, 0, 3750, 6, 0, 6);
 
         m_plots["hSegmentPsi"] = new TH1D("hSegmentPsi", "Segment Psi distribution ; Psi; Entries", 200, -60, +60);
         m_plots2["hSegmentPsiVST0"] = new TH2D("hSegmentPsiVST0", "Segment Psi distribution vs segment t0; Psi; Segment t0 (ns)", 200, -50, +50, 200, -100, 100);
@@ -233,8 +237,12 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
         // ------------------------------------------------------------------------------
         // Loop in the events
         // ------------------------------------------------------------------------------
+        // nEntries = 100;   // 100   nEntries
+        if (testFlag){
+            nEntries = 10;
+            std::cout << "FOR TESTE:" <<std::endl;
+        }
 
-        nEntries = nEntries;   // 100   nEntries
         std::cout << "Total entries:" << nEntries <<std::endl;
 
         for (Long64_t iEvent = 0; iEvent < nEntries; ++iEvent) { 
@@ -300,19 +308,30 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                     }
                 }// END loop segments
                 
+                m_plots2["hGenIdxVsNSeg"] -> Fill( iGenPart, bestSegIndex.size() );
+                std::cout << "iGenPart " << iGenPart << " -  NSeg " << bestSegIndex.size() << std::endl;
 
                 
 
                 // Print elements of the vector for test
                 std::cout << " \n ------------------------------------------- \n";
                 std::cout << "Best Segments Index" << std::endl;
-                for (size_t iElemt = 0; iElemt < bestSegIndex.size(); ++iElemt) {
-                    std::cout << bestSegIndex[iElemt] << " , ";
+                for (size_t iSeg = 0; iSeg < bestSegIndex.size(); ++iSeg) {
+                    std::cout << bestSegIndex[iSeg] << " , ";
                 }
                 std::cout << " \n ------------------------------------------- \n";
+                for (size_t iSeg = 0; iSeg < bestSegIndex.size(); ++iSeg) {
+                    if (bestSegIndex[iSeg] == 999) continue;
+                    Int_t segSt     = ph2Seg_station->at(bestSegIndex[iSeg]);
+                    Int_t segWh  = ph2Seg_wheel->at(bestSegIndex[iSeg]);
+                    Int_t segSec = ph2Seg_sector->at(bestSegIndex[iSeg]);
+                    if (segSec == 13) segSec = 4;
+                    if (segSec == 14) segSec = 10;
+                    std::cout << "  Seg Wheel: " << segWh << " | Seg Sector: "<< segSec << " | Seg Station: " << segSt <<  std::endl;
+                }
                 std::cout << "Best Segments Number of Hits" << std::endl;
-                for (size_t iElemt = 0; iElemt < bestSegNHits.size(); ++iElemt) {
-                    std::cout << bestSegNHits[iElemt] << " , ";
+                for (size_t iSeg = 0; iSeg < bestSegNHits.size(); ++iSeg) {
+                    std::cout << bestSegNHits[iSeg] << " , ";
                 }
                 std::cout << " \n";
 
@@ -426,7 +445,7 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                     std::string whTag    = whTags.at(segWh + 2);
                     std::string secTag   = secTags.at(segSec - 1);
 
-                    std::cout << "  Seg Wheel: " << segSec << " | Seg Sector: "<< segSec << " | Seg Station: " << segSt <<  std::endl;
+                    std::cout << "  Seg Wheel: " << segWh << " | Seg Sector: "<< segSec << " | Seg Station: " << segSt <<  std::endl;
 
                     if (ph2Seg_phi_t0->at(iSeg) > -500)
                     {
@@ -476,15 +495,8 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                             Double_t trigGlbPhi    = trigPhiInRad(ph2TpgPhiEmuAm_phi->at(iTrigAM),trigAMSec);
                             Double_t finalAMDPhi   = ph2Seg_posGlb_phi->at(iSeg) - trigGlbPhi;
                             Double_t segTrigAMDPhi = abs(acos(cos(finalAMDPhi)));
-
-                            std::cout << "      trigGlbPhi:    " << trigGlbPhi <<  std::endl;
-                            std::cout << "      finalAMDPhi:   " << finalAMDPhi <<  std::endl;
-                            std::cout << "      segTrigAMDPhi: " << segTrigAMDPhi <<  std::endl;
-
-                            
-                            // if (segTrigAMDPhi > m_maxSegTrigDPhi) continue; // For test
-
                             std::cout << "      iTrigAM: " << iTrigAM << " | Wheel: "<< trigAMWh << " | Sector: " << trigAMSec << " | Station: " << trigAMSt << " | trigAMBX: " << trigAMBX << " | segTrigAMDPhi: " << segTrigAMDPhi <<  std::endl;
+                            std::cout << "          trigGlbPhi: " << trigGlbPhi << " | finalAMDPhi: " << finalAMDPhi << " | segTrigAMDPhi: " << segTrigAMDPhi <<  std::endl;
 
                             m_plots["hPrimPsiAM"] -> Fill( ph2TpgPhiEmuAm_dirLoc_phi->at(iTrigAM) );
                             m_plots["hDeltaPhiAM"] -> Fill( segTrigAMDPhi );
@@ -699,10 +711,31 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
             // Save the plot in the output directory
             canvas.SaveAs((histoDir + name + ".png").c_str());
         }
+        for (const auto& pair : m_plots2) {
+            const std::string& name = pair.first;
+            TH2* hist = pair.second;
+
+            if (!hist) {
+                std::cerr << "Warning: Histogram '" << name << "' is null!" << std::endl;
+                continue;
+            }
+            hist->Write(); // Write the histogram to the root file
+
+            // Create a canvas to draw the histogram
+            TCanvas canvas("canvas", "canvas", 800, 600);
+            hist->Draw();
+
+            // Save the plot in the output directory
+            canvas.SaveAs((histoDir + name + ".png").c_str());
+        }
         // Close the file (optional, as it will be automatically closed when outFile goes out of scope)
         outFile.Close();
         std::cout << "All histograms saved in ROOT file: " << outputFile << std::endl;
         std::cout << "All plots saved in: " << outputDir << std::endl;
     }
+
+    std::cout << "----------------------------------" << std::endl;
+    std::cout << "TEST FLAG: " << testFlag << std::endl;
+    std::cout << "----------------------------------" << std::endl;
 
 } // END Program
