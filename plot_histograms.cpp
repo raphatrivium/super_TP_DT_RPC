@@ -46,10 +46,14 @@ void plot_histograms() {
             // RPC
             hTotal =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
             hMatched = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
-            plot_eff( hName, hMatched, hTotal, effDir2 );
-            
+            plot_eff( hName, hMatched, hTotal, effDir2 );    
         }
     }
+
+    std::string hName = "hEff_MB" + std::to_string(chamberNumber) + "_"+algo;
+
+    
+    m_plots["EffEta_" + chambTag + "_AM_matched"]->Fill(gen_eta->at(iGenPart));
     
     // ----------------------------------------------------------
     // ----Time of the TPs associated with prompt muons [ns]-----

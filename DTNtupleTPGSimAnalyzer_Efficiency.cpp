@@ -18,14 +18,16 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
 
     if (testFlag) file_names  = {"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"};
 
-
     for (const auto & file_name : file_names)
     {                                 
-
+        
         std::cout << "-------------------------------------------" <<std::endl;
         std::cout << inputDir+file_name << "\n" <<std::endl;
         std::cout << "-------------------------------------------" <<std::endl;
-
+        
+        // ---------------------------------------
+        // Making Map of Histograms 
+        // ---------------------------------------
         std::map<std::string, TH1*> m_plots;
         std::map<std::string, TH2*> m_plots2;
         std::map<std::string, TEfficiency*> m_effs;
@@ -41,8 +43,17 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
         m_plots2["hGenIdxVsNSeg"] = new TH2D("hGenIdxVsNSeg", "GenMuon Index vs Number of Segments; GenMuon Index; Number of Segments", 3750, 0, 3750, 100, 0, 6);
         // m_plots2["hGenIdxVsNSeg"] = new TH2D("hGenIdxVsNSeg", "GenMuon Index vs Number of Segments; GenMuon Index; Number of Segments", 80, 0, 80, 100, 0, 6);
         
+        m_plots["hGenEta"] = new TH1D("hGenEta", "Gen Muon #eta distribution ; #eta; Entries", 200, -1.5, +1.5);
+        m_plots["hGenPt"] = new TH1D("hGenPt", "Gen Muon pT distribution ; #eta; Entries", 200, 0, 200);
+        // m_plots["hGenEta"] = new TH1D("hGenEta", "Gen Muon #eta distribution ; #eta; Entries", 200, -1.5, +1.5);
+
         m_plots2["hGenEtaVsSegEta"] = new TH2D("hGenEtaVsSegEta", "Eta Gen vs Eta Segments; Eta Gen; Eta Segments", 100, -4, 4, 100, -4, 4);
         m_plots2["hGenPhiVsSegPhi"] = new TH2D("hGenPhiVsSegPhi", "Phi Gen vs Phi Segments; Phi Gen; Phi Segments", 100, -4, 4, 100, -4, 4);
+
+        m_plots["EffEtaGenRec_total"] = new TH1D("EffEtaGenRec_total", "Muon Reconstruction Efficiency; #eta; Efficiency", 100, -2, 2);
+        m_plots["EffEtaGenRec_matched"] = new TH1D("EffEtaGenRec_matched", "Muon Reconstruction Efficiency; #eta; Efficiency", 100, -2, 2);
+
+
 
         m_plots["hSegmentPsi"] = new TH1D("hSegmentPsi", "Segment Psi distribution ; Psi; Entries", 200, -60, +60);
         m_plots2["hSegmentPsiVST0"] = new TH2D("hSegmentPsiVST0", "Segment Psi distribution vs segment t0; Psi; Segment t0 (ns)", 200, -50, +50, 200, -100, 100);
@@ -270,7 +281,11 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                 std::cout << "iEvent " << iEvent << ", iGenPart " << iGenPart <<  " | gen_nGenParts: " << gen_nGenParts << " | " << "gen pt: "<< gen_pt->at(iGenPart) << " | " << "gen eta: "<< gen_eta->at(iGenPart) << " | gen phi: "<< gen_phi->at(iGenPart) << std::endl;
                 std::cout << "==============================================================================" << std::endl;
 
+                m_plots["hGenEta"] -> Fill( gen_eta->at(iGenPart) );
+                m_plots["EffEtaGenRec_total"] -> Fill( gen_eta->at(iGenPart) );
+
                 if (std::abs(gen_pdgId->at(iGenPart)) != 13 || gen_pt->at(iGenPart) < m_minMuPt) continue;
+
 
 
                 std::vector<std::size_t> bestSegIndex = { 999, 999, 999, 999 };
@@ -279,6 +294,7 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                 // -----------------------------
                 // Loop in the Segments (Reco Muons)
                 // -----------------------------
+                bool genFill = false;
                 std::cout << "Loop in the Segments and Gen Particle Matching " << std::endl;
                 std::cout << "Number of ph2 Segments in this event: " << ph2Seg_nSegments << std::endl;
                 for (std::size_t iSeg = 0; iSeg < ph2Seg_nSegments; ++iSeg) {
@@ -307,12 +323,13 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                         bestSegIndex[segSt - 1] = iSeg;
                         //   if (abs(seg_wheel->at(iSeg))==2 && segSt==4) cout << "Found!" << endl;
                     }
+
+                    if (genFill == false) {
+                        m_plots["EffEtaGenRec_matched"] -> Fill( gen_eta->at(iGenPart) );
+                        genFill = true;
+                    }
+
                 }// END loop segments
-                
-                std::cout << "iGenPart " << iGenPart << " -  NSeg " << bestSegIndex.size() << std::endl;
-                
-                
-                
 
                 // Print elements of the vector for test
                 std::cout << " \n ------------------------------------------- \n";
@@ -496,7 +513,7 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                         // SEGMENTS AND TP MATCHING
                         // -----------------------------
                         if (segWh == trigAMWh && segSec == trigAMSec && segSt  == trigAMSt) {
-
+                            
                             Double_t trigGlbPhi    = trigPhiInRad(ph2TpgPhiEmuAm_phi->at(iTrigAM),trigAMSec);
                             Double_t finalAMDPhi   = ph2Seg_posGlb_phi->at(iSeg) - trigGlbPhi;
                             Double_t segTrigAMDPhi = abs(acos(cos(finalAMDPhi)));
