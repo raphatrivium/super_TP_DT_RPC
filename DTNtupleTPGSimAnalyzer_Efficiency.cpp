@@ -7,7 +7,7 @@
 
 void DTNtupleTPGSimAnalyzer_Efficiency() {
 
-    bool testFlag = true;
+    bool testFlag = false;   // false  -   true
 
     // ------------------------------------------------------------------------------
     // INPUT FILES
@@ -37,7 +37,12 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
 
         m_plots["hGenSegments"] = new TH1D("hGenSegments", "Segments per Generated Muons ; Segments per Gen; Entries", 6, 0, 6);
         m_plots["hGenTP"] = new TH1D("hGenTP", "Trigger Primitives per Generated Muons ; Trigger Primitives per Gen; Entries", 6, 0, 6);
-        m_plots2["hGenIdxVsNSeg"] = new TH2D("hGenVsNSeg", "GenMuon Index vs Number of Segments; GenMuon Index; Number of Segments", 3750, 0, 3750, 6, 0, 6);
+
+        m_plots2["hGenIdxVsNSeg"] = new TH2D("hGenIdxVsNSeg", "GenMuon Index vs Number of Segments; GenMuon Index; Number of Segments", 3750, 0, 3750, 100, 0, 6);
+        // m_plots2["hGenIdxVsNSeg"] = new TH2D("hGenIdxVsNSeg", "GenMuon Index vs Number of Segments; GenMuon Index; Number of Segments", 80, 0, 80, 100, 0, 6);
+        
+        m_plots2["hGenEtaVsSegEta"] = new TH2D("hGenEtaVsSegEta", "Eta Gen vs Eta Segments; Eta Gen; Eta Segments", 100, -4, 4, 100, -4, 4);
+        m_plots2["hGenPhiVsSegPhi"] = new TH2D("hGenPhiVsSegPhi", "Phi Gen vs Phi Segments; Phi Gen; Phi Segments", 100, -4, 4, 100, -4, 4);
 
         m_plots["hSegmentPsi"] = new TH1D("hSegmentPsi", "Segment Psi distribution ; Psi; Entries", 200, -60, +60);
         m_plots2["hSegmentPsiVST0"] = new TH2D("hSegmentPsiVST0", "Segment Psi distribution vs segment t0; Psi; Segment t0 (ns)", 200, -50, +50, 200, -100, 100);
@@ -242,23 +247,19 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
             nEntries = 10;
             std::cout << "FOR TESTE:" <<std::endl;
         }
-
         std::cout << "Total entries:" << nEntries <<std::endl;
 
+        int idxGen = 0;
         for (Long64_t iEvent = 0; iEvent < nEntries; ++iEvent) { 
 
-            
             tree->GetEntry(iEvent);
-            
             branch_gen_nGenParts->GetEntry(iEvent);
 
             numTPEvent = 0;
             denTPEvent = 0;
-            
             // -----------------------------
             // loop Gen Particle
             // -----------------------------
-
             for (int iGenPart = 0; iGenPart < gen_nGenParts; ++iGenPart) {
                 int numTP = 0;
                 int denTP = 0;
@@ -308,9 +309,9 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                     }
                 }// END loop segments
                 
-                m_plots2["hGenIdxVsNSeg"] -> Fill( iGenPart, bestSegIndex.size() );
                 std::cout << "iGenPart " << iGenPart << " -  NSeg " << bestSegIndex.size() << std::endl;
-
+                
+                
                 
 
                 // Print elements of the vector for test
@@ -433,6 +434,10 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                     m_plots["hGenSegDeltaPhi"+whTags.at(ph2Seg_wheel->at(iSeg)+2)+chambTags.at(segSt-1)] -> Fill( muSegDPhi );
                     m_plots["hGenSegDeltaEta"] -> Fill( muSegDEta );
                     m_plots["hGenSegDeltaEta"+whTags.at(ph2Seg_wheel->at(iSeg)+2)+chambTags.at(segSt-1)] -> Fill( muSegDEta );
+
+                    m_plots2["hGenEtaVsSegEta"] -> Fill( gen_eta->at(iGenPart), ph2Seg_posGlb_eta->at(iSeg) );
+                    m_plots2["hGenPhiVsSegPhi"] -> Fill( gen_phi->at(iGenPart) , ph2Seg_posGlb_phi->at(iSeg) );
+
 
 
                     Int_t segWh  = ph2Seg_wheel->at(iSeg);
@@ -627,6 +632,9 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
 
                 } // End Loop best segments 
 
+                idxGen++;
+                m_plots2["hGenIdxVsNSeg"] -> Fill( idxGen, NbestSegment );
+
                 m_plots["hGenSegments"] -> Fill( NbestSegment );
                 m_plots["hGenTP"] -> Fill( Ntrigger );
 
@@ -711,6 +719,14 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
             // Save the plot in the output directory
             canvas.SaveAs((histoDir + name + ".png").c_str());
         }
+
+        // Manually changing some plots
+        // m_plots2["hGenIdxVsNSeg"]->SetStats(0); // Disable statistics box
+        // m_plots2["hGenIdxVsNSeg"]->SetMarkerStyle(20);   // 20 = small dots
+        // m_plots2["hGenIdxVsNSeg"]->SetMarkerColor(kBlack); // kBlack = ROOT's black color
+        // m_plots2["hGenIdxVsNSeg"]->SetMarkerSize(0.5);   // Adjust dot size (optional)
+        // m_plots2["hGenIdxVsNSeg"]->Draw("P");  // "P" option draws only points
+
         for (const auto& pair : m_plots2) {
             const std::string& name = pair.first;
             TH2* hist = pair.second;
@@ -723,8 +739,12 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
 
             // Create a canvas to draw the histogram
             TCanvas canvas("canvas", "canvas", 800, 600);
-            hist->Draw();
-
+            // hist->Draw();
+            hist->SetMarkerStyle(20);   // 20 = small dots
+            hist->SetMarkerColor(kBlack); // kBlack = ROOT's black color
+            hist->SetMarkerSize(0.5);   // Adjust dot size (optional)
+            hist->Draw("P");  // "P" option draws only points
+            // hist->Draw("AP");
             // Save the plot in the output directory
             canvas.SaveAs((histoDir + name + ".png").c_str());
         }

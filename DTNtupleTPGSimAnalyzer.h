@@ -168,14 +168,9 @@ void plot_t0_histograms(   TH1F *hist1,
     std::cout<< "Uncertainty Improvement: " <<  sigImp <<  " %" << std::endl;
     std::cout<< "Segma Delta (Combined Uncertainty): " <<  sigDelta << std::endl;
     std::cout<< "Z (Z Score): " <<  zScore << "  (If Z > 2, the difference is statistically significant.)" <<  std::endl;
-<<<<<<< HEAD
     std::cout<< "& $" <<  (std::to_string(stddev1)).substr(0, 4) << "\\pm" << (std::to_string(uncertainty1)).substr(0, 4) 
                     << "$ & $" << (std::to_string(stddev2)).substr(0, 4) << "\\pm" << (std::to_string(uncertainty2)).substr(0, 4) 
                     << "$ & " <<  improvement << " & " << sigImp << " & " << zScore << std::endl;
-=======
-
-    std::cout<< "& " << "$" << (std::to_string(stddev1)).substr(0, 4) << "pm"  <<  (std::to_string(uncertainty1)).substr(0, 4) << "$ & " << improvement << " & " <<  sigImp  << " & " << zScore  << std::endl;
->>>>>>> 3ea2ca981eae2311dd1ead32fca7f6de10223a31
     std::cout<< "------------------------------------------------ " << std::endl;
 
     hist1->SetTitle("");
