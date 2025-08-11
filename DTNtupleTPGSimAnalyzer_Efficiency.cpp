@@ -68,6 +68,9 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
 
                 m_plots["hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched"] = new TH1D( ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str(),
                 ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched; Time of the TPs associated with prompt muons [ns]; Entries").c_str(), 27, -10, 10); // 40, 0, 700  // 40, 630, 650
+
+                m_plots["hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched"] = new TH1D( ("hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched").c_str(),
+                ("hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched; BXs of the TPs associated with prompt muons [ns]; Entries").c_str(), 20, 10, 30); // 40, 0, 700  // 40, 630, 650
             }
         }
 
@@ -509,6 +512,8 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                         Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(iTrigAM);
                         Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(iTrigAM);
 
+                        // m_plots["hPh2TpgPhiEmuAmBX"+whTag+chambTag+"_matched"]->Fill(trigAMBX);
+
                         // -----------------------------
                         // SEGMENTS AND TP MATCHING
                         // -----------------------------
@@ -541,8 +546,8 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
 
                             // std::cout << "   Denominator -------- \n " << std::endl; 
 
-                            if ((segTrigAMDPhi < m_maxSegTrigDPhi) && (trigAMBX == 20) && (bestSegTrigAMDPhi > segTrigAMDPhi) && (ph2TpgPhiEmuAm_quality->at(iTrigAM) >= minQuality))
-                            // if ( (segTrigAMDPhi < m_maxSegTrigDPhi) && (trigAMBX == 20) ) // For test
+                            //if ((segTrigAMDPhi < m_maxSegTrigDPhi) && (trigAMBX == 20) && (bestSegTrigAMDPhi > segTrigAMDPhi) && (ph2TpgPhiEmuAm_quality->at(iTrigAM) >= minQuality))
+                            if ( trigAMBX == 20 ) // For test
                             {
                                 bestTPAM          = iTrigAM;
                                 besttrigAMBX      = trigAMBX;
@@ -609,6 +614,10 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                         trigAMt0 = (trigAMt0 * 25 / 32) -500;
                         std::cout << "            trigAMt0: "<< trigAMt0 << std::endl;
                         m_plots["hPh2TpgPhiEmuAmT0"+whTag+chambTag+"_matched"]->Fill(trigAMt0);
+
+                        m_plots["hPh2TpgPhiEmuAmBX"+whTag+chambTag+"_matched"]->Fill(besttrigAMBX);
+
+                        
 
                     } else if (bestTPAM  < 0 && ph2Seg_phi_t0->at(iSeg) > -500) {
                         // cout << iEvent << " " << -1 << " "<< segWh << " " << segSec << " " << segSt << " " << ph2Seg_phi_nHits->at(iSeg) << " " << getPh1Hits(segWh,segSec,segSt) << " " << getPh2Hits(segWh,segSec,segSt) <<endl;
