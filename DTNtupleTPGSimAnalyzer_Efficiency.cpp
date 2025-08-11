@@ -546,8 +546,8 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
 
                             // std::cout << "   Denominator -------- \n " << std::endl; 
 
-                            //if ((segTrigAMDPhi < m_maxSegTrigDPhi) && (trigAMBX == 20) && (bestSegTrigAMDPhi > segTrigAMDPhi) && (ph2TpgPhiEmuAm_quality->at(iTrigAM) >= minQuality))
-                            if ( trigAMBX == 20 ) // For test
+                            if ((segTrigAMDPhi < m_maxSegTrigDPhi) && (trigAMBX == 20) && (bestSegTrigAMDPhi > segTrigAMDPhi) && (ph2TpgPhiEmuAm_quality->at(iTrigAM) >= minQuality))
+                            // if ( trigAMBX == 20 ) // For test
                             {
                                 bestTPAM          = iTrigAM;
                                 besttrigAMBX      = trigAMBX;
