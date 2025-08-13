@@ -13,8 +13,11 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
     // INPUT FILES
     // ------------------------------------------------------------------------------
     std::string inputDir = "input/";
-    std::vector<std::string> file_names  = {"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root", 
-                                            "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"};
+    // std::vector<std::string> file_names  = {"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root", 
+    //                                         "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"};
+
+    std::vector<std::string> file_names  = {"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC_updated.root", 
+                                            "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC_updated.root"};
 
     if (testFlag) file_names  = {"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"};
 
@@ -36,6 +39,8 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
         std::vector<std::string> totalTag = {"matched", "total"};
         std::vector<std::string> chambTag = {"MB1",     "MB2", "MB3", "MB4"};
         std::vector<std::string> wheelTag = {"Wh.-2","Wh.-1","Wh.0","Wh.+1","Wh.+2",};
+
+        m_plots["hNTrigs"] = new TH1D("hNTrigs", "Number of Triggers ; Number of Triggers; Entries", 50, 0, 300);
 
         m_plots["hGenSegments"] = new TH1D("hGenSegments", "Segments per Generated Muons ; Segments per Gen; Entries", 6, 0, 6);
         m_plots["hGenTP"] = new TH1D("hGenTP", "Trigger Primitives per Generated Muons ; Trigger Primitives per Gen; Entries", 6, 0, 6);
@@ -268,6 +273,11 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
 
             tree->GetEntry(iEvent);
             branch_gen_nGenParts->GetEntry(iEvent);
+            branch_ph2TpgPhiEmuAm_nTrigs->GetEntry(iEvent);
+
+
+
+            m_plots["hNTrigs"] -> Fill( ph2TpgPhiEmuAm_nTrigs );
 
             numTPEvent = 0;
             denTPEvent = 0;

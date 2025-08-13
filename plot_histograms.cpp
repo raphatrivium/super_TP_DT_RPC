@@ -106,6 +106,36 @@ void plot_histograms() {
         }
     }
 
+    for (const auto & wheel : wheelTag) {
+        for (const auto & chamb : chambTag) {
+            
+            std::string hName = "hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched";
+            hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
+            hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+
+            std::string wheel2 = wheel;
+            wheel2 = wheel2.erase(1, 2);  // Removes "W.": "Wh.-2"→ "W-2"
+
+            plot_BX_histograms( hist1, hist2, 
+                                "hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched", 
+                                "BX of the TPs associated with prompt muons [ns]", 
+                                (wheel2+" "+chamb).c_str(),
+                                saveDir, 
+                                false);
+
+        }
+    }
+
+    
+    std::string hName = "hNTrigs";
+    hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
+    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+    plot_normal_histograms( hist1, hist2, 
+                        "hNTrigs", 
+                        "NTrigs", 
+                        "",
+                        saveDir, 
+                        false);
 
     std::cout << "--------------------------------" << std::endl;
     std::cout << "END PROGRAM" << std::endl;
