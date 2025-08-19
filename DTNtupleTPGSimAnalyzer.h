@@ -76,14 +76,14 @@ void plot_eff(  std::string hName,
 
     // Check if histograms exist
     if (!hMatched || !hTotal) {
-        std::cerr << "Error: Required histograms not found!" << std::endl;
+        std::cerr << "Error: Required histograms " << hName  << " not found!" << std::endl;
         return;
     }
 
     // Create the efficiency plot
     TEfficiency* effPlot = new TEfficiency(*hMatched, *hTotal);
     effPlot->SetName( hName.c_str() );  // Convert to const char*
-    effPlot->SetTitle( (hName+"; Sector ; Efficiency").c_str());
+    // effPlot->SetTitle( (hName+"; Sector ; Efficiency").c_str());
     
     // Style the efficiency plot
     effPlot->SetLineColor(kBlue);

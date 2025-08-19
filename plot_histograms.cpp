@@ -32,11 +32,12 @@ void plot_histograms() {
     // -------------------------------------------
     TH1F *hTotal;
     TH1F *hMatched;
+    std::string hName = "";
     for (int i = 0; i < 4; ++i){
         for (const auto & algo : algoTag)
         {
             int chamberNumber = i+1;
-            std::string hName = "hEff_MB" + std::to_string(chamberNumber) + "_"+algo;
+            hName = "hEff_MB" + std::to_string(chamberNumber) + "_"+algo;
 
             // NoRPC
             hTotal =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
@@ -49,6 +50,18 @@ void plot_histograms() {
             plot_eff( hName, hMatched, hTotal, effDir2 );    
         }
     }
+
+    hName = "EffEtaGenSeg";
+    hTotal =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
+    hMatched = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
+    plot_eff( hName, hMatched, hTotal, effDir);
+    plot_eff( hName, hMatched, hTotal, effDir2);
+
+    hName = "EffEtaGenSeg20";
+    hTotal =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
+    hMatched = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
+    plot_eff( hName, hMatched, hTotal, effDir);
+    plot_eff( hName, hMatched, hTotal, effDir2);
 
     // std::string hName = "hEff_MB" + std::to_string(chamberNumber) + "_"+algo;
 
@@ -106,28 +119,28 @@ void plot_histograms() {
         }
     }
 
-    for (const auto & wheel : wheelTag) {
-        for (const auto & chamb : chambTag) {
+    // for (const auto & wheel : wheelTag) {
+    //     for (const auto & chamb : chambTag) {
             
-            std::string hName = "hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched";
-            hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
-            hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+    //         std::string hName = "hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched";
+    //         hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
+    //         hist2 = (TH1F*)fileRPC->Get(hName.c_str());
 
-            std::string wheel2 = wheel;
-            wheel2 = wheel2.erase(1, 2);  // Removes "W.": "Wh.-2"→ "W-2"
+    //         std::string wheel2 = wheel;
+    //         wheel2 = wheel2.erase(1, 2);  // Removes "W.": "Wh.-2"→ "W-2"
 
-            plot_BX_histograms( hist1, hist2, 
-                                "hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched", 
-                                "BX of the TPs associated with prompt muons [ns]", 
-                                (wheel2+" "+chamb).c_str(),
-                                saveDir, 
-                                false);
+    //         plot_BX_histograms( hist1, hist2, 
+    //                             "hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched", 
+    //                             "BX of the TPs associated with prompt muons [ns]", 
+    //                             (wheel2+" "+chamb).c_str(),
+    //                             saveDir, 
+    //                             false);
 
-        }
-    }
+    //     }
+    // }
 
     
-    std::string hName = "hNTrigs";
+    hName = "hNTrigs";
     hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
     hist2 = (TH1F*)fileRPC->Get(hName.c_str());
     plot_normal_histograms( hist1, hist2, 
@@ -136,6 +149,23 @@ void plot_histograms() {
                         "",
                         saveDir, 
                         false);
+
+
+    // std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
+    // hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
+    // hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+    // plot_t0_histograms( hist1, hist2, 
+    //                     "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched", 
+    //                     "Time of the TPs associated with prompt muons [ns]", 
+    //                     (wheel2+" "+chamb).c_str(),
+    //                     saveDir, 
+    //                     true);
+        // EffEtaGenSeg_total
+        // EffEtaGenSeg_matched
+
+        // EffEtaGenSeg20_total
+        // EffEtaGenSeg20_matched
+
 
     std::cout << "--------------------------------" << std::endl;
     std::cout << "END PROGRAM" << std::endl;

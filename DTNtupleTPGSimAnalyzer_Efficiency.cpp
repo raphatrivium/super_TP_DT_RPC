@@ -7,7 +7,7 @@
 
 void DTNtupleTPGSimAnalyzer_Efficiency() {
 
-    bool testFlag = false;   // false  -   true
+    bool testFlag = false;   // false - true
 
     // ------------------------------------------------------------------------------
     // INPUT FILES
@@ -55,10 +55,19 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
         m_plots2["hGenEtaVsSegEta"] = new TH2D("hGenEtaVsSegEta", "Eta Gen vs Eta Segments; Eta Gen; Eta Segments", 100, -4, 4, 100, -4, 4);
         m_plots2["hGenPhiVsSegPhi"] = new TH2D("hGenPhiVsSegPhi", "Phi Gen vs Phi Segments; Phi Gen; Phi Segments", 100, -4, 4, 100, -4, 4);
 
-        m_plots["EffEtaGenRec_total"] = new TH1D("EffEtaGenRec_total", "Muon Reconstruction Efficiency; #eta; Efficiency", 100, -2, 2);
-        m_plots["EffEtaGenRec_matched"] = new TH1D("EffEtaGenRec_matched", "Muon Reconstruction Efficiency; #eta; Efficiency", 100, -2, 2);
+        m_plots["EffEtaGenSeg_total"] = new TH1D("EffEtaGenSeg_total", "Muon Reconstruction Efficiency; #eta; Efficiency", 100, -2, 2);
+        m_plots["EffEtaGenSeg_matched"] = new TH1D("EffEtaGenSeg_matched", "Muon Reconstruction Efficiency; #eta; Efficiency", 100, -2, 2);
 
+        m_plots["EffEtaGenSeg20_total"] = new TH1D("EffEtaGenSeg20_total", "Muon Reconstruction Efficiency; #eta; Efficiency", 100, -2, 2);
+        m_plots["EffEtaGenSeg20_matched"] = new TH1D("EffEtaGenSeg20_matched", "Muon Reconstruction Efficiency; #eta; Efficiency", 100, -2, 2);
 
+        m_plots["hSegStationWhM2"] = new TH1D("hSegStationWhM2", "Segment hits per station in Wheel -2; Station; Entries", 6, 0, 6);
+        m_plots["hSegStationWhM1"] = new TH1D("hSegStationWhM1", "Segment hits per station in Wheel -1; Station; Entries", 6, 0, 6);
+        m_plots["hSegStationWh0"] = new TH1D("hSegStationWh0", "Segment hits per station in Wheel 0; Station; Entries", 6, 0, 6);
+        m_plots["hSegStationWhP1"] = new TH1D("hSegStationWhP1", "Segment hits per station in Wheel +1; Station; Entries", 6, 0, 6);
+        m_plots["hSegStationWhP2"] = new TH1D("hSegStationWhP2", "Segment hits per station in Wheel +2; Station; Entries", 6, 0, 6);
+
+        m_plots2["hSegWhVsSegStat"] = new TH2D("hSegWhVsSegStat", "Segment Wheel vs Segment Station; Wheel; Station", 5, -2, 3, 6, 0, 6);
 
         m_plots["hSegmentPsi"] = new TH1D("hSegmentPsi", "Segment Psi distribution ; Psi; Entries", 200, -60, +60);
         m_plots2["hSegmentPsiVST0"] = new TH2D("hSegmentPsiVST0", "Segment Psi distribution vs segment t0; Psi; Segment t0 (ns)", 200, -50, +50, 200, -100, 100);
@@ -295,11 +304,11 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                 std::cout << "==============================================================================" << std::endl;
 
                 m_plots["hGenEta"] -> Fill( gen_eta->at(iGenPart) );
-                m_plots["EffEtaGenRec_total"] -> Fill( gen_eta->at(iGenPart) );
+                m_plots["EffEtaGenSeg_total"] -> Fill( gen_eta->at(iGenPart) );
 
                 if (std::abs(gen_pdgId->at(iGenPart)) != 13 || gen_pt->at(iGenPart) < m_minMuPt) continue;
 
-
+                m_plots["EffEtaGenSeg20_total"] -> Fill( gen_eta->at(iGenPart) );
 
                 std::vector<std::size_t> bestSegIndex = { 999, 999, 999, 999 };
                 std::vector<Int_t> bestSegNHits       = { 0, 0, 0, 0 };
@@ -338,7 +347,8 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                     }
 
                     if (genFill == false) {
-                        m_plots["EffEtaGenRec_matched"] -> Fill( gen_eta->at(iGenPart) );
+                        m_plots["EffEtaGenSeg_matched"] -> Fill( gen_eta->at(iGenPart) );
+                        m_plots["EffEtaGenSeg20_matched"] -> Fill( gen_eta->at(iGenPart) );
                         genFill = true;
                     }
 
@@ -467,20 +477,32 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
 
                     m_plots2["hGenEtaVsSegEta"] -> Fill( gen_eta->at(iGenPart), ph2Seg_posGlb_eta->at(iSeg) );
                     m_plots2["hGenPhiVsSegPhi"] -> Fill( gen_phi->at(iGenPart) , ph2Seg_posGlb_phi->at(iSeg) );
-
-
-
+                    
+                    
                     Int_t segWh  = ph2Seg_wheel->at(iSeg);
                     Int_t segSec = ph2Seg_sector->at(iSeg);
                     if (segSec == 13) segSec = 4;
                     if (segSec == 14) segSec = 10;
-
-
+                    
+                    
                     std::string chambTag = chambTags.at(segSt - 1);
                     std::string whTag    = whTags.at(segWh + 2);
                     std::string secTag   = secTags.at(segSec - 1);
-
                     std::cout << "  Seg Wheel: " << segWh << " | Seg Sector: "<< segSec << " | Seg Station: " << segSt <<  std::endl;
+
+                    m_plots2["hSegWhVsSegStat"] -> Fill( segWh , segSt );
+
+                    if (segWh == -2)
+                        m_plots["hSegStationWhM2"] -> Fill( segSt );
+                    else if (segWh == -1)
+                        m_plots["hSegStationWhM1"] -> Fill( segSt );
+                    else if (segWh == 0)
+                        m_plots["hSegStationWh0"] -> Fill( segSt );
+                    else if (segWh == 1)
+                        m_plots["hSegStationWhP1"] -> Fill( segSt );
+                    else if (segWh == 2)
+                        m_plots["hSegStationWhP2"] -> Fill( segSt );
+                    
 
                     if (ph2Seg_phi_t0->at(iSeg) > -500)
                     {
