@@ -7,19 +7,21 @@
 
 void DTNtupleTPGSimAnalyzer_Efficiency() {
 
-    bool testFlag = false;   // false - true
+    bool testFlag = true;   // false - true
 
     // ------------------------------------------------------------------------------
     // INPUT FILES
     // ------------------------------------------------------------------------------
     std::string inputDir = "input/";
-    // std::vector<std::string> file_names  = {"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root", 
-    //                                         "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"};
+    std::vector<std::string> file_names  = {"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root", 
+                                            "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"};
 
-    std::vector<std::string> file_names  = {"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC_updated.root", 
-                                            "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC_updated.root"};
+    // std::vector<std::string> file_names  = {"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC_updated.root", 
+    //                                         "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC_updated.root"};
 
-    if (testFlag) file_names  = {"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"};
+    // if (testFlag) file_names  = {"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"};
+
+    if (testFlag) file_names  = {"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_mauricio.root"};
 
     for (const auto & file_name : file_names)
     {                                 
