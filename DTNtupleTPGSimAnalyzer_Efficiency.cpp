@@ -7,7 +7,7 @@
 
 void DTNtupleTPGSimAnalyzer_Efficiency() {
 
-    bool testFlag = false;   // false - true
+    bool testFlag = true;   // false - true
 
     // ------------------------------------------------------------------------------
     // INPUT FILES
