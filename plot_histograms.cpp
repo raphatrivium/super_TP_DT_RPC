@@ -200,6 +200,17 @@ void plot_histograms() {
                             saveDir, 
                             false);
 
+    hName = "TPnotMathced";
+    hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
+    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+    plot_normal_histograms( hist1, 
+                            hist2, 
+                            "TPnotMathced", 
+                            "", 
+                            "",
+                            saveDir, 
+                            false);
+
     // -------------------------------------------------------------------------------
 
     hName = "hNSeg";
@@ -231,6 +242,17 @@ void plot_histograms() {
     plot_normal_histograms( hist1, 
                             hist2, 
                             "hRatioNtpNseg_totalRPCUpdated", 
+                            "", 
+                            "",
+                            saveDir, 
+                            false);
+    
+    hName = "TPnotMathced";
+    hist1 = (TH1F*)fileNoRPCUpdated->Get(hName.c_str());
+    hist2 = (TH1F*)fileRPCUpdated->Get(hName.c_str());
+    plot_normal_histograms( hist1, 
+                            hist2, 
+                            "TPnotMathcedRPCUpdated", 
                             "", 
                             "",
                             saveDir, 
