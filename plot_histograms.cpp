@@ -5,7 +5,9 @@ void plot_histograms() {
     // Open the two ROOT files
     TFile *fileNoRPC = TFile::Open("output/noRPC/DTNtupleTPGSimAnalyzer_Efficiency.root");
     TFile *fileRPC = TFile::Open("output/RPC/DTNtupleTPGSimAnalyzer_Efficiency.root");
-    TFile *fileRPCPhase2 = TFile::Open("output/RPCPHASE2/DTNtupleTPGSimAnalyzer_Efficiency.root");
+    TFile *fileNoRPCUpdated = TFile::Open("output/noRPCUpdated/DTNtupleTPGSimAnalyzer_Efficiency.root");
+    TFile *fileRPCUpdated = TFile::Open("output/RPCUpdated/DTNtupleTPGSimAnalyzer_Efficiency.root");
+
 
     if (!fileNoRPC || !fileRPC) {
         std::cout << "Error: Could not open one or both files!" << std::endl;
@@ -107,7 +109,7 @@ void plot_histograms() {
             std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
             hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
             hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-            hist3 = (TH1F*)fileRPCPhase2->Get(hName.c_str());
+            hist3 = (TH1F*)fileRPCUpdated->Get(hName.c_str());
 
             std::string wheel2 = wheel;
             wheel2 = wheel2.erase(1, 2);  // Removes "W.": "Wh.-2"→ "W-2"
@@ -164,19 +166,14 @@ void plot_histograms() {
     //     }
     // }
 
-    fileNoRPC = TFile::Open("output/RPCPHASE2noRPC/DTNtupleTPGSimAnalyzer_Efficiency.root");
-    fileRPC = TFile::Open("output/RPCPHASE2/DTNtupleTPGSimAnalyzer_Efficiency.root");
-
     saveDir = "output/histogram_comparison/";
     hName = "hNSeg";
     hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
     hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-    hist3 = (TH1F*)fileRPCPhase2->Get(hName.c_str());
     plot_normal_histograms( hist1, 
                             hist2, 
-                            hist3,
                             "hNSeg", 
-                            "hNSeg", 
+                            "", 
                             "",
                             saveDir, 
                             false);
@@ -184,12 +181,10 @@ void plot_histograms() {
     hName = "hNTrigs";
     hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
     hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-    hist3 = (TH1F*)fileRPCPhase2->Get(hName.c_str());
     plot_normal_histograms( hist1, 
                             hist2, 
-                            hist3,
                             "hNTrigs", 
-                            "NTrigs", 
+                            "", 
                             "",
                             saveDir, 
                             false);
@@ -197,12 +192,46 @@ void plot_histograms() {
     hName = "hRatioNtpNseg_total";
     hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
     hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-    hist3 = (TH1F*)fileRPCPhase2->Get(hName.c_str());
     plot_normal_histograms( hist1, 
                             hist2, 
-                            hist3,
                             "hRatioNtpNseg_total", 
-                            "hRatioNtpNseg_total", 
+                            "", 
+                            "",
+                            saveDir, 
+                            false);
+
+    // -------------------------------------------------------------------------------
+
+    hName = "hNSeg";
+    hist1 = (TH1F*)fileNoRPCUpdated->Get(hName.c_str());
+    hist2 = (TH1F*)fileRPCUpdated->Get(hName.c_str());
+    plot_normal_histograms( hist1, 
+                            hist2, 
+                            "hNSegRPCUpdated", 
+                            "", 
+                            "",
+                            saveDir, 
+                            false);
+
+    hName = "hNTrigs";
+    hist1 = (TH1F*)fileNoRPCUpdated->Get(hName.c_str());
+    hist2 = (TH1F*)fileRPCUpdated->Get(hName.c_str());
+
+    plot_normal_histograms( hist1, 
+                            hist2, 
+                            "hNTrigsRPCUpdated", 
+                            "", 
+                            "",
+                            saveDir, 
+                            false);
+
+    hName = "hRatioNtpNseg_total";
+    hist1 = (TH1F*)fileNoRPCUpdated->Get(hName.c_str());
+    hist2 = (TH1F*)fileRPCUpdated->Get(hName.c_str());
+    plot_normal_histograms( hist1, 
+                            hist2, 
+                            "hRatioNtpNseg_totalRPCUpdated", 
+                            "", 
                             "",
                             saveDir, 
                             false);

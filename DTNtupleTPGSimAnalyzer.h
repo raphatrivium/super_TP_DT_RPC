@@ -8,6 +8,7 @@
 #include <unordered_map>
 #include <set>
 #include <iomanip> // For std::setprecision
+#include <sys/stat.h>
 
 #include <TFile.h>
 #include <TDirectoryFile.h>
@@ -31,6 +32,28 @@
 #include <TLine.h>
 
 
+bool fileExists(const std::string& path) {
+    struct stat buffer;
+    return (stat(path.c_str(), &buffer) == 0);
+}
+
+bool checkFilesInDirectory(const std::vector<std::string>& filenames, 
+                           const std::string& directory) {
+    bool allExist = true;
+    
+    for (const auto& filename : filenames) {
+        std::string fullPath = directory + filename;
+        
+        if (fileExists(fullPath)) {
+            std::cout << "✓ Found: " << fullPath << std::endl;
+        } else {
+            std::cout << "✗ Missing: " << fullPath << std::endl;
+            allExist = false;
+        }
+    }
+    
+    return allExist;
+}
 
 double get_entries(  TH1F *hist) {
 
@@ -684,7 +707,6 @@ void plot_BX_histograms(   TH1F *hist1,
 
 void plot_normal_histograms(TH1F *hist1, 
                             TH1F *hist2,
-                            TH1F *hist3, 
                             std::string str_name,
                             std::string str_Xaxis,
                             std::string str_leg = "",
@@ -703,11 +725,9 @@ void plot_normal_histograms(TH1F *hist1,
 
     int N1 = hist1->GetEntries(); // Get the number of entries (N)
     int N2 = hist2->GetEntries();
-    int N3 = hist2->GetEntries();
 
     double max1 = hist1->GetMaximum();  // Highest bin in h1
     double max2 = hist2->GetMaximum();  // Highest bin in h2
-    double max3 = hist2->GetMaximum();  // Highest bin in h2
     
     hist1->SetTitle("");
     hist2->SetTitle("");
@@ -715,19 +735,15 @@ void plot_normal_histograms(TH1F *hist1,
     // Set different colors for the histograms
     hist1->SetLineColor(kRed);
     hist2->SetLineColor(kBlue);
-    hist3->SetLineColor(kBlack);
     // Set Line Width
     hist1->SetLineWidth(3);
     hist2->SetLineWidth(3);
-    hist3->SetLineWidth(3);
     // Set Line Width
     hist1->SetLineStyle(9);
     hist2->SetLineStyle(1);
-    hist3->SetLineStyle(2);
     // Remove statistic box
     hist1->SetStats(0);
     hist2->SetStats(0);
-    hist3->SetStats(0);
 
     // Normalize the histogram by its area
     if (norm){
@@ -759,33 +775,6 @@ void plot_normal_histograms(TH1F *hist1,
         hist2->Draw("HIST");
         hist1->Draw("HIST SAME");
     }
-
-    // hist3->Draw("HIST ");
-    // hist2->Draw("HIST SAME");  
-    // hist1->Draw("HIST SAME");
-
-    // hist2->Draw("HIST");  
-    // hist1->Draw("HIST SAME");
-    // if (max1 > max2 && max1 > max3){
-    //     hist1->Draw("HIST");  // Draw the first histogram
-    //     hist2->Draw("HIST SAME"); // Draw the second histogram on the same canvas
-    //     hist3->Draw("HIST SAME"); // Draw the second histogram on the same canvas
-    // }
-    // else if (max2 > max1 && max2 > max3){
-    //     hist2->Draw("HIST");  
-    //     hist1->Draw("HIST SAME");
-    //     hist3->Draw("HIST SAME");
-    // }
-    // else if (max3 > max1 && max3 > max2){
-    //     hist3->Draw("HIST ");
-    //     hist2->Draw("HIST SAME");  
-    //     hist1->Draw("HIST SAME");
-    // }
-    // else{
-    //     hist1->Draw("HIST");
-    //     hist2->Draw("HIST SAME");
-    //     hist3->Draw("HIST SAME");
-    // }
 
     TText *text = new TText(0.1,0.92,"CMS Preliminary");
 
@@ -829,7 +818,6 @@ void plot_normal_histograms(TH1F *hist1,
     // legend->AddEntry(hist1, (std::to_string(N1)).c_str(), "");
     legend->AddEntry(hist2, "DT AM w/ RPC", "l");
     // legend->AddEntry(hist2, (std::to_string(N2)).c_str(), "");
-    // legend->AddEntry(hist3, "DT AM w/ RPC phase2", "l");
     legend->SetTextSize(0.03); // Increase the text size in the legend
     legend->Draw(); // Draw the legend
 

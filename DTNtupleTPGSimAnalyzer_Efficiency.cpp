@@ -5,9 +5,9 @@
 
 #include "DTNtupleTPGSimAnalyzer.h"
 
-void DTNtupleTPGSimAnalyzer_Efficiency() {
+int DTNtupleTPGSimAnalyzer_Efficiency() {
 
-    bool testFlag = true;   // false - true
+    bool testFlag = false;   // false - true
 
     // ------------------------------------------------------------------------------
     // INPUT FILES
@@ -15,9 +15,14 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
     std::string inputDir = "input/";
     std::vector<std::string> file_names  = {"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root", 
                                             "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root",
-                                            "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCPHASE2.root",
-                                            "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_PHASE2_noRPC.root"};
+                                            "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated.root",
+                                            "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPCUpdated.root"};
 
+    bool allExist = checkFilesInDirectory (file_names, inputDir);
+    if (!allExist) {
+        std::cout << "\n Some of the files are missing !!!!!. Check the list above \n" <<std::endl;
+        return 1;
+    }
     // std::vector<std::string> file_names  = {"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC_updated.root", 
     //                                         "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC_updated.root"};
 
@@ -741,7 +746,8 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
         // if (file_name.find("noRPC") != std::string::npos) 
         if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC") != std::string::npos)
         {
-            std::cout << "Found 'noRPC' in the filename!" << std::endl;
+            // std::cout << "Found 'noRPC' in the filename!" << std::endl;
+            std::cout << "Found 'DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC' in the filename!" << std::endl;
             outputDir = "output/noRPC/";
             histoDir =  "output/noRPC/histograms/";
             effDir =    "output/noRPC/histograms/effPlots/";
@@ -752,20 +758,19 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
             histoDir =  "output/RPC/histograms/";
             effDir =    "output/RPC/histograms/effPlots/";
         }
-        else if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCPHASE2") != std::string::npos) { 
-            std::cout << "'DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCPHASE2'  in the filename!" << std::endl;
-            outputDir = "output/RPCPHASE2/";
-            histoDir =  "output/RPCPHASE2/histograms/";
-            effDir =    "output/RPCPHASE2/histograms/effPlots/";
+        else if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPCUpdated") != std::string::npos) { 
+            std::cout << "'DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPCUpdated'  in the filename!" << std::endl;
+            outputDir = "output/noRPCUpdated/";
+            histoDir =  "output/noRPCUpdated/histograms/";
+            effDir =    "output/noRPCUpdated/histograms/effPlots/";
         }
-        else if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_PHASE2_noRPC") != std::string::npos) { 
-            std::cout << "'DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_PHASE2_noRPC'  in the filename!" << std::endl;
-            outputDir = "output/RPCPHASE2noRPC/";
-            histoDir =  "output/RPCPHASE2noRPC/histograms/";
-            effDir =    "output/RPCPHASE2noRPC/histograms/effPlots/";
+        else if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated") != std::string::npos) { 
+            std::cout << "'DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated'  in the filename!" << std::endl;
+            outputDir = "output/RPCUpdated/";
+            histoDir =  "output/RPCUpdated/histograms/";
+            effDir =    "output/RPCUpdated/histograms/effPlots/";
         }
 
-        
 
         // Create the directory if it doesn't exist
         if (gSystem->AccessPathName(outputDir.c_str())) {
@@ -786,7 +791,7 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
         // Check if file opened successfully
         if (!outFile.IsOpen()) {
             std::cerr << "Error: Could not create file " << (outputDir+outputFile) << std::endl;
-            return;
+            return 1;
         }
 
         // -------------------------------------------
@@ -848,4 +853,5 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
     std::cout << "TEST FLAG: " << testFlag << std::endl;
     std::cout << "----------------------------------" << std::endl;
 
+    return 0;
 } // END Program
