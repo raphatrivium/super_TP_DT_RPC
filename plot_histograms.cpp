@@ -5,6 +5,7 @@ void plot_histograms() {
     // Open the two ROOT files
     TFile *fileNoRPC = TFile::Open("output/noRPC/DTNtupleTPGSimAnalyzer_Efficiency.root");
     TFile *fileRPC = TFile::Open("output/RPC/DTNtupleTPGSimAnalyzer_Efficiency.root");
+    TFile *fileRPCPhase2 = TFile::Open("output/RPCPHASE2/DTNtupleTPGSimAnalyzer_Efficiency.root");
 
     if (!fileNoRPC || !fileRPC) {
         std::cout << "Error: Could not open one or both files!" << std::endl;
@@ -79,6 +80,7 @@ void plot_histograms() {
 
     TH1F *hist1;
     TH1F *hist2;
+    TH1F *hist3;
     for (const auto & wheel : wheelTag) {
         for (const auto & chamb : chambTag) {
             
@@ -98,6 +100,29 @@ void plot_histograms() {
 
         }
     }
+
+    for (const auto & wheel : wheelTag) {
+        for (const auto & chamb : chambTag) {
+            
+            std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
+            hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
+            hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+            hist3 = (TH1F*)fileRPCPhase2->Get(hName.c_str());
+
+            std::string wheel2 = wheel;
+            wheel2 = wheel2.erase(1, 2);  // Removes "W.": "Wh.-2"→ "W-2"
+
+            plot_t0_histogramsV2( hist1, hist2, hist3,
+                                "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched", 
+                                "Time of the TPs associated with prompt muons [ns]", 
+                                (wheel2+" "+chamb).c_str(),
+                                saveDir, 
+                                true);
+
+        }
+    }
+
+    
 
     for (const auto & wheel : wheelTag) {
         for (const auto & chamb : chambTag) {
@@ -139,16 +164,48 @@ void plot_histograms() {
     //     }
     // }
 
-    
+    fileNoRPC = TFile::Open("output/RPCPHASE2noRPC/DTNtupleTPGSimAnalyzer_Efficiency.root");
+    fileRPC = TFile::Open("output/RPCPHASE2/DTNtupleTPGSimAnalyzer_Efficiency.root");
+
+    saveDir = "output/histogram_comparison/";
+    hName = "hNSeg";
+    hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
+    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+    hist3 = (TH1F*)fileRPCPhase2->Get(hName.c_str());
+    plot_normal_histograms( hist1, 
+                            hist2, 
+                            hist3,
+                            "hNSeg", 
+                            "hNSeg", 
+                            "",
+                            saveDir, 
+                            false);
+
     hName = "hNTrigs";
     hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
     hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-    plot_normal_histograms( hist1, hist2, 
-                        "hNTrigs", 
-                        "NTrigs", 
-                        "",
-                        saveDir, 
-                        false);
+    hist3 = (TH1F*)fileRPCPhase2->Get(hName.c_str());
+    plot_normal_histograms( hist1, 
+                            hist2, 
+                            hist3,
+                            "hNTrigs", 
+                            "NTrigs", 
+                            "",
+                            saveDir, 
+                            false);
+
+    hName = "hRatioNtpNseg_total";
+    hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
+    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+    hist3 = (TH1F*)fileRPCPhase2->Get(hName.c_str());
+    plot_normal_histograms( hist1, 
+                            hist2, 
+                            hist3,
+                            "hRatioNtpNseg_total", 
+                            "hRatioNtpNseg_total", 
+                            "",
+                            saveDir, 
+                            false);
 
 
     // std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";

@@ -13,13 +13,17 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
     // INPUT FILES
     // ------------------------------------------------------------------------------
     std::string inputDir = "input/";
-    // std::vector<std::string> file_names  = {"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root", 
-    //                                         "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"};
+    std::vector<std::string> file_names  = {"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root", 
+                                            "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root",
+                                            "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCPHASE2.root",
+                                            "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_PHASE2_noRPC.root"};
 
-    std::vector<std::string> file_names  = {"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC_updated.root", 
-                                            "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC_updated.root"};
+    // std::vector<std::string> file_names  = {"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC_updated.root", 
+    //                                         "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC_updated.root"};
 
+ 
     if (testFlag) file_names  = {"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"};
+    // if (testFlag) file_names  = {"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCPHASE2.root"};
 
     for (const auto & file_name : file_names)
     {                                 
@@ -40,7 +44,11 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
         std::vector<std::string> chambTag = {"MB1",     "MB2", "MB3", "MB4"};
         std::vector<std::string> wheelTag = {"Wh.-2","Wh.-1","Wh.0","Wh.+1","Wh.+2",};
 
+        
+        m_plots["hNSeg"] = new TH1D("hNSeg", "Number of Segments ; Number of Segments; Entries", 50, 0, 300);
         m_plots["hNTrigs"] = new TH1D("hNTrigs", "Number of Triggers ; Number of Triggers; Entries", 50, 0, 300);
+
+        m_plots["hRatioNtpNseg_total"] = new TH1D("hRatioNtpNseg_total", "Number of Triggers / Number of Segments ; N tp / N seg; Entries", 20, 0, 10);
 
         m_plots["hGenSegments"] = new TH1D("hGenSegments", "Segments per Generated Muons ; Segments per Gen; Entries", 6, 0, 6);
         m_plots["hGenTP"] = new TH1D("hGenTP", "Trigger Primitives per Generated Muons ; Trigger Primitives per Gen; Entries", 6, 0, 6);
@@ -49,7 +57,9 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
         // m_plots2["hGenIdxVsNSeg"] = new TH2D("hGenIdxVsNSeg", "GenMuon Index vs Number of Segments; GenMuon Index; Number of Segments", 80, 0, 80, 100, 0, 6);
         
         m_plots["hGenEta"] = new TH1D("hGenEta", "Gen Muon #eta distribution ; #eta; Entries", 200, -1.5, +1.5);
-        m_plots["hGenPt"] = new TH1D("hGenPt", "Gen Muon pT distribution ; #eta; Entries", 200, 0, 200);
+        m_plots["hGenPt"] = new TH1D("hGenPt", "Gen Muon pT distribution ; pT; Entries", 200, 0, 200);
+        m_plots["hGenIdPDG"] = new TH1D("hGenIdPDG", "Gen PDG ID ; PDG ID; Entries", 40, -20, 20);
+
         // m_plots["hGenEta"] = new TH1D("hGenEta", "Gen Muon #eta distribution ; #eta; Entries", 200, -1.5, +1.5);
 
         m_plots2["hGenEtaVsSegEta"] = new TH2D("hGenEtaVsSegEta", "Eta Gen vs Eta Segments; Eta Gen; Eta Segments", 100, -4, 4, 100, -4, 4);
@@ -272,7 +282,7 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
         // ------------------------------------------------------------------------------
         // nEntries = 100;   // 100   nEntries
         if (testFlag){
-            nEntries = 10;
+            nEntries = nEntries;
             std::cout << "FOR TESTE:" <<std::endl;
         }
         std::cout << "Total entries:" << nEntries <<std::endl;
@@ -281,12 +291,16 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
         for (Long64_t iEvent = 0; iEvent < nEntries; ++iEvent) { 
 
             tree->GetEntry(iEvent);
-            branch_gen_nGenParts->GetEntry(iEvent);
-            branch_ph2TpgPhiEmuAm_nTrigs->GetEntry(iEvent);
-
-
-
+            // branch_gen_nGenParts->GetEntry(iEvent);
+            // branch_ph2TpgPhiEmuAm_nTrigs->GetEntry(iEvent);
+            // branch_ph2TpgPhiEmuAm_nTrigs->GetEntry(iEvent);
+            
+            m_plots["hNSeg"] -> Fill( ph2Seg_nSegments );
             m_plots["hNTrigs"] -> Fill( ph2TpgPhiEmuAm_nTrigs );
+
+            double RatioNtpNseg;
+            RatioNtpNseg = double(ph2TpgPhiEmuAm_nTrigs) / double(ph2Seg_nSegments) ;
+            m_plots["hRatioNtpNseg_total"] -> Fill( RatioNtpNseg );
 
             numTPEvent = 0;
             denTPEvent = 0;
@@ -303,8 +317,11 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
                 std::cout << "iEvent " << iEvent << ", iGenPart " << iGenPart <<  " | gen_nGenParts: " << gen_nGenParts << " | " << "gen pt: "<< gen_pt->at(iGenPart) << " | " << "gen eta: "<< gen_eta->at(iGenPart) << " | gen phi: "<< gen_phi->at(iGenPart) << std::endl;
                 std::cout << "==============================================================================" << std::endl;
 
+                m_plots["hGenIdPDG"] -> Fill( gen_pdgId->at(iGenPart) );
                 m_plots["hGenEta"] -> Fill( gen_eta->at(iGenPart) );
+                m_plots["hGenPt"] -> Fill( gen_pt->at(iGenPart) );
                 m_plots["EffEtaGenSeg_total"] -> Fill( gen_eta->at(iGenPart) );
+                
 
                 if (std::abs(gen_pdgId->at(iGenPart)) != 13 || gen_pt->at(iGenPart) < m_minMuPt) continue;
 
@@ -721,19 +738,34 @@ void DTNtupleTPGSimAnalyzer_Efficiency() {
         std::string outputDir = "";
         std::string histoDir = "";
         std::string effDir = "";
-        if (file_name.find("noRPC") != std::string::npos) 
+        // if (file_name.find("noRPC") != std::string::npos) 
+        if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC") != std::string::npos)
         {
             std::cout << "Found 'noRPC' in the filename!" << std::endl;
             outputDir = "output/noRPC/";
             histoDir =  "output/noRPC/histograms/";
             effDir =    "output/noRPC/histograms/effPlots/";
         } 
-        else {
-            std::cout << "'noRPC' not found." << std::endl;
+        else if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC") != std::string::npos) { 
+            std::cout << "'DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC'  in the filename!" << std::endl;
             outputDir = "output/RPC/";
             histoDir =  "output/RPC/histograms/";
             effDir =    "output/RPC/histograms/effPlots/";
         }
+        else if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCPHASE2") != std::string::npos) { 
+            std::cout << "'DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCPHASE2'  in the filename!" << std::endl;
+            outputDir = "output/RPCPHASE2/";
+            histoDir =  "output/RPCPHASE2/histograms/";
+            effDir =    "output/RPCPHASE2/histograms/effPlots/";
+        }
+        else if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_PHASE2_noRPC") != std::string::npos) { 
+            std::cout << "'DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_PHASE2_noRPC'  in the filename!" << std::endl;
+            outputDir = "output/RPCPHASE2noRPC/";
+            histoDir =  "output/RPCPHASE2noRPC/histograms/";
+            effDir =    "output/RPCPHASE2noRPC/histograms/effPlots/";
+        }
+
+        
 
         // Create the directory if it doesn't exist
         if (gSystem->AccessPathName(outputDir.c_str())) {
