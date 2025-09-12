@@ -127,6 +127,61 @@ void plot_eff(  std::string hName,
 
 }
 
+void plot_eff_fake_rate(  std::string hName,
+                TH1F *hMatched1, 
+                TH1F *hTotal1,
+                TH1F *hMatched2, 
+                TH1F *hTotal2,
+                std::string saveDir ) 
+{
+
+    // Check if histograms exist
+    if (!hMatched1 || !hTotal1 || !hMatched2 || !hTotal2 ) {
+        std::cerr << "Error: Required histograms " << hName  << " not found!" << std::endl;
+        return;
+    }
+    
+    // Create the efficiency plot
+    TEfficiency* effPlot1 = new TEfficiency(*hMatched1, *hTotal1);
+    effPlot1->SetName( hName.c_str() );  // Convert to const char*
+    // Style the efficiency plot
+    effPlot1->SetLineColor(kRed);
+    effPlot1->SetMarkerColor(kRed);
+    effPlot1->SetMarkerStyle(20);
+
+    TEfficiency* effPlot2 = new TEfficiency(*hMatched2, *hTotal2);
+    effPlot2->SetName( hName.c_str() );  // Convert to const char*
+    // Style the efficiency plot
+    effPlot2->SetLineColor(kBlue);
+    effPlot2->SetMarkerColor(kBlue);
+    effPlot2->SetMarkerStyle(21);
+
+    // effPlot->GetYaxis()->SetRangeUser(0.0, 1.0);
+
+    // Draw the efficiency plot
+    TCanvas cEff = new TCanvas("cEff", "Efficiency Plot", 800, 600);
+    cEff.SetGridy();
+    cEff.SetGridx();
+    effPlot2->Draw("AP");  // "AP" for axis and points
+    effPlot1->Draw("P SAME");  // "AP" for axis and points
+    // effPlot3->Draw("AP SAME");  // "AP" for axis and points
+    // effPlot4->Draw("AP SAME");  // "AP" for axis and points
+
+    // Add legend
+    // TLegend* leg = new TLegend(0.75, 0.1, 0.9, 0.25);
+    TLegend* leg = new TLegend(0.75, 0.75, 0.9, 0.9);
+    leg->AddEntry(effPlot1, "AM", "lp");
+    leg->AddEntry(effPlot2, "AM+RPC", "lp");
+    leg->Draw();
+
+    // Save the plot in the output directory as "png" or/and "pdf"
+    cEff.SaveAs((saveDir+hName+".png").c_str());
+    cEff.SaveAs((saveDir+hName+".pdf").c_str());
+}
+
+
+
+
 void plot_t0_histograms(   TH1F *hist1, 
                             TH1F *hist2, 
                             std::string str_name,

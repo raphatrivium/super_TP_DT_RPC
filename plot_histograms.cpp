@@ -19,16 +19,12 @@ void plot_histograms() {
     std::vector<std::string> chambTag = {"MB1", "MB2", "MB3", "MB4"};
     std::vector<std::string> wheelTag = {"Wh.-2","Wh.-1","Wh.0","Wh.+1","Wh.+2",};
 
-    std::string effDir  = "output/noRPC/histograms/effPlots/";
-    std::string effDir2 = "output/RPC/histograms/effPlots/";
-
-    // Create the directory if it doesn't exist
-    if (gSystem->AccessPathName(effDir.c_str())) {
-        gSystem->mkdir(effDir.c_str(), true); // true = recursive
-    }
-    if (gSystem->AccessPathName(effDir2.c_str())) {
-        gSystem->mkdir(effDir2.c_str(), true); // true = recursive
-    }
+    std::vector<std::string> effDir = {
+                                       "output/noRPC/histograms/effPlots/",
+                                       "output/RPC/histograms/effPlots/",
+                                       "output/noRPCUpdated/histograms/effPlots/", 
+                                       "output/RPCUpdated/histograms/effPlots/",
+                                    };
 
     // -------------------------------------------
     // MAKING EFFICIENCY PLOTS
@@ -45,32 +41,68 @@ void plot_histograms() {
             // NoRPC
             hTotal =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
             hMatched = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
-            plot_eff( hName, hMatched, hTotal, effDir);
+            plot_eff( hName, hMatched, hTotal, effDir[0]);
 
             // RPC
             hTotal =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
             hMatched = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
-            plot_eff( hName, hMatched, hTotal, effDir2 );    
+            plot_eff( hName, hMatched, hTotal, effDir[1] );    
         }
     }
 
     hName = "EffEtaGenSeg";
     hTotal =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
     hMatched = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
-    plot_eff( hName, hMatched, hTotal, effDir);
-    plot_eff( hName, hMatched, hTotal, effDir2);
+    plot_eff( hName, hMatched, hTotal, effDir[0]);
+    hTotal =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
+    hMatched = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
+    plot_eff( hName, hMatched, hTotal, effDir[1]);
 
     hName = "EffEtaGenSeg20";
     hTotal =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
     hMatched = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
-    plot_eff( hName, hMatched, hTotal, effDir);
-    plot_eff( hName, hMatched, hTotal, effDir2);
+    plot_eff( hName, hMatched, hTotal, effDir[0]);
+    hTotal =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
+    hMatched = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
+    plot_eff( hName, hMatched, hTotal, effDir[1]);
 
-    // std::string hName = "hEff_MB" + std::to_string(chamberNumber) + "_"+algo;
+
+    hName = "Eff_TPnotMathced";
+    hTotal =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
+    hMatched = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
+    plot_eff( hName, hMatched, hTotal, effDir[0]);
+    hTotal =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
+    hMatched = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
+    plot_eff( hName, hMatched, hTotal, effDir[1]);
+    hTotal =   (TH1F*)fileNoRPCUpdated->Get((hName+"_total").c_str());
+    hMatched = (TH1F*)fileNoRPCUpdated->Get((hName+"_matched").c_str());
+    plot_eff( hName, hMatched, hTotal, effDir[2]);
+    hTotal =   (TH1F*)fileRPCUpdated->Get((hName+"_total").c_str());
+    hMatched = (TH1F*)fileRPCUpdated->Get((hName+"_matched").c_str());
+    plot_eff( hName, hMatched, hTotal, effDir[3]);
 
     
-    //m_plots["EffEta_" + chambTag + "_AM_matched"]->Fill(gen_eta->at(iGenPart));
+
+    hName = "Eff_TPnotMathced";
+    TH1F *hTotal1 =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
+    TH1F *hMatched1 = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
+    TH1F *hTotal2 =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
+    TH1F *hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
+    plot_eff_fake_rate( hName, 
+                        hMatched1, hTotal1, hMatched2, hTotal2,
+                        "output/histogram_comparison/");
+
+    hName = "Eff_TPnotMathced";
+    hTotal1 =   (TH1F*)fileNoRPCUpdated->Get((hName+"_total").c_str());
+    hMatched1 = (TH1F*)fileNoRPCUpdated->Get((hName+"_matched").c_str());
+    hTotal2 =   (TH1F*)fileRPCUpdated->Get((hName+"_total").c_str());
+    hMatched2 = (TH1F*)fileRPCUpdated->Get((hName+"_matched").c_str());
+    plot_eff_fake_rate( hName, 
+                        hMatched1, hTotal1, hMatched2, hTotal2,
+                        "output/histogram_comparison/");                    
     
+
+
     // ----------------------------------------------------------
     // ----Time of the TPs associated with prompt muons [ns]-----
     // ----------------------------------------------------------
@@ -211,6 +243,19 @@ void plot_histograms() {
                             saveDir, 
                             false);
 
+    hName = "TPMathced";
+    hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
+    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+    plot_normal_histograms( hist1, 
+                            hist2, 
+                            "TPMathced", 
+                            "", 
+                            "",
+                            saveDir, 
+                            false);
+
+                            
+
     // -------------------------------------------------------------------------------
 
     hName = "hNSeg";
@@ -258,6 +303,17 @@ void plot_histograms() {
                             saveDir, 
                             false);
 
+    hName = "TPMathced";
+    hist1 = (TH1F*)fileNoRPCUpdated->Get(hName.c_str());
+    hist2 = (TH1F*)fileRPCUpdated->Get(hName.c_str());
+    plot_normal_histograms( hist1, 
+                            hist2, 
+                            "TPMathcedRPCUpdated", 
+                            "", 
+                            "",
+                            saveDir, 
+                            false);
+                            
 
     // std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
     // hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
