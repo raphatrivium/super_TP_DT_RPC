@@ -62,8 +62,8 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
 
         m_plots["TPnotMathced"] = new TH1D("TPnotMathced", "Trigger Primitive not Matched per Event; TP not Matched per Event; Entries", 100, 0, 300);
 
-        m_plots["Eff_TPnotMathced_matched"] = new TH1D("Eff_TPnotMathced_matched", "Trigger Primitive not Matched per Event; Wheel; Efficiency", 22, 0, 22);
-        m_plots["Eff_TPnotMathced_total"] = new TH1D("Eff_TPnotMathced_total", "Trigger Primitive not Matched per Event; Wheel; Efficiency", 22, 0, 22);
+        m_plots["Eff_TPnot_matched"] = new TH1D("Eff_TPnot_matched", "Trigger Primitive not Matched per Event; Wheel; Efficiency", 22, 0, 22);
+        m_plots["Eff_TPnot_total"] = new TH1D("Eff_TPnot_total", "Trigger Primitive not Matched per Event; Wheel; Efficiency", 22, 0, 22);
         
 
         m_plots2["hGenIdxVsNSeg"] = new TH2D("hGenIdxVsNSeg", "GenMuon Index vs Number of Segments; GenMuon Index; Number of Segments", 3750, 0, 3750, 100, 0, 6);
@@ -342,7 +342,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 0  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 4) wheelIdx = 18;
                 if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 1  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 4) wheelIdx = 19;
                 if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 2  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 4) wheelIdx = 20;
-                m_plots["Eff_TPnotMathced_total"] -> Fill( wheelIdx );
+                m_plots["Eff_TPnot_total"] -> Fill( wheelIdx );
 
                 // m_plots["htrigAMrpcFlag_Total"] -> Fill(ph2TpgPhiEmuAm_rpcFlag->at(itrig));
                 // m_plots["htrigAMBX_Total"] -> Fill(ph2TpgPhiEmuAm_BX->at(itrig));
@@ -830,7 +830,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 0  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 4) wheelIdx = 18;
                 if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 1  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 4) wheelIdx = 19;
                 if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 2  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 4) wheelIdx = 20;
-                m_plots["Eff_TPnotMathced_matched"] -> Fill( wheelIdx ); 
+                m_plots["Eff_TPnot_matched"] -> Fill( wheelIdx ); 
                 
             }
             
