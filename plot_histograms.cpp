@@ -67,23 +67,23 @@ void plot_histograms() {
     plot_eff( hName, hMatched, hTotal, effDir[1]);
 
 
-    hName = "Eff_TPnotMathced";
-    hTotal =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
-    hMatched = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
-    plot_eff( hName, hMatched, hTotal, effDir[0]);
-    hTotal =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
-    hMatched = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
-    plot_eff( hName, hMatched, hTotal, effDir[1]);
-    hTotal =   (TH1F*)fileNoRPCUpdated->Get((hName+"_total").c_str());
-    hMatched = (TH1F*)fileNoRPCUpdated->Get((hName+"_matched").c_str());
-    plot_eff( hName, hMatched, hTotal, effDir[2]);
-    hTotal =   (TH1F*)fileRPCUpdated->Get((hName+"_total").c_str());
-    hMatched = (TH1F*)fileRPCUpdated->Get((hName+"_matched").c_str());
-    plot_eff( hName, hMatched, hTotal, effDir[3]);
+    // hName = "Eff_TPnotMatched";
+    // hTotal =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
+    // hMatched = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
+    // plot_eff( hName, hMatched, hTotal, effDir[0]);
+    // hTotal =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
+    // hMatched = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
+    // plot_eff( hName, hMatched, hTotal, effDir[1]);
+    // hTotal =   (TH1F*)fileNoRPCUpdated->Get((hName+"_total").c_str());
+    // hMatched = (TH1F*)fileNoRPCUpdated->Get((hName+"_matched").c_str());
+    // plot_eff( hName, hMatched, hTotal, effDir[2]);
+    // hTotal =   (TH1F*)fileRPCUpdated->Get((hName+"_total").c_str());
+    // hMatched = (TH1F*)fileRPCUpdated->Get((hName+"_matched").c_str());
+    // plot_eff( hName, hMatched, hTotal, effDir[3]);
 
     
 
-    hName = "Eff_TPnotMathced";
+    hName = "Eff_TPwheels";
     TH1F *hTotal1 =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
     TH1F *hMatched1 = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
     TH1F *hTotal2 =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
@@ -92,14 +92,36 @@ void plot_histograms() {
                         hMatched1, hTotal1, hMatched2, hTotal2,
                         "output/histogram_comparison/");
 
-    hName = "Eff_TPnotMathced";
-    hTotal1 =   (TH1F*)fileNoRPCUpdated->Get((hName+"_total").c_str());
-    hMatched1 = (TH1F*)fileNoRPCUpdated->Get((hName+"_matched").c_str());
-    hTotal2 =   (TH1F*)fileRPCUpdated->Get((hName+"_total").c_str());
-    hMatched2 = (TH1F*)fileRPCUpdated->Get((hName+"_matched").c_str());
+
+    hName = "fakeRate_WheelStationTP";
+    hTotal1 =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
+    hMatched1 = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
+    hTotal2 =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
+    hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
     plot_eff_fake_rate( hName, 
                         hMatched1, hTotal1, hMatched2, hTotal2,
-                        "output/histogram_comparison/");                    
+                        "output/histogram_comparison/");    
+                   
+
+    hName = "fakeRate_TPnot";
+    hTotal1 =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
+    hMatched1 = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
+    hTotal2 =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
+    hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
+    plot_eff_fake_rate( hName, 
+                        hMatched1, hTotal1, hMatched2, hTotal2,
+                        "output/histogram_comparison/");
+
+    
+
+    // hName = "Eff_TPnotMatched";
+    // hTotal1 =   (TH1F*)fileNoRPCUpdated->Get((hName+"_total").c_str());
+    // hMatched1 = (TH1F*)fileNoRPCUpdated->Get((hName+"_matched").c_str());
+    // hTotal2 =   (TH1F*)fileRPCUpdated->Get((hName+"_total").c_str());
+    // hMatched2 = (TH1F*)fileRPCUpdated->Get((hName+"_matched").c_str());
+    // plot_eff_fake_rate( hName, 
+    //                     hMatched1, hTotal1, hMatched2, hTotal2,
+    //                     "output/histogram_comparison/");                    
     
 
 
@@ -232,29 +254,61 @@ void plot_histograms() {
                             saveDir, 
                             false);
 
-    hName = "TPnotMathced";
+    hName = "TPnotMatched";
     hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
     hist2 = (TH1F*)fileRPC->Get(hName.c_str());
     plot_normal_histograms( hist1, 
                             hist2, 
-                            "TPnotMathced", 
+                            "TPnotMatched", 
                             "", 
                             "",
                             saveDir, 
                             false);
 
-    hName = "TPMathced";
+    hName = "TPMatched";
     hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
     hist2 = (TH1F*)fileRPC->Get(hName.c_str());
     plot_normal_histograms( hist1, 
                             hist2, 
-                            "TPMathced", 
+                            "TPMatched", 
                             "", 
                             "",
                             saveDir, 
                             false);
 
+    hName = "hTrigFlag";
+    hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
+    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+    plot_normal_histograms( hist1, 
+                            hist2, 
+                            "hTrigFlag", 
+                            "", 
+                            "",
+                            saveDir, 
+                            false);
+
+    hName = "hTPMatchedRPCflag";
+    hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
+    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+    plot_normal_histograms( hist1, 
+                            hist2, 
+                            "hTPMatchedRPCflag", 
+                            "", 
+                            "",
+                            saveDir, 
+                            false);
                             
+    hName = "fakeRate_EventWheelStationTP_matched";
+    hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
+    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+    plot_normal_histograms( hist1, 
+                            hist2, 
+                            "fakeRate_EventWheelStationTP_matched", 
+                            "", 
+                            "",
+                            saveDir, 
+                            false);
+    
 
     // -------------------------------------------------------------------------------
 
@@ -292,23 +346,23 @@ void plot_histograms() {
                             saveDir, 
                             false);
     
-    hName = "TPnotMathced";
+    hName = "TPnotMatched";
     hist1 = (TH1F*)fileNoRPCUpdated->Get(hName.c_str());
     hist2 = (TH1F*)fileRPCUpdated->Get(hName.c_str());
     plot_normal_histograms( hist1, 
                             hist2, 
-                            "TPnotMathcedRPCUpdated", 
+                            "TPnotMatchedRPCUpdated", 
                             "", 
                             "",
                             saveDir, 
                             false);
 
-    hName = "TPMathced";
+    hName = "TPMatched";
     hist1 = (TH1F*)fileNoRPCUpdated->Get(hName.c_str());
     hist2 = (TH1F*)fileRPCUpdated->Get(hName.c_str());
     plot_normal_histograms( hist1, 
                             hist2, 
-                            "TPMathcedRPCUpdated", 
+                            "TPMatchedRPCUpdated", 
                             "", 
                             "",
                             saveDir, 
