@@ -9,7 +9,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
 
     bool testFlag = false;   // false - true
     bool plotHistograms = true; // false - true
-    int flagRPCselection = 10;  // 0 (all RPC Flags) | 1  ( RPC Flag == 1) | 2  ( RPC Flag == 2) | 3  ( RPC Flag == 3) | 10 ( RPC Flag == 0 &&  RPC Flag == 1)
+    int flagRPCselection = 0;  // 0 (all RPC Flags) | 1  ( RPC Flag == 1) | 2  ( RPC Flag == 2) | 3  ( RPC Flag == 3) | 10 ( RPC Flag == 0 &&  RPC Flag == 1)
 
     // ------------------------------------------------------------------------------
     // INPUT FILES
@@ -18,8 +18,8 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
     std::vector<std::string> file_names  = {
                                             "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root" 
                                             ,"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"
-                                            //, "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated.root",
-                                            //, "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPCUpdated.root"
+                                            , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated.root"
+                                            , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPCUpdated.root"
                                             };
 
     bool allExist = checkFilesInDirectory (file_names, inputDir);

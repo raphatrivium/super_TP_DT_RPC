@@ -81,6 +81,7 @@ void plot_histograms() {
     // hMatched = (TH1F*)fileRPCUpdated->Get((hName+"_matched").c_str());
     // plot_eff( hName, hMatched, hTotal, effDir[3]);
 
+    std::string saveDir = "output/histogram_comparison/";
     
 
     hName = "Eff_TPwheels";
@@ -90,7 +91,7 @@ void plot_histograms() {
     TH1F *hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
     plot_eff_fake_rate( hName, 
                         hMatched1, hTotal1, hMatched2, hTotal2,
-                        "output/histogram_comparison/");
+                        saveDir);
 
 
     hName = "fakeRate_WheelStationTP";
@@ -100,7 +101,7 @@ void plot_histograms() {
     hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
     plot_eff_fake_rate( hName, 
                         hMatched1, hTotal1, hMatched2, hTotal2,
-                        "output/histogram_comparison/");    
+                        saveDir);    
                    
 
     hName = "fakeRate_TPnot";
@@ -110,7 +111,39 @@ void plot_histograms() {
     hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
     plot_eff_fake_rate( hName, 
                         hMatched1, hTotal1, hMatched2, hTotal2,
-                        "output/histogram_comparison/");
+                        saveDir);
+
+    
+    saveDir = "output/histogram_comparison_RPCUpdate/";
+
+    hName = "Eff_TPwheels";
+    hTotal1 =   (TH1F*)fileNoRPCUpdated->Get((hName+"_total").c_str());
+    hMatched1 = (TH1F*)fileNoRPCUpdated->Get((hName+"_matched").c_str());
+    hTotal2 =   (TH1F*)fileRPCUpdated->Get((hName+"_total").c_str());
+    hMatched2 = (TH1F*)fileRPCUpdated->Get((hName+"_matched").c_str());
+    plot_eff_fake_rate( hName, 
+                        hMatched1, hTotal1, hMatched2, hTotal2,
+                        saveDir);
+
+
+    hName = "fakeRate_WheelStationTP";
+    hTotal1 =   (TH1F*)fileNoRPCUpdated->Get((hName+"_total").c_str());
+    hMatched1 = (TH1F*)fileNoRPCUpdated->Get((hName+"_matched").c_str());
+    hTotal2 =   (TH1F*)fileRPCUpdated->Get((hName+"_total").c_str());
+    hMatched2 = (TH1F*)fileRPCUpdated->Get((hName+"_matched").c_str());
+    plot_eff_fake_rate( hName, 
+                        hMatched1, hTotal1, hMatched2, hTotal2,
+                        saveDir);    
+                   
+
+    hName = "fakeRate_TPnot";
+    hTotal1 =   (TH1F*)fileNoRPCUpdated->Get((hName+"_total").c_str());
+    hMatched1 = (TH1F*)fileNoRPCUpdated->Get((hName+"_matched").c_str());
+    hTotal2 =   (TH1F*)fileRPCUpdated->Get((hName+"_total").c_str());
+    hMatched2 = (TH1F*)fileRPCUpdated->Get((hName+"_matched").c_str());
+    plot_eff_fake_rate( hName, 
+                        hMatched1, hTotal1, hMatched2, hTotal2,
+                        saveDir);
 
     
 
@@ -128,7 +161,7 @@ void plot_histograms() {
     // ----------------------------------------------------------
     // ----Time of the TPs associated with prompt muons [ns]-----
     // ----------------------------------------------------------
-    std::string saveDir = "output/t0/";
+    saveDir = "output/t0/";
     // Create the directory if it doesn't exist
     if (gSystem->AccessPathName(saveDir.c_str())) {
         gSystem->mkdir(saveDir.c_str(), true); // true = recursive

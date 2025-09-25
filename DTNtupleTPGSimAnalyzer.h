@@ -184,7 +184,7 @@ void plot_eff_fake_rate(  std::string hName,
     // effPlot4->Draw("AP SAME");  // "AP" for axis and points
     
     gPad->Update();
-    effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0,1.);
+    effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.,1.005);
 
     // Then set the range using the pad
     gPad->Modified();
