@@ -33,6 +33,7 @@
 
 #include <TGraphAsymmErrors.h>
 #include <TFrame.h>
+#include <TGaxis.h>
 
 
 
@@ -184,7 +185,7 @@ void plot_eff_fake_rate(  std::string hName,
     // effPlot4->Draw("AP SAME");  // "AP" for axis and points
     
     gPad->Update();
-    effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.,1.005);
+    effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.5,1.2);
 
     // Then set the range using the pad
     gPad->Modified();
@@ -859,6 +860,10 @@ void plot_normal_histograms(TH1F *hist1,
         hist2->Draw("HIST");
         hist1->Draw("HIST SAME");
     }
+
+    // Important: Move the exponent 
+    gPad->Update();  
+    TGaxis::SetExponentOffset(-0.07, 0.01, "y");
 
     TText *text = new TText(0.1,0.92,"CMS Preliminary");
 

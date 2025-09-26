@@ -344,6 +344,7 @@ void plot_histograms() {
     
 
     // -------------------------------------------------------------------------------
+    saveDir = "output/histogram_comparison_RPCUpdate/";
 
     hName = "hNSeg";
     hist1 = (TH1F*)fileNoRPCUpdated->Get(hName.c_str());
@@ -400,7 +401,39 @@ void plot_histograms() {
                             "",
                             saveDir, 
                             false);
+
+    hName = "hTrigFlag";
+    hist1 = (TH1F*)fileNoRPCUpdated->Get(hName.c_str());
+    hist2 = (TH1F*)fileRPCUpdated->Get(hName.c_str());
+    plot_normal_histograms( hist1, 
+                            hist2, 
+                            "hTrigFlagRPCUpdated", 
+                            "", 
+                            "",
+                            saveDir, 
+                            false);
+
+    hName = "hTPMatchedRPCflag";
+    hist1 = (TH1F*)fileNoRPCUpdated->Get(hName.c_str());
+    hist2 = (TH1F*)fileRPCUpdated->Get(hName.c_str());
+    plot_normal_histograms( hist1, 
+                            hist2, 
+                            "hTPMatchedRPCflagRPCUpdated", 
+                            "", 
+                            "",
+                            saveDir, 
+                            false);
                             
+    hName = "fakeRate_EventWheelStationTP_matched";
+    hist1 = (TH1F*)fileNoRPCUpdated->Get(hName.c_str());
+    hist2 = (TH1F*)fileRPCUpdated->Get(hName.c_str());
+    plot_normal_histograms( hist1, 
+                            hist2, 
+                            "fakeRate_EventWheelStationTP_matchedRPCUpdated", 
+                            "", 
+                            "",
+                            saveDir, 
+                            false);
 
     // std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
     // hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
