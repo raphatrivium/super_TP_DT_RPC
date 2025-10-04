@@ -160,16 +160,16 @@ void plot_eff_fake_rate(  std::string hName,
 
     // Draw the efficiency plot
     TCanvas cEff = new TCanvas("cEff", "Efficiency Plot", 800, 600);
-    cEff.SetGridy();
-    cEff.SetGridx();
+    // cEff.SetGridy();
+    // cEff.SetGridx();
     effPlot2->Draw("AP");  // "AP" for axis and points
     effPlot1->Draw("P SAME");  // "AP" for axis and points
     // effPlot3->Draw("AP SAME");  // "AP" for axis and points
     // effPlot4->Draw("AP SAME");  // "AP" for axis and points
 
     // Add legend
-    // TLegend* leg = new TLegend(0.75, 0.1, 0.9, 0.25);
-    TLegend* leg = new TLegend(0.75, 0.75, 0.9, 0.9);
+    TLegend* leg = new TLegend(0.75, 0.1, 0.9, 0.25);
+    // TLegend* leg = new TLegend(0.75, 0.75, 0.9, 0.9);
     leg->AddEntry(effPlot1, "AM", "lp");
     leg->AddEntry(effPlot2, "AM+RPC", "lp");
     leg->Draw();

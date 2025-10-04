@@ -92,14 +92,14 @@ void plot_histograms() {
                         hMatched1, hTotal1, hMatched2, hTotal2,
                         "output/histogram_comparison/");
 
-    hName = "Eff_TPnotMathced";
-    hTotal1 =   (TH1F*)fileNoRPCUpdated->Get((hName+"_total").c_str());
-    hMatched1 = (TH1F*)fileNoRPCUpdated->Get((hName+"_matched").c_str());
-    hTotal2 =   (TH1F*)fileRPCUpdated->Get((hName+"_total").c_str());
-    hMatched2 = (TH1F*)fileRPCUpdated->Get((hName+"_matched").c_str());
-    plot_eff_fake_rate( hName, 
-                        hMatched1, hTotal1, hMatched2, hTotal2,
-                        "output/histogram_comparison/");                    
+    // hName = "Eff_TPnotMathced";
+    // hTotal1 =   (TH1F*)fileNoRPCUpdated->Get((hName+"_total").c_str());
+    // hMatched1 = (TH1F*)fileNoRPCUpdated->Get((hName+"_matched").c_str());
+    // hTotal2 =   (TH1F*)fileRPCUpdated->Get((hName+"_total").c_str());
+    // hMatched2 = (TH1F*)fileRPCUpdated->Get((hName+"_matched").c_str());
+    // plot_eff_fake_rate( hName, 
+    //                     hMatched1, hTotal1, hMatched2, hTotal2,
+    //                     "output/histogram_comparison/");                    
     
 
 

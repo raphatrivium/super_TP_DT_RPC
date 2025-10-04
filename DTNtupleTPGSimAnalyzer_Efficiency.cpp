@@ -62,8 +62,8 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
 
         m_plots["TPnotMathced"] = new TH1D("TPnotMathced", "Trigger Primitive not Matched per Event; TP not Matched per Event; Entries", 100, 0, 300);
 
-        m_plots["Eff_TPnotMathced_matched"] = new TH1D("Eff_TPnotMathced_matched", "Trigger Primitive not Matched per Event; Wheel; Efficiency", 22, 0, 22);
-        m_plots["Eff_TPnotMathced_total"] = new TH1D("Eff_TPnotMathced_total", "Trigger Primitive not Matched per Event; Wheel; Efficiency", 22, 0, 22);
+        m_plots["Eff_TPnotMathced_matched"] = new TH1D("Eff_TPnotMathced_matched", "Trigger Primitive not Matched per Event; Wheel; Efficiency", 24, 0, 24);
+        m_plots["Eff_TPnotMathced_total"] = new TH1D("Eff_TPnotMathced_total", "Trigger Primitive not Matched per Event; Wheel; Efficiency", 24, 0, 24);
         
 
         m_plots2["hGenIdxVsNSeg"] = new TH2D("hGenIdxVsNSeg", "GenMuon Index vs Number of Segments; GenMuon Index; Number of Segments", 3750, 0, 3750, 100, 0, 6);
@@ -321,7 +321,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
 
             for (std::size_t itrig = 0; itrig < ph2TpgPhiEmuAm_nTrigs; ++itrig){
 
-                int wheelIdx;
+                int wheelIdx = 0;
                 if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -2 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 1) wheelIdx = 1;
                 if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -1 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 1) wheelIdx = 2;
                 if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 0  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 1) wheelIdx = 3;
@@ -617,12 +617,12 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                         Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(iTrigAM);
 
                         // For test
-                        if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC") != std::string::npos){
-                            if ( trigAMrpc == 0) continue;
-                        }
-                        if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated") != std::string::npos) {
-                            if ( trigAMrpc == 0) continue;
-                        }
+                        // if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC") != std::string::npos){
+                        //     if ( trigAMrpc == 0) continue;
+                        // }
+                        // if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated") != std::string::npos) {
+                        //     if ( trigAMrpc == 0) continue;
+                        // }
 
                         
 
@@ -809,7 +809,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 }
                 if (found) continue;
                 
-                int wheelIdx;
+                int wheelIdx = 0;
                 if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -2 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 1) wheelIdx = 1;
                 if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -1 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 1) wheelIdx = 2;
                 if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 0  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 1) wheelIdx = 3;
