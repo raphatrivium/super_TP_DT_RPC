@@ -186,12 +186,24 @@ void plot_eff_fake_rate(  std::string hName,
     
     gPad->Update();
     effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.5,1.2);
+    // effPlot2->GetPaintedGraph()->GetXaxis()->SetRangeUser(0.0,21);
+
+    // // Define your custom labels
+    // const char* labels[] = {"-2", "-1", "0", "1", "2", 
+    //                        "-2", "-1", "0", "1", "2",
+    //                        "-2", "-1", "0", "1", "2", 
+    //                        "-2", "-1", "0", "1", "2"};
+    
+    // // Apply labels to each bin
+    // for (int i = 1; i <= 20; i++) {
+    //     effPlot2->GetPaintedGraph()->GetXaxis()->SetBinLabel(i, labels[i-1]);
+    // }
 
     // Then set the range using the pad
-    gPad->Modified();
-    gPad->Update();
-    gPad->GetFrame()->SetY1(0.0);    // Bottom of Y-axis
-    gPad->GetFrame()->SetY2(1.2);    // Top of Y-axis
+    // gPad->Modified();
+    // gPad->Update();
+    // gPad->GetFrame()->SetY1(0.0);    // Bottom of Y-axis
+    // gPad->GetFrame()->SetY2(1.2);    // Top of Y-axis
 
 
     // Add legend

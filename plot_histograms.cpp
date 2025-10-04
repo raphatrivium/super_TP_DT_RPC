@@ -66,6 +66,14 @@ void plot_histograms() {
     hMatched = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
     plot_eff( hName, hMatched, hTotal, effDir[1]);
 
+    hName = "Eff_TPwheels";
+    hTotal =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
+    hMatched = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
+    plot_eff( hName, hMatched, hTotal, effDir[0]);
+    hTotal =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
+    hMatched = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
+    plot_eff( hName, hMatched, hTotal, effDir[1]);
+
 
     // hName = "Eff_TPnotMatched";
     // hTotal =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
@@ -82,7 +90,7 @@ void plot_histograms() {
     // plot_eff( hName, hMatched, hTotal, effDir[3]);
 
     std::string saveDir = "output/histogram_comparison/";
-    
+
 
     hName = "Eff_TPwheels";
     TH1F *hTotal1 =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());

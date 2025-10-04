@@ -18,8 +18,8 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
     std::vector<std::string> file_names  = {
                                             "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root" 
                                             ,"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"
-                                            , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated.root"
-                                            , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPCUpdated.root"
+                                            // , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated.root"
+                                            // , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPCUpdated.root"
                                             };
 
     bool allExist = checkFilesInDirectory (file_names, inputDir);
@@ -64,18 +64,18 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
         
         m_plots["TPnotMatched"] = new TH1D("TPnotMatched", "Trigger Primitive not Matched per Event; TP not Matched per Event; Entries", 100, 0, 300);
 
-        m_plots["fakeRate_TPnot_matched"] = new TH1D("fakeRate_TPnot_matched", "Trigger Primitive not Matched per Event; Wheel; Fake Rate", 22, 0, 22);
-        m_plots["fakeRate_TPnot_total"] = new TH1D("fakeRate_TPnot_total", "Trigger Primitive not Matched per Event; Wheel; Fake Rate", 22, 0, 22);
+        m_plots["fakeRate_TPnot_matched"] = new TH1D("fakeRate_TPnot_matched", "Trigger Primitive not Matched per Event; Wheel; Fake Rate", 20, 0.5, 20.5); // 22, 0, 22  5, -2.5, +2.5
+        m_plots["fakeRate_TPnot_total"] = new TH1D("fakeRate_TPnot_total", "Trigger Primitive not Matched per Event; Wheel; Fake Rate",  20, 0.5, 20.5);
 
-        m_plots["fakeRate_WheelStationTP_matched"] = new TH1D("fakeRate_WheelStationTP_matched", "Trigger Primitive not Matched per Event; Wheel; Fake Rate", 22, 0, 22);
-        m_plots["fakeRate_WheelStationTP_total"] = new TH1D("fakeRate_WheelStationTP_total", "Trigger Primitive not Matched per Event; Wheel; Fake Rate", 22, 0, 22);
+        m_plots["fakeRate_WheelStationTP_matched"] = new TH1D("fakeRate_WheelStationTP_matched", "Trigger Primitive not Matched per Event; Wheel; Fake Rate",  20, 0.5, 20.5);
+        m_plots["fakeRate_WheelStationTP_total"] = new TH1D("fakeRate_WheelStationTP_total", "Trigger Primitive not Matched per Event; Wheel; Fake Rate",  20, 0.5, 20.5);
 
-        m_plots["fakeRate_EventWheelStationTP_matched"] = new TH1D("fakeRate_EventWheelStationTP_matched", "Trigger Primitive not Matched per Event; Wheel; Fake TPs", 22, 0, 22);
-        // m_plots["fakeRate_EventWheelStationTP_total"] = new TH1D("fakeRate_EventWheelStationTP_total", "Trigger Primitive not Matched per Event; Wheel; Fake Rate", 22, 0, 22);
+        m_plots["fakeRate_EventWheelStationTP_matched"] = new TH1D("fakeRate_EventWheelStationTP_matched", "Trigger Primitive not Matched per Event; Wheel; Fake TPs",  20, 0.5, 20.5);
+        // m_plots["fakeRate_EventWheelStationTP_total"] = new TH1D("fakeRate_EventWheelStationTP_total", "Trigger Primitive not Matched per Event; Wheel; Fake Rate", 21, 0, 21);
         
 
-        m_plots["Eff_TPwheels_matched"] = new TH1D("Eff_TPwheels_matched", "DT TP Local Efficiency; Wheel; Efficiency", 22, 0, 22);
-        m_plots["Eff_TPwheels_total"] = new TH1D("Eff_TPwheels_total", "DT TP Local Efficiency; Wheel; Efficiency", 22, 0, 22);
+        m_plots["Eff_TPwheels_matched"] = new TH1D("Eff_TPwheels_matched", "DT TP Local Efficiency; Wheel; Efficiency",20, 0.5, 20.5);
+        m_plots["Eff_TPwheels_total"] = new TH1D("Eff_TPwheels_total", "DT TP Local Efficiency; Wheel; Efficiency", 20, 0.5, 20.5);
         
         
 
@@ -310,7 +310,16 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
         std::vector<std::string> whTags    = { "Wh.-2", "Wh.-1", "Wh.0", "Wh.+1", "Wh.+2"};
         std::vector<std::string> secTags   = { "Sec1", "Sec2", "Sec3", "Sec4", "Sec5", "Sec6", "Sec7", "Sec8","Sec9","Sec10","Sec11","Sec12","Sec13","Sec14"};
 
-        
+
+        for (const auto & secTag : secTags)
+        {
+            m_plots["fakeRateTP_WheelvsStation_"+secTag+"_total"] = new TH1D(("fakeRateTP_WheelvsStation_"+secTag+"_total").c_str(),
+            ("Fake Rate Wheel vs Station for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
+
+            m_plots["fakeRateTP_WheelvsStation_"+secTag+"_matched"] = new TH1D(("fakeRateTP_WheelvsStation_"+secTag+"_matched").c_str(),
+            ("Fake Rate Wheel vs Station for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
+        }
+
 
         // ------------------------------------------------------------------------------
         // Loop in the events
@@ -763,8 +772,8 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                         if ( ph2TpgPhiEmuAm_wheel->at( bestTPAM ) == 2  &&  ph2TpgPhiEmuAm_station->at( bestTPAM ) == 4) wheelIdx = 20;
                         m_plots["Eff_TPwheels_matched"] -> Fill( wheelIdx );
 
-                        
-
+                        // int sectorIdx = 0;
+                        // if ( ph2TpgPhiEmuAm_wheel->at( bestTPAM ) == -2 &&  ph2TpgPhiEmuAm_station->at( bestTPAM ) == 1) wheelIdx = 1;
                         
 
                     } else if (bestTPAM  < 0 && ph2Seg_phi_t0->at(iSeg) > -500) {
@@ -862,87 +871,77 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
             int coutNTrigs = 0;
             for (std::size_t itrig = 0; itrig < ph2TpgPhiEmuAm_nTrigs; ++itrig){
 
+                Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(itrig);
+
                 if ( (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC") != std::string::npos)  || 
                      (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated") != std::string::npos)  ){
                     
                     if (flagRPCselection == 1){
-                        if ( ph2TpgPhiEmuAm_rpcFlag->at(itrig) != 1 ) continue;
+                        if ( trigAMrpc != 1 ) continue;
                     }
                     else if (flagRPCselection == 2){
-                        if ( ph2TpgPhiEmuAm_rpcFlag->at(itrig) != 2 ) continue;
+                        if ( trigAMrpc != 2 ) continue;
                     }
                     else if (flagRPCselection == 3){
-                        if ( ph2TpgPhiEmuAm_rpcFlag->at(itrig) != 3 ) continue;
+                        if ( trigAMrpc != 3 ) continue;
                     }
                     else if (flagRPCselection == 10){
-                        if ( ph2TpgPhiEmuAm_rpcFlag->at(itrig) != 1 && ph2TpgPhiEmuAm_rpcFlag->at(itrig) != 0 ) continue;
+                        if ( trigAMrpc != 1 && trigAMrpc != 0 ) continue;
                     }
                 } 
-                m_plots["hTrigFlag"] -> Fill( ph2TpgPhiEmuAm_rpcFlag->at(itrig) );
-
-                int wheelIdx = 0;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -2 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 1) wheelIdx = 1;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -1 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 1) wheelIdx = 2;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 0  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 1) wheelIdx = 3;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 1  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 1) wheelIdx = 4;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 2  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 1) wheelIdx = 5;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -2 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 2) wheelIdx = 6;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -1 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 2) wheelIdx = 7;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 0  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 2) wheelIdx = 8;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 1  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 2) wheelIdx = 9;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 2  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 2) wheelIdx = 10;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -2 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 3) wheelIdx = 11;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -1 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 3) wheelIdx = 12;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 0  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 3) wheelIdx = 13;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 1  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 3) wheelIdx = 14;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 2  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 3) wheelIdx = 15;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -2 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 4) wheelIdx = 16;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -1 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 4) wheelIdx = 17;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 0  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 4) wheelIdx = 18;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 1  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 4) wheelIdx = 19;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 2  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 4) wheelIdx = 20;
-                m_plots["fakeRate_TPnot_total"] -> Fill( wheelIdx );
-                m_plots["fakeRate_WheelStationTP_total"] -> Fill( wheelIdx );
+                m_plots["hTrigFlag"] -> Fill( trigAMrpc );
 
                 coutNTrigs++;
 
+                Int_t trigAMWh  = ph2TpgPhiEmuAm_wheel->at(itrig);
+                Int_t trigAMSt  = ph2TpgPhiEmuAm_station->at(itrig);
+                Int_t trigAMSec = ph2TpgPhiEmuAm_sector->at(itrig);
+                // Int_t trigAMBX  = ph2TpgPhiEmuAm_BX->at(itrig);
+                // Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(itrig);
+
+                int wheelIdx = 0;
+                if ( trigAMWh == -2 &&  trigAMSt == 1) wheelIdx = 1;
+                if ( trigAMWh == -1 &&  trigAMSt == 1) wheelIdx = 2;
+                if ( trigAMWh == 0  &&  trigAMSt == 1) wheelIdx = 3;
+                if ( trigAMWh == 1  &&  trigAMSt == 1) wheelIdx = 4;
+                if ( trigAMWh == 2  &&  trigAMSt == 1) wheelIdx = 5;
+                if ( trigAMWh == -2 &&  trigAMSt == 2) wheelIdx = 6;
+                if ( trigAMWh == -1 &&  trigAMSt == 2) wheelIdx = 7;
+                if ( trigAMWh == 0  &&  trigAMSt == 2) wheelIdx = 8;
+                if ( trigAMWh == 1  &&  trigAMSt == 2) wheelIdx = 9;
+                if ( trigAMWh == 2  &&  trigAMSt == 2) wheelIdx = 10;
+                if ( trigAMWh == -2 &&  trigAMSt == 3) wheelIdx = 11;
+                if ( trigAMWh == -1 &&  trigAMSt == 3) wheelIdx = 12;
+                if ( trigAMWh == 0  &&  trigAMSt == 3) wheelIdx = 13;
+                if ( trigAMWh == 1  &&  trigAMSt == 3) wheelIdx = 14;
+                if ( trigAMWh == 2  &&  trigAMSt == 3) wheelIdx = 15;
+                if ( trigAMWh == -2 &&  trigAMSt == 4) wheelIdx = 16;
+                if ( trigAMWh == -1 &&  trigAMSt == 4) wheelIdx = 17;
+                if ( trigAMWh == 0  &&  trigAMSt == 4) wheelIdx = 18;
+                if ( trigAMWh == 1  &&  trigAMSt == 4) wheelIdx = 19;
+                if ( trigAMWh == 2  &&  trigAMSt == 4) wheelIdx = 20;
+                m_plots["fakeRate_TPnot_total"] -> Fill( wheelIdx );
+                m_plots["fakeRate_WheelStationTP_total"] -> Fill( wheelIdx );
+
+                std::string secTag = secTags.at(trigAMSec - 1);
+                m_plots["fakeRateTP_WheelvsStation_"+secTag+"_total"]->Fill(wheelIdx);
+
                 
-                // Checking the station withou segments to comput falses TPs (fake rate TPS)
+                // Checking the station without segments to comput fake TPs
                 bool notFakeTP = false;
                 for (size_t i = 0; i < SegMatchedWheelAndStation.size(); ++i) {
-                    if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == SegMatchedWheelAndStation[i][0] && ph2TpgPhiEmuAm_station->at( itrig ) == SegMatchedWheelAndStation[i][1] )
+                    if ( trigAMWh == SegMatchedWheelAndStation[i][0] && trigAMSt == SegMatchedWheelAndStation[i][1] )
                         notFakeTP = true;
                     if (notFakeTP) break;
                 }
                 if (!notFakeTP){
-                    std::cout << "Wheel " << ph2TpgPhiEmuAm_wheel->at( itrig ) << " | Station: " << ph2TpgPhiEmuAm_station->at( itrig ) << std::endl;
+                    std::cout << "Wheel " << trigAMWh << " | Station: " << trigAMSt << std::endl;
 
-                    int wheelIdx = 0;
-                    if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -2 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 1) wheelIdx = 1;
-                    if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -1 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 1) wheelIdx = 2;
-                    if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 0  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 1) wheelIdx = 3;
-                    if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 1  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 1) wheelIdx = 4;
-                    if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 2  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 1) wheelIdx = 5;
-                    if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -2 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 2) wheelIdx = 6;
-                    if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -1 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 2) wheelIdx = 7;
-                    if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 0  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 2) wheelIdx = 8;
-                    if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 1  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 2) wheelIdx = 9;
-                    if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 2  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 2) wheelIdx = 10;
-                    if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -2 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 3) wheelIdx = 11;
-                    if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -1 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 3) wheelIdx = 12;
-                    if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 0  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 3) wheelIdx = 13;
-                    if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 1  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 3) wheelIdx = 14;
-                    if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 2  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 3) wheelIdx = 15;
-                    if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -2 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 4) wheelIdx = 16;
-                    if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -1 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 4) wheelIdx = 17;
-                    if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 0  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 4) wheelIdx = 18;
-                    if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 1  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 4) wheelIdx = 19;
-                    if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 2  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 4) wheelIdx = 20;
-                    m_plots["fakeRate_WheelStationTP_matched"] -> Fill( wheelIdx );
-                    m_plots["fakeRate_EventWheelStationTP_matched"] -> Fill( wheelIdx );
+                    m_plots["fakeRate_WheelStationTP_matched"] -> Fill(wheelIdx);
+                    m_plots["fakeRate_EventWheelStationTP_matched"] -> Fill(wheelIdx);
+                    m_plots["fakeRateTP_WheelvsStation_"+secTag+"_matched"]->Fill(wheelIdx);
                 }
                 
-
                 // To skip matched TP
                 int target = itrig;
                 bool found = false;
@@ -954,27 +953,6 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 }
                 if (found) continue;
 
-                
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -2 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 1) wheelIdx = 1;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -1 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 1) wheelIdx = 2;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 0  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 1) wheelIdx = 3;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 1  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 1) wheelIdx = 4;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 2  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 1) wheelIdx = 5;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -2 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 2) wheelIdx = 6;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -1 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 2) wheelIdx = 7;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 0  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 2) wheelIdx = 8;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 1  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 2) wheelIdx = 9;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 2  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 2) wheelIdx = 10;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -2 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 3) wheelIdx = 11;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -1 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 3) wheelIdx = 12;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 0  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 3) wheelIdx = 13;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 1  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 3) wheelIdx = 14;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 2  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 3) wheelIdx = 15;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -2 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 4) wheelIdx = 16;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == -1 &&  ph2TpgPhiEmuAm_station->at( itrig ) == 4) wheelIdx = 17;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 0  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 4) wheelIdx = 18;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 1  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 4) wheelIdx = 19;
-                if ( ph2TpgPhiEmuAm_wheel->at( itrig ) == 2  &&  ph2TpgPhiEmuAm_station->at( itrig ) == 4) wheelIdx = 20;
                 m_plots["fakeRate_TPnot_matched"] -> Fill( wheelIdx ); 
                 
             }
