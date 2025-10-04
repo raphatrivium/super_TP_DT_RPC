@@ -31,6 +31,13 @@
 #include <TSystem.h> // For gSystem->mkdir()
 #include <TLine.h>
 
+#include <TGraphAsymmErrors.h>
+#include <TFrame.h>
+#include <TGaxis.h>
+
+
+
+
 
 bool fileExists(const std::string& path) {
     struct stat buffer;
@@ -156,16 +163,48 @@ void plot_eff_fake_rate(  std::string hName,
     effPlot2->SetMarkerColor(kBlue);
     effPlot2->SetMarkerStyle(21);
 
+    // effPlot1->GetYaxis()->SetRangeUser(0.0, 1.);  // Y-axis from 0.0 to 1.2
+    // effPlot2->GetYaxis()->SetRangeUser(0.0, 1.);  // Y-axis from 0.0 to 1.2
+    
     // effPlot->GetYaxis()->SetRangeUser(0.0, 1.0);
-
+    // TGraphAsymmErrors* graph2 = effPlot2->GetPaintedGraph();
+    // if (graph2) {
+    //     graph2->GetYaxis()->SetRangeUser(0.0, 1.2);
+    // }
+    
     // Draw the efficiency plot
     TCanvas cEff = new TCanvas("cEff", "Efficiency Plot", 800, 600);
     // cEff.SetGridy();
     // cEff.SetGridx();
     effPlot2->Draw("AP");  // "AP" for axis and points
+
+
+    
     effPlot1->Draw("P SAME");  // "AP" for axis and points
     // effPlot3->Draw("AP SAME");  // "AP" for axis and points
     // effPlot4->Draw("AP SAME");  // "AP" for axis and points
+    
+    gPad->Update();
+    effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.5,1.2);
+    // effPlot2->GetPaintedGraph()->GetXaxis()->SetRangeUser(0.0,21);
+
+    // // Define your custom labels
+    // const char* labels[] = {"-2", "-1", "0", "1", "2", 
+    //                        "-2", "-1", "0", "1", "2",
+    //                        "-2", "-1", "0", "1", "2", 
+    //                        "-2", "-1", "0", "1", "2"};
+    
+    // // Apply labels to each bin
+    // for (int i = 1; i <= 20; i++) {
+    //     effPlot2->GetPaintedGraph()->GetXaxis()->SetBinLabel(i, labels[i-1]);
+    // }
+
+    // Then set the range using the pad
+    // gPad->Modified();
+    // gPad->Update();
+    // gPad->GetFrame()->SetY1(0.0);    // Bottom of Y-axis
+    // gPad->GetFrame()->SetY2(1.2);    // Top of Y-axis
+
 
     // Add legend
     TLegend* leg = new TLegend(0.75, 0.1, 0.9, 0.25);
@@ -177,6 +216,9 @@ void plot_eff_fake_rate(  std::string hName,
     // Save the plot in the output directory as "png" or/and "pdf"
     cEff.SaveAs((saveDir+hName+".png").c_str());
     cEff.SaveAs((saveDir+hName+".pdf").c_str());
+
+
+    
 }
 
 
@@ -830,6 +872,10 @@ void plot_normal_histograms(TH1F *hist1,
         hist2->Draw("HIST");
         hist1->Draw("HIST SAME");
     }
+
+    // Important: Move the exponent 
+    gPad->Update();  
+    TGaxis::SetExponentOffset(-0.07, 0.01, "y");
 
     TText *text = new TText(0.1,0.92,"CMS Preliminary");
 
