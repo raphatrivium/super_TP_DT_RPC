@@ -88,18 +88,28 @@ void plot_histograms() {
     // hTotal =   (TH1F*)fileRPCUpdated->Get((hName+"_total").c_str());
     // hMatched = (TH1F*)fileRPCUpdated->Get((hName+"_matched").c_str());
     // plot_eff( hName, hMatched, hTotal, effDir[3]);
-
+    
     std::string saveDir = "output/histogram_comparison/";
-
-
+    
     hName = "Eff_TPwheels";
     TH1F *hTotal1 =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
     TH1F *hMatched1 = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
     TH1F *hTotal2 =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
     TH1F *hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
     plot_eff_fake_rate( hName, 
-                        hMatched1, hTotal1, hMatched2, hTotal2,
-                        saveDir);
+        hMatched1, hTotal1, hMatched2, hTotal2,
+        saveDir);
+        
+    std::vector<std::string> secTags   = { "Sec1", "Sec2", "Sec3", "Sec4", "Sec5", "Sec6", "Sec7", "Sec8","Sec9","Sec10","Sec11","Sec12","Sec13","Sec14"};
+    for (const auto & secTag : secTags)
+    {
+        hName = "Eff_TPwheels_"+secTag;
+        hTotal1 =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
+        hMatched1 = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
+        hTotal2 =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
+        hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
+        plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, saveDir);
+    }
 
 
     hName = "fakeRate_WheelStationTP";
@@ -120,6 +130,21 @@ void plot_histograms() {
     plot_eff_fake_rate( hName, 
                         hMatched1, hTotal1, hMatched2, hTotal2,
                         saveDir);
+
+    for (const auto & secTag : secTags)
+    {
+        hName = "fakeRateTP_WheelvsStation_"+secTag;
+        hTotal1 =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
+        hMatched1 = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
+        hTotal2 =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
+        hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
+        plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, saveDir);
+    }
+
+
+
+    
+   
 
     
     saveDir = "output/histogram_comparison_RPCUpdate/";
@@ -349,7 +374,22 @@ void plot_histograms() {
                             "",
                             saveDir, 
                             false);
-    
+
+
+    for (const auto & secTag : secTags)
+    {
+        hName = "fakeRate_EventWheelStationTP_"+secTag+"_matched";
+        hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
+        hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+        plot_normal_histograms( hist1, 
+                            hist2, 
+                            "fakeRate_EventWheelStationTP_"+secTag+"_matched", 
+                            "", 
+                            "",
+                            saveDir, 
+                            false);
+    }
+
 
     // -------------------------------------------------------------------------------
     saveDir = "output/histogram_comparison_RPCUpdate/";

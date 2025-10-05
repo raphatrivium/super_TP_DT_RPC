@@ -34,6 +34,9 @@
 #include <TGraphAsymmErrors.h>
 #include <TFrame.h>
 #include <TGaxis.h>
+#include <TF1.h>
+
+
 
 
 
@@ -148,6 +151,17 @@ void plot_eff_fake_rate(  std::string hName,
         return;
     }
     
+    // Get coordinates from the points the the plot
+    std::vector<double> pointXcoords;
+    for (int bin = 1; bin <= hTotal1->GetNbinsX(); bin++) {
+        double x = hTotal1->GetBinCenter(bin);
+        if ( bin == 1 || bin == hTotal1->GetNbinsX() ) continue;
+        pointXcoords.push_back(x);
+        // double y = hTotal1->GetBinContent(bin);
+        // std::cout << "Bin " << bin << ": x = " << x << ", y = " << y << std::endl;
+    }
+
+
     // Create the efficiency plot
     TEfficiency* effPlot1 = new TEfficiency(*hMatched1, *hTotal1);
     effPlot1->SetName( hName.c_str() );  // Convert to const char*
@@ -163,54 +177,109 @@ void plot_eff_fake_rate(  std::string hName,
     effPlot2->SetMarkerColor(kBlue);
     effPlot2->SetMarkerStyle(21);
 
-    // effPlot1->GetYaxis()->SetRangeUser(0.0, 1.);  // Y-axis from 0.0 to 1.2
-    // effPlot2->GetYaxis()->SetRangeUser(0.0, 1.);  // Y-axis from 0.0 to 1.2
-    
-    // effPlot->GetYaxis()->SetRangeUser(0.0, 1.0);
-    // TGraphAsymmErrors* graph2 = effPlot2->GetPaintedGraph();
-    // if (graph2) {
-    //     graph2->GetYaxis()->SetRangeUser(0.0, 1.2);
-    // }
-    
+
+    TString originalTitle = hTotal1->GetTitle();
+    effPlot1->SetTitle(originalTitle);
+    effPlot2->SetTitle(originalTitle);
+
     // Draw the efficiency plot
     TCanvas cEff = new TCanvas("cEff", "Efficiency Plot", 800, 600);
-    // cEff.SetGridy();
+    cEff.SetGridy();
     // cEff.SetGridx();
     effPlot2->Draw("AP");  // "AP" for axis and points
-
-
-    
     effPlot1->Draw("P SAME");  // "AP" for axis and points
-    // effPlot3->Draw("AP SAME");  // "AP" for axis and points
-    // effPlot4->Draw("AP SAME");  // "AP" for axis and points
     
     gPad->Update();
-    effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.5,1.2);
+
+    //Flag all - 0
+    // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.988,1.005); // Eff  all
+    // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.97,1.01); // Eff by sector
+    // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.6,1.1); //Fake rate not matched
+    // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.0,0.66); // Fake rate over Total
+
+
+    //Flag 10
+    // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.988,1.005); // Eff  all
+    // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.97,1.01); // Eff by sector
+    // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.6,1.1); //Fake rate not matched
+    // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.0,0.66); // Fake rate over Total
+
+    //Flag 1
+    // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.8,1.1); // Eff  all
+    effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.4,1.2); // Eff by sector
+    // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.6,1.1); //Fake rate not matched
+    // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.0,0.66); // Fake rate over Total
+    
+    
+
+    // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.2,1.1);
+
+    effPlot2->GetPaintedGraph()->GetXaxis()->SetLabelSize(0);  // Remove labels completely
+
     // effPlot2->GetPaintedGraph()->GetXaxis()->SetRangeUser(0.0,21);
 
-    // // Define your custom labels
-    // const char* labels[] = {"-2", "-1", "0", "1", "2", 
-    //                        "-2", "-1", "0", "1", "2",
-    //                        "-2", "-1", "0", "1", "2", 
-    //                        "-2", "-1", "0", "1", "2"};
+    TText *text;
+    text = new TText(0.74,0.91,"PU 200 (14 TeV)");
+    text->SetNDC(); // To use the canvas coordinates
+    // text->SetTextAlign(31);
+    text->SetTextSize(0.03);
+    text->Draw();
+
+    TLatex latex;
+    latex.SetNDC(); // Use NDC (normalized device coordinates)
+    // latex.SetTextAlign(22); // Centered alignment
+    latex.SetTextSize(0.05); // Set text size
+    latex.DrawLatex(0.1,0.91, "CMS ");  // (#it{...} makes the text italic)
+    latex.SetTextSize(0.035);
+    latex.DrawLatex(0.18,0.91, "#it{Phase-2 Simulation}");  // (#it{...} makes the text italic)
     
-    // // Apply labels to each bin
-    // for (int i = 1; i <= 20; i++) {
-    //     effPlot2->GetPaintedGraph()->GetXaxis()->SetBinLabel(i, labels[i-1]);
-    // }
+    
+    // Draw new label information
+    std::vector<std::string> WheelID = {"-2", "-1", " 0", "+1", "+2", "-2", "-1", " 0", "+1", "+2","-2", "-1", " 0", "+1", "+2","-2", "-1", " 0", "+1", "+2"};
+    std::vector<std::string> StationID = {"MB1", "MB2", "MB3", "MB4"};
+    latex.SetTextSize(0.03);
+    double xcoord = 0.13;
+    int iMB = 0;
+    for (size_t i = 0; i < WheelID.size(); ++i) {
+        latex.DrawLatex(xcoord, 0.07, WheelID[i].c_str());
 
-    // Then set the range using the pad
-    // gPad->Modified();
-    // gPad->Update();
-    // gPad->GetFrame()->SetY1(0.0);    // Bottom of Y-axis
-    // gPad->GetFrame()->SetY2(1.2);    // Top of Y-axis
+        if ( WheelID[i] == " 0"){
+            latex.DrawLatex(xcoord, 0.04, StationID[iMB].c_str());
+            iMB++;
+        }
 
+        xcoord = xcoord + 0.0356;
+    }
 
+    // Draw vertical lines in the canvas
+    for (size_t i = 0; i < pointXcoords.size(); ++i) {
+        double x[2] = {pointXcoords[i], pointXcoords[i]};  // Same x coordinate
+        double y[2] = {0, hTotal1->GetMaximum()};  // From bottom to top
+        TGraph *vline = new TGraph(2, x, y);
+        vline->SetLineColor(kBlack);
+        vline->SetLineWidth(1.);
+        vline->SetLineStyle(2);
+        vline->Draw("L");  // "L" option for line only
+    }
+
+    // Draw vertical lines in the canvas
+    std::vector<double> divisors = {6, 11, 16};
+    for (size_t i = 0; i < divisors.size(); ++i) {
+        // double xpos = 6.;
+        double x[2] = {divisors[i], divisors[i]};  // Same x coordinate
+        double y[2] = {0, hTotal1->GetMaximum()};  // From bottom to top
+        TGraph *vline = new TGraph(2, x, y);
+        vline->SetLineColor(kBlack);
+        vline->SetLineWidth(2);
+        
+        vline->Draw("L");  // "L" option for line only
+    }
+    
     // Add legend
-    TLegend* leg = new TLegend(0.75, 0.1, 0.9, 0.25);
-    // TLegend* leg = new TLegend(0.75, 0.75, 0.9, 0.9);
-    leg->AddEntry(effPlot1, "AM", "lp");
-    leg->AddEntry(effPlot2, "AM+RPC", "lp");
+    // TLegend* leg = new TLegend(0.75, 0.1, 0.9, 0.25);
+    TLegend* leg = new TLegend(0.75, 0.75, 0.9, 0.9);
+    leg->AddEntry(effPlot1, "DT AM", "lp");
+    leg->AddEntry(effPlot2, "DT AM+RPC", "lp");
     leg->Draw();
 
     // Save the plot in the output directory as "png" or/and "pdf"
@@ -899,11 +968,11 @@ void plot_normal_histograms(TH1F *hist1,
     text->SetTextSize(0.05);
     text->Draw();
 
-    text = new TText(0.68,0.91,"PU 200 (14 TeV)");
+    text = new TText(0.74,0.91,"PU 200 (14 TeV)");
     text->SetNDC(); // To use the canvas coordinates
     // text->SetTextAlign(31);
-    text->SetTextSize(0.04);
-    if (norm) text->Draw();
+    text->SetTextSize(0.03);
+    text->Draw();
 
 
     text = new TText(0.74,0.85,str_leg.c_str());
@@ -913,11 +982,11 @@ void plot_normal_histograms(TH1F *hist1,
     if (norm) text->Draw();
 
     // // // Create a legend
-    TLegend *legend = new TLegend(0.65, 0.7, 0.87, 0.85); // Adjust the coordinates as needed
-    // TLegend *legend = new TLegend(0.13, 0.5, 0.35, 0.85); // Adjust the coordinates as needed
+    // TLegend *legend = new TLegend(0.65, 0.7, 0.87, 0.85); // Adjust the coordinates as needed 
+    TLegend* legend = new TLegend(0.73, 0.75, 0.9, 0.9);
     legend->AddEntry(hist1,"DT AM", "l");
     // legend->AddEntry(hist1, (std::to_string(N1)).c_str(), "");
-    legend->AddEntry(hist2, "DT AM w/ RPC", "l");
+    legend->AddEntry(hist2, "DT AM+RPC", "l");
     // legend->AddEntry(hist2, (std::to_string(N2)).c_str(), "");
     legend->SetTextSize(0.03); // Increase the text size in the legend
     legend->Draw(); // Draw the legend
