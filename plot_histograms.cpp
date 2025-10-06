@@ -100,7 +100,7 @@ void plot_histograms() {
         hMatched1, hTotal1, hMatched2, hTotal2,
         saveDir);
         
-    std::vector<std::string> secTags   = { "Sec1", "Sec2", "Sec3", "Sec4", "Sec5", "Sec6", "Sec7", "Sec8","Sec9","Sec10","Sec11","Sec12","Sec13","Sec14"};
+    std::vector<std::string> secTags   = { "Sec1", "Sec2", "Sec3", "Sec4", "Sec5", "Sec6", "Sec7", "Sec8","Sec9","Sec10","Sec11","Sec12"};
     for (const auto & secTag : secTags)
     {
         hName = "Eff_TPwheels_"+secTag;
@@ -364,10 +364,21 @@ void plot_histograms() {
                             saveDir, 
                             false);
                             
+    // hName = "fakeRate_EventWheelStationTP_matched";
+    // hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
+    // hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+    // plot_normal_histograms( hist1, 
+    //                         hist2, 
+    //                         "fakeRate_EventWheelStationTP_matched", 
+    //                         "", 
+    //                         "",
+    //                         saveDir, 
+    //                         false);
+
     hName = "fakeRate_EventWheelStationTP_matched";
     hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
     hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-    plot_normal_histograms( hist1, 
+    plot_fakeRate_wheels_histograms( hist1, 
                             hist2, 
                             "fakeRate_EventWheelStationTP_matched", 
                             "", 
@@ -376,19 +387,35 @@ void plot_histograms() {
                             false);
 
 
+    // for (const auto & secTag : secTags)
+    // {
+    //     hName = "fakeRate_EventWheelStationTP_"+secTag+"_matched";
+    //     hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
+    //     hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+    //     plot_normal_histograms( hist1, 
+    //                         hist2, 
+    //                         "fakeRate_EventWheelStationTP_"+secTag+"_matched", 
+    //                         "", 
+    //                         "",
+    //                         saveDir, 
+    //                         false);
+    // }
+
+
     for (const auto & secTag : secTags)
     {
         hName = "fakeRate_EventWheelStationTP_"+secTag+"_matched";
         hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
         hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-        plot_normal_histograms( hist1, 
-                            hist2, 
-                            "fakeRate_EventWheelStationTP_"+secTag+"_matched", 
-                            "", 
-                            "",
-                            saveDir, 
-                            false);
+        plot_fakeRate_wheels_histograms(hist1, 
+                                        hist2, 
+                                        "fakeRate_EventWheelStationTP_"+secTag+"_matched", 
+                                        "", 
+                                        "",
+                                        saveDir, 
+                                        false);
     }
+
 
 
     // -------------------------------------------------------------------------------

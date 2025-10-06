@@ -9,7 +9,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
 
     bool testFlag = false;   // false - true
     bool plotHistograms = true; // false - true
-    int flagRPCselection = 3;  // 0 (all RPC Flags) | 1  ( RPC Flag == 1) | 2  ( RPC Flag == 2) | 3  ( RPC Flag == 3) | 10 ( RPC Flag == 0 &&  RPC Flag == 1)
+    int flagRPCselection = 10;  // 0 (all RPC Flags) | 1  ( RPC Flag == 1) | 2  ( RPC Flag == 2) | 3  ( RPC Flag == 3) | 10 ( RPC Flag == 0 &&  RPC Flag == 1)
 
     // ------------------------------------------------------------------------------
     // INPUT FILES
@@ -324,7 +324,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
             ("Fake Rate Wheel vs Station for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
 
             m_plots["fakeRate_EventWheelStationTP_"+secTag+"_matched"] = new TH1D(("fakeRate_EventWheelStationTP_"+secTag+"_matched").c_str(),
-            ("Fake Rate per event for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
+            ("Fake Rate per event for " + secTag + "; Wheel; Fake TPs / Event").c_str(), 22, 0, 22);
 
             m_plots["fakeRate_TPnot_"+secTag+"_total"] = new TH1D(("fakeRate_TPnot_"+secTag+"_total").c_str(),
             ("TPs not Matched for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);

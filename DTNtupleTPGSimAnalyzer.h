@@ -1002,3 +1002,206 @@ void plot_normal_histograms(TH1F *hist1,
 
 
 }
+
+
+void plot_fakeRate_wheels_histograms(TH1F *hist1, 
+                            TH1F *hist2,
+                            std::string str_name,
+                            std::string str_Xaxis,
+                            std::string str_leg = "",
+                            std::string saveDir = "",
+                            bool norm=false,
+                            bool logYflag=false) 
+{
+
+    if (!hist1 || !hist2) {
+        std::cerr << "Error: Could not retrieve one or both histograms!" << std::endl;
+        return;
+    }
+
+    // Create a canvas
+    TCanvas *canvas = new TCanvas("canvas", "Histograms from Two Files", 800, 600);
+
+    int N1 = hist1->GetEntries(); // Get the number of entries (N)
+    int N2 = hist2->GetEntries();
+
+    double max1 = hist1->GetMaximum();  // Highest bin in h1
+    double max2 = hist2->GetMaximum();  // Highest bin in h2
+    
+    // hist1->SetTitle("");
+    // hist2->SetTitle("");
+
+    // Change histograms characteristics
+    hist1->SetStats(0); // Remove statistic box
+    hist1->SetLineColor(kRed);
+    hist1->SetLineWidth(1);
+    // hist1->SetLineStyle(9);
+    hist1->SetMarkerColor(kRed);
+    hist1->SetMarkerStyle(20);
+    
+    hist2->SetStats(0);
+    hist2->SetLineColor(kBlue);
+    hist2->SetLineWidth(1);
+    // hist2->SetLineStyle(1);
+    hist2->SetMarkerColor(kBlue);
+    hist2->SetMarkerStyle(21);
+
+
+
+    // Normalize the histogram by its area
+    if (norm){
+        // Get the sum of bin contents
+        double sum = hist1->Integral(1, hist1->GetNbinsX()); 
+        if (sum != 0) {
+            double scale = 1.0 / sum;
+            hist1->Scale(scale);
+        }
+        sum = hist2->Integral(1, hist2->GetNbinsX()); 
+        if (sum != 0) {
+            double scale = 1.0 / sum;
+            hist2->Scale(scale);
+        }
+    }
+
+   
+    int FlagHisto = 0;
+    if (max1 > max2){
+        hist1->Draw("p");
+        hist2->Draw("p SAME");
+        FlagHisto = 1;
+    }
+    else if (max2 > max1){
+        hist2->Draw("p");
+        hist1->Draw("p SAME");
+        FlagHisto = 2;
+    } 
+    else{
+        hist2->Draw("p");
+        hist1->Draw("p SAME");
+        FlagHisto = 2;
+    }
+
+    // Important: Move the exponent 
+    gPad->Update();  
+    TGaxis::SetExponentOffset(-0.07, 0.01, "y");
+
+    hist1->GetXaxis()->SetLabelSize(0);  // Remove labels completely
+    hist2->GetXaxis()->SetLabelSize(0);  // Remove labels completely
+
+    // Get coordinates from the points the the plot
+    std::vector<double> pointXcoords;
+    for (int bin = 1; bin <= hist1->GetNbinsX(); bin++) {
+        double x = hist1->GetBinCenter(bin);
+        if ( bin == 1 || bin == hist1->GetNbinsX() ) continue;
+        pointXcoords.push_back(x);
+    }
+
+    // Draw vertical lines in the canvas base on x-cootdinates of the points
+    for (size_t i = 0; i < pointXcoords.size(); ++i) {
+        double x[2] = {pointXcoords[i], pointXcoords[i]};  // Same x coordinate
+        double y[2] = {0,0};
+        if (FlagHisto == 1) y[1] = {hist1->GetMaximum()}; // From bottom to top
+        if (FlagHisto == 2) y[1] = {hist2->GetMaximum()};
+        TGraph *vline = new TGraph(2, x, y);
+        vline->SetLineColor(kBlack);
+        vline->SetLineWidth(1.);
+        vline->SetLineStyle(2);
+        vline->Draw("L");  // "L" option for line only
+    }
+
+
+    // Draw vertical lines in the canvas
+    std::vector<double> divisors = {6, 11, 16};
+    for (size_t i = 0; i < divisors.size(); ++i) {
+        // double xpos = 6.;
+        double x[2] = {divisors[i], divisors[i]};  // Same x coordinate
+        double y[2] = {0,0};
+        if (FlagHisto == 1) y[1] = {hist1->GetMaximum()}; // From bottom to top
+        if (FlagHisto == 2) y[1] = {hist2->GetMaximum()};
+        TGraph *vline = new TGraph(2, x, y);
+        vline->SetLineColor(kBlack);
+        vline->SetLineWidth(2);
+        vline->Draw("L");  // "L" option for line only
+    }
+
+    // Draw new label information
+    TLatex latex;
+    latex.SetNDC();
+    std::vector<std::string> WheelID = {"-2", "-1", " 0", "+1", "+2", "-2", "-1", " 0", "+1", "+2","-2", "-1", " 0", "+1", "+2","-2", "-1", " 0", "+1", "+2"};
+    std::vector<std::string> StationID = {"MB1", "MB2", "MB3", "MB4"};
+    // latex.SetTextSize(0.03);
+    // double xcoord = 1.2;
+    // int iMB = 0;
+    // for (size_t i = 0; i < WheelID.size(); ++i) {
+    //     latex.DrawLatex(xcoord, -0.5, WheelID[i].c_str());
+    //     if ( WheelID[i] == " 0"){
+    //         latex.DrawLatex(xcoord - 0.6, -0.12, StationID[iMB].c_str());
+    //         iMB++;
+    //     }
+    //     xcoord = xcoord + 1.;
+    // }
+
+    latex.SetTextSize(0.03);
+    double xcoord = 0.14;
+    int iMB = 0;
+    for (size_t i = 0; i < WheelID.size(); ++i) {
+        latex.DrawLatex(xcoord, 0.07, WheelID[i].c_str());
+
+        if ( WheelID[i] == " 0"){
+            latex.DrawLatex(xcoord, 0.04, StationID[iMB].c_str());
+            iMB++;
+        }
+
+        xcoord = xcoord + 0.0365;
+    }
+
+
+    TText *text;
+    text = new TText(0.10,0.01, str_Xaxis.c_str());
+    // text = new TText(0.50,0.03,"Segment timing [ns]"); str_Xaxis
+    text->SetNDC();
+    text->SetTextSize(0.05);
+    text->Draw();
+
+    text = new TText(0.74,0.91,"PU 200 (14 TeV)");
+    text->SetNDC(); // To use the canvas coordinates
+    // text->SetTextAlign(31);
+    text->SetTextSize(0.03);
+    text->Draw();
+
+
+    text = new TText(0.74,0.85,str_leg.c_str());
+    text->SetNDC(); // To use the canvas coordinates
+    // text->SetTextAlign(31);
+    text->SetTextSize(0.04);
+    if (norm) text->Draw();
+
+
+    
+    // latex.SetNDC(); // Use NDC (normalized device coordinates)
+    latex.SetTextSize(0.05); // Set text size
+    latex.DrawLatex(0.1,0.91, "CMS ");  // (#it{...} makes the text italic)
+    latex.SetTextSize(0.035);
+    latex.DrawLatex(0.18,0.91, "#it{Phase-2 Simulation}");  // (#it{...} makes the text italic)
+    latex.SetTextSize(0.04);
+
+
+    // // // Create a legend
+    // TLegend *legend = new TLegend(0.65, 0.7, 0.87, 0.85); // Adjust the coordinates as needed 
+    TLegend* legend = new TLegend(0.73, 0.75, 0.9, 0.9);
+    legend->AddEntry(hist1,"DT AM", "l");
+    // legend->AddEntry(hist1, (std::to_string(N1)).c_str(), "");
+    legend->AddEntry(hist2, "DT AM+RPC", "l");
+    // legend->AddEntry(hist2, (std::to_string(N2)).c_str(), "");
+    legend->SetTextSize(0.03); // Increase the text size in the legend
+    legend->Draw(); // Draw the legend
+
+    canvas->SetGridy();
+    if (logYflag) canvas->SetLogy();
+
+    canvas->Update(); // Update the canvas to display the histograms
+    canvas->SaveAs((saveDir+str_name+".png").c_str()); // Save the canvas as an image
+    canvas->SaveAs((saveDir+str_name+".pdf").c_str()); // Save the canvas as PDF
+
+
+}
