@@ -48,6 +48,8 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
         std::vector<std::string> chambTag = {"MB1",     "MB2", "MB3", "MB4"};
         std::vector<std::string> wheelTag = {"Wh.-2","Wh.-1","Wh.0","Wh.+1","Wh.+2",};
 
+
+
         
         m_plots["hNSeg"] = new TH1D("hNSeg", "Number of Segments ; Number of Segments; Entries", 50, 0, 300);
         m_plots["hNTrigs"] = new TH1D("hNTrigs", "Number of Triggers ; Number of Triggers; Entries", 50, 0, 300);
@@ -72,6 +74,12 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
 
         m_plots["fakeRate_EventWheelStationTP_matched"] = new TH1D("fakeRate_EventWheelStationTP_matched", "Trigger Primitive not Matched per Event; Wheel; Fake TPs / Event",  22, 0, 22);
         // m_plots["fakeRate_EventWheelStationTP_total"] = new TH1D("fakeRate_EventWheelStationTP_total", "Trigger Primitive not Matched per Event; Wheel; Fake Rate / Event", 21, 0, 21);
+        
+        m_plots["BX_forFakeRate"] = new TH1D("BX_forFakeRate", "BX used for Fake Rate calculations; Bunch Crossing [25ns]; Entries",40, 0, 40);
+
+        m_plots["RPCFlag_forFakeRate"] = new TH1D("RPCFlag_forFakeRate", "RPC Flag for Fake Rate calculations; RPC Flag; Entries",5, 0, 5);
+
+
         
 
         m_plots["Eff_TPwheels_matched"] = new TH1D("Eff_TPwheels_matched", "DT TP Local Efficiency; Wheel; Efficiency",22, 0, 22);
@@ -921,8 +929,13 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 Int_t trigAMWh  = ph2TpgPhiEmuAm_wheel->at(itrig);
                 Int_t trigAMSt  = ph2TpgPhiEmuAm_station->at(itrig);
                 Int_t trigAMSec = ph2TpgPhiEmuAm_sector->at(itrig);
-                // Int_t trigAMBX  = ph2TpgPhiEmuAm_BX->at(itrig);
+                Int_t trigAMBX  = ph2TpgPhiEmuAm_BX->at(itrig);
                 // Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(itrig);
+
+                if ( !(trigAMBX == 20) ) continue;
+
+                m_plots["BX_forFakeRate"] -> Fill( trigAMBX );
+                m_plots["RPCFlag_forFakeRate"] -> Fill( trigAMrpc );
 
                 int wheelIdx = 0;
                 if ( trigAMWh == -2 &&  trigAMSt == 1) wheelIdx = 1;
@@ -946,7 +959,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 if ( trigAMWh == 1  &&  trigAMSt == 4) wheelIdx = 19;
                 if ( trigAMWh == 2  &&  trigAMSt == 4) wheelIdx = 20;
 
-                m_plots["fakeRate_TPnot_total"] -> Fill( wheelIdx );
+                m_plots["fakeRate_TPnot_total"] -> Fill( wheelIdx ); //
 
                 m_plots["fakeRate_WheelStationTP_total"] -> Fill( wheelIdx );
        
@@ -1002,6 +1015,10 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 Int_t trigAMWh  = ph2TpgPhiEmuAm_wheel->at(itrig);
                 Int_t trigAMSt  = ph2TpgPhiEmuAm_station->at(itrig);
                 Int_t trigAMSec = ph2TpgPhiEmuAm_sector->at(itrig);
+                Int_t trigAMBX  = ph2TpgPhiEmuAm_BX->at(itrig);
+                // Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(itrig);
+
+                if ( !(trigAMBX == 20) ) continue;
 
                 int wheelIdx = 0;
                 if ( trigAMWh == -2 &&  trigAMSt == 1) wheelIdx = 1;
@@ -1039,9 +1056,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 }
                 if (!notFakeTP){
                     // std::cout << "Wheel " << trigAMWh << " | Station: " << trigAMSt << std::endl;
-
                     m_plots["fakeRate_EventWheelStationTP_"+secTag+"_matched"] -> Fill(wheelIdx);
-
                     m_plots["fakeRateTP_WheelvsStation_"+secTag+"_matched"]->Fill(wheelIdx);
                 }
                 

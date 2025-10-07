@@ -363,6 +363,28 @@ void plot_histograms() {
                             "",
                             saveDir, 
                             false);
+
+    hName = "BX_forFakeRate";
+    hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
+    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+    plot_normal_histograms( hist1, 
+                            hist2, 
+                            "BX_forFakeRate", 
+                            "", 
+                            "",
+                            saveDir, 
+                            false);
+    
+    hName = "RPCFlag_forFakeRate";
+    hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
+    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+    plot_normal_histograms( hist1, 
+                            hist2, 
+                            "RPCFlag_forFakeRate", 
+                            "", 
+                            "",
+                            saveDir, 
+                            false);
                             
     // hName = "fakeRate_EventWheelStationTP_matched";
     // hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
