@@ -18,8 +18,8 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
     std::vector<std::string> file_names  = {
                                             "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root" 
                                             ,"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"
-                                            // , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated.root"
-                                            // , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPCUpdated.root"
+                                            , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated.root"
+                                            , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPCUpdated.root"
                                             };
 
     bool allExist = checkFilesInDirectory (file_names, inputDir);
@@ -862,6 +862,9 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
             std::cout << "Numerator per Gen: "<<  numTP << std::endl;
             std::cout << "**********************" <<  std::endl;
 
+            // ----------------------------
+            // Loop in TPs again for fake rate calculations
+            // ----------------------------
             int coutNTrigs = 0;
             for (std::size_t itrig = 0; itrig < ph2TpgPhiEmuAm_nTrigs; ++itrig){
 
@@ -893,7 +896,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 Int_t trigAMBX  = ph2TpgPhiEmuAm_BX->at(itrig);
                 // Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(itrig);
 
-                // if ( !(trigAMBX == 20) ) continue;
+                if ( !(trigAMBX == 20) ) continue;
 
                 m_plots["BX_forFakeRate"] -> Fill( trigAMBX );
                 m_plots["RPCFlag_forFakeRate"] -> Fill( trigAMrpc );

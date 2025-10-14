@@ -192,9 +192,9 @@ void plot_eff_fake_rate(  std::string hName,
     gPad->Update();
 
     //Flag all - 0
-    // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.988,1.005); // Eff  all
+    effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.988,1.005); // Eff  all
     // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.97,1.01); // Eff by sector
-    effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.6,1.1); //Fake rate not matched
+    // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.6,1.1); //Fake rate not matched
     // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.0,0.66); // Fake rate over Total
 
 
@@ -212,14 +212,56 @@ void plot_eff_fake_rate(  std::string hName,
     // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.4,1.2); // Eff by sector
     // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.6,1.1); //Fake rate not matched
     // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.0,0.66); // Fake rate over Total
-    
-    
 
-    // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.2,1.1);
+
+    // Calculate combined Y-range to show ALL points
+    // double ymin = 1.0;
+    // double ymax = 0.0;
+    
+    // // Check both efficiencies for min/max values including errors
+    // for (int bin = 1; bin <= effPlot1->GetTotalHistogram()->GetNbinsX(); ++bin) {
+    //     if (effPlot1->GetEfficiency(bin) > 0) {
+    //         ymin = std::min(ymin, effPlot1->GetEfficiency(bin) - effPlot1->GetEfficiencyErrorLow(bin));
+    //     }
+    //     if (effPlot1->GetEfficiency(bin) > 0) {
+    //         ymin = std::min(ymin, effPlot1->GetEfficiency(bin) - effPlot1->GetEfficiencyErrorLow(bin));
+    //     }
+    //     ymax = std::max(ymax, effPlot1->GetEfficiency(bin) + effPlot1->GetEfficiencyErrorUp(bin));
+    //     ymax = std::max(ymax, effPlot2->GetEfficiency(bin) + effPlot1->GetEfficiencyErrorUp(bin));
+    // }
+
+    // std::cout << "ymin: " << ymin << std::endl;
+    // std::cout << "ymax: " << ymax << std::endl;
+    
+    // Add padding
+    // ymin = std::max(0.0, ymin - 0.05);
+    // ymax = std::min(1.05, ymax + 0.05);
+    
+    // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(ymin*0.99,ymax*1.04);
+
+    // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(ymin,ymax);
+
+
+    // Calculate the actual data range
+    // double data_ymin = 1.0;
+    // double data_ymax = 0.0;
+    
+    // for (int bin = 1; bin <= effPlot1->GetTotalHistogram()->GetNbinsX(); ++bin) {
+    //     data_ymin = std::min(data_ymin, effPlot1->GetEfficiency(bin) - effPlot1->GetEfficiencyErrorLow(bin));
+    //     data_ymax = std::max(data_ymax, effPlot1->GetEfficiency(bin) + effPlot1->GetEfficiencyErrorUp(bin));
+    //     data_ymin = std::min(data_ymin, effPlot2->GetEfficiency(bin) - effPlot2->GetEfficiencyErrorLow(bin));
+    //     data_ymax = std::max(data_ymax, effPlot2->GetEfficiency(bin) + effPlot2->GetEfficiencyErrorUp(bin));
+    // }
+    
+    // // Add extra space at the top for the legend
+    // double legend_space = 0.15 * (data_ymax - data_ymin); // 15% extra space
+    // double ymin = std::max(0.0, data_ymin - 0.05);
+    // double ymax = data_ymax + legend_space;
+    
+    // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(ymin, ymax);
+
 
     effPlot2->GetPaintedGraph()->GetXaxis()->SetLabelSize(0);  // Remove labels completely
-
-    // effPlot2->GetPaintedGraph()->GetXaxis()->SetRangeUser(0.0,21);
 
     TText *text;
     text = new TText(0.74,0.91,"PU 200 (14 TeV)");
