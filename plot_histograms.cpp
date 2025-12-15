@@ -99,7 +99,7 @@ void plot_histograms() {
     plot_eff_fake_rate( hName, 
         hMatched1, hTotal1, hMatched2, hTotal2,
         saveDir);
-    return;  
+    // return;  
     std::vector<std::string> secTags   = { "Sec1", "Sec2", "Sec3", "Sec4", "Sec5", "Sec6", "Sec7", "Sec8","Sec9","Sec10","Sec11","Sec12"};
     for (const auto & secTag : secTags)
     {

@@ -18,9 +18,15 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
     std::vector<std::string> file_names  = {
                                             "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root" 
                                             ,"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"
-                                            , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated.root"
-                                            , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPCUpdated.root"
+                                            , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root"
+                                            , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root"
                                             };
+
+    // , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPCUpdated.root"
+    // , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated.root"                                            
+
+    // DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root                                                
+    // DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root                                            
 
     bool allExist = checkFilesInDirectory (file_names, inputDir);
     if (!allExist) {
@@ -647,7 +653,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                         Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(iTrigAM);
                         
                         if ( (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC") != std::string::npos)  || 
-                             (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated") != std::string::npos)  ){
+                             (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX") != std::string::npos)  ){
                     
                             if (flagRPCselection == 1){
                                 if ( trigAMrpc != 1 ) continue;
@@ -871,7 +877,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(itrig);
 
                 if ( (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC") != std::string::npos)  || 
-                     (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated") != std::string::npos)  ){
+                     (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX") != std::string::npos)  ){
                     
                     if (flagRPCselection == 1){
                         if ( trigAMrpc != 1 ) continue;
@@ -896,7 +902,10 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 Int_t trigAMBX  = ph2TpgPhiEmuAm_BX->at(itrig);
                 // Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(itrig);
 
-                if ( !(trigAMBX == 20) ) continue;
+                // if ( !(trigAMBX == 20) ) continue;
+
+                // if ( trigAMBX < 18 ) continue;
+                // if ( trigAMBX > 22 ) continue;
 
                 m_plots["BX_forFakeRate"] -> Fill( trigAMBX );
                 m_plots["RPCFlag_forFakeRate"] -> Fill( trigAMrpc );
@@ -998,14 +1007,14 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
             histoDir =  "output/RPC/histograms/";
             effDir =    "output/RPC/histograms/effPlots/";
         }
-        else if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPCUpdated") != std::string::npos) { 
-            std::cout << "'DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPCUpdated'  in the filename!" << std::endl;
+        else if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX") != std::string::npos) { 
+            std::cout << "'DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX'  in the filename!" << std::endl;
             outputDir = "output/noRPCUpdated/";
             histoDir =  "output/noRPCUpdated/histograms/";
             effDir =    "output/noRPCUpdated/histograms/effPlots/";
         }
-        else if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated") != std::string::npos) { 
-            std::cout << "'DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated'  in the filename!" << std::endl;
+        else if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX") != std::string::npos) { 
+            std::cout << "'DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX'  in the filename!" << std::endl;
             outputDir = "output/RPCUpdated/";
             histoDir =  "output/RPCUpdated/histograms/";
             effDir =    "output/RPCUpdated/histograms/effPlots/";
