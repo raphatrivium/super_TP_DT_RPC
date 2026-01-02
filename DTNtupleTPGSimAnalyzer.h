@@ -407,8 +407,12 @@ void plot_t0_histograms(   TH1F *hist1,
                     << "$ & " <<  improvement << " & " << sigImp << " & " << zScore << std::endl;
     std::cout<< "------------------------------------------------ " << std::endl;
 
-    hist1->SetTitle("");
-    hist2->SetTitle("");
+    hist1->SetTitle(" ");
+    hist2->SetTitle(" ");
+    hist1->GetXaxis()->SetTitle("");
+    hist2->GetXaxis()->SetTitle("");
+    hist1->GetYaxis()->SetTitle("");
+    hist2->GetYaxis()->SetTitle("");
 
     // Set different colors for the histograms
     hist1->SetLineColor(kRed);
