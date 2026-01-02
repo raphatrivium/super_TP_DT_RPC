@@ -192,7 +192,7 @@ void plot_eff_fake_rate(  std::string hName,
     gPad->Update();
 
     //Flag all - 0
-    effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.988,1.005); // Eff  all
+    effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.0,1.005); // Eff  all
     // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.97,1.01); // Eff by sector
     // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.6,1.1); //Fake rate not matched
     // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.0,0.66); // Fake rate over Total

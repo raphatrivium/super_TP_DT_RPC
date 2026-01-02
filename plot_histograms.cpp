@@ -7,6 +7,7 @@ void plot_histograms() {
     TFile *fileRPC = TFile::Open("output/RPC/DTNtupleTPGSimAnalyzer_Efficiency.root");
     TFile *fileNoRPCUpdated = TFile::Open("output/noRPCUpdated/DTNtupleTPGSimAnalyzer_Efficiency.root");
     TFile *fileRPCUpdated = TFile::Open("output/RPCUpdated/DTNtupleTPGSimAnalyzer_Efficiency.root");
+    TFile *fileRPCOnly = TFile::Open("output/RPCOnly/DTNtupleTPGSimAnalyzer_Efficiency.root");
 
 
     if (!fileNoRPC || !fileRPC) {
@@ -568,6 +569,48 @@ void plot_histograms() {
 
         // EffEtaGenSeg20_total
         // EffEtaGenSeg20_matched
+
+
+
+    // -------------------------------------------------------------------------------
+    // Comparision with RPC only segments
+
+    saveDir = "output/histogram_RPCOnly_comparison/";
+    // Create the directory if it doesn't exist
+    if (gSystem->AccessPathName(saveDir.c_str())) { 
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
+
+    hName = "Eff_TPwheels";
+    hTotal1 =   (TH1F*)fileRPCOnly->Get((hName+"_total").c_str());
+    hMatched1 = (TH1F*)fileRPCOnly->Get((hName+"_matched").c_str());
+    hTotal2 =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
+    hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
+    plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, saveDir);
+
+    hName = "hTrigFlag";
+    hist1 = (TH1F*)fileRPCOnly->Get(hName.c_str());
+    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+    plot_normal_histograms( hist1, 
+                            hist2, 
+                            "hTrigFlag", 
+                            "", 
+                            "",
+                            saveDir, 
+                            false);
+
+    hName = "hTPMatchedRPCflag";
+    hist1 = (TH1F*)fileRPCOnly->Get(hName.c_str());
+    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+    plot_normal_histograms( hist1, 
+                            hist2, 
+                            "hTPMatchedRPCflag", 
+                            "", 
+                            "",
+                            saveDir, 
+                            false);
+
 
 
     std::cout << "--------------------------------" << std::endl;

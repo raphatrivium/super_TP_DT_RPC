@@ -9,17 +9,18 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
 
     bool testFlag = false;   // false - true
     bool plotHistograms = true; // false - true
-    int flagRPCselection = 0;  // 0 (all RPC Flags) | 1  ( RPC Flag == 1) | 2  ( RPC Flag == 2) | 3  ( RPC Flag == 3) | 10 ( RPC Flag == 0 &&  RPC Flag == 1)
+    int flagRPCselection = 2;  // 0 (all RPC Flags) | 1  ( RPC Flag == 1) | 2  ( RPC Flag == 2) | 3  ( RPC Flag == 3) | 10 ( RPC Flag == 0 &&  RPC Flag == 1)
 
     // ------------------------------------------------------------------------------
     // INPUT FILES
     // ------------------------------------------------------------------------------
     std::string inputDir = "input/";
     std::vector<std::string> file_names  = {
-                                            "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root" 
-                                            ,"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"
-                                            , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root"
-                                            , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root"
+                                            // "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root" 
+                                            // ,"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"
+                                            // , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root"
+                                            // , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root"
+                                            "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root"
                                             };
 
     // , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPCUpdated.root"
@@ -653,7 +654,8 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                         Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(iTrigAM);
                         
                         if ( (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC") != std::string::npos)  || 
-                             (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX") != std::string::npos)  ){
+                             (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX") != std::string::npos) ||
+                             (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025") != std::string::npos)  ){
                     
                             if (flagRPCselection == 1){
                                 if ( trigAMrpc != 1 ) continue;
@@ -877,8 +879,9 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(itrig);
 
                 if ( (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC") != std::string::npos)  || 
-                     (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX") != std::string::npos)  ){
-                    
+                     (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX") != std::string::npos)  || 
+                     (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025") != std::string::npos) ){
+              
                     if (flagRPCselection == 1){
                         if ( trigAMrpc != 1 ) continue;
                     }
@@ -1019,7 +1022,15 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
             histoDir =  "output/RPCUpdated/histograms/";
             effDir =    "output/RPCUpdated/histograms/effPlots/";
         }
+        else if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025") != std::string::npos) { 
+            std::cout << "'DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025'  in the filename!" << std::endl;
+            outputDir = "output/RPCOnly/";
+            histoDir =  "output/RPCOnly/histograms/";
+            effDir =    "output/RPCOnly/histograms/effPlots/";
+        }
 
+
+        
 
         // Create the directory if it doesn't exist
         if (gSystem->AccessPathName(outputDir.c_str())) {
