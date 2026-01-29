@@ -7,9 +7,17 @@
 
 int DTNtupleTPGSimAnalyzer_Efficiency() {
 
-    bool testFlag = false;   // false - true
+    bool testFlag = true;   // false - true
     bool plotHistograms = true; // false - true
-    int flagRPCselection = 0;  // 0 (all RPC Flags) | 1  ( RPC Flag == 1) | 2  ( RPC Flag == 2) | 3  ( RPC Flag == 3) | 10 ( RPC Flag == 0 &&  RPC Flag == 1)
+
+    // flagRPCselection = 0  : all RPC Flags
+    // flagRPCselection = 1  : RPC used to overwrite TP timing info (both t0 and BX)
+    // flagRPCselection = 2  : RPC only segment
+    // flagRPCselection = 3  : RPC single hit not associated to any DT segment
+    // flagRPCselection = 10 : RPC Flag == 0 &&  RPC Flag == 1.   "RPC Flag == 0": segment that could not be matched to any RPC cluster
+
+    int flagRPCselection = 0;
+
 
     // ------------------------------------------------------------------------------
     // INPUT FILES
@@ -17,17 +25,10 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
     std::string inputDir = "input/";
     std::vector<std::string> file_names  = {
                                             "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root" 
-                                            ,"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"
-                                            // , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root"
-                                            // , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root"
-                                            // "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root"
+                                            // ,"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"
+                                            // , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated.root"
+                                            // , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPCUpdated.root"
                                             };
-
-    // , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPCUpdated.root"
-    // , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated.root"                                            
-
-    // DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root                                                
-    // DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root                                            
 
     bool allExist = checkFilesInDirectory (file_names, inputDir);
     if (!allExist) {
@@ -58,8 +59,8 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
 
 
         
-        m_plots["hNSeg"] = new TH1D("hNSeg", "Number of Segments ; Number of Segments; Entries", 50, 0, 300);
-        m_plots["hNTrigs"] = new TH1D("hNTrigs", "Number of Triggers ; Number of Triggers; Entries", 50, 0, 300);
+        m_plots["hNSeg"] = new TH1D("hNSeg", "Number of Segments ; Number of Segments; Entries / Event", 50, 0, 300);
+        m_plots["hNTrigs"] = new TH1D("hNTrigs", "Number of Triggers ; Number of Triggers; Entries / Event", 50, 0, 300);
 
         m_plots["hRatioNtpNseg_total"] = new TH1D("hRatioNtpNseg_total", "Number of Triggers / Number of Segments ; N tp / N seg; Entries", 20, 0, 10);
 
@@ -654,8 +655,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                         Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(iTrigAM);
                         
                         if ( (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC") != std::string::npos)  || 
-                             (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX") != std::string::npos) ||
-                             (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025") != std::string::npos)  ){
+                             (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated") != std::string::npos)  ){
                     
                             if (flagRPCselection == 1){
                                 if ( trigAMrpc != 1 ) continue;
@@ -784,8 +784,10 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                             wheelIdx = (segSt - 1) * 5 + (segWh + 2) + 1;
                         }
 
+                        // Efficiency TP Numerator
                         m_plots["Eff_TPwheels_matched"] -> Fill( wheelIdx );
 
+                        // Efficiency TP by sector Numerator
                         std::string secTag = secTags.at(segSec - 1);
                         m_plots["Eff_TPwheels_"+secTag+"_matched"]->Fill(wheelIdx);
                         
@@ -827,8 +829,10 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                         if (segSt >= 1 && segSt <= 4 && segWh >= -2 && segWh <= 2) {
                             wheelIdx = (segSt - 1) * 5 + (segWh + 2) + 1;
                         }
+                        // Efficiency TP Denominator
                         m_plots["Eff_TPwheels_total"]->Fill(wheelIdx);
 
+                        // Efficiency TP by sector Denominator
                         std::string secTag = secTags.at(segSec - 1);
                         m_plots["Eff_TPwheels_"+secTag+"_total"]->Fill(wheelIdx);
 
@@ -870,18 +874,14 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
             std::cout << "Numerator per Gen: "<<  numTP << std::endl;
             std::cout << "**********************" <<  std::endl;
 
-            // ----------------------------
-            // Loop in TPs again for fake rate calculations
-            // ----------------------------
             int coutNTrigs = 0;
             for (std::size_t itrig = 0; itrig < ph2TpgPhiEmuAm_nTrigs; ++itrig){
 
                 Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(itrig);
 
                 if ( (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC") != std::string::npos)  || 
-                     (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX") != std::string::npos)  || 
-                     (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025") != std::string::npos) ){
-              
+                     (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated") != std::string::npos)  ){
+                    
                     if (flagRPCselection == 1){
                         if ( trigAMrpc != 1 ) continue;
                     }
@@ -906,9 +906,6 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 // Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(itrig);
 
                 // if ( !(trigAMBX == 20) ) continue;
-
-                // if ( trigAMBX < 18 ) continue;
-                // if ( trigAMBX > 22 ) continue;
 
                 m_plots["BX_forFakeRate"] -> Fill( trigAMBX );
                 m_plots["RPCFlag_forFakeRate"] -> Fill( trigAMrpc );
@@ -972,7 +969,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
     
             m_plots["TPMatched"] -> Fill( numTPEvent );
 
-            TPnotMatched = coutNTrigs - numTPEvent; 
+            TPnotMatched = coutNTrigs - numTPEvent;
             m_plots["TPnotMatched"] -> Fill( TPnotMatched );
 
             // std::cout << "**********************" <<  std::endl;
@@ -985,13 +982,23 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
             
             SegMatchedWheelAndStation.clear();
 
-        } // END Loop Event 
+        } // END Loop Event
+
+        m_plots["fakeRate_EventWheelStationTP_matched"]->Scale(1.0 / nEntries);
+
+        for (const auto & secTag : secTags)
+        {
+            m_plots["fakeRate_EventWheelStationTP_"+secTag+"_matched"]->Scale(1.0 / nEntries);
+        }
 
         std::cout << "**********************" <<  std::endl;
         std::cout << "Numerator : "<<  numTPAll << std::endl;
         std::cout << "DENOMINATOR : "<<  denTPAll << std::endl;
         std::cout << "**********************" <<  std::endl; 
 
+        // -----------------------------------------------------------------
+        // Creating directories to save control plots and root files
+        // -----------------------------------------------------------------
         std::string outputDir = "";
         std::string histoDir = "";
         std::string effDir = "";
@@ -1010,27 +1017,18 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
             histoDir =  "output/RPC/histograms/";
             effDir =    "output/RPC/histograms/effPlots/";
         }
-        else if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX") != std::string::npos) { 
-            std::cout << "'DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX'  in the filename!" << std::endl;
+        else if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPCUpdated") != std::string::npos) { 
+            std::cout << "'DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPCUpdated'  in the filename!" << std::endl;
             outputDir = "output/noRPCUpdated/";
             histoDir =  "output/noRPCUpdated/histograms/";
             effDir =    "output/noRPCUpdated/histograms/effPlots/";
         }
-        else if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX") != std::string::npos) { 
-            std::cout << "'DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX'  in the filename!" << std::endl;
+        else if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated") != std::string::npos) { 
+            std::cout << "'DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated'  in the filename!" << std::endl;
             outputDir = "output/RPCUpdated/";
             histoDir =  "output/RPCUpdated/histograms/";
             effDir =    "output/RPCUpdated/histograms/effPlots/";
         }
-        else if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025") != std::string::npos) { 
-            std::cout << "'DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025'  in the filename!" << std::endl;
-            outputDir = "output/RPCOnly/";
-            histoDir =  "output/RPCOnly/histograms/";
-            effDir =    "output/RPCOnly/histograms/effPlots/";
-        }
-
-
-        
 
         // Create the directory if it doesn't exist
         if (gSystem->AccessPathName(outputDir.c_str())) {
@@ -1052,13 +1050,6 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
         if (!outFile.IsOpen()) {
             std::cerr << "Error: Could not create file " << (outputDir+outputFile) << std::endl;
             return 1;
-        }
-
-        m_plots["fakeRate_EventWheelStationTP_matched"]->Scale(1.0 / nEntries);
-
-        for (const auto & secTag : secTags)
-        {
-            m_plots["fakeRate_EventWheelStationTP_"+secTag+"_matched"]->Scale(1.0 / nEntries);
         }
 
         // -------------------------------------------
