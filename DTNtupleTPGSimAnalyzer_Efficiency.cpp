@@ -7,7 +7,7 @@
 
 int DTNtupleTPGSimAnalyzer_Efficiency() {
 
-    bool testFlag = true;   // false - true
+    bool testFlag = false;   // false - true
     bool plotHistograms = true; // false - true
 
     // flagRPCselection = 0  : all RPC Flags
@@ -25,9 +25,10 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
     std::string inputDir = "input/";
     std::vector<std::string> file_names  = {
                                             "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root" 
-                                            // ,"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"
+                                            ,"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"
                                             // , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated.root"
                                             // , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPCUpdated.root"
+                                            ,"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCOnly.root"
                                             };
 
     bool allExist = checkFilesInDirectory (file_names, inputDir);
@@ -134,6 +135,9 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
 
                 m_plots["hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched"] = new TH1D( ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str(),
                 ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched; Time of the TPs associated with prompt muons [ns]; Entries").c_str(), 27, -10, 10); // 40, 0, 700  // 40, 630, 650
+
+                // m_plots["hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched"] = new TH1D( ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str(),
+                // ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched; Time of the TPs associated with prompt muons [ns]; Entries").c_str(), 40, -120, -100); 
 
                 m_plots["hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched"] = new TH1D( ("hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched").c_str(),
                 ("hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched; BXs of the TPs associated with prompt muons [ns]; Entries").c_str(), 20, 10, 30); // 40, 0, 700  // 40, 630, 650
@@ -655,8 +659,9 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                         Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(iTrigAM);
                         
                         if ( (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC") != std::string::npos)  || 
-                             (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated") != std::string::npos)  ){
-                    
+                            (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated") != std::string::npos) ||
+                            (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCOnly") != std::string::npos) ){
+                            
                             if (flagRPCselection == 1){
                                 if ( trigAMrpc != 1 ) continue;
                             }
@@ -669,6 +674,13 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                             else if (flagRPCselection == 10){
                                 if ( trigAMrpc != 1 && trigAMrpc != 0 ) continue;
                             }
+                        }
+                        // For this file, we are ignoring the RPC flags 0 and 1 to simulate only RPC TPs
+                        if ( (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCOnly") != std::string::npos)  ){
+
+                            if (trigAMrpc == 0) continue;
+                            if (trigAMrpc == 1) continue;
+                            
                         }
 
                         // m_plots["hPh2TpgPhiEmuAmBX"+whTag+chambTag+"_matched"]->Fill(trigAMBX);
@@ -772,7 +784,14 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                         // trigAMt0 = (trigAMt0 * 25 / 32); // DCS to ns   OBS: Need to change the range in the histogram to [-10,10]
                         trigAMt0 = (trigAMt0 * 25 / 32);
                         std::cout << "            trigAMt0 [ns]      : "<< trigAMt0 << std::endl;
-                        trigAMt0 = trigAMt0 - 500;
+
+                        if ( (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCOnly") != std::string::npos) ){
+                            trigAMt0 = trigAMt0 + 390;
+                        }
+                        else {
+                            trigAMt0 = trigAMt0 - 500;
+                        }
+
                         std::cout << "            trigAMt0 [ns]( - 500): "<< trigAMt0 << std::endl;
                         m_plots["hPh2TpgPhiEmuAmT0"+whTag+chambTag+"_matched"]->Fill(trigAMt0);
 
@@ -880,7 +899,8 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(itrig);
 
                 if ( (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC") != std::string::npos)  || 
-                     (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated") != std::string::npos)  ){
+                     (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated") != std::string::npos) ||
+                    (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCOnly") != std::string::npos) ){
                     
                     if (flagRPCselection == 1){
                         if ( trigAMrpc != 1 ) continue;
@@ -894,7 +914,15 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                     else if (flagRPCselection == 10){
                         if ( trigAMrpc != 1 && trigAMrpc != 0 ) continue;
                     }
-                } 
+                }
+                // For this file, we are ignoring the RPC flags 0 and 1 to simulate only RPC TPs
+                if ( (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCOnly") != std::string::npos)  ){
+
+                    if (trigAMrpc == 0) continue;
+                    if (trigAMrpc == 1) continue;
+                    
+                }
+ 
                 m_plots["hTrigFlag"] -> Fill( trigAMrpc );
 
                 coutNTrigs++;
@@ -923,7 +951,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 m_plots["fakeRateTP_WheelvsStation_"+secTag+"_total"]->Fill(wheelIdx);
                 m_plots["fakeRate_TPnot_"+secTag+"_total"] -> Fill( wheelIdx );
        
-                // Checking the station without segments to comput fake TPs
+                // Checking the station without segments to compute Real fake TPs
                 bool notFakeTP = false;
                 for (size_t i = 0; i < SegMatchedWheelAndStation.size(); ++i) {
                     if ( trigAMWh == SegMatchedWheelAndStation[i][0] && trigAMSt == SegMatchedWheelAndStation[i][1] )
@@ -936,7 +964,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                     m_plots["fakeRate_EventWheelStationTP_matched"] -> Fill(wheelIdx);
                 }
 
-                // Checking the station without segments to comput fake TPs by Sectors
+                // Checking the station without segments to compute Realfake TPs by Sectors
                 notFakeTP = false;
                 for (size_t i = 0; i < SegMatchedWheelAndStation.size(); ++i) {
                     if ( trigAMWh == SegMatchedWheelAndStation[i][0] && trigAMSt == SegMatchedWheelAndStation[i][1] && trigAMSec == SegMatchedWheelAndStation[i][2] )
@@ -1029,6 +1057,14 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
             histoDir =  "output/RPCUpdated/histograms/";
             effDir =    "output/RPCUpdated/histograms/effPlots/";
         }
+        else if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCOnly") != std::string::npos) { 
+            std::cout << "'DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCOnly'  in the filename!" << std::endl;
+            outputDir = "output/RPCOnly/";
+            histoDir =  "output/RPCOnly/histograms/";
+            effDir =    "output/RPCOnly/histograms/effPlots/";
+        }
+
+
 
         // Create the directory if it doesn't exist
         if (gSystem->AccessPathName(outputDir.c_str())) {
