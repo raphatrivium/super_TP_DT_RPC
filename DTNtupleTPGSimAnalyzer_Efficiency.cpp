@@ -7,7 +7,7 @@
 
 int DTNtupleTPGSimAnalyzer_Efficiency() {
 
-    bool testFlag = true;   // false - true
+    bool testFlag = false;   // false - true
     bool plotHistograms = true; // false - true
 
     // flagRPCselection = 0  : all RPC Flags
@@ -16,7 +16,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
     // flagRPCselection = 3  : RPC single hit not associated to any DT segment
     // flagRPCselection = 10 : RPC Flag == 0 &&  RPC Flag == 1.   "RPC Flag == 0": segment that could not be matched to any RPC cluster
 
-    int flagRPCselection = 0;
+    int flagRPCselection = 1;
 
 
     // ------------------------------------------------------------------------------
