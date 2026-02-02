@@ -7,7 +7,7 @@
 
 int DTNtupleTPGSimAnalyzer_Efficiency() {
 
-    bool testFlag = false;   // false - true
+    bool testFlag = true;   // false - true
     bool plotHistograms = true; // false - true
 
     // flagRPCselection = 0  : all RPC Flags
@@ -23,37 +23,35 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
     // INPUT FILES
     // ------------------------------------------------------------------------------
     std::string inputDir = "input/";
-    std::vector<std::string> file_names  = {
-                                            // "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root" 
-                                            // ,"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"
-                                            // , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated.root"
-                                            // , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPCUpdated.root"
-                                            "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCOnly.root"
-                                            };
-    if (testFlag) file_names  = {"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"};
-
     std::map<std::string,std::string> m_files;
     m_files["noRPC"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
     m_files["RPC"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
-    m_files["RPCUpdated"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated.root";
-    m_files["noRPCUpdated"] = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPCUpdated.root";
-    m_files["RPCOnly"]      = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCOnly.root";
+    m_files["RPCUpdated"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root";
+    m_files["noRPCUpdated"] = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root";
+    m_files["RPCOnly"]      = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
     m_files["test"]         = "test.root"; // It is a copy of m_files["RPC"]
 
+    // ------------------------------------------------------------------------------
     // Check if the files are present.
+    // ------------------------------------------------------------------------------
+    bool allExist = true;
     for (const auto& pair : m_files) {
         const std::string& name = pair.first;
         const std::string& fname = pair.second;
-        // std::cout << name <<": " << fname <<std::endl;
-        
-        bool allExist = checkFilesInDirectory (fname, inputDir);
-        if (!allExist) {
-            std::cout << "\n Some of the files are missing !!!!!. Check the list above \n" <<std::endl;
-            return 1;
-        }
+       
+        bool fileExist = checkFilesInDirectory (fname, inputDir);
+        if (!fileExist) allExist = false; 
+    }
+    if (!allExist){
+        std::cout << "\n Some of the files are missing !!!!!. Check the list above \n" <<std::endl;
+        return 1;
     }
     
+    // ------------------------------------------------------------------------------
+    // Loop in the map of files
+    // ------------------------------------------------------------------------------
     for (const auto& pair : m_files) {
+                               
         const std::string& name = pair.first;
         const std::string& file_name = pair.second;
 
@@ -64,26 +62,6 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
         std::cout << inputDir+file_name << "\n" <<std::endl;
         std::cout << "-------------------------------------------" <<std::endl;
 
-        // Open the ROOT file
-        TFile *file = new TFile( (inputDir+file_name).c_str() );
-    }
-    
-    return 1;
-
-    for (const auto & file_name : file_names)
-    // for (const auto& pair : m_files) {
-        {                       
-            // const std::string& name = pair.first;
-            // const std::string& file_name = pair.second;
-            
-            // if (testFlag){ if ( file_name != m_files["test"] ) continue; }
-            // else{ if ( file_name == m_files["test"] ) continue; }
-            
-            std::cout << "-------------------------------------------" <<std::endl;
-            std::cout << inputDir+file_name << "\n" <<std::endl;
-            std::cout << "-------------------------------------------" <<std::endl;
-            
-            
         // ---------------------------------------
         // Making Map of Histograms 
         // ---------------------------------------
@@ -124,13 +102,8 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
 
         m_plots["RPCFlag_forFakeRate"] = new TH1D("RPCFlag_forFakeRate", "RPC Flag for Fake Rate calculations; RPC Flag; Entries",5, 0, 5);
 
-
-        
-
         m_plots["Eff_TPwheels_matched"] = new TH1D("Eff_TPwheels_matched", "DT TP Local Efficiency; Wheel; Efficiency",22, 0, 22);
         m_plots["Eff_TPwheels_total"] = new TH1D("Eff_TPwheels_total", "DT TP Local Efficiency; Wheel; Efficiency", 22, 0, 22);
-
-
 
         m_plots2["hGenIdxVsNSeg"] = new TH2D("hGenIdxVsNSeg", "GenMuon Index vs Number of Segments; GenMuon Index; Number of Segments", 3750, 0, 3750, 100, 0, 6);
         // m_plots2["hGenIdxVsNSeg"] = new TH2D("hGenIdxVsNSeg", "GenMuon Index vs Number of Segments; GenMuon Index; Number of Segments", 80, 0, 80, 100, 0, 6);
@@ -694,9 +667,10 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                         Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(iTrigAM);
                         Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(iTrigAM);
                         
-                        if ( (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC") != std::string::npos)  || 
-                            (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated") != std::string::npos) ||
-                            (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCOnly") != std::string::npos) ){
+                        if ( (file_name.find(m_files["RPC"]) != std::string::npos)  || 
+                            (file_name.find(m_files["RPCUpdated"]) != std::string::npos) ||
+                            (file_name.find(m_files["RPCOnly"]) != std::string::npos) || 
+                            (file_name.find(m_files["test"]) != std::string::npos) ){
                             
                             if (flagRPCselection == 1){
                                 if ( trigAMrpc != 1 ) continue;
@@ -712,7 +686,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                             }
                         }
                         // For this file, we are ignoring the RPC flags 0 and 1 to simulate only RPC TPs
-                        if ( (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCOnly") != std::string::npos)  ){
+                        if ( (file_name.find(m_files["RPCOnly"]) != std::string::npos)  ){
 
                             if (trigAMrpc == 0) continue;
                             if (trigAMrpc == 1) continue;
@@ -821,7 +795,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                         trigAMt0 = (trigAMt0 * 25 / 32);
                         std::cout << "            trigAMt0 [ns]      : "<< trigAMt0 << std::endl;
 
-                        if ( (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCOnly") != std::string::npos) ){
+                        if ( (file_name.find(m_files["RPCOnly"]) != std::string::npos) ){
                             trigAMt0 = trigAMt0 - 390;
                         }
                         else {
@@ -934,9 +908,10 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
 
                 Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(itrig);
 
-                if ( (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC") != std::string::npos)  || 
-                     (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated") != std::string::npos) ||
-                    (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCOnly") != std::string::npos) ){
+                if  ((file_name.find(m_files["RPC"]) != std::string::npos)  || 
+                    (file_name.find(m_files["RPCUpdated"]) != std::string::npos) ||
+                    (file_name.find(m_files["RPCOnly"]) != std::string::npos) ||
+                    (file_name.find(m_files["test"]) != std::string::npos) ){
                     
                     if (flagRPCselection == 1){
                         if ( trigAMrpc != 1 ) continue;
@@ -952,7 +927,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                     }
                 }
                 // For this file, we are ignoring the RPC flags 0 and 1 to simulate only RPC TPs
-                if ( (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCOnly") != std::string::npos)  ){
+                if ( (file_name.find(m_files["RPCOnly"]) != std::string::npos)  ){
 
                     if (trigAMrpc == 0) continue;
                     if (trigAMrpc == 1) continue;
@@ -1067,37 +1042,43 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
         std::string histoDir = "";
         std::string effDir = "";
         // if (file_name.find("noRPC") != std::string::npos) 
-        if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC") != std::string::npos)
+        if (file_name.find(m_files["noRPC"]) != std::string::npos)
         {
             // std::cout << "Found 'noRPC' in the filename!" << std::endl;
-            std::cout << "Found 'DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC' in the filename!" << std::endl;
+            std::cout << "Found '"<< m_files["noRPC"] <<"' in the filename!" << std::endl;
             outputDir = "output/noRPC/";
             histoDir =  "output/noRPC/histograms/";
             effDir =    "output/noRPC/histograms/effPlots/";
         } 
-        else if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC") != std::string::npos) { 
-            std::cout << "'DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC'  in the filename!" << std::endl;
+        else if (file_name.find(m_files["RPC"]) != std::string::npos) {
+            std::cout << "Found '"<< m_files["RPC"] <<"' in the filename!" << std::endl; 
             outputDir = "output/RPC/";
             histoDir =  "output/RPC/histograms/";
             effDir =    "output/RPC/histograms/effPlots/";
         }
-        else if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPCUpdated") != std::string::npos) { 
-            std::cout << "'DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPCUpdated'  in the filename!" << std::endl;
+        else if (file_name.find(m_files["noRPCUpdated"]) != std::string::npos) { 
+            std::cout << "Found '"<< m_files["noRPCUpdated"] <<"' in the filename!" << std::endl;
             outputDir = "output/noRPCUpdated/";
             histoDir =  "output/noRPCUpdated/histograms/";
             effDir =    "output/noRPCUpdated/histograms/effPlots/";
         }
-        else if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated") != std::string::npos) { 
-            std::cout << "'DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated'  in the filename!" << std::endl;
+        else if (file_name.find(m_files["RPCUpdated"]) != std::string::npos) { 
+            std::cout << "Found '"<< m_files["RPCUpdated"] <<"' in the filename!" << std::endl;
             outputDir = "output/RPCUpdated/";
             histoDir =  "output/RPCUpdated/histograms/";
             effDir =    "output/RPCUpdated/histograms/effPlots/";
         }
-        else if (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCOnly") != std::string::npos) { 
-            std::cout << "'DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCOnly'  in the filename!" << std::endl;
+        else if (file_name.find(m_files["RPCOnly"]) != std::string::npos) { 
+            std::cout << "Found '"<< m_files["RPCOnly"] <<"' in the filename!" << std::endl;
             outputDir = "output/RPCOnly/";
             histoDir =  "output/RPCOnly/histograms/";
             effDir =    "output/RPCOnly/histograms/effPlots/";
+        }
+        else if (file_name.find(m_files["test"]) != std::string::npos) { 
+            std::cout <<"Found '"<< m_files["test"] <<"' in the filename!" << std::endl;
+            outputDir = "output/test/";
+            histoDir =  "output/test/histograms/";
+            effDir =    "output/test/histograms/effPlots/";
         }
 
 
