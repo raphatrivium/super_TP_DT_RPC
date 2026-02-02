@@ -47,21 +47,34 @@ bool fileExists(const std::string& path) {
     return (stat(path.c_str(), &buffer) == 0);
 }
 
-bool checkFilesInDirectory(const std::vector<std::string>& filenames, 
+// bool checkFilesInDirectory(const std::vector<std::string>& filenames, 
+//                            const std::string& directory) {
+//     bool allExist = true;
+    
+//     for (const auto& filename : filenames) {
+//         std::string fullPath = directory + filename;
+        
+//         if (fileExists(fullPath)) {
+//             std::cout << "✓ Found: " << fullPath << std::endl;
+//         } else {
+//             std::cout << "✗ Missing: " << fullPath << std::endl;
+//             allExist = false;
+//         }
+//     }
+    
+//     return allExist;
+// }
+
+bool checkFilesInDirectory(const std::string& filename, 
                            const std::string& directory) {
     bool allExist = true;
-    
-    for (const auto& filename : filenames) {
-        std::string fullPath = directory + filename;
-        
-        if (fileExists(fullPath)) {
-            std::cout << "✓ Found: " << fullPath << std::endl;
-        } else {
-            std::cout << "✗ Missing: " << fullPath << std::endl;
-            allExist = false;
-        }
+    std::string fullPath = directory + filename;
+    if (fileExists(fullPath)) {
+        std::cout << "✓ Found: " << fullPath << std::endl;
+    } else {
+        std::cout << "✗ Missing: " << fullPath << std::endl;
+        allExist = false;
     }
-    
     return allExist;
 }
 

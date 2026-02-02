@@ -24,27 +24,66 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
     // ------------------------------------------------------------------------------
     std::string inputDir = "input/";
     std::vector<std::string> file_names  = {
-                                            "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root" 
-                                            ,"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"
+                                            // "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root" 
+                                            // ,"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"
                                             // , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated.root"
                                             // , "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPCUpdated.root"
-                                            ,"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCOnly.root"
+                                            "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCOnly.root"
                                             };
-
-    bool allExist = checkFilesInDirectory (file_names, inputDir);
-    if (!allExist) {
-        std::cout << "\n Some of the files are missing !!!!!. Check the list above \n" <<std::endl;
-        return 1;
-    }
     if (testFlag) file_names  = {"DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root"};
 
-    for (const auto & file_name : file_names)
-    {                                 
+    std::map<std::string,std::string> m_files;
+    m_files["noRPC"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
+    m_files["RPC"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
+    m_files["RPCUpdated"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCUpdated.root";
+    m_files["noRPCUpdated"] = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPCUpdated.root";
+    m_files["RPCOnly"]      = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCOnly.root";
+    m_files["test"]         = "test.root"; // It is a copy of m_files["RPC"]
+
+    // Check if the files are present.
+    for (const auto& pair : m_files) {
+        const std::string& name = pair.first;
+        const std::string& fname = pair.second;
+        // std::cout << name <<": " << fname <<std::endl;
         
+        bool allExist = checkFilesInDirectory (fname, inputDir);
+        if (!allExist) {
+            std::cout << "\n Some of the files are missing !!!!!. Check the list above \n" <<std::endl;
+            return 1;
+        }
+    }
+    
+    for (const auto& pair : m_files) {
+        const std::string& name = pair.first;
+        const std::string& file_name = pair.second;
+
+        if (testFlag){ if ( file_name != m_files["test"] ) continue; }
+        else{ if ( file_name == m_files["test"] ) continue; }
+
         std::cout << "-------------------------------------------" <<std::endl;
         std::cout << inputDir+file_name << "\n" <<std::endl;
         std::cout << "-------------------------------------------" <<std::endl;
-        
+
+        // Open the ROOT file
+        TFile *file = new TFile( (inputDir+file_name).c_str() );
+    }
+    
+    return 1;
+
+    for (const auto & file_name : file_names)
+    // for (const auto& pair : m_files) {
+        {                       
+            // const std::string& name = pair.first;
+            // const std::string& file_name = pair.second;
+            
+            // if (testFlag){ if ( file_name != m_files["test"] ) continue; }
+            // else{ if ( file_name == m_files["test"] ) continue; }
+            
+            std::cout << "-------------------------------------------" <<std::endl;
+            std::cout << inputDir+file_name << "\n" <<std::endl;
+            std::cout << "-------------------------------------------" <<std::endl;
+            
+            
         // ---------------------------------------
         // Making Map of Histograms 
         // ---------------------------------------
@@ -57,9 +96,6 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
         std::vector<std::string> chambTag = {"MB1",     "MB2", "MB3", "MB4"};
         std::vector<std::string> wheelTag = {"Wh.-2","Wh.-1","Wh.0","Wh.+1","Wh.+2",};
 
-
-
-        
         m_plots["hNSeg"] = new TH1D("hNSeg", "Number of Segments ; Number of Segments; Entries / Event", 50, 0, 300);
         m_plots["hNTrigs"] = new TH1D("hNTrigs", "Number of Triggers ; Number of Triggers; Entries / Event", 50, 0, 300);
 
@@ -786,13 +822,13 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                         std::cout << "            trigAMt0 [ns]      : "<< trigAMt0 << std::endl;
 
                         if ( (file_name.find("DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCOnly") != std::string::npos) ){
-                            trigAMt0 = trigAMt0 + 390;
+                            trigAMt0 = trigAMt0 - 390;
                         }
                         else {
                             trigAMt0 = trigAMt0 - 500;
                         }
 
-                        std::cout << "            trigAMt0 [ns]( - 500): "<< trigAMt0 << std::endl;
+                        std::cout << "            trigAMt0 [ns]( - 500 or -610): "<< trigAMt0 << std::endl;
                         m_plots["hPh2TpgPhiEmuAmT0"+whTag+chambTag+"_matched"]->Fill(trigAMt0);
 
                         m_plots["hPh2TpgPhiEmuAmBX"+whTag+chambTag+"_matched"]->Fill(besttrigAMBX);
