@@ -8,6 +8,8 @@
 int DTNtupleTPGSimAnalyzer_Efficiency() {
 
     bool testFlag = false;   // false - true
+    bool fdebug = false;
+
     bool plotHistograms = true; // false - true
 
     // flagRPCselection = 0  : all RPC Flags
@@ -17,7 +19,6 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
     // flagRPCselection = 10 : RPC Flag == 0 &&  RPC Flag == 1.   "RPC Flag == 0": segment that could not be matched to any RPC cluster
 
     int flagRPCselection = 1;
-
 
     // ------------------------------------------------------------------------------
     // INPUT FILES
@@ -67,7 +68,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
         // ---------------------------------------
         std::map<std::string, TH1*> m_plots;
         std::map<std::string, TH2*> m_plots2;
-        std::map<std::string, TEfficiency*> m_effs;
+        // std::map<std::string, TEfficiency*> m_effs;
 
         std::vector<std::string> algoTag  = {"AM", "AM+RPC", "Ph1"};
         std::vector<std::string> totalTag = {"matched", "total"};
@@ -410,9 +411,9 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 int NbestSegment = 0;
                 int Ntrigger = 0;
                 
-                std::cout << "==============================================================================" << std::endl;
-                std::cout << "iEvent " << iEvent << ", iGenPart " << iGenPart <<  " | gen_nGenParts: " << gen_nGenParts << " | " << "gen pt: "<< gen_pt->at(iGenPart) << " | " << "gen eta: "<< gen_eta->at(iGenPart) << " | gen phi: "<< gen_phi->at(iGenPart) << std::endl;
-                std::cout << "==============================================================================" << std::endl;
+                if (fdebug) std::cout << "==============================================================================" << std::endl;
+                if (fdebug) std::cout << "iEvent " << iEvent << ", iGenPart " << iGenPart <<  " | gen_nGenParts: " << gen_nGenParts << " | " << "gen pt: "<< gen_pt->at(iGenPart) << " | " << "gen eta: "<< gen_eta->at(iGenPart) << " | gen phi: "<< gen_phi->at(iGenPart) << std::endl;
+                if (fdebug) std::cout << "==============================================================================" << std::endl;
 
                 m_plots["hGenIdPDG"] -> Fill( gen_pdgId->at(iGenPart) );
                 m_plots["hGenEta"] -> Fill( gen_eta->at(iGenPart) );
@@ -431,8 +432,8 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 // Loop in the Segments (Reco Muons)
                 // -----------------------------
                 bool genFill = false;
-                std::cout << "Loop in the Segments and Gen Particle Matching " << std::endl;
-                std::cout << "Number of ph2 Segments in this event: " << ph2Seg_nSegments << std::endl;
+                if (fdebug) std::cout << "Loop in the Segments and Gen Particle Matching " << std::endl;
+                if (fdebug) std::cout << "Number of ph2 Segments in this event: " << ph2Seg_nSegments << std::endl;
                 for (std::size_t iSeg = 0; iSeg < ph2Seg_nSegments; ++iSeg) {
 
                     Int_t segSt    = ph2Seg_station->at(iSeg);
@@ -469,6 +470,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 }// END loop segments
 
                 // Print elements of the vector for test
+                if (fdebug) {
                 std::cout << " \n ------------------------------------------- \n";
                 std::cout << "Best Segments Index" << std::endl;
                 for (size_t iSeg = 0; iSeg < bestSegIndex.size(); ++iSeg) {
@@ -489,6 +491,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                     std::cout << bestSegNHits[iSeg] << " , ";
                 }
                 std::cout << " \n";
+                }
 
                 // Quality Code
                 // LOWQ 1 -> 3 hits
@@ -566,11 +569,11 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 // --------------------------
                 // Loop best segments
                 // --------------------------
-                std::cout << "  Loop best segments " << std::endl; 
+                if (fdebug) std::cout << "  Loop best segments " << std::endl; 
                 for (const auto & iSeg : bestSegIndex)
                 {
-                    std::cout << "  --------------" << std::endl;
-                    std::cout << "  Segment Index " << iSeg << std::endl; 
+                    if (fdebug) std::cout << "  --------------" << std::endl;
+                    if (fdebug) std::cout << "  Segment Index " << iSeg << std::endl; 
                     if (iSeg == 999) continue;
 
                     
@@ -611,7 +614,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                     std::string chambTag = chambTags.at(segSt - 1);
                     std::string whTag    = whTags.at(segWh + 2);
                     std::string secTag   = secTags.at(segSec - 1);
-                    std::cout << "  Seg Wheel: " << segWh << " | Seg Sector: "<< segSec << " | Seg Station: " << segSt <<  std::endl;
+                    if (fdebug) std::cout << "  Seg Wheel: " << segWh << " | Seg Sector: "<< segSec << " | Seg Station: " << segSt <<  std::endl;
 
                     m_plots2["hSegWhVsSegStat"] -> Fill( segWh , segSt );
 
@@ -655,8 +658,8 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                     // -----------------------------
                     // Loop in the AM TP
                     // -----------------------------
-                    std::cout << "      Loop in the AM TP " << std::endl;
-                    std::cout << "      Total number of TP in this event: "<< ph2TpgPhiEmuAm_nTrigs << std::endl;  
+                    if (fdebug) std::cout << "      Loop in the AM TP " << std::endl;
+                    if (fdebug) std::cout << "      Total number of TP in this event: "<< ph2TpgPhiEmuAm_nTrigs << std::endl;  
                     for (std::size_t iTrigAM = 0; iTrigAM < ph2TpgPhiEmuAm_nTrigs; ++iTrigAM){
 
                         
@@ -703,8 +706,8 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                             Double_t trigGlbPhi    = trigPhiInRad(ph2TpgPhiEmuAm_phi->at(iTrigAM),trigAMSec);
                             Double_t finalAMDPhi   = ph2Seg_posGlb_phi->at(iSeg) - trigGlbPhi;
                             Double_t segTrigAMDPhi = abs(acos(cos(finalAMDPhi)));
-                            std::cout << "      iTrigAM: " << iTrigAM << " | Wheel: "<< trigAMWh << " | Sector: " << trigAMSec << " | Station: " << trigAMSt << " | trigAMBX: " << trigAMBX << " | segTrigAMDPhi: " << segTrigAMDPhi <<  std::endl;
-                            std::cout << "          trigGlbPhi: " << trigGlbPhi << " | finalAMDPhi: " << finalAMDPhi << " | segTrigAMDPhi: " << segTrigAMDPhi <<  std::endl;
+                            if (fdebug) std::cout << "      iTrigAM: " << iTrigAM << " | Wheel: "<< trigAMWh << " | Sector: " << trigAMSec << " | Station: " << trigAMSt << " | trigAMBX: " << trigAMBX << " | segTrigAMDPhi: " << segTrigAMDPhi <<  std::endl;
+                            if (fdebug) std::cout << "          trigGlbPhi: " << trigGlbPhi << " | finalAMDPhi: " << finalAMDPhi << " | segTrigAMDPhi: " << segTrigAMDPhi <<  std::endl;
 
                             m_plots["hPrimPsiAM"] -> Fill( ph2TpgPhiEmuAm_dirLoc_phi->at(iTrigAM) );
                             m_plots["hDeltaPhiAM"] -> Fill( segTrigAMDPhi );
@@ -757,8 +760,8 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                     if (bestTPAM > -1 && ph2Seg_phi_t0->at(iSeg) > -500)
                     {
                         vbestTPAM.push_back(bestTPAM);
-                        std::cout << "  Fill MATCHING Histograms (Efficient)" << std::endl;
-                        std::cout << "  bestTPAM: "<< bestTPAM << std::endl;
+                        if (fdebug) std::cout << "  Fill MATCHING Histograms (Efficient)" << std::endl;
+                        if (fdebug) std::cout << "  bestTPAM: "<< bestTPAM << std::endl;
 
                         Ntrigger++;
 
@@ -790,19 +793,21 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                         m_plots["hEffvsSlopeAMmatched"] -> Fill(atan ( (ph2Seg_dirLoc_x->at(iSeg) / ph2Seg_dirLoc_z->at(iSeg)) ) * 360 / (2*TMath::Pi()) );
                         if (AMRPCflag > 0) m_plots["Eff_" + chambTag + "_AM+RPC_matched"]->Fill(segWh);
 
-                        std::cout << "            trigAMt0 (DCS)      : "<< trigAMt0 << std::endl;
+                        if (fdebug) std::cout << "            trigAMt0 (DCS)      : "<< trigAMt0 << std::endl;
                         // trigAMt0 = (trigAMt0 * 25 / 32); // DCS to ns   OBS: Need to change the range in the histogram to [-10,10]
                         trigAMt0 = (trigAMt0 * 25 / 32);
-                        std::cout << "            trigAMt0 [ns]      : "<< trigAMt0 << std::endl;
+                        if (fdebug) std::cout << "            trigAMt0 [ns]      : "<< trigAMt0 << std::endl;
 
                         if ( (file_name.find(m_files["RPCOnly"]) != std::string::npos) ){
                             trigAMt0 = trigAMt0 - 390;
+                            if (fdebug) std::cout << "            trigAMt0 [ns](- 390 for onlyRPC): "<< trigAMt0 << std::endl;
                         }
                         else {
                             trigAMt0 = trigAMt0 - 500;
+                            if (fdebug) std::cout << "            trigAMt0 [ns]( - 500): "<< trigAMt0 << std::endl;
                         }
 
-                        std::cout << "            trigAMt0 [ns]( - 500 or -610): "<< trigAMt0 << std::endl;
+                       
                         m_plots["hPh2TpgPhiEmuAmT0"+whTag+chambTag+"_matched"]->Fill(trigAMt0);
 
                         m_plots["hPh2TpgPhiEmuAmBX"+whTag+chambTag+"_matched"]->Fill(besttrigAMBX);
@@ -842,7 +847,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                     if (ph2Seg_phi_t0->at(iSeg) > -500)
                     // if (  bestTPAM > -500 && ph2Seg_phi_t0->at(iSeg) > -500) // For test. This is to apply the 0.1 cut in the denominator as well
                     {
-                        std::cout << "  Fill TOTAL Histograms" << std::endl;
+                        if (fdebug) std::cout << "  Fill TOTAL Histograms" << std::endl;
 
                         m_plots["Eff_" + chambTag + "_AM_total"]->Fill(segWh);
                         m_plots["EffNoBX_" + chambTag + "_AM_total"]->Fill(segWh);
@@ -882,26 +887,27 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 m_plots["hGenTP"] -> Fill( Ntrigger );
 
                 // double eff = numTP / denTP;
-                std::cout << "**********************" <<  std::endl;
-                std::cout << "Numerator per Gen: "<<  numTP << std::endl;
-                std::cout << "DENOMINATOR per Gen: "<<  denTP << std::endl;
+                if (fdebug) std::cout << "**********************" <<  std::endl;
+                if (fdebug) std::cout << "Numerator per Gen: "<<  numTP << std::endl;
+                if (fdebug) std::cout << "DENOMINATOR per Gen: "<<  denTP << std::endl;
                 // std::cout << "eff per Event: "<<  eff << std::endl;
-                std::cout << "**********************" <<  std::endl;
+                if (fdebug) std::cout << "**********************" <<  std::endl;
                 
             } // END Loop Gen
 
 
-        
-            for (size_t i = 0; i < SegMatchedWheelAndStation.size(); ++i) {
-                std::cout << "Segment " << i << ": ";
-                std::cout << SegMatchedWheelAndStation[i][0] << " " << SegMatchedWheelAndStation[i][1]<< " " << SegMatchedWheelAndStation[i][2] << std::endl;
+            if (fdebug) {
+                for (size_t i = 0; i < SegMatchedWheelAndStation.size(); ++i) {
+                    std::cout << "Segment " << i << ": ";
+                    std::cout << SegMatchedWheelAndStation[i][0] << " " << SegMatchedWheelAndStation[i][1]<< " " << SegMatchedWheelAndStation[i][2] << std::endl;
+                }   
             }
             
             
 
-            std::cout << "**********************" <<  std::endl;
-            std::cout << "Numerator per Gen: "<<  numTP << std::endl;
-            std::cout << "**********************" <<  std::endl;
+            if (fdebug) std::cout << "**********************" <<  std::endl;
+            if (fdebug) std::cout << "Numerator per Gen: "<<  numTP << std::endl;
+            if (fdebug) std::cout << "**********************" <<  std::endl;
 
             int coutNTrigs = 0;
             for (std::size_t itrig = 0; itrig < ph2TpgPhiEmuAm_nTrigs; ++itrig){
@@ -970,7 +976,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                     if (notFakeTP) break;
                 }
                 if (!notFakeTP){
-                    std::cout << "Wheel " << trigAMWh << " | Station: " << trigAMSt << std::endl;
+                    if (fdebug) std::cout << "Wheel " << trigAMWh << " | Station: " << trigAMSt << std::endl;
                     m_plots["fakeRate_WheelStationTP_matched"] -> Fill(wheelIdx);
                     m_plots["fakeRate_EventWheelStationTP_matched"] -> Fill(wheelIdx);
                 }
@@ -1011,12 +1017,9 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
             TPnotMatched = coutNTrigs - numTPEvent;
             m_plots["TPnotMatched"] -> Fill( TPnotMatched );
 
-            // std::cout << "**********************" <<  std::endl;
-            std::cout << "Numerator Event: "<<  numTPEvent << std::endl;
-            std::cout << "DENOMINATOR Event: "<<  denTPEvent << std::endl;
-            std::cout << "TP not matched per event: "<< TPnotMatched << std::endl;
-
-
+            if (fdebug) std::cout << "Numerator Event: "<<  numTPEvent << std::endl;
+            if (fdebug) std::cout << "DENOMINATOR Event: "<<  denTPEvent << std::endl;
+            if (fdebug) std::cout << "TP not matched per event: "<< TPnotMatched << std::endl;
             // std::cout << "**********************" <<  std::endl;
             
             SegMatchedWheelAndStation.clear();
@@ -1030,10 +1033,10 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
             m_plots["fakeRate_EventWheelStationTP_"+secTag+"_matched"]->Scale(1.0 / nEntries);
         }
 
-        std::cout << "**********************" <<  std::endl;
-        std::cout << "Numerator : "<<  numTPAll << std::endl;
-        std::cout << "DENOMINATOR : "<<  denTPAll << std::endl;
-        std::cout << "**********************" <<  std::endl; 
+        if (fdebug) std::cout << "**********************" <<  std::endl;
+        if (fdebug) std::cout << "Numerator : "<<  numTPAll << std::endl;
+        if (fdebug) std::cout << "DENOMINATOR : "<<  denTPAll << std::endl;
+        if (fdebug) std::cout << "**********************" <<  std::endl; 
 
         // -----------------------------------------------------------------
         // Creating directories to save control plots and root files
@@ -1045,37 +1048,37 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
         if (file_name.find(m_files["noRPC"]) != std::string::npos)
         {
             // std::cout << "Found 'noRPC' in the filename!" << std::endl;
-            std::cout << "Found '"<< m_files["noRPC"] <<"' in the filename!" << std::endl;
+            if (fdebug) std::cout << "Found '"<< m_files["noRPC"] <<"' in the filename!" << std::endl;
             outputDir = "output/noRPC/";
             histoDir =  "output/noRPC/histograms/";
             effDir =    "output/noRPC/histograms/effPlots/";
         } 
         else if (file_name.find(m_files["RPC"]) != std::string::npos) {
-            std::cout << "Found '"<< m_files["RPC"] <<"' in the filename!" << std::endl; 
+            if (fdebug) std::cout << "Found '"<< m_files["RPC"] <<"' in the filename!" << std::endl; 
             outputDir = "output/RPC/";
             histoDir =  "output/RPC/histograms/";
             effDir =    "output/RPC/histograms/effPlots/";
         }
         else if (file_name.find(m_files["noRPCUpdated"]) != std::string::npos) { 
-            std::cout << "Found '"<< m_files["noRPCUpdated"] <<"' in the filename!" << std::endl;
+            if (fdebug) std::cout << "Found '"<< m_files["noRPCUpdated"] <<"' in the filename!" << std::endl;
             outputDir = "output/noRPCUpdated/";
             histoDir =  "output/noRPCUpdated/histograms/";
             effDir =    "output/noRPCUpdated/histograms/effPlots/";
         }
         else if (file_name.find(m_files["RPCUpdated"]) != std::string::npos) { 
-            std::cout << "Found '"<< m_files["RPCUpdated"] <<"' in the filename!" << std::endl;
+            if (fdebug) std::cout << "Found '"<< m_files["RPCUpdated"] <<"' in the filename!" << std::endl;
             outputDir = "output/RPCUpdated/";
             histoDir =  "output/RPCUpdated/histograms/";
             effDir =    "output/RPCUpdated/histograms/effPlots/";
         }
         else if (file_name.find(m_files["RPCOnly"]) != std::string::npos) { 
-            std::cout << "Found '"<< m_files["RPCOnly"] <<"' in the filename!" << std::endl;
+            if (fdebug) std::cout << "Found '"<< m_files["RPCOnly"] <<"' in the filename!" << std::endl;
             outputDir = "output/RPCOnly/";
             histoDir =  "output/RPCOnly/histograms/";
             effDir =    "output/RPCOnly/histograms/effPlots/";
         }
         else if (file_name.find(m_files["test"]) != std::string::npos) { 
-            std::cout <<"Found '"<< m_files["test"] <<"' in the filename!" << std::endl;
+            if (fdebug) std::cout <<"Found '"<< m_files["test"] <<"' in the filename!" << std::endl;
             outputDir = "output/test/";
             histoDir =  "output/test/histograms/";
             effDir =    "output/test/histograms/effPlots/";
@@ -1124,8 +1127,19 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 hist->Draw();
 
                 // Save the plot in the output directory
+                gErrorIgnoreLevel = kError;  // or kWarning
                 canvas.SaveAs((histoDir + name + ".png").c_str());
+                gErrorIgnoreLevel = kInfo;  // Back to normal
             }
+
+            // // Suppress all ROOT info messages
+            // gErrorIgnoreLevel = kError;  // or kWarning
+
+            // // Save your file - no message will appear
+            // c1->SaveAs("plot.png");
+
+            // // Restore if needed later
+            // gErrorIgnoreLevel = kInfo;  // Back to normal
 
             // Manually changing some plots
             // m_plots2["hGenIdxVsNSeg"]->SetStats(0); // Disable statistics box
@@ -1153,9 +1167,15 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 hist->Draw("P");  // "P" option draws only points
                 // hist->Draw("AP");
                 // Save the plot in the output directory
+                gErrorIgnoreLevel = kError;  // or kWarning
                 canvas.SaveAs((histoDir + name + ".png").c_str());
+                gErrorIgnoreLevel = kInfo;  // Back to normal
             }
         }
+
+        m_plots.clear();
+        m_plots2.clear();
+
         // Close the file (optional, as it will be automatically closed when outFile goes out of scope)
         outFile.Close();
         std::cout << "All histograms saved in ROOT file: " << outputFile << std::endl;
