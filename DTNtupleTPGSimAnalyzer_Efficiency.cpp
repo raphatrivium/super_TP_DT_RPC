@@ -7,7 +7,7 @@
 
 int DTNtupleTPGSimAnalyzer_Efficiency() {
 
-    bool testFlag = false;   // false - true
+    bool testFlag = true;   // false - true
     bool plotHistograms = true; // false - true
     int flagRPCselection = 0;  // 0 (all RPC Flags) | 1  ( RPC Flag == 1) | 2  ( RPC Flag == 2) | 3  ( RPC Flag == 3) | 10 ( RPC Flag == 0 &&  RPC Flag == 1)
 
@@ -353,7 +353,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
         // ------------------------------------------------------------------------------
         // nEntries = 1;   // 100   nEntries
         if (testFlag){
-            nEntries = 100;
+            nEntries = 5;
             std::cout << "FOR TESTE:" <<std::endl;
         }
         std::cout << "Total entries:" << nEntries <<std::endl;
@@ -827,8 +827,11 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                         if (segSt >= 1 && segSt <= 4 && segWh >= -2 && segWh <= 2) {
                             wheelIdx = (segSt - 1) * 5 + (segWh + 2) + 1;
                         }
+
+                        // Efficiency Wheels Denominator
                         m_plots["Eff_TPwheels_total"]->Fill(wheelIdx);
 
+                        // Efficiency Wheels by sector Denominator
                         std::string secTag = secTags.at(segSec - 1);
                         m_plots["Eff_TPwheels_"+secTag+"_total"]->Fill(wheelIdx);
 
@@ -972,7 +975,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
     
             m_plots["TPMatched"] -> Fill( numTPEvent );
 
-            TPnotMatched = coutNTrigs - numTPEvent; 
+            TPnotMatched = coutNTrigs - numTPEvent;
             m_plots["TPnotMatched"] -> Fill( TPnotMatched );
 
             // std::cout << "**********************" <<  std::endl;
