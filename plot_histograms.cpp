@@ -97,10 +97,8 @@ void plot_histograms() {
     TH1F *hMatched1 = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
     TH1F *hTotal2 =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
     TH1F *hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
-    plot_eff_fake_rate( hName, 
-        hMatched1, hTotal1, hMatched2, hTotal2,
-        saveDir);
-    // return;  
+    plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "DT AM", saveDir);
+
     std::vector<std::string> secTags   = { "Sec1", "Sec2", "Sec3", "Sec4", "Sec5", "Sec6", "Sec7", "Sec8","Sec9","Sec10","Sec11","Sec12"};
     for (const auto & secTag : secTags)
     {
@@ -109,7 +107,7 @@ void plot_histograms() {
         hMatched1 = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
         hTotal2 =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
         hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
-        plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, saveDir);
+       plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "DT AM", saveDir);
     }
 
 
@@ -118,9 +116,7 @@ void plot_histograms() {
     hMatched1 = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
     hTotal2 =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
     hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
-    plot_eff_fake_rate( hName, 
-                        hMatched1, hTotal1, hMatched2, hTotal2,
-                        saveDir);    
+    plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "DT AM", saveDir);  
                    
 
     hName = "fakeRate_TPnot";
@@ -128,9 +124,7 @@ void plot_histograms() {
     hMatched1 = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
     hTotal2 =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
     hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
-    plot_eff_fake_rate( hName, 
-                        hMatched1, hTotal1, hMatched2, hTotal2,
-                        saveDir);
+    plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "DT AM", saveDir);
 
     for (const auto & secTag : secTags)
     {
@@ -139,15 +133,11 @@ void plot_histograms() {
         hMatched1 = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
         hTotal2 =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
         hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
-        plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, saveDir);
+        plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "DT AM", saveDir);
     }
 
 
 
-    
-   
-
-    
     saveDir = "output/histogram_comparison_RPCUpdate/";
 
     hName = "Eff_TPwheels";
@@ -155,9 +145,7 @@ void plot_histograms() {
     hMatched1 = (TH1F*)fileNoRPCUpdated->Get((hName+"_matched").c_str());
     hTotal2 =   (TH1F*)fileRPCUpdated->Get((hName+"_total").c_str());
     hMatched2 = (TH1F*)fileRPCUpdated->Get((hName+"_matched").c_str());
-    plot_eff_fake_rate( hName, 
-                        hMatched1, hTotal1, hMatched2, hTotal2,
-                        saveDir);
+    plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "DT AM", saveDir);
 
 
     hName = "fakeRate_WheelStationTP";
@@ -165,9 +153,7 @@ void plot_histograms() {
     hMatched1 = (TH1F*)fileNoRPCUpdated->Get((hName+"_matched").c_str());
     hTotal2 =   (TH1F*)fileRPCUpdated->Get((hName+"_total").c_str());
     hMatched2 = (TH1F*)fileRPCUpdated->Get((hName+"_matched").c_str());
-    plot_eff_fake_rate( hName, 
-                        hMatched1, hTotal1, hMatched2, hTotal2,
-                        saveDir);    
+    plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "DT AM", saveDir);    
                    
 
     hName = "fakeRate_TPnot";
@@ -175,9 +161,7 @@ void plot_histograms() {
     hMatched1 = (TH1F*)fileNoRPCUpdated->Get((hName+"_matched").c_str());
     hTotal2 =   (TH1F*)fileRPCUpdated->Get((hName+"_total").c_str());
     hMatched2 = (TH1F*)fileRPCUpdated->Get((hName+"_matched").c_str());
-    plot_eff_fake_rate( hName, 
-                        hMatched1, hTotal1, hMatched2, hTotal2,
-                        saveDir);
+    plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "DT AM", saveDir);
 
     
 
@@ -214,13 +198,15 @@ void plot_histograms() {
             std::string wheel2 = wheel;
             wheel2 = wheel2.erase(1, 2);  // Removes "W.": "Wh.-2"→ "W-2"
 
-            plot_t0_histograms( hist1, hist2, 
+            plot_t0_histograms( hist1, 
+                                hist2, 
                                 "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched", 
                                 "Time of the TPs associated with prompt muons [ns]", 
                                 (wheel2+" "+chamb).c_str(),
+                                "DT AM",
                                 saveDir, 
                                 true);
-
+                                
         }
     }
 
@@ -261,31 +247,13 @@ void plot_histograms() {
                                 "hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched", 
                                 "BX of the TPs associated with prompt muons [ns]", 
                                 (wheel2+" "+chamb).c_str(),
+                                "DT AM",
                                 saveDir, 
                                 false);
 
         }
     }
 
-    // for (const auto & wheel : wheelTag) {
-    //     for (const auto & chamb : chambTag) {
-            
-    //         std::string hName = "hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched";
-    //         hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
-    //         hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-
-    //         std::string wheel2 = wheel;
-    //         wheel2 = wheel2.erase(1, 2);  // Removes "W.": "Wh.-2"→ "W-2"
-
-    //         plot_BX_histograms( hist1, hist2, 
-    //                             "hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched", 
-    //                             "BX of the TPs associated with prompt muons [ns]", 
-    //                             (wheel2+" "+chamb).c_str(),
-    //                             saveDir, 
-    //                             false);
-
-    //     }
-    // }
 
     saveDir = "output/histogram_comparison/";
     hName = "hNSeg";
@@ -295,7 +263,7 @@ void plot_histograms() {
                             hist2, 
                             "hNSeg", 
                             "", 
-                            "",
+                            "DT AM",
                             saveDir, 
                             false);
 
@@ -306,7 +274,7 @@ void plot_histograms() {
                             hist2, 
                             "hNTrigs", 
                             "", 
-                            "",
+                            "DT AM",
                             saveDir, 
                             false);
 
@@ -317,7 +285,7 @@ void plot_histograms() {
                             hist2, 
                             "hRatioNtpNseg_total", 
                             "", 
-                            "",
+                            "DT AM",
                             saveDir, 
                             false);
 
@@ -328,7 +296,7 @@ void plot_histograms() {
                             hist2, 
                             "TPnotMatched", 
                             "", 
-                            "",
+                            "DT AM",
                             saveDir, 
                             false);
 
@@ -339,7 +307,7 @@ void plot_histograms() {
                             hist2, 
                             "TPMatched", 
                             "", 
-                            "",
+                            "DT AM",
                             saveDir, 
                             false);
 
@@ -350,7 +318,7 @@ void plot_histograms() {
                             hist2, 
                             "hTrigFlag", 
                             "", 
-                            "",
+                            "DT AM",
                             saveDir, 
                             false);
 
@@ -361,7 +329,7 @@ void plot_histograms() {
                             hist2, 
                             "hTPMatchedRPCflag", 
                             "", 
-                            "",
+                            "DT AM",
                             saveDir, 
                             false);
 
@@ -372,7 +340,7 @@ void plot_histograms() {
                             hist2, 
                             "BX_forFakeRate", 
                             "", 
-                            "",
+                            "DT AM",
                             saveDir, 
                             false);
     
@@ -383,7 +351,7 @@ void plot_histograms() {
                             hist2, 
                             "RPCFlag_forFakeRate", 
                             "", 
-                            "",
+                            "DT AM",
                             saveDir, 
                             false);
                             
@@ -451,7 +419,7 @@ void plot_histograms() {
                             hist2, 
                             "hNSegRPCUpdated", 
                             "", 
-                            "",
+                            "DT AM",
                             saveDir, 
                             false);
 
@@ -463,7 +431,7 @@ void plot_histograms() {
                             hist2, 
                             "hNTrigsRPCUpdated", 
                             "", 
-                            "",
+                            "DT AM",
                             saveDir, 
                             false);
 
@@ -474,7 +442,7 @@ void plot_histograms() {
                             hist2, 
                             "hRatioNtpNseg_totalRPCUpdated", 
                             "", 
-                            "",
+                            "DT AM",
                             saveDir, 
                             false);
     
@@ -485,7 +453,7 @@ void plot_histograms() {
                             hist2, 
                             "TPnotMatchedRPCUpdated", 
                             "", 
-                            "",
+                            "DT AM",
                             saveDir, 
                             false);
 
@@ -496,7 +464,7 @@ void plot_histograms() {
                             hist2, 
                             "TPMatchedRPCUpdated", 
                             "", 
-                            "",
+                            "DT AM",
                             saveDir, 
                             false);
 
@@ -507,7 +475,7 @@ void plot_histograms() {
                             hist2, 
                             "hTrigFlagRPCUpdated", 
                             "", 
-                            "",
+                            "DT AM",
                             saveDir, 
                             false);
 
@@ -518,7 +486,7 @@ void plot_histograms() {
                             hist2, 
                             "hTPMatchedRPCflagRPCUpdated", 
                             "", 
-                            "",
+                            "DT AM",
                             saveDir, 
                             false);
                             
@@ -529,7 +497,7 @@ void plot_histograms() {
                             hist2, 
                             "fakeRate_EventWheelStationTP_matchedRPCUpdated", 
                             "", 
-                            "",
+                            "DT AM",
                             saveDir, 
                             false);
 
@@ -540,7 +508,7 @@ void plot_histograms() {
                             hist2, 
                             "BX_forFakeRateRPCUpdated", 
                             "", 
-                            "",
+                            "DT AM",
                             saveDir, 
                             false);
     
@@ -551,26 +519,9 @@ void plot_histograms() {
                             hist2, 
                             "RPCFlag_forFakeRateRPCUpdated", 
                             "", 
-                            "",
+                            "DT AM",
                             saveDir, 
                             false);
-
-    // std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
-    // hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
-    // hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-    // plot_t0_histograms( hist1, hist2, 
-    //                     "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched", 
-    //                     "Time of the TPs associated with prompt muons [ns]", 
-    //                     (wheel2+" "+chamb).c_str(),
-    //                     saveDir, 
-    //                     true);
-        // EffEtaGenSeg_total
-        // EffEtaGenSeg_matched
-
-        // EffEtaGenSeg20_total
-        // EffEtaGenSeg20_matched
-
-
 
     // -------------------------------------------------------------------------------
     // Comparision with RPC only segments
@@ -587,7 +538,18 @@ void plot_histograms() {
     hMatched1 = (TH1F*)fileRPCOnly->Get((hName+"_matched").c_str());
     hTotal2 =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
     hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
-    plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, saveDir);
+    plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "RPC Only", saveDir);
+
+    hName = "hNTrigs";
+    hist1 = (TH1F*)fileRPCOnly->Get(hName.c_str());
+    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+    plot_normal_histograms( hist1, 
+                            hist2, 
+                            "hNTrigs", 
+                            "", 
+                            "RPC Only",
+                            saveDir, 
+                            false);
 
     hName = "hTrigFlag";
     hist1 = (TH1F*)fileRPCOnly->Get(hName.c_str());
@@ -596,7 +558,7 @@ void plot_histograms() {
                             hist2, 
                             "hTrigFlag", 
                             "", 
-                            "",
+                            "RPC Only",
                             saveDir, 
                             false);
 
@@ -607,10 +569,60 @@ void plot_histograms() {
                             hist2, 
                             "hTPMatchedRPCflag", 
                             "", 
-                            "",
+                            "RPC Only",
                             saveDir, 
                             false);
 
+    // ----------------------------------------------------------
+    // ----Time of the TPs associated with prompt muons [ns]-----
+    // ----------------------------------------------------------
+    saveDir = "output/t0RPOnly/";
+    // Create the directory if it doesn't exist
+    if (gSystem->AccessPathName(saveDir.c_str())) {
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
+    for (const auto & wheel : wheelTag) {
+        for (const auto & chamb : chambTag) {
+            
+            std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
+            hist1 = (TH1F*)fileRPCOnly->Get(hName.c_str());
+            hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+
+            std::string wheel2 = wheel;
+            wheel2 = wheel2.erase(1, 2);  // Removes "W.": "Wh.-2"→ "W-2"
+
+            plot_t0_histograms( hist1, hist2, 
+                                "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched", 
+                                "Time of the TPs associated with prompt muons [ns]", 
+                                (wheel2+" "+chamb).c_str(),
+                                "RPC only",
+                                saveDir, 
+                                true);
+
+        }
+    }
+
+    for (const auto & wheel : wheelTag) {
+        for (const auto & chamb : chambTag) {
+            
+            std::string hName = "hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched";
+            hist1 = (TH1F*)fileRPCOnly->Get(hName.c_str());
+            hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+
+            std::string wheel2 = wheel;
+            wheel2 = wheel2.erase(1, 2);  // Removes "W.": "Wh.-2"→ "W-2"
+
+            plot_BX_histograms( hist1, hist2, 
+                                "hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched", 
+                                "BX of the TPs associated with prompt muons [ns]", 
+                                (wheel2+" "+chamb).c_str(),
+                                "RPC only",
+                                saveDir, 
+                                false);
+
+        }
+    }
 
 
     std::cout << "--------------------------------" << std::endl;

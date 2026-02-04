@@ -47,21 +47,34 @@ bool fileExists(const std::string& path) {
     return (stat(path.c_str(), &buffer) == 0);
 }
 
-bool checkFilesInDirectory(const std::vector<std::string>& filenames, 
+// bool checkFilesInDirectory(const std::vector<std::string>& filenames, 
+//                            const std::string& directory) {
+//     bool allExist = true;
+    
+//     for (const auto& filename : filenames) {
+//         std::string fullPath = directory + filename;
+        
+//         if (fileExists(fullPath)) {
+//             std::cout << "✓ Found: " << fullPath << std::endl;
+//         } else {
+//             std::cout << "✗ Missing: " << fullPath << std::endl;
+//             allExist = false;
+//         }
+//     }
+    
+//     return allExist;
+// }
+
+bool checkFilesInDirectory(const std::string& filename, 
                            const std::string& directory) {
     bool allExist = true;
-    
-    for (const auto& filename : filenames) {
-        std::string fullPath = directory + filename;
-        
-        if (fileExists(fullPath)) {
-            std::cout << "✓ Found: " << fullPath << std::endl;
-        } else {
-            std::cout << "✗ Missing: " << fullPath << std::endl;
-            allExist = false;
-        }
+    std::string fullPath = directory + filename;
+    if (fileExists(fullPath)) {
+        std::cout << "✓ Found: " << fullPath << std::endl;
+    } else {
+        std::cout << "✗ Missing: " << fullPath << std::endl;
+        allExist = false;
     }
-    
     return allExist;
 }
 
@@ -142,7 +155,8 @@ void plot_eff_fake_rate(  std::string hName,
                 TH1F *hTotal1,
                 TH1F *hMatched2, 
                 TH1F *hTotal2,
-                std::string saveDir ) 
+                std::string str_leg = "",
+                std::string saveDir = "") 
 {
 
     // Check if histograms exist
@@ -323,7 +337,7 @@ void plot_eff_fake_rate(  std::string hName,
     // Add legend
     // TLegend* leg = new TLegend(0.75, 0.1, 0.9, 0.25);
     TLegend* leg = new TLegend(0.75, 0.75, 0.9, 0.9);
-    leg->AddEntry(effPlot1, "DT AM", "lp");
+    leg->AddEntry(effPlot1, str_leg.c_str(), "lp"); // "DT AM"
     leg->AddEntry(effPlot2, "DT AM+RPC", "lp");
     leg->Draw();
 
@@ -342,6 +356,7 @@ void plot_t0_histograms(   TH1F *hist1,
                             TH1F *hist2, 
                             std::string str_name,
                             std::string str_Xaxis,
+                            std::string str_wh_ch,
                             std::string str_leg = "",
                             std::string saveDir = "",
                             bool norm=false,
@@ -366,7 +381,7 @@ void plot_t0_histograms(   TH1F *hist1,
     // // Extract the first four characters
     // std::string firstFourChars = originalString.substr(0, 4);
     std::cout<< "------------------------------------------------ " << std::endl;
-    std::cout<< "   " << str_leg << std::endl;
+    std::cout<< "   " << str_wh_ch << std::endl;
 
 
     double N;
@@ -494,7 +509,7 @@ void plot_t0_histograms(   TH1F *hist1,
     if (norm) text->Draw();
 
 
-    text = new TText(0.74,0.85,str_leg.c_str());
+    text = new TText(0.74,0.85,str_wh_ch.c_str());
     text->SetNDC(); // To use the canvas coordinates
     // text->SetTextAlign(31);
     text->SetTextSize(0.04);
@@ -508,7 +523,7 @@ void plot_t0_histograms(   TH1F *hist1,
 
     // // // Create a legend
     TLegend *legend = new TLegend(0.13, 0.6, 0.35, 0.85); // Adjust the coordinates as needed
-    legend->AddEntry(hist1,"DT AM", "l");
+    legend->AddEntry(hist1,str_leg.c_str(), "l"); // "DT AM"
     legend->AddEntry(hist1, str_stddev1.c_str(), "");
     legend->AddEntry(hist2, "DT AM w/ RPC", "l");
     legend->AddEntry(hist2, str_stddev2.c_str(), "");
@@ -735,14 +750,15 @@ void plot_t0_histogramsV2(  TH1F *hist1,
 }
 
 
-void plot_BX_histograms(   TH1F *hist1, 
-                            TH1F *hist2, 
-                            std::string str_name,
-                            std::string str_Xaxis,
-                            std::string str_leg = "",
-                            std::string saveDir = "",
-                            bool norm=false,
-                            bool logYflag=false) 
+void plot_BX_histograms(TH1F *hist1, 
+                        TH1F *hist2, 
+                        std::string str_name,
+                        std::string str_Xaxis,
+                        std::string str_wh_ch,
+                        std::string str_leg = "", 
+                        std::string saveDir = "",
+                        bool norm=false,
+                        bool logYflag=false) 
 {
 
     if (!hist1 || !hist2) {
@@ -762,47 +778,6 @@ void plot_BX_histograms(   TH1F *hist1,
 
     // // Extract the first four characters
     // std::string firstFourChars = originalString.substr(0, 4);
-    std::cout<< "------------------------------------------------ " << std::endl;
-    std::cout<< "   " << str_leg << std::endl;
-
-
-    // double N;
-    // double uncertainty1;
-    // double uncertainty2;
-    // // std::string str_stddev1 = "#sigma = "+(std::to_string(stddev1)).substr(0, 4);
-    // N = hist1->GetEntries();                    // Get the number of entries (N)
-    // uncertainty1 = stddev1 / std::sqrt(2 * N);   // Calculate the uncertainty of the standard deviation
-    // uncertainty1 = round(uncertainty1*100);
-    // uncertainty1 = uncertainty1/100;
-    // std::cout<< "stddev NoRPC: " <<  (std::to_string(stddev1)).substr(0, 4) << std::endl;
-    // std::cout<< "uncertainty NoRPC: " <<  uncertainty1 << std::endl;
-    // std::string str_stddev1 = "#sigma = "+(std::to_string(stddev1)).substr(0, 4)+ "#pm" +(std::to_string(uncertainty1)).substr(0, 4);
-
-    // // std::string str_stddev2 = "#sigma = "+(std::to_string(stddev2)).substr(0, 4);
-    // N = hist2->GetEntries();
-    // uncertainty2 = stddev2 / std::sqrt(2 * N);
-    // uncertainty2 = round(uncertainty2*100);
-    // uncertainty2 = uncertainty2/100;
-    // std::cout<< "stddev RPC: " <<  (std::to_string(stddev2)).substr(0, 4) << std::endl;
-    // std::cout<< "uncertainty RPC  : " <<  uncertainty2 << std::endl;
-    // std::string str_stddev2 = "#sigma = "+(std::to_string(stddev2)).substr(0, 4)+ "#pm" +(std::to_string(uncertainty2)).substr(0, 4);
-
-    // // Time improvement calculations
-
-    // double delta = (stddev1 - stddev2);
-    // double improvement = delta*100/ stddev1;
-    // double sigImp = (uncertainty1-uncertainty2)*100/uncertainty1;
-    // double sigDelta = sqrt( pow(uncertainty1,2) + pow(uncertainty2,2) );
-    // double zScore = delta/sigDelta;
-    // std::cout<< "delta: " <<  delta << std::endl;
-    // std::cout<< "Improvement: " <<  improvement <<  " %" << std::endl;
-    // std::cout<< "Uncertainty Improvement: " <<  sigImp <<  " %" << std::endl;
-    // std::cout<< "Segma Delta (Combined Uncertainty): " <<  sigDelta << std::endl;
-    // std::cout<< "Z (Z Score): " <<  zScore << "  (If Z > 2, the difference is statistically significant.)" <<  std::endl;
-    // std::cout<< "& $" <<  (std::to_string(stddev1)).substr(0, 4) << "\\pm" << (std::to_string(uncertainty1)).substr(0, 4) 
-    //                 << "$ & $" << (std::to_string(stddev2)).substr(0, 4) << "\\pm" << (std::to_string(uncertainty2)).substr(0, 4) 
-    //                 << "$ & " <<  improvement << " & " << sigImp << " & " << zScore << std::endl;
-    // std::cout<< "------------------------------------------------ " << std::endl;
 
     hist1->SetTitle("");
     hist2->SetTitle("");
@@ -887,7 +862,7 @@ void plot_BX_histograms(   TH1F *hist1,
     if (norm) text->Draw();
 
 
-    text = new TText(0.74,0.85,str_leg.c_str());
+    text = new TText(0.74,0.85,str_wh_ch.c_str());
     text->SetNDC(); // To use the canvas coordinates
     // text->SetTextAlign(31);
     text->SetTextSize(0.04);
@@ -901,7 +876,7 @@ void plot_BX_histograms(   TH1F *hist1,
 
     // // // Create a legend
     TLegend *legend = new TLegend(0.13, 0.5, 0.35, 0.85); // Adjust the coordinates as needed
-    legend->AddEntry(hist1,"DT AM", "l");
+    legend->AddEntry(hist1,str_leg.c_str(), "l"); // "DT AM"
     // legend->AddEntry(hist1, str_stddev1.c_str(), "");
     legend->AddEntry(hist2, "DT AM w/ RPC", "l");
     // legend->AddEntry(hist2, str_stddev2.c_str(), "");
@@ -1024,16 +999,16 @@ void plot_normal_histograms(TH1F *hist1,
     text->Draw();
 
 
-    text = new TText(0.74,0.85,str_leg.c_str());
-    text->SetNDC(); // To use the canvas coordinates
-    // text->SetTextAlign(31);
-    text->SetTextSize(0.04);
-    if (norm) text->Draw();
+    // text = new TText(0.74,0.85,str_leg.c_str());
+    // text->SetNDC(); // To use the canvas coordinates
+    // // text->SetTextAlign(31);
+    // text->SetTextSize(0.04);
+    // if (norm) text->Draw();
 
     // // // Create a legend
     // TLegend *legend = new TLegend(0.65, 0.7, 0.87, 0.85); // Adjust the coordinates as needed 
     TLegend* legend = new TLegend(0.73, 0.75, 0.9, 0.9);
-    legend->AddEntry(hist1,"DT AM", "l");
+    legend->AddEntry(hist1, str_leg.c_str(), "l"); // "DT AM"
     // legend->AddEntry(hist1, (std::to_string(N1)).c_str(), "");
     legend->AddEntry(hist2, "DT AM+RPC", "l");
     // legend->AddEntry(hist2, (std::to_string(N2)).c_str(), "");
