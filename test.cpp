@@ -18,7 +18,9 @@ int test() {
     // flagRPCselection = 3  : RPC single hit not associated to any DT segment
     // flagRPCselection = 10 : RPC Flag == 0 &&  RPC Flag == 1.   "RPC Flag == 0": segment that could not be matched to any RPC cluster
 
-    int flagRPCselection = 1;
+    int flagRPCselection = 0;
+
+    bool booltest = false;
 
     // ------------------------------------------------------------------------------
     // INPUT FILES
@@ -27,9 +29,9 @@ int test() {
     std::map<std::string,std::string> m_files;
     m_files["noRPC"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
     m_files["RPC"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
-    // m_files["RPCUpdated"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root";
-    // m_files["noRPCUpdated"] = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root";
-    // m_files["RPCOnly"]      = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
+    m_files["RPCUpdated"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root";
+    m_files["noRPCUpdated"] = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root";
+    m_files["RPCOnly"]      = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
     m_files["test"]         = "test.root"; // It is a copy of m_files["RPC"]
 
     // ------------------------------------------------------------------------------
@@ -60,23 +62,15 @@ int test() {
         else{ if ( file_name == m_files["test"] ) continue; }
 
         std::cout << "-------------------------------------------" <<std::endl;
-        std::cout << inputDir+file_name << "\n" <<std::endl;
-        std::cout << "-------------------------------------------" <<std::endl;
+        std::cout << "["+name+"]: "+inputDir+file_name+"\n" <<std::endl;
+        // std::cout << "-------------------------------------------" <<std::endl;
 
-        bool loopfile = false;
-        if ( m_files.find("RPCOnly") != m_files.end() ) {
-            if (file_name.find(m_files["RPCOnly"]) != std::string::npos)  loopfile = true;
-        }
-        else if ( m_files.find("RPCUpdated") != m_files.end() ) {
-            if (file_name.find(m_files["RPCUpdated"]) != std::string::npos)  loopfile = true;
-        }
-        else if ( m_files.find("RPC") != m_files.end() ) {
-            if (file_name.find(m_files["RPC"]) != std::string::npos)  loopfile = true;
-        }
-        else if ( m_files.find("test") != m_files.end() ) {
-            if (file_name.find(m_files["test"]) != std::string::npos)  loopfile = true;
-        }
-
+        bool fileRPCflag = false;
+        if ( name == "RPCOnly" ) fileRPCflag = true;
+        else if ( name == "RPCUpdated" ) fileRPCflag = true;
+        else if ( name == "RPC" ) fileRPCflag = true;
+        else if ( name == "test" ) fileRPCflag = true;
+   
         // ---------------------------------------
         // Making Map of Histograms 
         // ---------------------------------------
@@ -683,8 +677,8 @@ int test() {
                         Int_t trigAMBX  = ph2TpgPhiEmuAm_BX->at(iTrigAM);
                         Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(iTrigAM);
                         Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(iTrigAM);
-                     
-                        if (loopfile){
+
+                        if (fileRPCflag){
                             if (flagRPCselection == 1){
                                 if ( trigAMrpc != 1 ) continue;
                             }
@@ -698,20 +692,14 @@ int test() {
                                 if ( trigAMrpc != 1 && trigAMrpc != 0 ) continue;
                             }
                         }
+
+                        booltest = fileRPCflag;
                        
                         // For this file, we are ignoring the RPC flags 0 and 1 to simulate only RPC TPs
-                        if ( m_files.find("RPCOnly") != m_files.end() ) {
-                            if ( (file_name.find(m_files["RPCOnly"]) != std::string::npos)  ){
-                                if (trigAMrpc == 0) continue;
-                                if (trigAMrpc == 1) continue;
-                            }
+                        if ( name == "RPCOnly" ){
+                            if (trigAMrpc == 0) continue;
+                            if (trigAMrpc == 1) continue;
                         }
-
-                        // if ( (file_name.find(m_files["RPCOnly"]) != std::string::npos)  ){
-                        //     if (trigAMrpc == 0) continue;
-                        //     if (trigAMrpc == 1) continue;
-                        // }
-
 
                         // m_plots["hPh2TpgPhiEmuAmBX"+whTag+chambTag+"_matched"]->Fill(trigAMBX);
 
@@ -815,29 +803,16 @@ int test() {
                         trigAMt0 = (trigAMt0 * 25 / 32);
                         if (fdebug) std::cout << "            trigAMt0 [ns]      : "<< trigAMt0 << std::endl;
 
-
-                        if ( m_files.find("RPCOnly") != m_files.end() ) {
-                            if ( (file_name.find(m_files["RPCOnly"]) != std::string::npos)  ){
-                                trigAMt0 = trigAMt0 - 390;
-                                if (fdebug) std::cout << "            trigAMt0 [ns](- 390 for onlyRPC): "<< trigAMt0 << std::endl;
-                            }
+                        if ( name == "RPCOnly" ){
+                            trigAMt0 = trigAMt0 - 390;
+                            if (fdebug) std::cout << "            trigAMt0 [ns](- 390 for onlyRPC): "<< trigAMt0 << std::endl;
                         }
                         else{
                             trigAMt0 = trigAMt0 - 500;
                             if (fdebug) std::cout << "            trigAMt0 [ns]( - 500): "<< trigAMt0 << std::endl;
                         }
 
-                        // if ( (file_name.find(m_files["RPCOnly"]) != std::string::npos) ){
-                        //     trigAMt0 = trigAMt0 - 390;
-                        //     if (fdebug) std::cout << "            trigAMt0 [ns](- 390 for onlyRPC): "<< trigAMt0 << std::endl;
-                        // }
-                        // else {
-                        //     trigAMt0 = trigAMt0 - 500;
-                        //     if (fdebug) std::cout << "            trigAMt0 [ns]( - 500): "<< trigAMt0 << std::endl;
-                        // }
-                       
                         m_plots["hPh2TpgPhiEmuAmT0"+whTag+chambTag+"_matched"]->Fill(trigAMt0);
-
                         m_plots["hPh2TpgPhiEmuAmBX"+whTag+chambTag+"_matched"]->Fill(besttrigAMBX);
 
                         // Organize Wheels and stations in 20 bins
@@ -942,7 +917,7 @@ int test() {
 
                 Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(itrig);
 
-                if (loopfile){
+                if (fileRPCflag){
                     if (flagRPCselection == 1){
                         if ( trigAMrpc != 1 ) continue;
                     }
@@ -956,15 +931,13 @@ int test() {
                         if ( trigAMrpc != 1 && trigAMrpc != 0 ) continue;
                     }
                 }
-                
+         
                 // For this file, we are ignoring the RPC flags 0 and 1 to simulate only RPC TPs
-                if ( m_files.find("RPCOnly") != m_files.end() ) {
-                    if ( (file_name.find(m_files["RPCOnly"]) != std::string::npos)  ){
-                        if (trigAMrpc == 0) continue;
-                        if (trigAMrpc == 1) continue;
-                    }
+                if ( name == "RPCOnly" ){
+                    if (trigAMrpc == 0) continue;
+                    if (trigAMrpc == 1) continue;
                 }
- 
+
                 m_plots["hTrigFlag"] -> Fill( trigAMrpc );
 
                 coutNTrigs++;
@@ -1070,97 +1043,11 @@ int test() {
         std::string histoDir = "";
         std::string effDir = "";
         // if (file_name.find("noRPC") != std::string::npos)
-        
-        if ( (m_files.find("noRPC") != m_files.end()) ) {
-            if (file_name.find(m_files["noRPC"]) != std::string::npos){
-                if (fdebug) std::cout << "Found '"<< m_files["noRPC"] <<"' in the filename!" << std::endl;
-                outputDir = "output/noRPC/";
-                histoDir =  "output/noRPC/histograms/";
-                effDir =    "output/noRPC/histograms/effPlots/";
-            }
-        }
-        else if ( (m_files.find("RPC") != m_files.end()) ) {
-            if (file_name.find(m_files["RPC"]) != std::string::npos){
-                if (fdebug) std::cout << "Found '"<< m_files["RPC"] <<"' in the filename!" << std::endl;
-                outputDir = "output/RPC/";
-                histoDir =  "output/RPC/histograms/";
-                effDir =    "output/RPC/histograms/effPlots/";
-            }
-        }
-        else if ( (m_files.find("RPCUpdated") != m_files.end()) ) {
-            if (file_name.find(m_files["RPCUpdated"]) != std::string::npos){
-                if (fdebug) std::cout << "Found '"<< m_files["RPCUpdated"] <<"' in the filename!" << std::endl;
-                outputDir = "output/RPCUpdated/";
-                histoDir =  "output/RPCUpdated/histograms/";
-                effDir =    "output/RPCUpdated/histograms/effPlots/";
-            }
-        }
-        else if ( (m_files.find("noRPCUpdated") != m_files.end()) ) {
-            if (file_name.find(m_files["noRPCUpdated"]) != std::string::npos){
-                if (fdebug) std::cout << "Found '"<< m_files["noRPCUpdated"] <<"' in the filename!" << std::endl;
-                outputDir = "output/noRPCUpdated/";
-                histoDir =  "output/noRPCUpdated/histograms/";
-                effDir =    "output/noRPCUpdated/histograms/effPlots/";
-            }
-        }
-        else if ( (m_files.find("RPCOnly") != m_files.end()) ) {
-            if (file_name.find(m_files["RPCOnly"]) != std::string::npos){
-                if (fdebug) std::cout << "Found '"<< m_files["RPCOnly"] <<"' in the filename!" << std::endl;
-                outputDir = "output/RPCOnly/";
-                histoDir =  "output/RPCOnly/histograms/";
-                effDir =    "output/RPCOnly/histograms/effPlots/";
-            }
-        }
-        else if ( (m_files.find("test") != m_files.end()) ) {
-            if (file_name.find(m_files["test"]) != std::string::npos){
-                if (fdebug) std::cout << "Found '"<< m_files["test"] <<"' in the filename!" << std::endl;
-                outputDir = "output/test/";
-                histoDir =  "output/test/histograms/";
-                effDir =    "output/test/histograms/effPlots/";
-            }
-        }
 
-
-        // if (file_name.find(m_files["noRPC"]) != std::string::npos)
-        // {
-        //     // std::cout << "Found 'noRPC' in the filename!" << std::endl;
-        //     if (fdebug) std::cout << "Found '"<< m_files["noRPC"] <<"' in the filename!" << std::endl;
-        //     outputDir = "output/noRPC/";
-        //     histoDir =  "output/noRPC/histograms/";
-        //     effDir =    "output/noRPC/histograms/effPlots/";
-        // } 
-        // else if (file_name.find(m_files["RPC"]) != std::string::npos) {
-        //     if (fdebug) std::cout << "Found '"<< m_files["RPC"] <<"' in the filename!" << std::endl; 
-        //     outputDir = "output/RPC/";
-        //     histoDir =  "output/RPC/histograms/";
-        //     effDir =    "output/RPC/histograms/effPlots/";
-        // }
-        // else if (file_name.find(m_files["noRPCUpdated"]) != std::string::npos) { 
-        //     if (fdebug) std::cout << "Found '"<< m_files["noRPCUpdated"] <<"' in the filename!" << std::endl;
-        //     outputDir = "output/noRPCUpdated/";
-        //     histoDir =  "output/noRPCUpdated/histograms/";
-        //     effDir =    "output/noRPCUpdated/histograms/effPlots/";
-        // }
-        // else if (file_name.find(m_files["RPCUpdated"]) != std::string::npos) { 
-        //     if (fdebug) std::cout << "Found '"<< m_files["RPCUpdated"] <<"' in the filename!" << std::endl;
-        //     outputDir = "output/RPCUpdated/";
-        //     histoDir =  "output/RPCUpdated/histograms/";
-        //     effDir =    "output/RPCUpdated/histograms/effPlots/";
-        // }
-        // else if (file_name.find(m_files["RPCOnly"]) != std::string::npos) { 
-        //     if (fdebug) std::cout << "Found '"<< m_files["RPCOnly"] <<"' in the filename!" << std::endl;
-        //     outputDir = "output/RPCOnly/";
-        //     histoDir =  "output/RPCOnly/histograms/";
-        //     effDir =    "output/RPCOnly/histograms/effPlots/";
-        // }
-        // else if (file_name.find(m_files["test"]) != std::string::npos) { 
-        //     if (fdebug) std::cout <<"Found '"<< m_files["test"] <<"' in the filename!" << std::endl;
-        //     outputDir = "output/test/";
-        //     histoDir =  "output/test/histograms/";
-        //     effDir =    "output/test/histograms/effPlots/";
-        // }
-
-
+        // if (fdebug) std::cout << "Found '"<< m_files[name] <<"' in the filename!" << std::endl;
+        outputDir = "output/"+name+"/";
+        histoDir =  "output/"+name+"/histograms/";
+        effDir =    "output/"+name+"/histograms/effPlots/";
 
         // Create the directory if it doesn't exist
         if (gSystem->AccessPathName(outputDir.c_str())) {
@@ -1264,6 +1151,8 @@ int test() {
         outFile.Close();
         std::cout << "All histograms saved in ROOT file: " << outputFile << std::endl;
         std::cout << "All plots saved in: " << outputDir << std::endl;
+        std::cout << "booltest: " << booltest << std::endl;
+        
     }
 
     std::cout << "----------------------------------" << std::endl;
