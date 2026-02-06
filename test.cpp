@@ -27,10 +27,10 @@ int test() {
     // ------------------------------------------------------------------------------
     std::string inputDir = "input/";
     std::map<std::string,std::string> m_files;
-    m_files["noRPC"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
-    m_files["RPC"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
-    m_files["RPCUpdated"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root";
-    m_files["noRPCUpdated"] = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root";
+    // m_files["noRPC"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
+    // m_files["RPC"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
+    // m_files["RPCUpdated"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root";
+    // m_files["noRPCUpdated"] = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root";
     m_files["RPCOnly"]      = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
     m_files["test"]         = "test.root"; // It is a copy of m_files["RPC"]
 
@@ -83,147 +83,11 @@ int test() {
         std::vector<std::string> chambTag = {"MB1",     "MB2", "MB3", "MB4"};
         std::vector<std::string> wheelTag = {"Wh.-2","Wh.-1","Wh.0","Wh.+1","Wh.+2",};
 
-        m_plots["hNSeg"] = new TH1D("hNSeg", "Number of Segments ; Number of Segments; Entries / Event", 50, 0, 300);
-        m_plots["hNTrigs"] = new TH1D("hNTrigs", "Number of Triggers ; Number of Triggers; Entries / Event", 50, 0, 300);
-
-        m_plots["hRatioNtpNseg_total"] = new TH1D("hRatioNtpNseg_total", "Number of Triggers / Number of Segments ; N tp / N seg; Entries", 20, 0, 10);
-
-        m_plots["hGenSegments"] = new TH1D("hGenSegments", "Segments per Generated Muons ; Segments per Gen; Entries", 6, 0, 6);
-        m_plots["hGenTP"] = new TH1D("hGenTP", "Trigger Primitives per Generated Muons ; Trigger Primitives per Gen; Entries", 6, 0, 6);
-
-        m_plots["TPMatched"] = new TH1D("TPMatched", "Trigger Primitive Matched per Event; TP Matched per Event; Entries", 40, 0, 40);
-        m_plots["hTPMatchedRPCflag"] = new TH1D("hTPMatchedRPCflag", "Trigger Primitive Matched RPC Flag; RPC Flag; Entries", 5, 0, 5);
-
-        m_plots["hTrigFlag"] = new TH1D("hTrigFlag", "Trigger Primitive RPC Flag; RPC Flag; Entries", 5, 0, 5);
-        
-        m_plots["TPnotMatched"] = new TH1D("TPnotMatched", "Trigger Primitive not Matched per Event; TP not Matched per Event; Entries", 100, 0, 300);
-
-        m_plots["fakeRate_TPnot_matched"] = new TH1D("fakeRate_TPnot_matched", "TPs not Matched; Wheel; Fake Rate", 22, 0, 22); // 22, 0, 22  5, -2.5, +2.5
-        m_plots["fakeRate_TPnot_total"] = new TH1D("fakeRate_TPnot_total", "TPs not Matched; Wheel; Fake Rate", 22, 0, 22);
-
-        m_plots["fakeRate_WheelStationTP_matched"] = new TH1D("fakeRate_WheelStationTP_matched", "Trigger Primitive not Matched; Wheel; Fake Rate",  22, 0, 22);
-        m_plots["fakeRate_WheelStationTP_total"] = new TH1D("fakeRate_WheelStationTP_total", "Trigger Primitive not Matched; Wheel; Fake Rate",  22, 0, 22);
-
-        m_plots["fakeRate_EventWheelStationTP_matched"] = new TH1D("fakeRate_EventWheelStationTP_matched", "Trigger Primitive not Matched per Event; Wheel; Fake TPs / Event",  22, 0, 22);
-        // m_plots["fakeRate_EventWheelStationTP_total"] = new TH1D("fakeRate_EventWheelStationTP_total", "Trigger Primitive not Matched per Event; Wheel; Fake Rate / Event", 21, 0, 21);
-        
-        m_plots["BX_forFakeRate"] = new TH1D("BX_forFakeRate", "BX used for Fake Rate calculations; Bunch Crossing [25ns]; Entries",40, 0, 40);
-
-        m_plots["RPCFlag_forFakeRate"] = new TH1D("RPCFlag_forFakeRate", "RPC Flag for Fake Rate calculations; RPC Flag; Entries",5, 0, 5);
-
-        m_plots["Eff_TPwheels_matched"] = new TH1D("Eff_TPwheels_matched", "DT TP Local Efficiency; Wheel; Efficiency",22, 0, 22);
-        m_plots["Eff_TPwheels_total"] = new TH1D("Eff_TPwheels_total", "DT TP Local Efficiency; Wheel; Efficiency", 22, 0, 22);
-
-        m_plots2["hGenIdxVsNSeg"] = new TH2D("hGenIdxVsNSeg", "GenMuon Index vs Number of Segments; GenMuon Index; Number of Segments", 3750, 0, 3750, 100, 0, 6);
-        // m_plots2["hGenIdxVsNSeg"] = new TH2D("hGenIdxVsNSeg", "GenMuon Index vs Number of Segments; GenMuon Index; Number of Segments", 80, 0, 80, 100, 0, 6);
-        
         m_plots["hGenEta"] = new TH1D("hGenEta", "Gen Muon #eta distribution ; #eta; Entries", 200, -1.5, +1.5);
         m_plots["hGenPt"] = new TH1D("hGenPt", "Gen Muon pT distribution ; pT; Entries", 200, 0, 200);
         m_plots["hGenIdPDG"] = new TH1D("hGenIdPDG", "Gen PDG ID ; PDG ID; Entries", 40, -20, 20);
 
-        // m_plots["hGenEta"] = new TH1D("hGenEta", "Gen Muon #eta distribution ; #eta; Entries", 200, -1.5, +1.5);
-
-        m_plots2["hGenEtaVsSegEta"] = new TH2D("hGenEtaVsSegEta", "Eta Gen vs Eta Segments; Eta Gen; Eta Segments", 100, -4, 4, 100, -4, 4);
-        m_plots2["hGenPhiVsSegPhi"] = new TH2D("hGenPhiVsSegPhi", "Phi Gen vs Phi Segments; Phi Gen; Phi Segments", 100, -4, 4, 100, -4, 4);
-
-        m_plots["EffEtaGenSeg_total"] = new TH1D("EffEtaGenSeg_total", "Muon Reconstruction Efficiency; #eta; Efficiency", 100, -2, 2);
-        m_plots["EffEtaGenSeg_matched"] = new TH1D("EffEtaGenSeg_matched", "Muon Reconstruction Efficiency; #eta; Efficiency", 100, -2, 2);
-
-        m_plots["EffEtaGenSeg20_total"] = new TH1D("EffEtaGenSeg20_total", "Muon Reconstruction Efficiency; #eta; Efficiency", 100, -2, 2);
-        m_plots["EffEtaGenSeg20_matched"] = new TH1D("EffEtaGenSeg20_matched", "Muon Reconstruction Efficiency; #eta; Efficiency", 100, -2, 2);
-
-        m_plots["hSegStationWhM2"] = new TH1D("hSegStationWhM2", "Segment hits per station in Wheel -2; Station; Entries", 6, 0, 6);
-        m_plots["hSegStationWhM1"] = new TH1D("hSegStationWhM1", "Segment hits per station in Wheel -1; Station; Entries", 6, 0, 6);
-        m_plots["hSegStationWh0"] = new TH1D("hSegStationWh0", "Segment hits per station in Wheel 0; Station; Entries", 6, 0, 6);
-        m_plots["hSegStationWhP1"] = new TH1D("hSegStationWhP1", "Segment hits per station in Wheel +1; Station; Entries", 6, 0, 6);
-        m_plots["hSegStationWhP2"] = new TH1D("hSegStationWhP2", "Segment hits per station in Wheel +2; Station; Entries", 6, 0, 6);
-
-        m_plots2["hSegWhVsSegStat"] = new TH2D("hSegWhVsSegStat", "Segment Wheel vs Segment Station; Wheel; Station", 5, -2, 3, 6, 0, 6);
-
-        m_plots["hSegmentPsi"] = new TH1D("hSegmentPsi", "Segment Psi distribution ; Psi; Entries", 200, -60, +60);
-        m_plots2["hSegmentPsiVST0"] = new TH2D("hSegmentPsiVST0", "Segment Psi distribution vs segment t0; Psi; Segment t0 (ns)", 200, -50, +50, 200, -100, 100);
-        m_plots["hGenSegDeltaPhi"] = new TH1D("hGenSegDeltaPhi", "Gen Muon - Segment Delta Phi distribution ; Delta Phi; Entries", 600, 0, 0.5);
-        m_plots["hGenSegDeltaEta"] = new TH1D("hGenSegDeltaEta", "Gen Muon - Segment Delta Eta distribution ; Delta Eta; Entries", 600, 0, 0.5);
-        for (const auto & chamb : chambTag) {
-            for (const auto & wheel : wheelTag) {
-                m_plots["hGenSegDeltaPhi"+wheel+chamb] = new TH1D(("hGenSegDeltaPhi"+wheel+chamb).c_str(),
-                "Gen Muon - Segment Delta Phi distribution ; Delta Phi; Entries", 600, 0, 0.5);
-                m_plots["hGenSegDeltaEta"+wheel+chamb] = new TH1D(("hGenSegDeltaEta"+wheel+chamb).c_str(),
-                "Gen Muon - Segment Delta Eta distribution ; Delta Eta; Entries", 600, 0,  0.5);
-
-                m_plots["hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched"] = new TH1D( ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str(),
-                ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched; Time of the TPs associated with prompt muons [ns]; Entries").c_str(), 27, -10, 10); // 40, 0, 700  // 40, 630, 650
-
-                // m_plots["hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched"] = new TH1D( ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str(),
-                // ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched; Time of the TPs associated with prompt muons [ns]; Entries").c_str(), 40, -120, -100); 
-
-                m_plots["hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched"] = new TH1D( ("hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched").c_str(),
-                ("hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched; BXs of the TPs associated with prompt muons [ns]; Entries").c_str(), 20, 10, 30); // 40, 0, 700  // 40, 630, 650
-
-                // m_plots["Eff_TPnotMatched"+wheel+chamb+"_total"] = new TH1D( ("Eff_TPnotMatched"+wheel+chamb+"_total").c_str(),
-                // ("Eff_TPnotMatched"+wheel+chamb+"_total; Efficiency of TP not Matched; Efficiency").c_str(), 20, 10, 30); // 40, 0, 700  // 40, 630, 650
-
-                // m_plots["Eff_TPnotMatched"+wheel+chamb+"_matched"] = new TH1D( ("Eff_TPnotMatched"+wheel+chamb+"_matched").c_str(),
-                // ("Eff_TPnotMatched"+wheel+chamb+"_matched; Efficiency of TP not Matched; Efficiency").c_str(), 20, 10, 30); // 40, 0, 700  // 40, 630, 650
-
-
-            }
-        }
-
-        for (const auto & algo : algoTag)
-        {
-            m_plots2["hSegmentPsiVSDeltaT0" + algo] = new TH2D(("hSegmentPsiVSDeltaT0_" + algo).c_str(),
-            "Segment Psi distribution vs Delta t0; Psi; Delta t0 (ns)",
-            200, -50, +50, 100, -50, 50);
-            m_plots["hPrimPsi" + algo] = new TH1D(("hPrimPsi_" + algo).c_str(),
-            (algo + " Primitives Psi distribution ; Psi; Entries").c_str(),
-            200, -60, +60);
-            m_plots2["hBXvsPrimPsi" + algo] = new TH2D(("hBXvsPrimPsi_" + algo).c_str(),
-            (algo + " BX vs Primitives Psi distribution ; BX; Psi").c_str(),
-            11, -5.5, 5.5, 13 ,-65., 65.);
-            m_plots["hDeltaPhi" + algo] = new TH1D(("hDeltaPhi_" + algo).c_str(),
-            (algo + " Primitive - Segment Delta Phi distribution ; Delta Phi; Entries").c_str(),
-            600, 0, 0.1);
-            m_plots["hEffvsSlope" + algo + "matched"] = new TH1D(("hEff_" + algo + "_matched" ).c_str(),
-            ("Efficiency for " + algo + "; Local Direction; Efficiency").c_str(),
-            50, -50, 50);
-            m_plots["hEffvsSlope" + algo + "total"] = new TH1D(("hEff_" + algo + "_total" ).c_str(),
-            ("Efficiency for "  + algo + "; Local Direction; Efficiency").c_str(),
-            50, -50, 50);
-            m_plots["hEffvsLxy" + algo + "matched"] = new TH1D(("hEffLxy_" + algo + "_matched" ).c_str(),
-            ("Efficiency for " + algo + "; Gen muon Lxy; Efficiency").c_str(),
-            50, 0, 310);
-            m_plots["hEffvsLxy" + algo + "total"] = new TH1D(("hEffLxy_" + algo + "_total" ).c_str(),
-            ("Efficiency for "  + algo + "; Gen muon Lxy; Efficiency").c_str(),
-            50, 0, 310);
-            for (const auto & chamb : chambTag)
-            {
-                for (const auto & total : totalTag)
-                {
-                    m_plots["Eff_" + chamb + "_" + algo + "_" + total] = new TH1D(("hEff_" + chamb + "_" + algo + "_" + total).c_str(),
-                    ("Efficiency for " + chamb + " " + algo + "; Sector; Efficiency").c_str(),
-                    5, -2.5, +2.5);
-                    m_plots["SegEff_" + chamb + "_" + algo + "_" + total] = new TH1D(("hSegEff_" + chamb + "_" + algo + "_" + total).c_str(),
-                    ("Segment efficiency for " + chamb + "; Sector; Efficiency").c_str(),
-                    5, -2.5, +2.5);
-                    m_plots["EffNoBX_" + chamb + "_" + algo + "_" + total] = new TH1D(("hEffNoBX_" + chamb + "_" + algo + "_" + total).c_str(),
-                    ("Efficiency for " + chamb + " " + algo + "; Sector; Efficiency").c_str(),
-                    5, -2.5, +2.5);
-                    m_plots["EffEta_" + chamb + "_" + algo + "_" + total] = new TH1D(("hEffEta_" + chamb + "_" + algo + "_" + total).c_str(),
-                    ("Efficiency vs Eta for " + chamb + " " + algo + "; #eta; Efficiency").c_str(),
-                    100, -1.5, +1.5);
-                    for (const auto & wheel : wheelTag)
-                    {
-                        m_plots["hEffvsSlope" + algo + chamb + wheel + total] = new TH1D(("hEff_" + wheel + "_" + chamb + "_" + algo + "_" + total ).c_str(),
-                            ("Efficiency for " + wheel + " " + chamb + " " + algo + "; Local Direction; Efficiency").c_str(),
-                        50, -50, 50);
-                        m_plots["hEffvsLxy" + algo + chamb + wheel + total] = new TH1D(("hEffLxy_" + wheel + "_" + chamb + "_" + algo + "_" + total ).c_str(),
-                        ("Efficiency for " + wheel + " " + chamb + " " + algo + "; Gen muon Lxy; Efficiency").c_str(),
-                        50, 0, 310);
-                    }
-                }
-            }
-        }
+        // m_plots["EffEtaGenSeg_total"] = new TH1D("EffEtaGenSeg_total", "Muon Reconstruction Efficiency; #eta; Efficiency", 100, -2, 2);
 
         // ---------------------------------
         // Open the ROOT file
@@ -240,7 +104,7 @@ int test() {
         Long64_t nEntries = tree->GetEntries();
 
 
-        // For vector type
+        // GEN information
         // --------------------------
         TBranch *branch_gen_nGenParts = tree->GetBranch("gen_nGenParts");
         int gen_nGenParts;
@@ -255,7 +119,8 @@ int test() {
         std::vector<float> *gen_phi = nullptr;
         tree->SetBranchAddress("gen_phi", &gen_phi);
 
-
+        // Segments (Reco Muon) information
+        // --------------------------
         TBranch *branch_ph2Seg_nSegments = tree->GetBranch("ph2Seg_nSegments");
         int ph2Seg_nSegments;
         branch_ph2Seg_nSegments->SetAddress(&ph2Seg_nSegments);
@@ -287,7 +152,8 @@ int test() {
         std::vector<float> *ph2Seg_dirLoc_z = nullptr;
         tree->SetBranchAddress("ph2Seg_dirLoc_z", &ph2Seg_dirLoc_z);
 
-        // ------------------------------------------------------------------------------
+        // Trigger Primitives information
+        // --------------------------
         TBranch *branch_ph2TpgPhiEmuAm_nTrigs = tree->GetBranch("ph2TpgPhiEmuAm_nTrigs");
         int ph2TpgPhiEmuAm_nTrigs;
         branch_ph2TpgPhiEmuAm_nTrigs->SetAddress(&ph2TpgPhiEmuAm_nTrigs);
@@ -388,7 +254,7 @@ int test() {
             // branch_gen_nGenParts->GetEntry(iEvent);
             // branch_ph2TpgPhiEmuAm_nTrigs->GetEntry(iEvent);
             
-            m_plots["hNSeg"] -> Fill( ph2Seg_nSegments );
+            // m_plots["hNSeg"] -> Fill( ph2Seg_nSegments );
             // m_plots["hNTrigs"] -> Fill( ph2TpgPhiEmuAm_nTrigs );
 
             
@@ -403,7 +269,7 @@ int test() {
 
             double RatioNtpNseg;
             RatioNtpNseg = double(ph2TpgPhiEmuAm_nTrigs) / double(ph2Seg_nSegments) ;
-            m_plots["hRatioNtpNseg_total"] -> Fill( RatioNtpNseg );
+            // m_plots["hRatioNtpNseg_total"] -> Fill( RatioNtpNseg );
 
             numTPEvent = 0;
             denTPEvent = 0;
@@ -431,735 +297,124 @@ int test() {
 
                 if (std::abs(gen_pdgId->at(iGenPart)) != 13 || gen_pt->at(iGenPart) < m_minMuPt) continue;
 
-                m_plots["EffEtaGenSeg20_total"] -> Fill( gen_eta->at(iGenPart) );
+                // m_plots["EffEtaGenSeg20_total"] -> Fill( gen_eta->at(iGenPart) );
 
-                std::vector<std::size_t> bestSegIndex = { 999, 999, 999, 999 };
-                std::vector<Int_t> bestSegNHits       = { 0, 0, 0, 0 };
+                // std::vector<std::size_t> bestSegIndex = { 999, 999, 999, 999 };
+                // std::vector<Int_t> bestSegNHits       = { 0, 0, 0, 0 };
                     
-                // -----------------------------
-                // Loop in the Segments (Reco Muons)
-                // -----------------------------
-                bool genFill = false;
-                if (fdebug) std::cout << "Loop in the Segments and Gen Particle Matching " << std::endl;
-                if (fdebug) std::cout << "Number of ph2 Segments in this event: " << ph2Seg_nSegments << std::endl;
-                for (std::size_t iSeg = 0; iSeg < ph2Seg_nSegments; ++iSeg) {
-
-                    Int_t segSt    = ph2Seg_station->at(iSeg);
-                    Int_t segNHits = ph2Seg_phi_nHits->at(iSeg);
-                    Int_t segZNHits = ph2Seg_z_nHits->at(iSeg);
-                    
-                    // -------------------------------------
-                    // Segments quality selection
-                    // -------------------------------------
-                    if (abs(ph2Seg_phi_t0->at(iSeg)) > m_maxSegT0 ) continue;
-                    // if (abs(seg_wheel->at(iSeg))==2 && segSt==4) cout << "Found! muSegDPhi=" << muSegDPhi<< " genPhi="<< gen_phi->at(iGenPart) << " seg_posGlb_phi=" << seg_posGlb_phi->at(iSeg)  << " muSegDEta=" << muSegDEta << " segNHits=" << segNHits << " segZNHits=" << segZNHits  << endl;
-                    
-                    Double_t muSegDPhi = std::abs(acos(cos(gen_phi->at(iGenPart) - ph2Seg_posGlb_phi->at(iSeg))));
-                    Double_t muSegDEta = std::abs(gen_eta->at(iGenPart) - ph2Seg_posGlb_eta->at(iSeg));
-                
-                    if (muSegDPhi < m_maxMuSegDPhi &&
-                        muSegDEta < m_maxMuSegDEta &&
-                        segNHits >= m_minSegHits &&
-                        (segZNHits >= m_minZSegHits  || segSt==4) &&
-                        segNHits >= bestSegNHits.at(segSt - 1))
-                    {
-                        // Update Best Segment. Stores the hit count and index of the best-matched segment per station.
-                        bestSegNHits[segSt - 1] = segNHits; 
-                        bestSegIndex[segSt - 1] = iSeg;
-                        //   if (abs(seg_wheel->at(iSeg))==2 && segSt==4) cout << "Found!" << endl;
-                    }
-
-                    if (genFill == false) {
-                        m_plots["EffEtaGenSeg_matched"] -> Fill( gen_eta->at(iGenPart) );
-                        m_plots["EffEtaGenSeg20_matched"] -> Fill( gen_eta->at(iGenPart) );
-                        genFill = true;
-                    }
-
-                }// END loop segments
-
-                // Print elements of the vector for test
-                if (fdebug) {
-                std::cout << " \n ------------------------------------------- \n";
-                std::cout << "Best Segments Index" << std::endl;
-                for (size_t iSeg = 0; iSeg < bestSegIndex.size(); ++iSeg) {
-                    std::cout << bestSegIndex[iSeg] << " , ";
-                }
-                std::cout << " \n ------------------------------------------- \n";
-                for (size_t iSeg = 0; iSeg < bestSegIndex.size(); ++iSeg) {
-                    if (bestSegIndex[iSeg] == 999) continue;
-                    Int_t segSt     = ph2Seg_station->at(bestSegIndex[iSeg]);
-                    Int_t segWh  = ph2Seg_wheel->at(bestSegIndex[iSeg]);
-                    Int_t segSec = ph2Seg_sector->at(bestSegIndex[iSeg]);
-                    if (segSec == 13) segSec = 4;
-                    if (segSec == 14) segSec = 10;
-                    std::cout << "  Seg Wheel: " << segWh << " | Seg Sector: "<< segSec << " | Seg Station: " << segSt <<  std::endl;
-                }
-                std::cout << "Best Segments Number of Hits" << std::endl;
-                for (size_t iSeg = 0; iSeg < bestSegNHits.size(); ++iSeg) {
-                    std::cout << bestSegNHits[iSeg] << " , ";
-                }
-                std::cout << " \n";
-                }
-
-                // Quality Code
-                // LOWQ 1 -> 3 hits
-                // CLOWQ 2 -> 3+2
-                // HIGHQ 3 -> 4 hits
-                // CHIGHQ 4 -> 4+2
-                // LOWLOWQ 6 -> 3+3
-                // HIGHLOWQ 7 -> 4+3
-                // HIGHHIGHQ 8 -> 4+4
-
-                TString quality_;
-                quality_ = "All";
-                
-                // quality_ = "Q8";
-
-                // enum MP_QUALITY { NOPATH = 0, LOWQ = 1, CLOWQ = 2, HIGHQ = 3, CHIGHQ = 4, LOWLOWQ = 6, HIGHLOWQ = 7, HIGHHIGHQ = 8 };
-                int LOWQ = 1;
-                int CLOWQ = 2;
-                int HIGHQ = 3;
-                int CHIGHQ = 4;
-                int LOWLOWQ = 6;
-                int HIGHLOWQ = 7;
-                int HIGHHIGHQ = 8;
-                
-                int minQuality = -99;
-                int minQualityPh1 = -99;
-                int maxIndex = 9999;
-                bool qualityMatched = false;
-                bool qualityORSegs = false;
-                bool qualityORSegsClus = false;
-                bool qualityMatchedORSegs = false;
-                bool qualityMatchedORSegsClus = false;
-                bool qualityCorrelated = false;
-                bool qualityConfirmed = false;
-                bool qualityLegacy = false;
-                
-                if (quality_ == "nothreehits"){
-                minQuality = CLOWQ;
-                }
-                else if (quality_ == "index0")
-                maxIndex = 0;
-                else if (quality_ == "index01")
-                maxIndex = 1;
-                else if (quality_ == "index012")
-                maxIndex = 2;
-                else if (quality_ == "index0123")
-                maxIndex = 3;
-                else if (quality_ == "withmatchedthreehits")
-                qualityMatched = true;
-                else if (quality_ == "qualityORSegs")
-                qualityORSegs = true;
-                else if (quality_ == "qualityORSegsClus")
-                qualityORSegsClus = true;
-                else if (quality_ == "qualityMatchedORSegs")
-                qualityMatchedORSegs = true;
-                else if (quality_ == "qualityMatchedORSegsClus")
-                qualityMatchedORSegsClus = true;
-                else if (quality_ == "correlated")
-                qualityCorrelated = true;
-                else if (quality_ == "confirmed")
-                qualityConfirmed = true;
-                else if (quality_ == "legacy")
-                qualityLegacy = true;
-                else if (quality_ == "Q8" ){
-                minQuality = HIGHHIGHQ;
-                minQualityPh1 = 6;
-                }
-                else if (quality_ == "All" )
-                minQuality = -999;
-                else {
-                cout << "Error: Efficiency category not found" << endl;
-                //  std::exit(EXIT_FAILURE);
-                }
-
-                // --------------------------
-                // Loop best segments
-                // --------------------------
-                if (fdebug) std::cout << "  Loop best segments " << std::endl; 
-                for (const auto & iSeg : bestSegIndex)
-                {
-                    if (fdebug) std::cout << "  --------------" << std::endl;
-                    if (fdebug) std::cout << "  Segment Index " << iSeg << std::endl; 
-                    if (iSeg == 999) continue;
-
-                    
-
-                    NbestSegment++;
-
-                    Int_t segSt    = ph2Seg_station->at(iSeg);
-                    Int_t segNHits = ph2Seg_phi_nHits->at(iSeg);
-                    Int_t segZNHits = ph2Seg_z_nHits->at(iSeg);
-
-                    Double_t muSegDPhi = std::abs(acos(cos(gen_phi->at(iGenPart) - ph2Seg_posGlb_phi->at(iSeg))));
-                    Double_t muSegDEta = std::abs(gen_eta->at(iGenPart) - ph2Seg_posGlb_eta->at(iSeg));
-
-                    m_plots["hSegmentPsi"] -> Fill( atan ( (ph2Seg_dirLoc_x->at(iSeg) / ph2Seg_dirLoc_z->at(iSeg)) ) * 360 / (2*TMath::Pi())  );
-                    m_plots2["hSegmentPsiVST0"] -> Fill( atan ( (ph2Seg_dirLoc_x->at(iSeg) / ph2Seg_dirLoc_z->at(iSeg)) ) * 360 / (2*TMath::Pi()) , ph2Seg_phi_t0->at(iSeg) );
-                    m_plots["hGenSegDeltaPhi"] -> Fill( muSegDPhi );
-                    m_plots["hGenSegDeltaPhi"+whTags.at(ph2Seg_wheel->at(iSeg)+2)+chambTags.at(segSt-1)] -> Fill( muSegDPhi );
-                    m_plots["hGenSegDeltaEta"] -> Fill( muSegDEta );
-                    m_plots["hGenSegDeltaEta"+whTags.at(ph2Seg_wheel->at(iSeg)+2)+chambTags.at(segSt-1)] -> Fill( muSegDEta );
-
-                    m_plots2["hGenEtaVsSegEta"] -> Fill( gen_eta->at(iGenPart), ph2Seg_posGlb_eta->at(iSeg) );
-                    m_plots2["hGenPhiVsSegPhi"] -> Fill( gen_phi->at(iGenPart) , ph2Seg_posGlb_phi->at(iSeg) );
-                    
-                    
-                    Int_t segWh  = ph2Seg_wheel->at(iSeg);
-                    Int_t segSec = ph2Seg_sector->at(iSeg);
-                    if (segSec == 13) segSec = 4;
-                    if (segSec == 14) segSec = 10;
-                    
-
-                    
-                    std::vector<int> tempVec;
-                    tempVec.push_back(segWh);
-                    tempVec.push_back(segSt);
-                    tempVec.push_back(segSec);
-                    SegMatchedWheelAndStation.push_back(tempVec);
-                    
-                    std::string chambTag = chambTags.at(segSt - 1);
-                    std::string whTag    = whTags.at(segWh + 2);
-                    std::string secTag   = secTags.at(segSec - 1);
-                    if (fdebug) std::cout << "  Seg Wheel: " << segWh << " | Seg Sector: "<< segSec << " | Seg Station: " << segSt <<  std::endl;
-
-                    m_plots2["hSegWhVsSegStat"] -> Fill( segWh , segSt );
-
-                    if (segWh == -2)
-                        m_plots["hSegStationWhM2"] -> Fill( segSt );
-                    else if (segWh == -1)
-                        m_plots["hSegStationWhM1"] -> Fill( segSt );
-                    else if (segWh == 0)
-                        m_plots["hSegStationWh0"] -> Fill( segSt );
-                    else if (segWh == 1)
-                        m_plots["hSegStationWhP1"] -> Fill( segSt );
-                    else if (segWh == 2)
-                        m_plots["hSegStationWhP2"] -> Fill( segSt );
-
-                    
-                    
-
-                    if (ph2Seg_phi_t0->at(iSeg) > -500)
-                    {
-                        m_plots["Eff_" + chambTag + "_Ph1_total"]->Fill(segWh);
-                        m_plots["EffNoBX_" + chambTag + "_Ph1_total"]->Fill(segWh);
-                        m_plots["EffEta_" + chambTag + "_Ph1_total"]->Fill(gen_eta->at(iGenPart));
-                        m_plots["hEffvsSlopePh1" + chambTag + whTag + "total"] -> Fill(atan ( (ph2Seg_dirLoc_x->at(iSeg) / ph2Seg_dirLoc_z->at(iSeg)) ) * 360 / (2*TMath::Pi()) );
-                        m_plots["hEffvsSlopePh1total"] -> Fill(atan ( (ph2Seg_dirLoc_x->at(iSeg) / ph2Seg_dirLoc_z->at(iSeg)) ) * 360 / (2*TMath::Pi()) );
-                        // if (DM_) m_plots["hEffvsLxyPh1" + chambTag + whTag + "total"] -> Fill( gen_lxy->at(iGenPart) );
-                        // if (DM_) m_plots["hEffvsLxyPh1total"] -> Fill( gen_lxy->at(iGenPart) );
-                    }
-
-                    // ==================== VARIABLES FOR THE ANALYTICAL METHOD ALGORITHM
-                    // Int_t    bestTPAM = -1;
-                    Int_t    bestTPAM = -999; // For test
-                    Int_t    bestTPNoBXAM = -1;
-                    Int_t    AMRPCflag= -1;
-                    Double_t bestSegTrigAMDPhi = 1000;
-                    Double_t bestSegTrigAMDPhiNoBX = 1000;
-                    Double_t bestAMDPhi = 0;
-                    Int_t    besttrigAMBX = 0;
-
-                    Double_t trigAMt0 = -999;
-
-                    // -----------------------------
-                    // Loop in the AM TP
-                    // -----------------------------
-                    if (fdebug) std::cout << "      Loop in the AM TP " << std::endl;
-                    if (fdebug) std::cout << "      Total number of TP in this event: "<< ph2TpgPhiEmuAm_nTrigs << std::endl;  
-                    for (std::size_t iTrigAM = 0; iTrigAM < ph2TpgPhiEmuAm_nTrigs; ++iTrigAM){
-
-                        
-                        Int_t trigAMWh  = ph2TpgPhiEmuAm_wheel->at(iTrigAM);
-                        Int_t trigAMSec = ph2TpgPhiEmuAm_sector->at(iTrigAM);
-                        Int_t trigAMSt  = ph2TpgPhiEmuAm_station->at(iTrigAM);
-                        Int_t trigAMBX  = ph2TpgPhiEmuAm_BX->at(iTrigAM);
-                        Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(iTrigAM);
-                        Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(iTrigAM);
-
-                        if (fileRPCflag){
-                            if (flagRPCselection == 1){
-                                if ( trigAMrpc != 1 ) continue;
-                            }
-                            else if (flagRPCselection == 2){
-                                if ( trigAMrpc != 2 ) continue;
-                            }
-                            else if (flagRPCselection == 3){
-                                if ( trigAMrpc != 3 ) continue;
-                            }
-                            else if (flagRPCselection == 10){
-                                if ( trigAMrpc != 1 && trigAMrpc != 0 ) continue;
-                            }
-                        }
-
-                        booltest = fileRPCflag;
-                       
-                        // For this file, we are ignoring the RPC flags 0 and 1 to simulate only RPC TPs
-                        if ( name == "RPCOnly" ){
-                            if (trigAMrpc == 0) continue;
-                            if (trigAMrpc == 1) continue;
-                        }
-
-                        // m_plots["hPh2TpgPhiEmuAmBX"+whTag+chambTag+"_matched"]->Fill(trigAMBX);
-
-                        // -----------------------------
-                        // SEGMENTS AND TP MATCHING
-                        // -----------------------------
-                        if (segWh == trigAMWh && segSec == trigAMSec && segSt  == trigAMSt) {
-                            
-                            Double_t trigGlbPhi    = trigPhiInRad(ph2TpgPhiEmuAm_phi->at(iTrigAM),trigAMSec);
-                            Double_t finalAMDPhi   = ph2Seg_posGlb_phi->at(iSeg) - trigGlbPhi;
-                            Double_t segTrigAMDPhi = abs(acos(cos(finalAMDPhi)));
-                            if (fdebug) std::cout << "      iTrigAM: " << iTrigAM << " | Wheel: "<< trigAMWh << " | Sector: " << trigAMSec << " | Station: " << trigAMSt << " | trigAMBX: " << trigAMBX << " | segTrigAMDPhi: " << segTrigAMDPhi <<  std::endl;
-                            if (fdebug) std::cout << "          trigGlbPhi: " << trigGlbPhi << " | finalAMDPhi: " << finalAMDPhi << " | segTrigAMDPhi: " << segTrigAMDPhi <<  std::endl;
-
-                            m_plots["hPrimPsiAM"] -> Fill( ph2TpgPhiEmuAm_dirLoc_phi->at(iTrigAM) );
-                            m_plots["hDeltaPhiAM"] -> Fill( segTrigAMDPhi );
-                            m_plots2["hBXvsPrimPsiAM"] -> Fill ( trigAMBX - 20 , atan ( (ph2Seg_dirLoc_x->at(iSeg) / ph2Seg_dirLoc_z->at(iSeg)) ) * 360 / (2*TMath::Pi()));
-                            if (segNHits == 8) 
-                                m_plots["SegEff_" + chambTag + "_AM_matched"] -> Fill(segWh);
-                            m_plots["SegEff_" + chambTag + "_AM_total"] -> Fill(segWh);
-                            m_plots2["hSegmentPsiVSDeltaT0AM"]->Fill(  atan ( (ph2Seg_dirLoc_x->at(iSeg) / ph2Seg_dirLoc_z->at(iSeg)) ) * 360 / (2*TMath::Pi()) , ph2TpgPhiEmuAm_t0->at(iTrigAM) - 20*25 - ph2Seg_phi_t0->at(iSeg) );
-
-                            if (ph2TpgPhiEmuAm_index->at(iTrigAM) > maxIndex ) continue;
-                            // if (ph2TpgPhiEmuAm_quality->at(iTrigAM) < minQuality ) continue;
-                            if (qualityORSegs && ( (trigAMqual < LOWQ && trigAMqual > -1) || ( trigAMqual ==-1 && trigAMrpc!=2 ) )) continue;
-                            if (qualityORSegsClus &&  (trigAMqual < LOWQ && trigAMqual > -1)  ) continue;
-                            if (qualityMatched && ( (ph2TpgPhiEmuAm_quality->at(iTrigAM) < LOWQ && ph2TpgPhiEmuAm_rpcFlag->at(iTrigAM)==0 ) || ( ph2TpgPhiEmuAm_quality->at(iTrigAM) ==-1 ) ) ) continue;
-                            if (qualityMatchedORSegs && ( ( (trigAMqual < LOWQ && trigAMrpc==0 ) && trigAMqual > -1) || ( trigAMqual ==-1 && trigAMrpc!=2 ) )) continue;
-                            if (qualityMatchedORSegsClus && ( ( (trigAMqual < LOWQ && trigAMrpc==0 ) && trigAMqual > -1) )) continue;
-                            if (qualityCorrelated && (trigAMqual < LOWLOWQ)) continue;
-                            if (qualityConfirmed && (trigAMqual < LOWLOWQ && trigAMqual != CLOWQ && trigAMqual != CHIGHQ)) continue;
-                            if (qualityLegacy && (trigAMqual < HIGHQ)) continue;
-
-                            // std::cout << "   Denominator -------- \n " << std::endl; 
-
-                            if ((segTrigAMDPhi < m_maxSegTrigDPhi) && (trigAMBX == 20) && (bestSegTrigAMDPhi > segTrigAMDPhi) && (ph2TpgPhiEmuAm_quality->at(iTrigAM) >= minQuality))
-                            {
-                                bestTPAM          = iTrigAM;
-                                besttrigAMBX      = trigAMBX;
-                                bestSegTrigAMDPhi = segTrigAMDPhi;
-                                // bestAMDPhi        = TVector2::Phi_mpi_pi(finalAMDPhi);
-                                AMRPCflag         = ph2TpgPhiEmuAm_rpcFlag->at(iTrigAM);
-
-                                // std::cout << "   bestTPAM : " << bestTPAM << std::endl; 
-                            }
-                            if (segTrigAMDPhi < m_maxSegTrigDPhi && (bestSegTrigAMDPhiNoBX > segTrigAMDPhi) && (ph2TpgPhiEmuAm_quality->at(iTrigAM) >= minQuality))
-                            {
-                                bestTPNoBXAM          = iTrigAM;
-                                bestSegTrigAMDPhiNoBX = segTrigAMDPhi;
-                                trigAMt0 = ph2TpgPhiEmuAm_t0->at(iTrigAM);
-
-                            }
-                            
-
-
-                        } // End Conditional Matching
-
-                    } // End Loop TP        
-
-                    // ----------------------------
-                    // NUMERATOR
-                    // ----------------------------
-                    if (bestTPAM > -1 && ph2Seg_phi_t0->at(iSeg) > -500)
-                    {
-                        vbestTPAM.push_back(bestTPAM);
-                        if (fdebug) std::cout << "  Fill MATCHING Histograms (Efficient)" << std::endl;
-                        if (fdebug) std::cout << "  bestTPAM: "<< bestTPAM << std::endl;
-
-                        Ntrigger++;
-
-                        // cout << iEvent << " " << 1 << " "<< segWh << " " << segSec << " " << segSt << " " << ph2Seg_phi_nHits->at(iSeg) << " " << getPh1Hits(segWh,segSec,segSt) << " " << getPh2Hits(segWh,segSec,segSt) <<endl;
-                        //        cout << "Efficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) <<endl;
-                        // cout << "Efficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) << " Primitive iTrig " << bestTPAM << " out of " <<  ph2TpgPhiEmuAm_nTrigs  << " Quality: " << ph2TpgPhiEmuAm_quality->at(bestTPAM) << " t0=" << ph2TpgPhiEmuAm_t0->at(bestTPAM)  <<endl;
-                        // cout << "Eficiente!" << endl;
-
-                        // cout << iEvent << " " << 1 << " "<< segWh << " " << segSec << " " << segSt << " " << ph2Seg_phi_nHits->at(iSeg) << " " <<endl;
-                        // cout << "Efficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) <<endl;
-                        // cout << "Efficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) << " Primitive iTrig " << bestTPAM << " out of " <<  ph2TpgPhiEmuAm_nTrigs  << " Quality: " << ph2TpgPhiEmuAm_quality->at(bestTPAM) << " t0=" << ph2TpgPhiEmuAm_t0->at(bestTPAM)  <<endl;
-                        // cout << "Eficiente!" << endl;
-                        
-                        // std::cout << "NUMERATOR Here: " << std::endl;
-                        numTP++;
-                        numTPEvent++;
-                        numTPAll++;
-
-                        m_plots["hTPMatchedRPCflag"]->Fill(ph2TpgPhiEmuAm_rpcFlag->at(bestTPAM));
-
-
-                        
-
-                        m_plots["Eff_" + chambTag + "_AM_matched"]->Fill(segWh);
-                        m_plots["EffEta_" + chambTag + "_AM_matched"]->Fill(gen_eta->at(iGenPart));
-                        m_plots["hEffvsSlopeAM" + chambTag + whTag + "matched"] -> Fill(atan ( (ph2Seg_dirLoc_x->at(iSeg) / ph2Seg_dirLoc_z->at(iSeg)) ) * 360 / (2*TMath::Pi()) );
-                        // if (DM_) m_plots["hEffvsLxyAM" + chambTag + whTag + "matched"] -> Fill( gen_lxy->at(iGenPart) );
-                        // if (DM_) m_plots["hEffvsLxyAMmatched"] -> Fill( gen_lxy->at(iGenPart) );
-                        m_plots["hEffvsSlopeAMmatched"] -> Fill(atan ( (ph2Seg_dirLoc_x->at(iSeg) / ph2Seg_dirLoc_z->at(iSeg)) ) * 360 / (2*TMath::Pi()) );
-                        if (AMRPCflag > 0) m_plots["Eff_" + chambTag + "_AM+RPC_matched"]->Fill(segWh);
-
-                        if (fdebug) std::cout << "            trigAMt0 (DCS)      : "<< trigAMt0 << std::endl;
-                        // trigAMt0 = (trigAMt0 * 25 / 32); // DCS to ns   OBS: Need to change the range in the histogram to [-10,10]
-                        trigAMt0 = (trigAMt0 * 25 / 32);
-                        if (fdebug) std::cout << "            trigAMt0 [ns]      : "<< trigAMt0 << std::endl;
-
-                        if ( name == "RPCOnly" ){
-                            trigAMt0 = trigAMt0 - 390;
-                            if (fdebug) std::cout << "            trigAMt0 [ns](- 390 for onlyRPC): "<< trigAMt0 << std::endl;
-                        }
-                        else{
-                            trigAMt0 = trigAMt0 - 500;
-                            if (fdebug) std::cout << "            trigAMt0 [ns]( - 500): "<< trigAMt0 << std::endl;
-                        }
-
-                        m_plots["hPh2TpgPhiEmuAmT0"+whTag+chambTag+"_matched"]->Fill(trigAMt0);
-                        m_plots["hPh2TpgPhiEmuAmBX"+whTag+chambTag+"_matched"]->Fill(besttrigAMBX);
-
-                        // Organize Wheels and stations in 20 bins
-                        int wheelIdx = 0;
-                        if (segSt >= 1 && segSt <= 4 && segWh >= -2 && segWh <= 2) {
-                            wheelIdx = (segSt - 1) * 5 + (segWh + 2) + 1;
-                        }
-
-                        // Efficiency TP Numerator
-                        m_plots["Eff_TPwheels_matched"] -> Fill( wheelIdx );
-
-                        // Efficiency TP by sector Numerator
-                        std::string secTag = secTags.at(segSec - 1);
-                        m_plots["Eff_TPwheels_"+secTag+"_matched"]->Fill(wheelIdx);
-                        
-                        
-
-                    } else if (bestTPAM  < 0 && ph2Seg_phi_t0->at(iSeg) > -500) {
-                        // cout << iEvent << " " << -1 << " "<< segWh << " " << segSec << " " << segSt << " " << ph2Seg_phi_nHits->at(iSeg) << " " << getPh1Hits(segWh,segSec,segSt) << " " << getPh2Hits(segWh,segSec,segSt) <<endl;
-                        // cout << "Inefficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) <<endl;
-                        // cout << "Inefficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) << " Primitive iTrig " << bestTPAM << " out of " <<  ph2TpgPhiEmuAm_nTrigs  <<endl;
-
-                        // cout << iEvent << " " << -1 << " "<< segWh << " " << segSec << " " << segSt << " " << ph2Seg_phi_nHits->at(iSeg) <<endl;
-                        // cout << "Inefficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) <<endl;
-                        // cout << "Inefficient event " <<  iEvent << " in " << whTag << " " << secTag << " " << chambTag << " Segment hits: " << ph2Seg_phi_nHits->at(iSeg) << " Segment Position: " << ph2Seg_posLoc_x->at(iSeg) << " Primitive iTrig " << bestTPAM << " out of " <<  ph2TpgPhiEmuAm_nTrigs  <<endl;                      
-                    }
-                    if (bestTPNoBXAM > -1 && ph2Seg_phi_t0->at(iSeg) > -500)
-                    {
-                        m_plots["EffNoBX_" + chambTag + "_AM_matched"]->Fill(segWh);
-                    }
-                            
-                    // ----------------------------
-                    // DENOMINATOR
-                    // ----------------------------
-                    if (ph2Seg_phi_t0->at(iSeg) > -500)
-                    // if (  bestTPAM > -500 && ph2Seg_phi_t0->at(iSeg) > -500) // For test. This is to apply the 0.1 cut in the denominator as well
-                    {
-                        if (fdebug) std::cout << "  Fill TOTAL Histograms" << std::endl;
-
-                        m_plots["Eff_" + chambTag + "_AM_total"]->Fill(segWh);
-                        m_plots["EffNoBX_" + chambTag + "_AM_total"]->Fill(segWh);
-                        m_plots["EffEta_" + chambTag + "_AM_total"]->Fill(gen_eta->at(iGenPart));
-                        m_plots["hEffvsSlopeAM" + chambTag + whTag + "total"] -> Fill(atan ( (ph2Seg_dirLoc_x->at(iSeg) / ph2Seg_dirLoc_z->at(iSeg)) ) * 360 / (2*TMath::Pi()) );
-                        m_plots["hEffvsSlopeAMtotal"] -> Fill(atan ( (ph2Seg_dirLoc_x->at(iSeg) / ph2Seg_dirLoc_z->at(iSeg)) ) * 360 / (2*TMath::Pi()) );
-                        // if (DM_) m_plots["hEffvsLxyAM" + chambTag + whTag + "total"] -> Fill( gen_lxy->at(iGenPart) );
-                        // if (DM_) m_plots["hEffvsLxyAMtotal"] -> Fill( gen_lxy->at(iGenPart) );
-                        m_plots["Eff_" + chambTag + "_AM+RPC_total"]->Fill(segWh);
-
-                        // Organize Wheels and stations in 20 bins
-                        int wheelIdx = 0;
-                        if (segSt >= 1 && segSt <= 4 && segWh >= -2 && segWh <= 2) {
-                            wheelIdx = (segSt - 1) * 5 + (segWh + 2) + 1;
-                        }
-                        // Efficiency TP Denominator
-                        m_plots["Eff_TPwheels_total"]->Fill(wheelIdx);
-
-                        // Efficiency TP by sector Denominator
-                        std::string secTag = secTags.at(segSec - 1);
-                        m_plots["Eff_TPwheels_"+secTag+"_total"]->Fill(wheelIdx);
-
-                        // std::cout << "DENOMINATOR Here: " << std::endl;
-                        denTP++;
-                        denTPEvent++;
-                        denTPAll++;
-                    }
-
-                } // End Loop best segments 
-
-                
-
-                idxGen++;
-                m_plots2["hGenIdxVsNSeg"] -> Fill( idxGen, NbestSegment );
-
-                m_plots["hGenSegments"] -> Fill( NbestSegment );
-                m_plots["hGenTP"] -> Fill( Ntrigger );
-
-                // double eff = numTP / denTP;
-                if (fdebug) std::cout << "**********************" <<  std::endl;
-                if (fdebug) std::cout << "Numerator per Gen: "<<  numTP << std::endl;
-                if (fdebug) std::cout << "DENOMINATOR per Gen: "<<  denTP << std::endl;
-                // std::cout << "eff per Event: "<<  eff << std::endl;
-                if (fdebug) std::cout << "**********************" <<  std::endl;
                 
             } // END Loop Gen
 
-
-            if (fdebug) {
-                for (size_t i = 0; i < SegMatchedWheelAndStation.size(); ++i) {
-                    std::cout << "Segment " << i << ": ";
-                    std::cout << SegMatchedWheelAndStation[i][0] << " " << SegMatchedWheelAndStation[i][1]<< " " << SegMatchedWheelAndStation[i][2] << std::endl;
-                }   
-            }
-            
-            
-
-            if (fdebug) std::cout << "**********************" <<  std::endl;
-            if (fdebug) std::cout << "Numerator per Gen: "<<  numTP << std::endl;
-            if (fdebug) std::cout << "**********************" <<  std::endl;
-
-            int coutNTrigs = 0;
-            for (std::size_t itrig = 0; itrig < ph2TpgPhiEmuAm_nTrigs; ++itrig){
-
-                Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(itrig);
-
-                if (fileRPCflag){
-                    if (flagRPCselection == 1){
-                        if ( trigAMrpc != 1 ) continue;
-                    }
-                    else if (flagRPCselection == 2){
-                        if ( trigAMrpc != 2 ) continue;
-                    }
-                    else if (flagRPCselection == 3){
-                        if ( trigAMrpc != 3 ) continue;
-                    }
-                    else if (flagRPCselection == 10){
-                        if ( trigAMrpc != 1 && trigAMrpc != 0 ) continue;
-                    }
-                }
-         
-                // For this file, we are ignoring the RPC flags 0 and 1 to simulate only RPC TPs
-                if ( name == "RPCOnly" ){
-                    if (trigAMrpc == 0) continue;
-                    if (trigAMrpc == 1) continue;
-                }
-
-                m_plots["hTrigFlag"] -> Fill( trigAMrpc );
-
-                coutNTrigs++;
-
-                Int_t trigAMWh  = ph2TpgPhiEmuAm_wheel->at(itrig);
-                Int_t trigAMSt  = ph2TpgPhiEmuAm_station->at(itrig);
-                Int_t trigAMSec = ph2TpgPhiEmuAm_sector->at(itrig);
-                Int_t trigAMBX  = ph2TpgPhiEmuAm_BX->at(itrig);
-                // Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(itrig);
-
-                // if ( !(trigAMBX == 20) ) continue;
-
-                m_plots["BX_forFakeRate"] -> Fill( trigAMBX );
-                m_plots["RPCFlag_forFakeRate"] -> Fill( trigAMrpc );
-
-                // Organize Wheels and stations in 20 bins
-                int wheelIdx = 0;
-                if (trigAMSt >= 1 && trigAMSt <= 4 && trigAMWh >= -2 && trigAMWh <= 2) {
-                    wheelIdx = (trigAMSt - 1) * 5 + (trigAMWh + 2) + 1;
-                }
-
-                m_plots["fakeRate_TPnot_total"] -> Fill( wheelIdx ); //
-                m_plots["fakeRate_WheelStationTP_total"] -> Fill( wheelIdx );
-
-                std::string secTag = secTags.at(trigAMSec - 1);
-                m_plots["fakeRateTP_WheelvsStation_"+secTag+"_total"]->Fill(wheelIdx);
-                m_plots["fakeRate_TPnot_"+secTag+"_total"] -> Fill( wheelIdx );
-       
-                // Checking the station without segments to compute Real fake TPs
-                bool notFakeTP = false;
-                for (size_t i = 0; i < SegMatchedWheelAndStation.size(); ++i) {
-                    if ( trigAMWh == SegMatchedWheelAndStation[i][0] && trigAMSt == SegMatchedWheelAndStation[i][1] )
-                        notFakeTP = true;
-                    if (notFakeTP) break;
-                }
-                if (!notFakeTP){
-                    if (fdebug) std::cout << "Wheel " << trigAMWh << " | Station: " << trigAMSt << std::endl;
-                    m_plots["fakeRate_WheelStationTP_matched"] -> Fill(wheelIdx);
-                    m_plots["fakeRate_EventWheelStationTP_matched"] -> Fill(wheelIdx);
-                }
-
-                // Checking the station without segments to compute Realfake TPs by Sectors
-                notFakeTP = false;
-                for (size_t i = 0; i < SegMatchedWheelAndStation.size(); ++i) {
-                    if ( trigAMWh == SegMatchedWheelAndStation[i][0] && trigAMSt == SegMatchedWheelAndStation[i][1] && trigAMSec == SegMatchedWheelAndStation[i][2] )
-                        notFakeTP = true;
-                    if (notFakeTP) break;
-                }
-                if (!notFakeTP){
-                    // std::cout << "Wheel " << trigAMWh << " | Station: " << trigAMSt << std::endl;
-                    m_plots["fakeRate_EventWheelStationTP_"+secTag+"_matched"] -> Fill(wheelIdx);
-                    m_plots["fakeRateTP_WheelvsStation_"+secTag+"_matched"]->Fill(wheelIdx);
-                }
-                
-                // To skip matched TP
-                int target = itrig;
-                bool found = false;
-                for (int value : vbestTPAM) {
-                    if (value == target) {
-                        found = true;
-                        break;
-                    }
-                }
-                if (found) continue;
-
-                m_plots["fakeRate_TPnot_matched"] -> Fill( wheelIdx );
-                m_plots["fakeRate_TPnot_"+secTag+"_matched"] -> Fill( wheelIdx );
-                
-            }
-
-            m_plots["hNTrigs"] -> Fill( coutNTrigs );
-    
-            m_plots["TPMatched"] -> Fill( numTPEvent );
-
-            TPnotMatched = coutNTrigs - numTPEvent;
-            m_plots["TPnotMatched"] -> Fill( TPnotMatched );
-
-            if (fdebug) std::cout << "Numerator Event: "<<  numTPEvent << std::endl;
-            if (fdebug) std::cout << "DENOMINATOR Event: "<<  denTPEvent << std::endl;
-            if (fdebug) std::cout << "TP not matched per event: "<< TPnotMatched << std::endl;
-            // std::cout << "**********************" <<  std::endl;
-            
-            SegMatchedWheelAndStation.clear();
-
         } // END Loop Event
 
-        m_plots["fakeRate_EventWheelStationTP_matched"]->Scale(1.0 / nEntries);
 
-        for (const auto & secTag : secTags)
-        {
-            m_plots["fakeRate_EventWheelStationTP_"+secTag+"_matched"]->Scale(1.0 / nEntries);
-        }
-
-        if (fdebug) std::cout << "**********************" <<  std::endl;
-        if (fdebug) std::cout << "Numerator : "<<  numTPAll << std::endl;
-        if (fdebug) std::cout << "DENOMINATOR : "<<  denTPAll << std::endl;
-        if (fdebug) std::cout << "**********************" <<  std::endl; 
+        // for (const auto & secTag : secTags)
+        // {
+        //     m_plots["fakeRate_EventWheelStationTP_"+secTag+"_matched"]->Scale(1.0 / nEntries);
+        // }
 
         // -----------------------------------------------------------------
         // Creating directories to save control plots and root files
         // -----------------------------------------------------------------
-        std::string outputDir = "";
-        std::string histoDir = "";
-        std::string effDir = "";
-        // if (file_name.find("noRPC") != std::string::npos)
+        // std::string outputDir = "";
+        // std::string histoDir = "";
+        // std::string effDir = "";
+        // // if (file_name.find("noRPC") != std::string::npos)
 
-        // if (fdebug) std::cout << "Found '"<< m_files[name] <<"' in the filename!" << std::endl;
-        outputDir = "output/"+name+"/";
-        histoDir =  "output/"+name+"/histograms/";
-        effDir =    "output/"+name+"/histograms/effPlots/";
+        // // if (fdebug) std::cout << "Found '"<< m_files[name] <<"' in the filename!" << std::endl;
+        // outputDir = "output/"+name+"/";
+        // histoDir =  "output/"+name+"/histograms/";
+        // effDir =    "output/"+name+"/histograms/effPlots/";
 
-        // Create the directory if it doesn't exist
-        if (gSystem->AccessPathName(outputDir.c_str())) {
-            gSystem->mkdir(outputDir.c_str(), true); // true = recursive
-        }
+        // // Create the directory if it doesn't exist
+        // if (gSystem->AccessPathName(outputDir.c_str())) {
+        //     gSystem->mkdir(outputDir.c_str(), true); // true = recursive
+        // }
 
-        if (gSystem->AccessPathName(histoDir.c_str())) {
-            gSystem->mkdir(histoDir.c_str(), true); // true = recursive
-        }
+        // if (gSystem->AccessPathName(histoDir.c_str())) {
+        //     gSystem->mkdir(histoDir.c_str(), true); // true = recursive
+        // }
 
-        if (gSystem->AccessPathName(effDir.c_str())) {
-            gSystem->mkdir(effDir.c_str(), true); // true = recursive
-        }
+        // if (gSystem->AccessPathName(effDir.c_str())) {
+        //     gSystem->mkdir(effDir.c_str(), true); // true = recursive
+        // }
         
-        const std::string& outputFile = "DTNtupleTPGSimAnalyzer_Efficiency.root";
-        // Create a new ROOT file (recreate will overwrite existing file)
-        TFile outFile((outputDir+outputFile).c_str(), "RECREATE");
-        // Check if file opened successfully
-        if (!outFile.IsOpen()) {
-            std::cerr << "Error: Could not create file " << (outputDir+outputFile) << std::endl;
-            return 1;
-        }
+        // const std::string& outputFile = "DTNtupleTPGSimAnalyzer_Efficiency.root";
+        // // Create a new ROOT file (recreate will overwrite existing file)
+        // TFile outFile((outputDir+outputFile).c_str(), "RECREATE");
+        // // Check if file opened successfully
+        // if (!outFile.IsOpen()) {
+        //     std::cerr << "Error: Could not create file " << (outputDir+outputFile) << std::endl;
+        //     return 1;
+        // }
 
         // -------------------------------------------
         // Loop over the map to save each histogram in the root file and as png
         // -------------------------------------------
         if (plotHistograms){
-            for (const auto& pair : m_plots) {
-                const std::string& name = pair.first;
-                TH1* hist = pair.second;
+            // for (const auto& pair : m_plots) {
+            //     const std::string& name = pair.first;
+            //     TH1* hist = pair.second;
 
-                if (!hist) {
-                    std::cerr << "Warning: Histogram '" << name << "' is null!" << std::endl;
-                    continue;
-                }
-                hist->Write(); // Write the histogram to the root file
+            //     if (!hist) {
+            //         std::cerr << "Warning: Histogram '" << name << "' is null!" << std::endl;
+            //         continue;
+            //     }
+            //     hist->Write(); // Write the histogram to the root file
 
-                // Create a canvas to draw the histogram
-                TCanvas canvas("canvas", "canvas", 800, 600);
-                hist->Draw();
+            //     // Create a canvas to draw the histogram
+            //     TCanvas canvas("canvas", "canvas", 800, 600);
+            //     hist->Draw();
 
-                // Save the plot in the output directory
-                gErrorIgnoreLevel = kError;  // or kWarning
-                canvas.SaveAs((histoDir + name + ".png").c_str());
-                gErrorIgnoreLevel = kInfo;  // Back to normal
+            //     // Save the plot in the output directory
+            //     gErrorIgnoreLevel = kError;  // or kWarning
+            //     canvas.SaveAs((histoDir + name + ".png").c_str());
+            //     gErrorIgnoreLevel = kInfo;  // Back to normal
 
-                // Need to apply do not receve Warning in <TROOT::Append>: Replacing existing TH1 (Potential memory leak).
-                delete hist;
-            }
+            //     // Need to apply do not receve Warning in <TROOT::Append>: Replacing existing TH1 (Potential memory leak).
+            //     delete hist;
+            // }
 
-            // // Suppress all ROOT info messages
-            // gErrorIgnoreLevel = kError;  // or kWarning
+            // for (const auto& pair : m_plots2) {
+            //     const std::string& name = pair.first;
+            //     TH2* hist = pair.second;
 
-            // // Save your file - no message will appear
-            // c1->SaveAs("plot.png");
+            //     if (!hist) {
+            //         std::cerr << "Warning: Histogram '" << name << "' is null!" << std::endl;
+            //         continue;
+            //     }
+            //     hist->Write(); // Write the histogram to the root file
 
-            // // Restore if needed later
-            // gErrorIgnoreLevel = kInfo;  // Back to normal
+            //     // Create a canvas to draw the histogram
+            //     TCanvas canvas("canvas", "canvas", 800, 600);
+            //     // hist->Draw();
+            //     hist->SetMarkerStyle(20);   // 20 = small dots
+            //     hist->SetMarkerColor(kBlack); // kBlack = ROOT's black color
+            //     hist->SetMarkerSize(0.5);   // Adjust dot size (optional)
+            //     hist->Draw("P");  // "P" option draws only points
+            //     // hist->Draw("AP");
+            //     // Save the plot in the output directory
+            //     gErrorIgnoreLevel = kError;  // or kWarning
+            //     canvas.SaveAs((histoDir + name + ".png").c_str());
+            //     gErrorIgnoreLevel = kInfo;  // Back to normal
 
-            // Manually changing some plots
-            // m_plots2["hGenIdxVsNSeg"]->SetStats(0); // Disable statistics box
-            // m_plots2["hGenIdxVsNSeg"]->SetMarkerStyle(20);   // 20 = small dots
-            // m_plots2["hGenIdxVsNSeg"]->SetMarkerColor(kBlack); // kBlack = ROOT's black color
-            // m_plots2["hGenIdxVsNSeg"]->SetMarkerSize(0.5);   // Adjust dot size (optional)
-            // m_plots2["hGenIdxVsNSeg"]->Draw("P");  // "P" option draws only points
-
-            for (const auto& pair : m_plots2) {
-                const std::string& name = pair.first;
-                TH2* hist = pair.second;
-
-                if (!hist) {
-                    std::cerr << "Warning: Histogram '" << name << "' is null!" << std::endl;
-                    continue;
-                }
-                hist->Write(); // Write the histogram to the root file
-
-                // Create a canvas to draw the histogram
-                TCanvas canvas("canvas", "canvas", 800, 600);
-                // hist->Draw();
-                hist->SetMarkerStyle(20);   // 20 = small dots
-                hist->SetMarkerColor(kBlack); // kBlack = ROOT's black color
-                hist->SetMarkerSize(0.5);   // Adjust dot size (optional)
-                hist->Draw("P");  // "P" option draws only points
-                // hist->Draw("AP");
-                // Save the plot in the output directory
-                gErrorIgnoreLevel = kError;  // or kWarning
-                canvas.SaveAs((histoDir + name + ".png").c_str());
-                gErrorIgnoreLevel = kInfo;  // Back to normal
-
-                delete hist;
-            }
+            //     delete hist;
+            // }
         }
 
-        // m_plots.clear();
-        // m_plots2.clear();
-
-        // m_plots.erase();
-        // m_plots2.erase();
-
-        // Close the file (optional, as it will be automatically closed when outFile goes out of scope)
-        outFile.Close();
-        std::cout << "All histograms saved in ROOT file: " << outputFile << std::endl;
-        std::cout << "All plots saved in: " << outputDir << std::endl;
-        std::cout << "booltest: " << booltest << std::endl;
+        // // Close the file (optional, as it will be automatically closed when outFile goes out of scope)
+        // outFile.Close();
+        // std::cout << "All histograms saved in ROOT file: " << outputFile << std::endl;
+        // std::cout << "All plots saved in: " << outputDir << std::endl;
+        // std::cout << "booltest: " << booltest << std::endl;
         
     }
 
-    std::cout << "----------------------------------" << std::endl;
-    std::cout << "TEST FLAG: " << testFlag << std::endl;
-    std::cout << "plotHistograms FLAG: " << plotHistograms << std::endl;
-    std::cout << "flag RPC: " << flagRPCselection << std::endl;
-    std::cout << "----------------------------------" << std::endl;
+    // std::cout << "----------------------------------" << std::endl;
+    // std::cout << "TEST FLAG: " << testFlag << std::endl;
+    // std::cout << "plotHistograms FLAG: " << plotHistograms << std::endl;
+    // std::cout << "flag RPC: " << flagRPCselection << std::endl;
+    // std::cout << "----------------------------------" << std::endl;
 
     return 0;
 } // END Program

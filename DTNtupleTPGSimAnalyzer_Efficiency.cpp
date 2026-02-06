@@ -28,10 +28,10 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
     std::string inputDir = "input/";
     std::map<std::string,std::string> m_files;
     m_files["noRPC"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
-    m_files["RPC"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
-    m_files["RPCUpdated"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root";
-    m_files["noRPCUpdated"] = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root";
-    m_files["RPCOnly"]      = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
+    // m_files["RPC"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
+    // m_files["RPCUpdated"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root";
+    // m_files["noRPCUpdated"] = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root";
+    // m_files["RPCOnly"]      = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
     m_files["test"]         = "test.root"; // It is a copy of m_files["RPC"]
 
     // ------------------------------------------------------------------------------
@@ -584,8 +584,6 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                     if (fdebug) std::cout << "  Segment Index " << iSeg << std::endl; 
                     if (iSeg == 999) continue;
 
-                    
-
                     NbestSegment++;
 
                     Int_t segSt    = ph2Seg_station->at(iSeg);
@@ -605,19 +603,16 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                     m_plots2["hGenEtaVsSegEta"] -> Fill( gen_eta->at(iGenPart), ph2Seg_posGlb_eta->at(iSeg) );
                     m_plots2["hGenPhiVsSegPhi"] -> Fill( gen_phi->at(iGenPart) , ph2Seg_posGlb_phi->at(iSeg) );
                     
-                    
                     Int_t segWh  = ph2Seg_wheel->at(iSeg);
                     Int_t segSec = ph2Seg_sector->at(iSeg);
                     if (segSec == 13) segSec = 4;
                     if (segSec == 14) segSec = 10;
                     
-
-                    
-                    std::vector<int> tempVec;
+                    std::vector<int> tempVec; // tempVec = [Seg Wheel][Seg Station][Seg Sector] 
                     tempVec.push_back(segWh);
                     tempVec.push_back(segSt);
                     tempVec.push_back(segSec);
-                    SegMatchedWheelAndStation.push_back(tempVec);
+                    SegMatchedWheelAndStation.push_back(tempVec); 
                     
                     std::string chambTag = chambTags.at(segSt - 1);
                     std::string whTag    = whTags.at(segWh + 2);
@@ -1096,15 +1091,6 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 delete hist;
             }
 
-            // // Suppress all ROOT info messages
-            // gErrorIgnoreLevel = kError;  // or kWarning
-
-            // // Save your file - no message will appear
-            // c1->SaveAs("plot.png");
-
-            // // Restore if needed later
-            // gErrorIgnoreLevel = kInfo;  // Back to normal
-
             // Manually changing some plots
             // m_plots2["hGenIdxVsNSeg"]->SetStats(0); // Disable statistics box
             // m_plots2["hGenIdxVsNSeg"]->SetMarkerStyle(20);   // 20 = small dots
@@ -1138,12 +1124,6 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 delete hist;
             }
         }
-
-        // m_plots.clear();
-        // m_plots2.clear();
-
-        // m_plots.erase();
-        // m_plots2.erase();
 
         // Close the file (optional, as it will be automatically closed when outFile goes out of scope)
         outFile.Close();
