@@ -140,6 +140,15 @@ bool fileExists(const std::string& path) {
     return (stat(path.c_str(), &buffer) == 0);
 }
 
+// Organize Wheels and stations in 20 bins for Efficiency plots
+int WheelStationToBins (int station, int wheel ){
+    int wheelIdx = 0;
+    if (station >= 1 && station <= 4 && wheel >= -2 && wheel <= 2) {
+        wheelIdx = (station - 1) * 5 + (wheel + 2) + 1;
+    }
+    return wheelIdx;
+}
+
 // bool checkFilesInDirectory(const std::vector<std::string>& filenames, 
 //                            const std::string& directory) {
 //     bool allExist = true;
@@ -176,7 +185,7 @@ double get_entries(  TH1F *hist) {
    double totalEntries = 0.;
 
     if (!hist) {
-        std::cerr << "Error: Could not retrieve one or both histograms!" << std::endl;
+        std::cerr << "Error: Could not retrieve histogram for get_entries() !!!!!" << std::endl;
         return totalEntries = 0.;
     }
     // Get the standard deviation of each histogram
@@ -457,7 +466,7 @@ void plot_t0_histograms(   TH1F *hist1,
 {
 
     if (!hist1 || !hist2) {
-        std::cerr << "Error: Could not retrieve one or both histograms!" << std::endl;
+        std::cerr << "Error: Could not retrieve one or both histograms for plot_t0_histograms() !!!!!!" << std::endl;
         return;
     }
 
@@ -646,7 +655,7 @@ void plot_t0_histogramsV2(  TH1F *hist1,
 {
 
     if (!hist1 || !hist2) {
-        std::cerr << "Error: Could not retrieve one or both histograms!" << std::endl;
+        std::cerr << "Error: Could not retrieve one or both histograms for plot_t0_histogramsV2() !!!!!" << std::endl;
         return;
     }
 
@@ -855,7 +864,7 @@ void plot_BX_histograms(TH1F *hist1,
 {
 
     if (!hist1 || !hist2) {
-        std::cerr << "Error: Could not retrieve one or both histograms!" << std::endl;
+        std::cerr << "Error: Could not retrieve one or both histograms for plot_BX_histograms() !!!!!" << std::endl;
         return;
     }
 
@@ -999,7 +1008,7 @@ void plot_normal_histograms(TH1F *hist1,
 {
 
     if (!hist1 || !hist2) {
-        std::cerr << "Error: Could not retrieve one or both histograms!" << std::endl;
+        std::cerr << "Error: Could not retrieve one or both histograms for plot_normal_histograms() !!!!!!" << std::endl;
         return;
     }
 
@@ -1132,7 +1141,7 @@ void plot_fakeRate_wheels_histograms(TH1F *hist1,
 {
 
     if (!hist1 || !hist2) {
-        std::cerr << "Error: Could not retrieve one or both histograms!" << std::endl;
+        std::cerr << "Error: Could not retrieve one or both histograms for plot_fakeRate_wheels_histograms() !!!!!!" << std::endl;
         return;
     }
 

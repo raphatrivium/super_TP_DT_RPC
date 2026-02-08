@@ -1141,3 +1141,19 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
 
     return 0;
 } // END Program
+
+
+
+
+// Gen muon with some variable for test.
+// Each row is muon with [pt] [eta] [phi] 
+// std::vector<std::vector<double>> gen_test = { 
+//     {59.9677, 0.303135, -1.73079},
+//     {59.9677, -0.303135, 1.41081},
+//     {188.142, -0.351275, 2.0767},
+//     {188.142, 0.351275, -1.06489},
+//     {33.8774, -0.251606, -0.332262},
+//     {33.8774, 0.251606, -2.80933},
+//     {51.2031, 0.06783, -1.67888},
+//     {51.2031, -0.06783, -1.46271}
+// };

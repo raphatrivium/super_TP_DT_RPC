@@ -96,7 +96,24 @@ int test() {
 
         m_plots["hGenTPdeltaPhi"] = new TH1D("hGenTPdeltaPhi", "Delta Phi between Gen and TP ; Delta Phi; Entries", 600, 0, 0.5);
 
-        m_plots["hTPStationDeltaT0"] = new TH1D( "hTPStationDeltaT0", "Delta t0 between MB1 and MB2; Delta t0 [ns]; Entries", 27, -10, 10);
+        m_plots["hTPStationDeltaT0"] = new TH1D( "hTPStationDeltaT0", "Delta t0 between MB1 and MB2; Delta t0 [ns]; Entries", 30, 0, 10);
+
+
+        m_plots["Eff_TPRPC_wheels_total"] = new TH1D("Eff_TPRPC_wheels_total", "DT/RPC TP Local Efficiency; Wheel; Efficiency", 22, 0, 22);
+        m_plots["Eff_TPRPC_wheels_matched"] = new TH1D("Eff_TPRPC_wheels_matched", "DT/RPC TP Local Efficiency; Wheel; Efficiency",22, 0, 22);
+
+        for (const auto & chamb : chambTag) {
+            for (const auto & wheel : wheelTag) {
+                // m_plots["hGenSegDeltaPhi"+wheel+chamb] = new TH1D(("hGenSegDeltaPhi"+wheel+chamb).c_str(),
+                // "Gen Muon - Segment Delta Phi distribution ; Delta Phi; Entries", 600, 0, 0.5);
+                // m_plots["hGenSegDeltaEta"+wheel+chamb] = new TH1D(("hGenSegDeltaEta"+wheel+chamb).c_str(),
+                // "Gen Muon - Segment Delta Eta distribution ; Delta Eta; Entries", 600, 0,  0.5);
+
+                m_plots["hTPRPCOnlygT0"+wheel+chamb+"_matched"] = new TH1D( ("hTPRPCOnlygT0"+wheel+chamb+"_matched").c_str(),
+                ("hTPRPCOnlygT0"+wheel+chamb+"_matched; Time of the TPs associated with prompt muons [ns]; Entries").c_str(), 27, -10, 10); // 40, 0, 700  // 40, 630, 650
+
+            }
+        }
 
         // ---------------------------------
         // Open the ROOT file
@@ -293,6 +310,10 @@ int test() {
                 int denTP = 0;
                 int NbestSegment = 0;
                 int Ntrigger = 0;
+
+
+                int tpRPC_den = 0;
+                int tpRPC_num = 0;
                 
                 if (fdebug) std::cout << "==============================================================================" << std::endl;
                 if (fdebug) std::cout << "iEvent " << iEvent << ", iGenPart " << iGenPart <<  " | gen_nGenParts: " << gen_nGenParts << " | " << "gen pt: "<< gen_pt->at(iGenPart) << " | " << "gen eta: "<< gen_eta->at(iGenPart) << " | gen phi: "<< gen_phi->at(iGenPart) << std::endl;
@@ -338,15 +359,26 @@ int test() {
                     tempSector  = geo_info[iGeo][2];
                     tempRing    = geo_info[iGeo][3];
 
+                    std::cout << "hitTwoLayers:" << hitTwoLayers << std::endl;
                     if (hitTwoLayers){
-                        std::cout << "hitTwoLayers:" << hitTwoLayers << std::endl;
                         std::cout << "Ring:" << geoRing << ", Sector: " << geoSector << ", Station: " << geoStation << ", Layer: " << geoLayer << std::endl;
+
+                        int wheelIdx = WheelStationToBins(geoStation, geoRing );
+                        m_plots["Eff_TPRPC_wheels_total"] -> Fill( wheelIdx );
+                        tpRPC_den++;
                         continue;
                     }
                     else{
-                        std::cout << "hitTwoLayers:" << hitTwoLayers << std::endl;
                         std::cout << "Ring:" << geoRing << ", Sector: " << geoSector << ", Station: " << geoStation << ", Layer: " << geoLayer << std::endl;
+
+                        // Organize Wheels and stations in 20 bins
+                        int wheelIdx = WheelStationToBins(geoStation, geoRing );
+
+                        // m_plots["Eff_TPRPC_wheels_total"] -> Fill( wheelIdx );
                     }
+
+
+                    
                 }
 
                 // -----------------------------
@@ -389,11 +421,12 @@ int test() {
                     }
 
 
-                    // int tempStation = 999;
-                    // int tempLayer   = 999;
-                    // int tempSector  = 999;
-                    // int tempRing    = 999;
+                    tempStation = 999;
+                    tempLayer   = 999;
+                    tempSector  = 999;
+                    tempRing    = 999;
                     
+                    Double_t bestTPtime = 999;
                     for (size_t iGeo = 0; iGeo < geo_info.size(); ++iGeo) {
                         // 0=[station] 1=[layer] 2=[sector] 3=[ring]
                         int geoStation = geo_info[iGeo][0];
@@ -426,13 +459,24 @@ int test() {
                         //     std::cout << "Ring:" << geoRing << ", Sector: " << geoSector << ", Station: " << geoStation << ", Layer: " << geoLayer << std::endl;
                         // }
 
+
                         // -----------------------------
                         // GEN AND TP MATCHING
                         // -----------------------------
                         if (geoRing == trigAMWh && geoSector == trigAMSec && geoStation  == trigAMSt) {
 
-                            Double_t trigGlbPhi    = trigPhiInRad(ph2TpgPhiEmuAm_phi->at(iTrigAM),trigAMSec);
+                            // TODO: Check this part to see if it is right.
+                            Double_t trigGlbPhi  = trigPhiInRad(ph2TpgPhiEmuAm_phi->at(iTrigAM),trigAMSec);
+                            Double_t finalDPhi   = gen_phi->at(iGenPart) - trigGlbPhi;
+                            Double_t trigGenDPhi = abs(acos(cos(finalDPhi)));
+
+                            // TODO: Check if we will apply a Delta phi cut
+                            // if ( trigGenDPhi  < 0.15) continue;
+
                             Double_t trigAMt0 = ph2TpgPhiEmuAm_t0->at(iTrigAM);
+                            
+                            // TODO: Check if we will apply a t0 cut
+                            // if ( trigAMt0  < 500) continue;
 
                             trigAMt0 = (trigAMt0 * 25 / 32); // DCS to ns
                             trigAMt0 = trigAMt0 - 390; // Shift to zero (RPC only)
@@ -440,9 +484,26 @@ int test() {
                             if (fdebug) std::cout << " iTrigAM: " << iTrigAM << " | Wh: "<< trigAMWh << 
                                                      " | Sec: " << trigAMSec << " | St: " << trigAMSt << 
                                                      " | BX: " << trigAMBX << " | GlbPhi: " << trigGlbPhi  <<
-                                                     " | t0: " << trigAMt0 << std::endl;
+                                                     " | trigGenDPhi: " << trigGenDPhi  <<" | t0: " << trigAMt0 << std::endl;
+
+
                             
-                            m_plots["hGenTPdeltaPhi"] -> Fill( gen_phi->at(iGenPart) - trigGlbPhi );
+                            // To select the best trigger if we have two or more in the same station.
+                            // if ( abs(trigAMt0) < abs(bestTPtime) ) continue; 
+                            
+                            m_plots["hGenTPdeltaPhi"] -> Fill( trigGenDPhi );
+
+                            // Organize Wheels and stations in 20 bins
+                            int wheelIdx = WheelStationToBins(geoStation, geoRing );
+
+                            m_plots["Eff_TPRPC_wheels_matched"] -> Fill( wheelIdx );
+                            tpRPC_num++;
+
+                            std::string chambTag = chambTags.at(geoStation - 1);
+                            std::string whTag    = whTags.at(geoRing + 2);
+                            std::string secTag   = secTags.at(geoSector - 1);
+
+                            m_plots["hTPRPCOnlygT0"+whTag+chambTag+"_matched"]->Fill(trigAMt0);
 
                             bestTP.push_back(iTrigAM);
 
@@ -452,8 +513,13 @@ int test() {
                     }// End loop Geo
                 } // END loop Trigger primitives
 
+                // -----------------------------
+                // LOOP BEST TRIGGER PRIMITIVES
+                // -----------------------------
                 std::cout << "bestTP size: " << bestTP.size() << std::endl;
                 for (std::size_t ibestTP = 0; ibestTP < bestTP.size(); ++ibestTP){
+
+                    std::cout << "bestTP idx: " << bestTP[ibestTP] << std::endl;
 
                     Int_t trigAMWh  = ph2TpgPhiEmuAm_wheel->at(bestTP[ibestTP]);
                     Int_t trigAMSec = ph2TpgPhiEmuAm_sector->at(bestTP[ibestTP]);
@@ -465,7 +531,7 @@ int test() {
                     std::cout << "bestTP 1: "  <<  "trigAMt0 :" << trigAMt0 << std::endl;
 
 
-                    // For time between station 1 and station 2
+                    // For Delta t0 between station 1 and station 2
                     for (std::size_t jbestTP = 0; jbestTP < bestTP.size(); ++jbestTP){
                         
                         Int_t trigAMWh2  = ph2TpgPhiEmuAm_wheel->at(bestTP[jbestTP]);
@@ -480,12 +546,12 @@ int test() {
                         Double_t trigAMt02 = ph2TpgPhiEmuAm_t0->at(bestTP[jbestTP]);
                         trigAMt02 = (trigAMt02 * 25 / 32); // DCS to ns
                         trigAMt02 = trigAMt02 - 390; // Shift to zero (RPC only)
-                        std::cout << "bestTP 2: "  <<  "trigAMt02 :" << trigAMt0 << std::endl;
+                        std::cout << "bestTP 2: "  <<  "trigAMt02 :" << trigAMt02 << std::endl;
 
                         if ( trigAMWh == trigAMWh2 && trigAMSec == trigAMSec2 && trigAMSt != trigAMSt2 ){
 
-                            std::cout << "MB1 t0 - MB2 t0: " << trigAMt0 - trigAMt02 << std::endl;
-                            m_plots["hTPStationDeltaT0"] -> Fill( trigAMt0 - trigAMt02 );
+                            std::cout << "MB1 t0 - MB2 t0: " << abs(trigAMt0 - trigAMt02) << std::endl;
+                            m_plots["hTPStationDeltaT0"] -> Fill( abs(trigAMt0 - trigAMt02) );
 
                             std::cout << "Filled " << std::endl;
 
@@ -502,7 +568,12 @@ int test() {
 
                 }
 
-                
+                std::cout << "--------------" << std::endl;
+                std::cout << "tpRPC_num: " << tpRPC_num << std::endl;
+                std::cout << "tpRPC_den: " << tpRPC_den << std::endl;
+
+                if ( tpRPC_num > tpRPC_den) return 0; 
+
             } // END Loop Gen
 
         } // END Loop Event

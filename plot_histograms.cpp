@@ -8,6 +8,8 @@ void plot_histograms() {
     TFile *fileNoRPCUpdated = TFile::Open("output/noRPCUpdated/DTNtupleTPGSimAnalyzer_Efficiency.root");
     TFile *fileRPCUpdated = TFile::Open("output/RPCUpdated/DTNtupleTPGSimAnalyzer_Efficiency.root");
     TFile *fileRPCOnly = TFile::Open("output/RPCOnly/DTNtupleTPGSimAnalyzer_Efficiency.root");
+    TFile *fileRPCOnlyUpdated = TFile::Open("output/RPCOnlyUpdated/DTNtupleTPGSimAnalyzer_Efficiency.root");
+    
 
 
     if (!fileNoRPC || !fileRPC) {
@@ -525,6 +527,9 @@ void plot_histograms() {
 
     // -------------------------------------------------------------------------------
     // Comparision with RPC only segments
+    std::cout << "--------------------------------" << std::endl;
+    std::cout << "RPC Only Studies" << std::endl;
+    std::cout << "--------------------------------" << std::endl;
 
     saveDir = "output/histogram_RPCOnly_comparison/";
     // Create the directory if it doesn't exist
@@ -532,13 +537,21 @@ void plot_histograms() {
         gSystem->mkdir(saveDir.c_str(), true); // true = recursive
     }
 
+    hName = "Eff_TPRPC_wheels";
+    // hName = "Eff_TPwheels";  // Using DT normal efficiency
+    hTotal1 =   (TH1F*)fileRPCOnly->Get((hName+"_total").c_str());
+    if (!hTotal1) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
+    hMatched1 = (TH1F*)fileRPCOnly->Get((hName+"_matched").c_str());
+    if (!hMatched1) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
 
     hName = "Eff_TPwheels";
-    hTotal1 =   (TH1F*)fileRPCOnly->Get((hName+"_total").c_str());
-    hMatched1 = (TH1F*)fileRPCOnly->Get((hName+"_matched").c_str());
     hTotal2 =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
+    if (!hTotal2) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
     hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
+    if (!hMatched2) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
+
     plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "RPC Only", saveDir);
+
 
     hName = "hNTrigs";
     hist1 = (TH1F*)fileRPCOnly->Get(hName.c_str());
@@ -576,19 +589,26 @@ void plot_histograms() {
     // ----------------------------------------------------------
     // ----Time of the TPs associated with prompt muons [ns]-----
     // ----------------------------------------------------------
-    saveDir = "output/t0RPOnly/";
+    saveDir = "output/t0RPCOnly/";
     // Create the directory if it doesn't exist
     if (gSystem->AccessPathName(saveDir.c_str())) {
         gSystem->mkdir(saveDir.c_str(), true); // true = recursive
     }
 
+
     for (const auto & wheel : wheelTag) {
         for (const auto & chamb : chambTag) {
-            
-            std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
-            hist1 = (TH1F*)fileRPCOnly->Get(hName.c_str());
-            hist2 = (TH1F*)fileRPC->Get(hName.c_str());
 
+            std::string hName = "";
+            // hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
+            hName = "hTPRPCOnlygT0"+wheel+chamb+"_matched";
+            hist1 = (TH1F*)fileRPCOnly->Get(hName.c_str());
+            if (!hist1) std::cerr << "Error: Could not retrieve " << hName << " !!!!!!" << std::endl;
+        
+            hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
+            hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+            if (!hist2) std::cerr << "Error: Could not retrieve " << hName << " !!!!!!" << std::endl;
+            
             std::string wheel2 = wheel;
             wheel2 = wheel2.erase(1, 2);  // Removes "W.": "Wh.-2"→ "W-2"
 
@@ -603,27 +623,84 @@ void plot_histograms() {
         }
     }
 
+    // for (const auto & wheel : wheelTag) {
+    //     for (const auto & chamb : chambTag) {
+            
+    //         std::string hName = "hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched";
+    //         hist1 = (TH1F*)fileRPCOnly->Get(hName.c_str());
+    //         hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+
+    //         std::string wheel2 = wheel;
+    //         wheel2 = wheel2.erase(1, 2);  // Removes "W.": "Wh.-2"→ "W-2"
+
+    //         plot_BX_histograms( hist1, hist2, 
+    //                             "hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched", 
+    //                             "BX of the TPs associated with prompt muons [ns]", 
+    //                             (wheel2+" "+chamb).c_str(),
+    //                             "RPC Only",
+    //                             saveDir, 
+    //                             false);
+
+    //     }
+    // }
+
+    std::cout << "--------------------------------" << std::endl;
+    std::cout << "RPC Only Updated Studies" << std::endl;
+    std::cout << "--------------------------------" << std::endl;
+    saveDir = "output/histogram_RPCOnlyUpdated_comparison/";
+    // Create the directory if it doesn't exist
+    if (gSystem->AccessPathName(saveDir.c_str())) { 
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
+    hName = "Eff_TPRPC_wheels";
+    // hName = "Eff_TPwheels";  // Using DT normal efficiency
+    hTotal1 =   (TH1F*)fileRPCOnlyUpdated->Get((hName+"_total").c_str());
+    if (!hTotal1) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
+    hMatched1 = (TH1F*)fileRPCOnlyUpdated->Get((hName+"_matched").c_str());
+    if (!hMatched1) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
+
+    hName = "Eff_TPwheels";
+    hTotal2 =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
+    if (!hTotal2) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
+    hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
+    if (!hMatched2) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
+
+    plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "RPC Only Updated", saveDir);
+    
+    // ----------------------------------------------------------
+    // ----Time of the TPs associated with prompt muons [ns]-----
+    // ----------------------------------------------------------
+    saveDir = "output/t0RPCOnlyUpdated/";
+    // Create the directory if it doesn't exist
+    if (gSystem->AccessPathName(saveDir.c_str())) {
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
     for (const auto & wheel : wheelTag) {
         for (const auto & chamb : chambTag) {
             
-            std::string hName = "hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched";
-            hist1 = (TH1F*)fileRPCOnly->Get(hName.c_str());
+            std::string hName = "";
+            hName = "hTPRPCOnlygT0"+wheel+chamb+"_matched";
+            hist1 = (TH1F*)fileRPCOnlyUpdated->Get(hName.c_str());
+            if (!hist1) std::cerr << "Error: Could not retrieve " << hName << " !!!!!!" << std::endl;
+            hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
             hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+            if (!hist2) std::cerr << "Error: Could not retrieve " << hName << " !!!!!!" << std::endl;
 
             std::string wheel2 = wheel;
-            wheel2 = wheel2.erase(1, 2);  // Removes "W.": "Wh.-2"→ "W-2"
+            wheel2 = wheel2.erase(1, 2);  // Removes "h.": "Wh.-2"→ "W-2"
 
-            plot_BX_histograms( hist1, hist2, 
-                                "hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched", 
-                                "BX of the TPs associated with prompt muons [ns]", 
+            plot_t0_histograms( hist1, hist2,
+                                "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched",
+                                "Time of the TPs associated with prompt muons [ns]",
                                 (wheel2+" "+chamb).c_str(),
-                                "RPC only",
-                                saveDir, 
-                                false);
+                                "RPC Only Updated",
+                                saveDir,
+                                true);
 
         }
     }
-
 
     std::cout << "--------------------------------" << std::endl;
     std::cout << "END PROGRAM" << std::endl;
