@@ -8,7 +8,7 @@
 int test() {
 
     bool testFlag = false;   // false - true
-    bool fdebug = false;
+    bool fdebug = true;
 
     bool plotHistograms = true; // false - true
 
@@ -31,8 +31,9 @@ int test() {
     // m_files["RPC"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
     // m_files["RPCUpdated"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root";
     // m_files["noRPCUpdated"] = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root";
-    m_files["RPCOnly"]      = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
-    m_files["test"]         = "test.root"; // It is a copy of m_files["RPC"]
+    m_files["RPCOnly"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
+    m_files["RPCOnlyUpdated"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCPhase2_RPCOnlyFlag.root";
+    m_files["test"]            = "test.root"; // It is a copy of m_files["RPC"]
 
     // ------------------------------------------------------------------------------
     // Check if the files are present.
@@ -67,9 +68,13 @@ int test() {
 
         bool fileRPCflag = false;
         if ( name == "RPCOnly" ) fileRPCflag = true;
+        else if ( name == "RPCOnlyUpdated" ) fileRPCflag = true;
         else if ( name == "RPCUpdated" ) fileRPCflag = true;
         else if ( name == "RPC" ) fileRPCflag = true;
         else if ( name == "test" ) fileRPCflag = true;
+
+        BarrelGeo barGeo("barrel_geometry.txt");
+        // if ( name == "RPCOnly" ) barGeo = barGeo("barrel_geometry.txt");
    
         // ---------------------------------------
         // Making Map of Histograms 
@@ -88,6 +93,10 @@ int test() {
         m_plots["hGenIdPDG"] = new TH1D("hGenIdPDG", "Gen PDG ID ; PDG ID; Entries", 40, -20, 20);
 
         // m_plots["EffEtaGenSeg_total"] = new TH1D("EffEtaGenSeg_total", "Muon Reconstruction Efficiency; #eta; Efficiency", 100, -2, 2);
+
+        m_plots["hGenTPdeltaPhi"] = new TH1D("hGenTPdeltaPhi", "Delta Phi between Gen and TP ; Delta Phi; Entries", 600, 0, 0.5);
+
+        m_plots["hTPStationDeltaT0"] = new TH1D( "hTPStationDeltaT0", "Delta t0 between MB1 and MB2; Delta t0 [ns]; Entries", 27, -10, 10);
 
         // ---------------------------------
         // Open the ROOT file
@@ -215,32 +224,32 @@ int test() {
         std::vector<std::string> secTags   = { "Sec1", "Sec2", "Sec3", "Sec4", "Sec5", "Sec6", "Sec7", "Sec8","Sec9","Sec10","Sec11","Sec12","Sec13","Sec14"};
 
 
-        for (const auto & secTag : secTags)
-        {
-            m_plots["Eff_TPwheels_"+secTag+"_total"] = new TH1D(("Eff_TPwheels_"+secTag+"_total").c_str(),
-            ("DT TP Local Efficiency for " + secTag + "; Wheel; Efficiency").c_str(), 22, 0, 22);
-            m_plots["Eff_TPwheels_"+secTag+"_matched"] = new TH1D(("Eff_TPwheels_"+secTag+"_matched").c_str(),
-            ("DT TP Local Efficiency for " + secTag + "; Wheel; Efficiency").c_str(), 22, 0, 22);
+        // for (const auto & secTag : secTags)
+        // {
+        //     m_plots["Eff_TPwheels_"+secTag+"_total"] = new TH1D(("Eff_TPwheels_"+secTag+"_total").c_str(),
+        //     ("DT TP Local Efficiency for " + secTag + "; Wheel; Efficiency").c_str(), 22, 0, 22);
+        //     m_plots["Eff_TPwheels_"+secTag+"_matched"] = new TH1D(("Eff_TPwheels_"+secTag+"_matched").c_str(),
+        //     ("DT TP Local Efficiency for " + secTag + "; Wheel; Efficiency").c_str(), 22, 0, 22);
             
-            m_plots["fakeRateTP_WheelvsStation_"+secTag+"_total"] = new TH1D(("fakeRateTP_WheelvsStation_"+secTag+"_total").c_str(),
-            ("Fake Rate Wheel vs Station for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
-            m_plots["fakeRateTP_WheelvsStation_"+secTag+"_matched"] = new TH1D(("fakeRateTP_WheelvsStation_"+secTag+"_matched").c_str(),
-            ("Fake Rate Wheel vs Station for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
+        //     m_plots["fakeRateTP_WheelvsStation_"+secTag+"_total"] = new TH1D(("fakeRateTP_WheelvsStation_"+secTag+"_total").c_str(),
+        //     ("Fake Rate Wheel vs Station for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
+        //     m_plots["fakeRateTP_WheelvsStation_"+secTag+"_matched"] = new TH1D(("fakeRateTP_WheelvsStation_"+secTag+"_matched").c_str(),
+        //     ("Fake Rate Wheel vs Station for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
 
-            m_plots["fakeRate_EventWheelStationTP_"+secTag+"_matched"] = new TH1D(("fakeRate_EventWheelStationTP_"+secTag+"_matched").c_str(),
-            ("Fake Rate per event for " + secTag + "; Wheel; Fake TPs / Event").c_str(), 22, 0, 22);
+        //     m_plots["fakeRate_EventWheelStationTP_"+secTag+"_matched"] = new TH1D(("fakeRate_EventWheelStationTP_"+secTag+"_matched").c_str(),
+        //     ("Fake Rate per event for " + secTag + "; Wheel; Fake TPs / Event").c_str(), 22, 0, 22);
 
-            m_plots["fakeRate_TPnot_"+secTag+"_total"] = new TH1D(("fakeRate_TPnot_"+secTag+"_total").c_str(),
-            ("TPs not Matched for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
-            m_plots["fakeRate_TPnot_"+secTag+"_matched"] = new TH1D(("fakeRate_TPnot_"+secTag+"_matched").c_str(),
-            ("TPs not Matched for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
-        }
+        //     m_plots["fakeRate_TPnot_"+secTag+"_total"] = new TH1D(("fakeRate_TPnot_"+secTag+"_total").c_str(),
+        //     ("TPs not Matched for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
+        //     m_plots["fakeRate_TPnot_"+secTag+"_matched"] = new TH1D(("fakeRate_TPnot_"+secTag+"_matched").c_str(),
+        //     ("TPs not Matched for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
+        // }
 
 
         // ------------------------------------------------------------------------------
         // Loop in the events
         // ------------------------------------------------------------------------------
-        // nEntries = 2;   // 100   nEntries
+        // nEntries = 1;   // 100   nEntries
         if (testFlag){
             nEntries = 100;
             std::cout << "FOR TESTE:" <<std::endl;
@@ -292,7 +301,7 @@ int test() {
                 m_plots["hGenIdPDG"] -> Fill( gen_pdgId->at(iGenPart) );
                 m_plots["hGenEta"] -> Fill( gen_eta->at(iGenPart) );
                 m_plots["hGenPt"] -> Fill( gen_pt->at(iGenPart) );
-                m_plots["EffEtaGenSeg_total"] -> Fill( gen_eta->at(iGenPart) );
+                // m_plots["EffEtaGenSeg_total"] -> Fill( gen_eta->at(iGenPart) );
                 
 
                 if (std::abs(gen_pdgId->at(iGenPart)) != 13 || gen_pt->at(iGenPart) < m_minMuPt) continue;
@@ -301,7 +310,198 @@ int test() {
 
                 // std::vector<std::size_t> bestSegIndex = { 999, 999, 999, 999 };
                 // std::vector<Int_t> bestSegNHits       = { 0, 0, 0, 0 };
+
+                int tempStation = 999;
+                int tempLayer   = 999;
+                int tempSector  = 999;
+                int tempRing    = 999;
+                std::vector<std::vector<double>> geo_info = barGeo.StaLaySecRing(gen_eta->at(iGenPart),gen_phi->at(iGenPart));
+                for (size_t iGeo = 0; iGeo < geo_info.size(); ++iGeo) {
+                    // 0=[station] 1=[layer] 2=[sector] 3=[ring]
+                    int geoStation = geo_info[iGeo][0];
+                    int geoLayer   = geo_info[iGeo][1];
+                    int geoSector  = geo_info[iGeo][2];
+                    int geoRing    = geo_info[iGeo][3];
+
+                    // TODO: while we do not have stations 3 and 4 implemented in the TP build
+                    if (geoStation == 3 || geoStation == 4) continue;
+
+                    // To not repeat the chamber when a gen muon hit station 1 and station 2.
+                    bool hitTwoLayers = false;
+                    if (geoRing == tempRing && geoSector == tempSector && geoStation == tempStation && geoLayer > tempLayer ){
+                        hitTwoLayers = true;
+                        // continue;
+                    }
+
+                    tempStation = geo_info[iGeo][0];
+                    tempLayer   = geo_info[iGeo][1];
+                    tempSector  = geo_info[iGeo][2];
+                    tempRing    = geo_info[iGeo][3];
+
+                    if (hitTwoLayers){
+                        std::cout << "hitTwoLayers:" << hitTwoLayers << std::endl;
+                        std::cout << "Ring:" << geoRing << ", Sector: " << geoSector << ", Station: " << geoStation << ", Layer: " << geoLayer << std::endl;
+                        continue;
+                    }
+                    else{
+                        std::cout << "hitTwoLayers:" << hitTwoLayers << std::endl;
+                        std::cout << "Ring:" << geoRing << ", Sector: " << geoSector << ", Station: " << geoStation << ", Layer: " << geoLayer << std::endl;
+                    }
+                }
+
+                // -----------------------------
+                // Loop in the AM TP
+                // -----------------------------
+                if (fdebug) std::cout << "      Loop in the AM TP " << std::endl;
+                if (fdebug) std::cout << "      Total number of TP in this event: "<< ph2TpgPhiEmuAm_nTrigs << std::endl;
+                
+                std::vector<int> bestTP;
+                for (std::size_t iTrigAM = 0; iTrigAM < ph2TpgPhiEmuAm_nTrigs; ++iTrigAM){
+
+                    Int_t trigAMWh  = ph2TpgPhiEmuAm_wheel->at(iTrigAM);
+                    Int_t trigAMSec = ph2TpgPhiEmuAm_sector->at(iTrigAM);
+                    Int_t trigAMSt  = ph2TpgPhiEmuAm_station->at(iTrigAM);
+                    Int_t trigAMBX  = ph2TpgPhiEmuAm_BX->at(iTrigAM);
+                    Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(iTrigAM);
+                    Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(iTrigAM);
+
+                    if (trigAMBX != 20) continue;
+
+                    if (fileRPCflag){
+                        if (flagRPCselection == 1){
+                            if ( trigAMrpc != 1 ) continue;
+                        }
+                        else if (flagRPCselection == 2){
+                            if ( trigAMrpc != 2 ) continue;
+                        }
+                        else if (flagRPCselection == 3){
+                            if ( trigAMrpc != 3 ) continue;
+                        }
+                        else if (flagRPCselection == 10){
+                            if ( trigAMrpc != 1 && trigAMrpc != 0 ) continue;
+                        }
+                    }
                     
+                    // For this file, we are ignoring the RPC flags 0 and 1 to simulate only RPC TPs
+                    if ( name == "RPCOnly" || name == "RPCOnlyUpdated" ){
+                        if (trigAMrpc == 0) continue;
+                        if (trigAMrpc == 1) continue;
+                    }
+
+
+                    // int tempStation = 999;
+                    // int tempLayer   = 999;
+                    // int tempSector  = 999;
+                    // int tempRing    = 999;
+                    
+                    for (size_t iGeo = 0; iGeo < geo_info.size(); ++iGeo) {
+                        // 0=[station] 1=[layer] 2=[sector] 3=[ring]
+                        int geoStation = geo_info[iGeo][0];
+                        int geoLayer   = geo_info[iGeo][1];
+                        int geoSector  = geo_info[iGeo][2];
+                        int geoRing    = geo_info[iGeo][3];
+
+                        // TODO: while we do not have stations 3 and 4 implemented in the TP build
+                        if (geoStation == 3 || geoStation == 4) continue;
+
+                        // To not repeat the chamber when a gen muon hit station 1 and station 2.
+                        bool hitTwoLayers = false;
+                        if (geoRing == tempRing && geoSector == tempSector && geoStation == tempStation && geoLayer > tempLayer ){
+                            hitTwoLayers = true;
+                            // continue;
+                        }
+
+                        tempStation = geo_info[iGeo][0];
+                        tempLayer   = geo_info[iGeo][1];
+                        tempSector  = geo_info[iGeo][2];
+                        tempRing    = geo_info[iGeo][3];
+
+                        if (hitTwoLayers){
+                            // std::cout << "hitTwoLayers:" << hitTwoLayers << std::endl;
+                            // std::cout << "Ring:" << geoRing << ", Sector: " << geoSector << ", Station: " << geoStation << ", Layer: " << geoLayer << std::endl;
+                            continue;
+                        }
+                        // else{
+                        //     std::cout << "hitTwoLayers:" << hitTwoLayers << std::endl;
+                        //     std::cout << "Ring:" << geoRing << ", Sector: " << geoSector << ", Station: " << geoStation << ", Layer: " << geoLayer << std::endl;
+                        // }
+
+                        // -----------------------------
+                        // GEN AND TP MATCHING
+                        // -----------------------------
+                        if (geoRing == trigAMWh && geoSector == trigAMSec && geoStation  == trigAMSt) {
+
+                            Double_t trigGlbPhi    = trigPhiInRad(ph2TpgPhiEmuAm_phi->at(iTrigAM),trigAMSec);
+                            Double_t trigAMt0 = ph2TpgPhiEmuAm_t0->at(iTrigAM);
+
+                            trigAMt0 = (trigAMt0 * 25 / 32); // DCS to ns
+                            trigAMt0 = trigAMt0 - 390; // Shift to zero (RPC only)
+
+                            if (fdebug) std::cout << " iTrigAM: " << iTrigAM << " | Wh: "<< trigAMWh << 
+                                                     " | Sec: " << trigAMSec << " | St: " << trigAMSt << 
+                                                     " | BX: " << trigAMBX << " | GlbPhi: " << trigGlbPhi  <<
+                                                     " | t0: " << trigAMt0 << std::endl;
+                            
+                            m_plots["hGenTPdeltaPhi"] -> Fill( gen_phi->at(iGenPart) - trigGlbPhi );
+
+                            bestTP.push_back(iTrigAM);
+
+                        }
+
+
+                    }// End loop Geo
+                } // END loop Trigger primitives
+
+                std::cout << "bestTP size: " << bestTP.size() << std::endl;
+                for (std::size_t ibestTP = 0; ibestTP < bestTP.size(); ++ibestTP){
+
+                    Int_t trigAMWh  = ph2TpgPhiEmuAm_wheel->at(bestTP[ibestTP]);
+                    Int_t trigAMSec = ph2TpgPhiEmuAm_sector->at(bestTP[ibestTP]);
+                    Int_t trigAMSt  = ph2TpgPhiEmuAm_station->at(bestTP[ibestTP]);
+                    Double_t trigAMt0 = ph2TpgPhiEmuAm_t0->at(bestTP[ibestTP]);
+                    trigAMt0 = (trigAMt0 * 25 / 32); // DCS to ns
+                    trigAMt0 = trigAMt0 - 390; // Shift to zero (RPC only)
+
+                    std::cout << "bestTP 1: "  <<  "trigAMt0 :" << trigAMt0 << std::endl;
+
+
+                    // For time between station 1 and station 2
+                    for (std::size_t jbestTP = 0; jbestTP < bestTP.size(); ++jbestTP){
+                        
+                        Int_t trigAMWh2  = ph2TpgPhiEmuAm_wheel->at(bestTP[jbestTP]);
+                        Int_t trigAMSec2 = ph2TpgPhiEmuAm_sector->at(bestTP[jbestTP]);
+                        Int_t trigAMSt2  = ph2TpgPhiEmuAm_station->at(bestTP[jbestTP]);
+
+                        if ( bestTP[jbestTP] == bestTP[ibestTP] ) continue;
+
+                        // To not repeat combinations
+                        if ( ibestTP > jbestTP) continue;
+                        
+                        Double_t trigAMt02 = ph2TpgPhiEmuAm_t0->at(bestTP[jbestTP]);
+                        trigAMt02 = (trigAMt02 * 25 / 32); // DCS to ns
+                        trigAMt02 = trigAMt02 - 390; // Shift to zero (RPC only)
+                        std::cout << "bestTP 2: "  <<  "trigAMt02 :" << trigAMt0 << std::endl;
+
+                        if ( trigAMWh == trigAMWh2 && trigAMSec == trigAMSec2 && trigAMSt != trigAMSt2 ){
+
+                            std::cout << "MB1 t0 - MB2 t0: " << trigAMt0 - trigAMt02 << std::endl;
+                            m_plots["hTPStationDeltaT0"] -> Fill( trigAMt0 - trigAMt02 );
+
+                            std::cout << "Filled " << std::endl;
+
+
+                        }
+                        else{
+                            continue;
+                        }
+
+
+                    }
+
+
+
+                }
+
                 
             } // END Loop Gen
 
@@ -316,90 +516,90 @@ int test() {
         // -----------------------------------------------------------------
         // Creating directories to save control plots and root files
         // -----------------------------------------------------------------
-        // std::string outputDir = "";
-        // std::string histoDir = "";
-        // std::string effDir = "";
-        // // if (file_name.find("noRPC") != std::string::npos)
+        std::string outputDir = "";
+        std::string histoDir = "";
+        std::string effDir = "";
+        // if (file_name.find("noRPC") != std::string::npos)
 
-        // // if (fdebug) std::cout << "Found '"<< m_files[name] <<"' in the filename!" << std::endl;
-        // outputDir = "output/"+name+"/";
-        // histoDir =  "output/"+name+"/histograms/";
-        // effDir =    "output/"+name+"/histograms/effPlots/";
+        // if (fdebug) std::cout << "Found '"<< m_files[name] <<"' in the filename!" << std::endl;
+        outputDir = "output/"+name+"/";
+        histoDir =  "output/"+name+"/histograms/";
+        effDir =    "output/"+name+"/histograms/effPlots/";
 
-        // // Create the directory if it doesn't exist
-        // if (gSystem->AccessPathName(outputDir.c_str())) {
-        //     gSystem->mkdir(outputDir.c_str(), true); // true = recursive
-        // }
+        // Create the directory if it doesn't exist
+        if (gSystem->AccessPathName(outputDir.c_str())) {
+            gSystem->mkdir(outputDir.c_str(), true); // true = recursive
+        }
 
-        // if (gSystem->AccessPathName(histoDir.c_str())) {
-        //     gSystem->mkdir(histoDir.c_str(), true); // true = recursive
-        // }
+        if (gSystem->AccessPathName(histoDir.c_str())) {
+            gSystem->mkdir(histoDir.c_str(), true); // true = recursive
+        }
 
-        // if (gSystem->AccessPathName(effDir.c_str())) {
-        //     gSystem->mkdir(effDir.c_str(), true); // true = recursive
-        // }
+        if (gSystem->AccessPathName(effDir.c_str())) {
+            gSystem->mkdir(effDir.c_str(), true); // true = recursive
+        }
         
-        // const std::string& outputFile = "DTNtupleTPGSimAnalyzer_Efficiency.root";
-        // // Create a new ROOT file (recreate will overwrite existing file)
-        // TFile outFile((outputDir+outputFile).c_str(), "RECREATE");
-        // // Check if file opened successfully
-        // if (!outFile.IsOpen()) {
-        //     std::cerr << "Error: Could not create file " << (outputDir+outputFile) << std::endl;
-        //     return 1;
-        // }
+        const std::string& outputFile = "DTNtupleTPGSimAnalyzer_Efficiency.root";
+        // Create a new ROOT file (recreate will overwrite existing file)
+        TFile outFile((outputDir+outputFile).c_str(), "RECREATE");
+        // Check if file opened successfully
+        if (!outFile.IsOpen()) {
+            std::cerr << "Error: Could not create file " << (outputDir+outputFile) << std::endl;
+            return 1;
+        }
 
         // -------------------------------------------
         // Loop over the map to save each histogram in the root file and as png
         // -------------------------------------------
         if (plotHistograms){
-            // for (const auto& pair : m_plots) {
-            //     const std::string& name = pair.first;
-            //     TH1* hist = pair.second;
+            for (const auto& pair : m_plots) {
+                const std::string& name = pair.first;
+                TH1* hist = pair.second;
 
-            //     if (!hist) {
-            //         std::cerr << "Warning: Histogram '" << name << "' is null!" << std::endl;
-            //         continue;
-            //     }
-            //     hist->Write(); // Write the histogram to the root file
+                if (!hist) {
+                    std::cerr << "Warning: Histogram '" << name << "' is null!" << std::endl;
+                    continue;
+                }
+                hist->Write(); // Write the histogram to the root file
 
-            //     // Create a canvas to draw the histogram
-            //     TCanvas canvas("canvas", "canvas", 800, 600);
-            //     hist->Draw();
+                // Create a canvas to draw the histogram
+                TCanvas canvas("canvas", "canvas", 800, 600);
+                hist->Draw();
 
-            //     // Save the plot in the output directory
-            //     gErrorIgnoreLevel = kError;  // or kWarning
-            //     canvas.SaveAs((histoDir + name + ".png").c_str());
-            //     gErrorIgnoreLevel = kInfo;  // Back to normal
+                // Save the plot in the output directory
+                gErrorIgnoreLevel = kError;  // or kWarning
+                canvas.SaveAs((histoDir + name + ".png").c_str());
+                gErrorIgnoreLevel = kInfo;  // Back to normal
 
-            //     // Need to apply do not receve Warning in <TROOT::Append>: Replacing existing TH1 (Potential memory leak).
-            //     delete hist;
-            // }
+                // Need to apply do not receve Warning in <TROOT::Append>: Replacing existing TH1 (Potential memory leak).
+                delete hist;
+            }
 
-            // for (const auto& pair : m_plots2) {
-            //     const std::string& name = pair.first;
-            //     TH2* hist = pair.second;
+            for (const auto& pair : m_plots2) {
+                const std::string& name = pair.first;
+                TH2* hist = pair.second;
 
-            //     if (!hist) {
-            //         std::cerr << "Warning: Histogram '" << name << "' is null!" << std::endl;
-            //         continue;
-            //     }
-            //     hist->Write(); // Write the histogram to the root file
+                if (!hist) {
+                    std::cerr << "Warning: Histogram '" << name << "' is null!" << std::endl;
+                    continue;
+                }
+                hist->Write(); // Write the histogram to the root file
 
-            //     // Create a canvas to draw the histogram
-            //     TCanvas canvas("canvas", "canvas", 800, 600);
-            //     // hist->Draw();
-            //     hist->SetMarkerStyle(20);   // 20 = small dots
-            //     hist->SetMarkerColor(kBlack); // kBlack = ROOT's black color
-            //     hist->SetMarkerSize(0.5);   // Adjust dot size (optional)
-            //     hist->Draw("P");  // "P" option draws only points
-            //     // hist->Draw("AP");
-            //     // Save the plot in the output directory
-            //     gErrorIgnoreLevel = kError;  // or kWarning
-            //     canvas.SaveAs((histoDir + name + ".png").c_str());
-            //     gErrorIgnoreLevel = kInfo;  // Back to normal
+                // Create a canvas to draw the histogram
+                TCanvas canvas("canvas", "canvas", 800, 600);
+                // hist->Draw();
+                hist->SetMarkerStyle(20);   // 20 = small dots
+                hist->SetMarkerColor(kBlack); // kBlack = ROOT's black color
+                hist->SetMarkerSize(0.5);   // Adjust dot size (optional)
+                hist->Draw("P");  // "P" option draws only points
+                // hist->Draw("AP");
+                // Save the plot in the output directory
+                gErrorIgnoreLevel = kError;  // or kWarning
+                canvas.SaveAs((histoDir + name + ".png").c_str());
+                gErrorIgnoreLevel = kInfo;  // Back to normal
 
-            //     delete hist;
-            // }
+                delete hist;
+            }
         }
 
         // // Close the file (optional, as it will be automatically closed when outFile goes out of scope)

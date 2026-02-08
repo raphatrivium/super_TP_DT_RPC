@@ -1,5 +1,11 @@
 #include "DTNtupleTPGSimAnalyzer.h"
 
+
+
+
+
+
+
 int test2() {
 
     const std::string& filename = "barrel_geometry.txt";
@@ -100,7 +106,6 @@ int test2() {
         std::cout << "iGenPart:" << iGenPart << ", genPt: " << genPt << ", genEta: " << genEta << ", genPhi: " << genPhi << std::endl;
 
         // 0=[station] 1=[layer] 2=[sector] 3=[ring] 4=[eta_min] 5=[eta_max] 6=[phi_min] 7=[phi_max]
-
         for (int iGeo = 0; iGeo < barrel_geometry.size(); ++iGeo) {
             
             double geoEtaMin = barrel_geometry[iGeo][4];
