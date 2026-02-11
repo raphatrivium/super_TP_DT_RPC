@@ -11,6 +11,9 @@ input/*
 output/*
 !output/.gitkeep
 
+plots/*
+!plots/.gitkeep
+
 # Compiled Object files
 *.slo
 *.lo
