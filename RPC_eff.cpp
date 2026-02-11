@@ -106,8 +106,8 @@ int RPC_eff() {
 
 
 
-        m_plots["Eff_TPRPC_wheels_total"] = new TH1D("Eff_TPRPC_wheels_total", "DT/RPC TP Local Efficiency; Wheel; Efficiency", 22, 0, 22);
-        m_plots["Eff_TPRPC_wheels_matched"] = new TH1D("Eff_TPRPC_wheels_matched", "DT/RPC TP Local Efficiency; Wheel; Efficiency",22, 0, 22);
+        m_plots["Eff_TPRPC_wheels_total"] = new TH1D("Eff_TPRPC_wheels_total", "RPC TP Local Efficiency; Wheel; Efficiency", 22, 0, 22);
+        m_plots["Eff_TPRPC_wheels_matched"] = new TH1D("Eff_TPRPC_wheels_matched", "RPC TP Local Efficiency; Wheel; Efficiency",22, 0, 22);
 
         for (const auto & chamb : chambTag) {
             for (const auto & wheel : wheelTag) {

@@ -252,12 +252,12 @@ void plot_eff(  std::string hName,
 
 }
 
-
+// For 1 histogram
 void plotEffWheelStation(std::string hName,
                          TH1F *hMatched, 
                          TH1F *hTotal,
-                         std::string saveDir,
-                         std::string str_leg ) 
+                         std::string str_leg,
+                         std::string saveDir ) 
 {
     // Check if histograms exist
     if (!hMatched || !hTotal ) {
@@ -270,9 +270,12 @@ void plotEffWheelStation(std::string hName,
     TEfficiency* effPlot = new TEfficiency(*hMatched, *hTotal);
     effPlot->SetName( hName.c_str() );  // Convert to const char*
     // Style the efficiency plot
-    effPlot->SetLineColor(kRed);
-    effPlot->SetMarkerColor(kRed);
-    effPlot->SetMarkerStyle(20);
+    effPlot->SetLineColor(kBlue);
+    effPlot->SetMarkerColor(kBlue);
+    effPlot->SetMarkerStyle(21);
+    // effPlot->SetLineColor(kRed);
+    // effPlot->SetMarkerColor(kRed);
+    // effPlot->SetMarkerStyle(20);
 
     TString originalTitle = hTotal->GetTitle();
     effPlot->SetTitle(originalTitle);
@@ -286,7 +289,9 @@ void plotEffWheelStation(std::string hName,
     
     gPad->Update();
 
-    // effPlot->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.0,1.005);
+    effPlot->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.0,1.005);
+
+    effPlot->GetPaintedGraph()->GetXaxis()->SetRangeUser(0,22);
 
     effPlot->GetPaintedGraph()->GetXaxis()->SetLabelSize(0);  // Remove labels completely
 
@@ -367,6 +372,143 @@ void plotEffWheelStation(std::string hName,
 
 
 }
+
+// For 2 histograms
+void plotEffWheelStation(   std::string hName,
+                            TH1F *hMatched1, 
+                            TH1F *hTotal1,
+                            TH1F *hMatched2, 
+                            TH1F *hTotal2,
+                            std::string str_leg1 = "",
+                            std::string str_leg2 = "",
+                            std::string saveDir = "" ) 
+{
+
+    // Check if histograms exist
+    if (!hMatched1 || !hTotal1 || !hMatched2 || !hTotal2 ) {
+        std::cerr << "Error: Required histograms " << hName  << " not found!" << std::endl;
+        return;
+    }
+    
+    // Create the efficiency plot
+    TEfficiency* effPlot1 = new TEfficiency(*hMatched1, *hTotal1);
+    effPlot1->SetName( hName.c_str() );  // Convert to const char*
+    // Style the efficiency plot
+    effPlot1->SetLineColor(kRed);
+    effPlot1->SetMarkerColor(kRed);
+    effPlot1->SetMarkerStyle(20);
+
+    TEfficiency* effPlot2 = new TEfficiency(*hMatched2, *hTotal2);
+    effPlot2->SetName( hName.c_str() );  // Convert to const char*
+    // Style the efficiency plot
+    effPlot2->SetLineColor(kBlue);
+    effPlot2->SetMarkerColor(kBlue);
+    effPlot2->SetMarkerStyle(21);
+
+
+    TString originalTitle = hTotal1->GetTitle();
+    effPlot1->SetTitle(originalTitle);
+    effPlot2->SetTitle(originalTitle);
+
+    // Draw the efficiency plot
+    TCanvas cEff = new TCanvas("cEff", "Efficiency Plot", 800, 600);
+    cEff.SetGridy();
+    // cEff.SetGridx();
+    effPlot2->Draw("AP");  // "AP" for axis and points
+    effPlot1->Draw("P SAME");  // "AP" for axis and points
+    
+    gPad->Update();
+
+    effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.0,1.005); // Eff  all
+    // effPlot2->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.990,1.005); // Eff  all
+
+    
+    effPlot2->GetPaintedGraph()->GetXaxis()->SetLabelSize(0);  // Remove labels completely
+
+    TText *text;
+    text = new TText(0.74,0.91,"PU 200 (14 TeV)");
+    text->SetNDC(); // To use the canvas coordinates
+    // text->SetTextAlign(31);
+    text->SetTextSize(0.03);
+    text->Draw();
+
+    TLatex latex;
+    latex.SetNDC(); // Use NDC (normalized device coordinates)
+    // latex.SetTextAlign(22); // Centered alignment
+    latex.SetTextSize(0.05); // Set text size
+    latex.DrawLatex(0.1,0.91, "CMS ");  // (#it{...} makes the text italic)
+    latex.SetTextSize(0.035);
+    latex.DrawLatex(0.18,0.91, "#it{Phase-2 Simulation}");  // (#it{...} makes the text italic)
+    
+    // Draw new label information
+    std::vector<std::string> WheelID = {"-2", "-1", " 0", "+1", "+2", "-2", "-1", " 0", "+1", "+2","-2", "-1", " 0", "+1", "+2","-2", "-1", " 0", "+1", "+2"};
+    std::vector<std::string> StationID = {"MB1", "MB2", "MB3", "MB4"};
+    latex.SetTextSize(0.03);
+    double xcoord = 0.13;
+    int iMB = 0;
+    for (size_t i = 0; i < WheelID.size(); ++i) {
+        latex.DrawLatex(xcoord, 0.07, WheelID[i].c_str());
+
+        if ( WheelID[i] == " 0"){
+            latex.DrawLatex(xcoord, 0.04, StationID[iMB].c_str());
+            iMB++;
+        }
+
+        xcoord = xcoord + 0.0356;
+    }
+
+    // Get coordinates from the points the the plot
+    std::vector<double> pointXcoords;
+    for (int bin = 1; bin <= hTotal1->GetNbinsX(); bin++) {
+        double x = hTotal1->GetBinCenter(bin);
+        if ( bin == 1 || bin == hTotal1->GetNbinsX() ) continue;
+        pointXcoords.push_back(x);
+        // double y = hTotal1->GetBinContent(bin);
+        // std::cout << "Bin " << bin << ": x = " << x << ", y = " << y << std::endl;
+    }
+
+    // Draw vertical lines in the canvas
+    for (size_t i = 0; i < pointXcoords.size(); ++i) {
+        double x[2] = {pointXcoords[i], pointXcoords[i]};  // Same x coordinate
+        double y[2] = {0, hTotal1->GetMaximum()};  // From bottom to top
+        TGraph *vline = new TGraph(2, x, y);
+        vline->SetLineColor(kBlack);
+        vline->SetLineWidth(1.);
+        vline->SetLineStyle(2);
+        vline->Draw("L");  // "L" option for line only
+    }
+
+    // Draw vertical lines in the canvas
+    std::vector<double> divisors = {6, 11, 16};
+    for (size_t i = 0; i < divisors.size(); ++i) {
+        // double xpos = 6.;
+        double x[2] = {divisors[i], divisors[i]};  // Same x coordinate
+        double y[2] = {0, hTotal1->GetMaximum()};  // From bottom to top
+        TGraph *vline = new TGraph(2, x, y);
+        vline->SetLineColor(kBlack);
+        vline->SetLineWidth(2);
+        
+        vline->Draw("L");  // "L" option for line only
+    }
+    
+    // Add legend
+    // TLegend* leg = new TLegend(0.75, 0.1, 0.9, 0.25);
+    TLegend* leg = new TLegend(0.75, 0.75, 0.9, 0.9);
+    leg->AddEntry(effPlot1, str_leg1.c_str(), "lp"); // "DT AM"
+    leg->AddEntry(effPlot2, str_leg2.c_str(), "lp"); // "DT AM+RPC"
+    leg->Draw();
+
+    // Save the plot in the output directory as "png" or/and "pdf"
+    cEff.SaveAs((saveDir+hName+".png").c_str());
+    cEff.SaveAs((saveDir+hName+".pdf").c_str());
+
+    
+} // END plotEffWheelStation() for 2 histograms
+
+
+
+
+
 
 void plot_eff_fake_rate(  std::string hName,
                 TH1F *hMatched1, 

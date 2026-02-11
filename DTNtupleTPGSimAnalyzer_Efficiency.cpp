@@ -28,10 +28,10 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
     std::string inputDir = "input/";
     std::map<std::string,std::string> m_files;
     m_files["noRPC"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
-    // m_files["RPC"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
-    // m_files["RPCUpdated"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root";
-    // m_files["noRPCUpdated"] = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root";
-    // m_files["RPCOnly"]      = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
+    m_files["RPC"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
+    m_files["RPCUpdated"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root";
+    m_files["noRPCUpdated"] = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root";
+    m_files["RPCOnly"]      = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
     m_files["test"]         = "test.root"; // It is a copy of m_files["RPC"]
 
     // ------------------------------------------------------------------------------

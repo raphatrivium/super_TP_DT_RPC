@@ -112,16 +112,16 @@ void test() {
     TH1F *hTotal2;
     TH1F *hMatched2;
 
-    hMatched1 = (TH1F*)fileNoRPC->Get("Eff_TPwheels_matched");
-    hTotal1 =   (TH1F*)fileNoRPC->Get("Eff_TPwheels_total");
+    // hMatched1 = (TH1F*)fileNoRPC->Get("Eff_TPwheels_matched");
+    // hTotal1 =   (TH1F*)fileNoRPC->Get("Eff_TPwheels_total");
 
-    plotEffWheelStation("Eff_TPwheels",  // histogram name
-                        hMatched1, // histogram passed
-                        hTotal1, // histogram total
-                        saveDir, // directory to save
-                        "DT AM" ); // Legend
+    // plotEffWheelStation("Eff_TPwheels",  // histogram name
+    //                     hMatched1, // histogram passed
+    //                     hTotal1, // histogram total
+    //                     "DT AM", // Legend for the histogram
+    //                     saveDir ); // directory to save
 
-    return;
+    // return;
 
     for (const auto& plot : v_plot) {
         // hName = plot;
@@ -129,9 +129,17 @@ void test() {
         TH1F *hMatched1 = (TH1F*)fileNoRPC->Get((plot+"_matched").c_str());
         TH1F *hTotal2 =   (TH1F*)fileRPC->Get((plot+"_total").c_str());
         TH1F *hMatched2 = (TH1F*)fileRPC->Get((plot+"_matched").c_str());
-        plot_eff_fake_rate( plot, hMatched1, hTotal1, hMatched2, hTotal2, "DT AM", saveDir);
+        plotEffWheelStation((plot).c_str(),  // histogram name
+                            hMatched1,   // histogram 1 passed
+                            hTotal1,      // histogram 1 total
+                            hMatched2,   // histogram 2 passed
+                            hTotal2,    // histogram 2 total
+                            "DT AM", // Legend for the histogram 1
+                            "DT AM + RPC", // Legend for the histogram 2
+                            saveDir // directory to save 
+                        );
+        // plot_eff_fake_rate( plot, hMatched1, hTotal1, hMatched2, hTotal2, "DT AM", saveDir);
     }
-
    
     // ---------------
     // Normal plot
@@ -285,40 +293,34 @@ void test() {
         gSystem->mkdir(saveDir.c_str(), true); // true = recursive
     }
 
-    // eff plots
-    v_plot.clear();
-    v_plot.push_back("Eff_TPRPC_wheels");
-    
-
-    // for (const auto& plot : v_plot) {
-    //     // hName = plot;
-    //     TH1F *hTotal1 =   (TH1F*)fileRPCOnly->Get((plot+"_total").c_str());
-    //     if (!hTotal1) std::cerr << "Error: Could not retrieve " << plot+"_total" << " !!!!!!" << std::endl;
-    //     TH1F *hMatched1 = (TH1F*)fileRPCOnly->Get((plot+"_matched").c_str());
-    //     if (!hMatched1) std::cerr << "Error: Could not retrieve " << plot+"_matched" << " !!!!!!" << std::endl;
-    //     TH1F *hTotal2 =   (TH1F*)fileRPC->Get((plot+"_total").c_str());
-    //     if (!hTotal2) std::cerr << "Error: Could not retrieve " << plot+"_total" << " !!!!!!" << std::endl;
-    //     TH1F *hMatched2 = (TH1F*)fileRPC->Get((plot+"_matched").c_str());
-    //     if (!hMatched2) std::cerr << "Error: Could not retrieve " << plot+"_matched" << " !!!!!!" << std::endl;
-
-    //     plot_eff_fake_rate( plot, hMatched1, hTotal1, hMatched2, hTotal2, "RPC Only", saveDir);
-
-    // }
-    
     hName = "Eff_TPRPC_wheels";
     // hName = "Eff_TPwheels";  // Using DT normal efficiency
     hTotal1 =   (TH1F*)fileRPCOnly->Get((hName+"_total").c_str());
     if (!hTotal1) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
     hMatched1 = (TH1F*)fileRPCOnly->Get((hName+"_matched").c_str());
     if (!hMatched1) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
+
+    plotEffWheelStation("Eff_TPRPC_wheels",  // histogram name
+                        hMatched1, // histogram passed
+                        hTotal1, // histogram total
+                        "RPC Only", // Legend for the histogram
+                        saveDir ); // directory to save
+
+
+    hMatched1 = (TH1F*)fileNoRPC->Get("Eff_TPwheels_matched");
+    hTotal1 =   (TH1F*)fileNoRPC->Get("Eff_TPwheels_total");
+
+    plotEffWheelStation("Eff_TPwheels",  // histogram name
+                        hMatched1, // histogram passed
+                        hTotal1, // histogram total
+                        "DT AM", // Legend for the histogram
+                        saveDir ); // directory to save
     
-    hName = "Eff_TPwheels";
-    hTotal2 =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
-    if (!hTotal2) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
-    hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
-    if (!hMatched2) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
     
-    plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "RPC Only", saveDir);
+
+    return;
+    
+    // plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "RPC Only", saveDir);
     
 
     saveDir = "plots/DT+RPC_vs_RPConly/variables/";
@@ -407,13 +409,15 @@ void test() {
     hMatched1 = (TH1F*)fileRPCOnlyUpdated->Get((hName+"_matched").c_str());
     if (!hMatched1) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
 
-    hName = "Eff_TPwheels";
-    hTotal2 =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
-    if (!hTotal2) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
-    hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
-    if (!hMatched2) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
+    // plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "RPC Only Updated", saveDir);
 
-    plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "RPC Only Updated", saveDir);
+    plotEffWheelStation(hName,  // histogram name
+                        hMatched1, // histogram passed
+                        hTotal1, // histogram total
+                        "RPC Only Updated", // Legend for the histogram
+                        saveDir ); // directory to save
+
+    
     
     // ----------------------------------------------------------
     // ----Time of the TPs associated with prompt muons [ns]-----
