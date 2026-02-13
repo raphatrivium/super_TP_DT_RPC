@@ -373,6 +373,182 @@ void plotEffWheelStation(std::string hName,
 
 }
 
+void plotEffWheelStationV2(std::string hName,
+                         TH1F *hMatched, 
+                         TH1F *hTotal,
+                         std::string str_leg,
+                         std::string saveDir ) 
+{
+    // Check if histograms exist
+    if (!hMatched || !hTotal ) {
+        std::cerr << "Error: Required histograms " << hName  << " not found!" << std::endl;
+        return;
+    }
+
+    
+    // TGraphAsymmErrors* graph = new TGraphAsymmErrors();
+    // graph->Divide(hMatched, hTotal, "cp");  // "cp" = Clopper-Pearson errors
+
+
+    // // Draw the efficiency plot
+    // TCanvas cEff = new TCanvas("cEff", "Efficiency Plot", 800, 600);
+    // cEff.SetGridy();
+    // // cEff.SetGridx();
+
+
+    // // Style and draw
+    // graph->SetMarkerStyle(21);
+    // graph->SetMarkerColor(kBlue);
+    // graph->SetLineColor(kBlue);
+    // graph->Draw("AP");
+
+    int nBins = hMatched->GetNbinsX();
+    std::vector<double> x, y, ex_low, ex_high, ey_low, ey_high;
+
+    for (int i = 1; i <= nBins; ++i) {
+        double binCenter = hMatched->GetXaxis()->GetBinCenter(i);
+        double binWidth = hMatched->GetXaxis()->GetBinWidth(i) / 2.0;
+        double passed = hMatched->GetBinContent(i);
+        double total = hTotal->GetBinContent(i);
+        
+        // YOU DECIDE what to do with zero-denominator bins
+        if (total == 0) {
+            // OPTION 1: Show point at 0 with no error (what you requested)
+            x.push_back(binCenter);
+            y.push_back(0.0);
+            ex_low.push_back(binWidth);
+            ex_high.push_back(binWidth);
+            ey_low.push_back(0.0);
+            ey_high.push_back(0.0);
+            
+            // OPTION 2: Skip entirely (default behavior)
+            // continue;
+            
+            // OPTION 3: Show as undefined (e.g., -1) - will not display
+            // x.push_back(binCenter);
+            // y.push_back(-1.0);
+            // ... etc
+        } else {
+            // Normal efficiency calculation with Clopper-Pearson errors
+            double efficiency = passed / total;
+            
+            // Wilson score interval or Clopper-Pearson
+            // For simplicity, using standard error approximation
+            double error = (passed > 0 && passed < total) ? 
+                        sqrt(efficiency * (1 - efficiency) / total) : 0;
+            
+            x.push_back(binCenter);
+            y.push_back(efficiency);
+            ex_low.push_back(binWidth);
+            ex_high.push_back(binWidth);
+            ey_low.push_back(error);
+            ey_high.push_back(error);
+        }
+    }
+
+    // Create graph with EXACTLY the points you want
+    TGraphAsymmErrors* graph = new TGraphAsymmErrors(
+        x.size(), 
+        x.data(), y.data(),
+        ex_low.data(), ex_high.data(),
+        ey_low.data(), ey_high.data()
+    );
+
+    // Draw the efficiency plot
+    TCanvas cEff = new TCanvas("cEff", "Efficiency Plot", 800, 600);
+    cEff.SetGridy();
+    // cEff.SetGridx();
+
+    graph->SetMarkerStyle(21);
+    graph->SetMarkerColor(kRed);
+    graph->SetLineColor(kRed);
+    graph->Draw("AP");
+
+    gPad->Update();
+
+    graph->GetYaxis()->SetRangeUser(0.0,1.005); // Eff  all
+
+    graph->GetXaxis()->SetLabelSize(0);  // Remove labels completely
+
+    TText *text;
+    text = new TText(0.74,0.91,"PU 200 (14 TeV)");
+    text->SetNDC(); // To use the canvas coordinates
+    // text->SetTextAlign(31);
+    text->SetTextSize(0.03);
+    text->Draw();
+
+    TLatex latex;
+    latex.SetNDC(); // Use NDC (normalized device coordinates)
+    // latex.SetTextAlign(22); // Centered alignment
+    latex.SetTextSize(0.05); // Set text size
+    latex.DrawLatex(0.1,0.91, "CMS ");  // (#it{...} makes the text italic)
+    latex.SetTextSize(0.035);
+    latex.DrawLatex(0.18,0.91, "#it{Phase-2 Simulation}");  // (#it{...} makes the text italic)
+
+    // Draw new label information
+    std::vector<std::string> WheelID = {"-2", "-1", " 0", "+1", "+2", "-2", "-1", " 0", "+1", "+2","-2", "-1", " 0", "+1", "+2","-2", "-1", " 0", "+1", "+2"};
+    std::vector<std::string> StationID = {"MB1", "MB2", "MB3", "MB4"};
+    latex.SetTextSize(0.03);
+    double xcoord = 0.13;
+    int iMB = 0;
+    for (size_t i = 0; i < WheelID.size(); ++i) {
+        latex.DrawLatex(xcoord, 0.07, WheelID[i].c_str());
+
+        if ( WheelID[i] == " 0"){
+            latex.DrawLatex(xcoord, 0.04, StationID[iMB].c_str());
+            iMB++;
+        }
+
+        xcoord = xcoord + 0.0356;
+    }
+
+    // Get coordinates from the points the the plot
+    std::vector<double> pointXcoords;
+    for (int bin = 1; bin <= hTotal->GetNbinsX(); bin++) {
+        double x = hTotal->GetBinCenter(bin);
+        if ( bin == 1 || bin == hTotal->GetNbinsX() ) continue;
+        pointXcoords.push_back(x);
+        // double y = hTotal1->GetBinContent(bin);
+        // std::cout << "Bin " << bin << ": x = " << x << ", y = " << y << std::endl;
+    }
+
+    // Draw vertical lines in the canvas
+    for (size_t i = 0; i < pointXcoords.size(); ++i) {
+        double x[2] = {pointXcoords[i], pointXcoords[i]};  // Same x coordinate
+        double y[2] = {0, hTotal->GetMaximum()};  // From bottom to top
+        TGraph *vline = new TGraph(2, x, y);
+        vline->SetLineColor(kBlack);
+        vline->SetLineWidth(1.);
+        vline->SetLineStyle(2);
+        vline->Draw("L");  // "L" option for line only
+    }
+
+    // Draw vertical lines in the canvas
+    std::vector<double> divisors = {6, 11, 16};
+    for (size_t i = 0; i < divisors.size(); ++i) {
+        // double xpos = 6.;
+        double x[2] = {divisors[i], divisors[i]};  // Same x coordinate
+        double y[2] = {0, hTotal->GetMaximum()};  // From bottom to top
+        TGraph *vline = new TGraph(2, x, y);
+        vline->SetLineColor(kBlack);
+        vline->SetLineWidth(2);
+        
+        vline->Draw("L");  // "L" option for line only
+    }
+
+     // Add legend
+    // TLegend* leg = new TLegend(0.75, 0.1, 0.9, 0.25);
+    TLegend* leg = new TLegend(0.75, 0.75, 0.9, 0.9);
+    leg->AddEntry(graph, str_leg.c_str(), "lp"); // "DT AM"
+    leg->Draw();
+
+    // Save the plot in the output directory as "png" or/and "pdf"
+    cEff.SaveAs((saveDir+hName+".png").c_str());
+    cEff.SaveAs((saveDir+hName+".pdf").c_str());
+
+
+}
+
 // For 2 histograms
 void plotEffWheelStation(   std::string hName,
                             TH1F *hMatched1, 
