@@ -2,540 +2,309 @@
 
 void plot_histograms() {
 
-    // Open the two ROOT files
-    TFile *fileNoRPC = TFile::Open("output/noRPC/DTNtupleTPGSimAnalyzer_Efficiency.root");
-    TFile *fileRPC = TFile::Open("output/RPC/DTNtupleTPGSimAnalyzer_Efficiency.root");
-    TFile *fileNoRPCUpdated = TFile::Open("output/noRPCUpdated/DTNtupleTPGSimAnalyzer_Efficiency.root");
-    TFile *fileRPCUpdated = TFile::Open("output/RPCUpdated/DTNtupleTPGSimAnalyzer_Efficiency.root");
-    TFile *fileRPCOnly = TFile::Open("output/RPCOnly/DTNtupleTPGSimAnalyzer_Efficiency.root");
-    TFile *fileRPCOnlyUpdated = TFile::Open("output/RPCOnlyUpdated/DTNtupleTPGSimAnalyzer_Efficiency.root");
+    // Open ROOT files
+    std::string inputDir = "output/";
+    std::string fileName = "DTNtupleTPGSimAnalyzer_Efficiency.root";
+
+    TFile *fileNoRPC          = TFile::Open((inputDir+"noRPC/"+fileName).c_str());
+    TFile *fileRPC            = TFile::Open((inputDir+"RPC/"+fileName).c_str());
+    TFile *fileNoRPCUpdated   = TFile::Open((inputDir+"noRPCUpdated/"+fileName).c_str());
+    TFile *fileRPCUpdated     = TFile::Open((inputDir+"RPCUpdated/"+fileName).c_str());
+    TFile *fileRPCOnly        = TFile::Open((inputDir+"RPCOnly/"+fileName).c_str());
+    TFile *fileRPCOnlyUpdated = TFile::Open((inputDir+"RPCOnlyUpdated/"+fileName).c_str());
+
+
+    std::string saveDir = "--";
     
-
-
-    if (!fileNoRPC || !fileRPC) {
-        std::cout << "Error: Could not open one or both files!" << std::endl;
-        return;
-    }
+    // // ------------------------------------------------------------------------------
+    // // INPUT FILES
+    // // ------------------------------------------------------------------------------
+    // std::string inputDir = "input/";
+    // std::map<std::string,std::string> m_files;
+    // // m_files["noRPC"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
+    // // m_files["RPC"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
+    // // m_files["RPCUpdated"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root";
+    // // m_files["noRPCUpdated"] = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root";
+    // m_files["RPCOnly"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
+    // m_files["RPCOnlyUpdated"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCPhase2_RPCOnlyFlag.root";
+    // m_files["test"]            = "test.root"; // It is a copy of m_files["RPC"]
 
     std::vector<std::string> algoTag  = {"AM", "AM+RPC"};
     // std::vector<std::string> totalTag = {"matched", "total"};
     std::vector<std::string> chambTag = {"MB1", "MB2", "MB3", "MB4"};
     std::vector<std::string> wheelTag = {"Wh.-2","Wh.-1","Wh.0","Wh.+1","Wh.+2",};
+    std::vector<std::string> secTags   = { "Sec1", "Sec2", "Sec3", "Sec4", "Sec5", "Sec6", "Sec7", "Sec8","Sec9","Sec10","Sec11","Sec12"};
 
-    std::vector<std::string> effDir = {
-                                       "output/noRPC/histograms/effPlots/",
-                                       "output/RPC/histograms/effPlots/",
-                                       "output/noRPCUpdated/histograms/effPlots/", 
-                                       "output/RPCUpdated/histograms/effPlots/",
-                                    };
+    // std::vector<std::string> effDir = {
+    //                                    "output/noRPC/histograms/effPlots/",
+    //                                    "output/RPC/histograms/effPlots/",
+    //                                    "output/noRPCUpdated/histograms/effPlots/", 
+    //                                    "output/RPCUpdated/histograms/effPlots/",
+    //                                 };
 
-    // -------------------------------------------
-    // MAKING EFFICIENCY PLOTS
-    // -------------------------------------------
     TH1F *hTotal;
     TH1F *hMatched;
     std::string hName = "";
-    for (int i = 0; i < 4; ++i){
-        for (const auto & algo : algoTag)
-        {
-            int chamberNumber = i+1;
-            hName = "hEff_MB" + std::to_string(chamberNumber) + "_"+algo;
+    std::vector<std::string> v_plot;
 
-            // NoRPC
-            hTotal =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
-            hMatched = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
-            plot_eff( hName, hMatched, hTotal, effDir[0]);
-
-            // RPC
-            hTotal =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
-            hMatched = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
-            plot_eff( hName, hMatched, hTotal, effDir[1] );    
-        }
-    }
-
-    hName = "EffEtaGenSeg";
-    hTotal =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
-    hMatched = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
-    plot_eff( hName, hMatched, hTotal, effDir[0]);
-    hTotal =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
-    hMatched = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
-    plot_eff( hName, hMatched, hTotal, effDir[1]);
-
-    hName = "EffEtaGenSeg20";
-    hTotal =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
-    hMatched = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
-    plot_eff( hName, hMatched, hTotal, effDir[0]);
-    hTotal =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
-    hMatched = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
-    plot_eff( hName, hMatched, hTotal, effDir[1]);
-
-    hName = "Eff_TPwheels";
-    hTotal =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
-    hMatched = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
-    plot_eff( hName, hMatched, hTotal, effDir[0]);
-    hTotal =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
-    hMatched = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
-    plot_eff( hName, hMatched, hTotal, effDir[1]);
-
-
-    // hName = "Eff_TPnotMatched";
-    // hTotal =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
-    // hMatched = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
-    // plot_eff( hName, hMatched, hTotal, effDir[0]);
-    // hTotal =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
-    // hMatched = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
-    // plot_eff( hName, hMatched, hTotal, effDir[1]);
-    // hTotal =   (TH1F*)fileNoRPCUpdated->Get((hName+"_total").c_str());
-    // hMatched = (TH1F*)fileNoRPCUpdated->Get((hName+"_matched").c_str());
-    // plot_eff( hName, hMatched, hTotal, effDir[2]);
-    // hTotal =   (TH1F*)fileRPCUpdated->Get((hName+"_total").c_str());
-    // hMatched = (TH1F*)fileRPCUpdated->Get((hName+"_matched").c_str());
-    // plot_eff( hName, hMatched, hTotal, effDir[3]);
+    std::cout << "--------------------------------" << std::endl;
+    std::cout << "DT AM and DT + RPC  Studies" << std::endl;
+    std::cout << "--------------------------------" << std::endl;
+    v_plot.clear();                                
+    v_plot.push_back("EffEtaGenSeg");
+    v_plot.push_back("EffEtaGenSeg20");
+    v_plot.push_back("Eff_TPwheels");
+    // v_plot.push_back("Eff_TPnotMatched");
     
-    std::string saveDir = "output/histogram_comparison/";
-    
-    hName = "Eff_TPwheels";
-    TH1F *hTotal1 =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
-    TH1F *hMatched1 = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
-    TH1F *hTotal2 =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
-    TH1F *hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
-    plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "DT AM", saveDir);
+    // for (int i = 0; i < 4; ++i){
+    //     for (const auto & algo : algoTag){
+    //         int chamberNumber = i+1;
+    //         v_plot.push_back("hEff_MB" + std::to_string(chamberNumber) + "_"+algo);
+    //     }
+    // }
 
-    std::vector<std::string> secTags   = { "Sec1", "Sec2", "Sec3", "Sec4", "Sec5", "Sec6", "Sec7", "Sec8","Sec9","Sec10","Sec11","Sec12"};
-    for (const auto & secTag : secTags)
-    {
-        hName = "Eff_TPwheels_"+secTag;
-        hTotal1 =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
-        hMatched1 = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
-        hTotal2 =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
-        hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
-       plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "DT AM", saveDir);
-    }
+    // for (const auto& plot : v_plot) {
+    //     hName = plot;
+    //     hTotal =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
+    //     hMatched = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
+    //     plot_eff( hName, hMatched, hTotal, effDir[0]);
+    //     hTotal =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
+    //     hMatched = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
+    //     plot_eff( hName, hMatched, hTotal, effDir[1]);
+    // }
 
+    // -------------------------------------------
+    // For comparison plots
+    // -------------------------------------------
+    // std::string saveDir = "output/histogram_comparison/";
 
-    hName = "fakeRate_WheelStationTP";
-    hTotal1 =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
-    hMatched1 = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
-    hTotal2 =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
-    hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
-    plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "DT AM", saveDir);  
-                   
-
-    hName = "fakeRate_TPnot";
-    hTotal1 =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
-    hMatched1 = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
-    hTotal2 =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
-    hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
-    plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "DT AM", saveDir);
-
-    for (const auto & secTag : secTags)
-    {
-        hName = "fakeRateTP_WheelvsStation_"+secTag;
-        hTotal1 =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
-        hMatched1 = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
-        hTotal2 =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
-        hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
-        plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "DT AM", saveDir);
-    }
-
-
-
-    saveDir = "output/histogram_comparison_RPCUpdate/";
-
-    hName = "Eff_TPwheels";
-    hTotal1 =   (TH1F*)fileNoRPCUpdated->Get((hName+"_total").c_str());
-    hMatched1 = (TH1F*)fileNoRPCUpdated->Get((hName+"_matched").c_str());
-    hTotal2 =   (TH1F*)fileRPCUpdated->Get((hName+"_total").c_str());
-    hMatched2 = (TH1F*)fileRPCUpdated->Get((hName+"_matched").c_str());
-    plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "DT AM", saveDir);
-
-
-    hName = "fakeRate_WheelStationTP";
-    hTotal1 =   (TH1F*)fileNoRPCUpdated->Get((hName+"_total").c_str());
-    hMatched1 = (TH1F*)fileNoRPCUpdated->Get((hName+"_matched").c_str());
-    hTotal2 =   (TH1F*)fileRPCUpdated->Get((hName+"_total").c_str());
-    hMatched2 = (TH1F*)fileRPCUpdated->Get((hName+"_matched").c_str());
-    plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "DT AM", saveDir);    
-                   
-
-    hName = "fakeRate_TPnot";
-    hTotal1 =   (TH1F*)fileNoRPCUpdated->Get((hName+"_total").c_str());
-    hMatched1 = (TH1F*)fileNoRPCUpdated->Get((hName+"_matched").c_str());
-    hTotal2 =   (TH1F*)fileRPCUpdated->Get((hName+"_total").c_str());
-    hMatched2 = (TH1F*)fileRPCUpdated->Get((hName+"_matched").c_str());
-    plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "DT AM", saveDir);
-
-    
-
-    // hName = "Eff_TPnotMatched";
-    // hTotal1 =   (TH1F*)fileNoRPCUpdated->Get((hName+"_total").c_str());
-    // hMatched1 = (TH1F*)fileNoRPCUpdated->Get((hName+"_matched").c_str());
-    // hTotal2 =   (TH1F*)fileRPCUpdated->Get((hName+"_total").c_str());
-    // hMatched2 = (TH1F*)fileRPCUpdated->Get((hName+"_matched").c_str());
-    // plot_eff_fake_rate( hName, 
-    //                     hMatched1, hTotal1, hMatched2, hTotal2,
-    //                     "output/histogram_comparison/");                    
-    
-
-
-    // ----------------------------------------------------------
-    // ----Time of the TPs associated with prompt muons [ns]-----
-    // ----------------------------------------------------------
-    saveDir = "output/t0/";
+    saveDir = "plots/DT+RPC_vs_DT/efficiency/";
     // Create the directory if it doesn't exist
     if (gSystem->AccessPathName(saveDir.c_str())) {
         gSystem->mkdir(saveDir.c_str(), true); // true = recursive
     }
 
-    TH1F *hist1;
-    TH1F *hist2;
-    TH1F *hist3;
-    for (const auto & wheel : wheelTag) {
-        for (const auto & chamb : chambTag) {
-            
-            std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
-            hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
-            hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-
-            std::string wheel2 = wheel;
-            wheel2 = wheel2.erase(1, 2);  // Removes "W.": "Wh.-2"→ "W-2"
-
-            plot_t0_histograms( hist1, 
-                                hist2, 
-                                "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched", 
-                                "Time of the TPs associated with prompt muons [ns]", 
-                                (wheel2+" "+chamb).c_str(),
-                                "DT AM",
-                                saveDir, 
-                                true);
-                                
-        }
-    }
-
-    for (const auto & wheel : wheelTag) {
-        for (const auto & chamb : chambTag) {
-            
-            std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
-            hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
-            hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-            hist3 = (TH1F*)fileRPCUpdated->Get(hName.c_str());
-
-            std::string wheel2 = wheel;
-            wheel2 = wheel2.erase(1, 2);  // Removes "W.": "Wh.-2"→ "W-2"
-
-            plot_t0_histogramsV2( hist1, hist2, hist3,
-                                "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched", 
-                                "Time of the TPs associated with prompt muons [ns]", 
-                                (wheel2+" "+chamb).c_str(),
-                                saveDir, 
-                                true);
-
-        }
-    }
-
     
+    // ---------------
+    // eff plots
+    v_plot.clear();
+    v_plot.push_back("Eff_TPwheels");
+    v_plot.push_back("fakeRate_WheelStationTP");
+    v_plot.push_back("fakeRate_TPnot");
+    
+    // for (const auto & secTag : secTags){
+    //     hName = "Eff_TPwheels_"+secTag;
+    //     v_plot.push_back(hName);
+    // }
+    // for (const auto & secTag : secTags){
+    //     hName = "fakeRateTP_WheelvsStation_"+secTag;
+    //     v_plot.push_back(hName);
+    // }
 
-    for (const auto & wheel : wheelTag) {
-        for (const auto & chamb : chambTag) {
-            
-            std::string hName = "hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched";
-            hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
-            hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+    TH1F *hTotal1;
+    TH1F *hMatched1;
+    TH1F *hTotal2;
+    TH1F *hMatched2;
 
-            std::string wheel2 = wheel;
-            wheel2 = wheel2.erase(1, 2);  // Removes "W.": "Wh.-2"→ "W-2"
+    // hMatched1 = (TH1F*)fileNoRPC->Get("Eff_TPwheels_matched");
+    // hTotal1 =   (TH1F*)fileNoRPC->Get("Eff_TPwheels_total");
 
-            plot_BX_histograms( hist1, hist2, 
-                                "hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched", 
-                                "BX of the TPs associated with prompt muons [ns]", 
-                                (wheel2+" "+chamb).c_str(),
+    // plotEffWheelStation("Eff_TPwheels",  // histogram name
+    //                     hMatched1, // histogram passed
+    //                     hTotal1, // histogram total
+    //                     "DT AM", // Legend for the histogram
+    //                     saveDir ); // directory to save
+
+    // return;
+
+    for (const auto& plot : v_plot) {
+        // hName = plot;
+        TH1F *hTotal1 =   (TH1F*)fileNoRPC->Get((plot+"_total").c_str());
+        TH1F *hMatched1 = (TH1F*)fileNoRPC->Get((plot+"_matched").c_str());
+        TH1F *hTotal2 =   (TH1F*)fileRPC->Get((plot+"_total").c_str());
+        TH1F *hMatched2 = (TH1F*)fileRPC->Get((plot+"_matched").c_str());
+        plotEffWheelStation((plot).c_str(),  // histogram name
+                            hMatched1,   // histogram 1 passed
+                            hTotal1,      // histogram 1 total
+                            hMatched2,   // histogram 2 passed
+                            hTotal2,    // histogram 2 total
+                            "DT AM", // Legend for the histogram 1
+                            "DT AM + RPC", // Legend for the histogram 2
+                            saveDir ); // directory to save 
+                        
+    }
+   
+    // ---------------
+    // Normal plot
+    saveDir = "plots/DT+RPC_vs_DT/variables/";
+    // Create the directory if it doesn't exist
+    if (gSystem->AccessPathName(saveDir.c_str())) {
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+    v_plot.clear();
+    v_plot.push_back("hNSeg");
+    v_plot.push_back("hNTrigs");
+    v_plot.push_back("hRatioNtpNseg_total");
+    v_plot.push_back("TPnotMatched");
+    v_plot.push_back("TPMatched");
+    v_plot.push_back("hTrigFlag");
+    v_plot.push_back("hTPMatchedRPCflag");
+    v_plot.push_back("BX_forFakeRate");
+    v_plot.push_back("RPCFlag_forFakeRate");
+    v_plot.push_back("fakeRate_EventWheelStationTP_matched");
+
+    // for (const auto & secTag : secTags){
+    //     hName = "fakeRate_EventWheelStationTP_"+secTag+"_matched";
+    //     v_plot.push_back(hName);
+    // }
+
+    for (const auto& plot : v_plot) {
+        // hName = "hNSeg";
+        TH1F *hist1 = (TH1F*)fileNoRPC->Get(plot.c_str());
+        TH1F *hist2 = (TH1F*)fileRPC->Get(plot.c_str());
+        plot_normal_histograms( hist1, 
+                                hist2, 
+                                plot, 
+                                "", 
                                 "DT AM",
                                 saveDir, 
                                 false);
+    }
+    
+    // ----Time of the TPs associated with prompt muons [ns]-----
+    saveDir = "plots/DT+RPC_vs_DT/time/";
+    // Create the directory if it doesn't exist
+    if (gSystem->AccessPathName(saveDir.c_str())) {
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
 
+    for (const auto & wheel : wheelTag) {
+        for (const auto & chamb : chambTag) {
+            // ---------------------------  
+            // t0
+            std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
+            TH1F *hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
+            TH1F *hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+            
+            std::string wheel2 = wheel;
+            wheel2 = wheel2.erase(1, 2);  // Removes "W.": "Wh.-2"→ "W-2"
+            
+            plot_t0_histograms( hist1, hist2, hName, 
+                "Time of the TPs associated with prompt muons [ns]", 
+                (wheel2+" "+chamb).c_str(),
+                "DT AM",
+                saveDir, 
+                true);
+            // ---------------------------    
+            // BX
+            hName = "hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched";
+            hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
+            hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+
+            plot_BX_histograms( hist1, hist2, hName, 
+                "BX of the TPs associated with prompt muons [ns]", 
+                (wheel2+" "+chamb).c_str(),
+                "DT AM",
+                saveDir, 
+                false);
         }
     }
 
-
-    saveDir = "output/histogram_comparison/";
-    hName = "hNSeg";
-    hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
-    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-    plot_normal_histograms( hist1, 
-                            hist2, 
-                            "hNSeg", 
-                            "", 
-                            "DT AM",
-                            saveDir, 
-                            false);
-
-    hName = "hNTrigs";
-    hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
-    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-    plot_normal_histograms( hist1, 
-                            hist2, 
-                            "hNTrigs", 
-                            "", 
-                            "DT AM",
-                            saveDir, 
-                            false);
-
-    hName = "hRatioNtpNseg_total";
-    hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
-    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-    plot_normal_histograms( hist1, 
-                            hist2, 
-                            "hRatioNtpNseg_total", 
-                            "", 
-                            "DT AM",
-                            saveDir, 
-                            false);
-
-    hName = "TPnotMatched";
-    hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
-    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-    plot_normal_histograms( hist1, 
-                            hist2, 
-                            "TPnotMatched", 
-                            "", 
-                            "DT AM",
-                            saveDir, 
-                            false);
-
-    hName = "TPMatched";
-    hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
-    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-    plot_normal_histograms( hist1, 
-                            hist2, 
-                            "TPMatched", 
-                            "", 
-                            "DT AM",
-                            saveDir, 
-                            false);
-
-    hName = "hTrigFlag";
-    hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
-    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-    plot_normal_histograms( hist1, 
-                            hist2, 
-                            "hTrigFlag", 
-                            "", 
-                            "DT AM",
-                            saveDir, 
-                            false);
-
-    hName = "hTPMatchedRPCflag";
-    hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
-    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-    plot_normal_histograms( hist1, 
-                            hist2, 
-                            "hTPMatchedRPCflag", 
-                            "", 
-                            "DT AM",
-                            saveDir, 
-                            false);
-
-    hName = "BX_forFakeRate";
-    hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
-    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-    plot_normal_histograms( hist1, 
-                            hist2, 
-                            "BX_forFakeRate", 
-                            "", 
-                            "DT AM",
-                            saveDir, 
-                            false);
     
-    hName = "RPCFlag_forFakeRate";
-    hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
-    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-    plot_normal_histograms( hist1, 
-                            hist2, 
-                            "RPCFlag_forFakeRate", 
-                            "", 
-                            "DT AM",
-                            saveDir, 
-                            false);
-                            
-    // hName = "fakeRate_EventWheelStationTP_matched";
-    // hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
-    // hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-    // plot_normal_histograms( hist1, 
-    //                         hist2, 
-    //                         "fakeRate_EventWheelStationTP_matched", 
-    //                         "", 
-    //                         "",
-    //                         saveDir, 
-    //                         false);
-
-    hName = "fakeRate_EventWheelStationTP_matched";
-    hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
-    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-    plot_fakeRate_wheels_histograms( hist1, 
-                            hist2, 
-                            "fakeRate_EventWheelStationTP_matched", 
-                            "", 
-                            "",
-                            saveDir, 
-                            false);
-
-
-    // for (const auto & secTag : secTags)
-    // {
-    //     hName = "fakeRate_EventWheelStationTP_"+secTag+"_matched";
-    //     hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
-    //     hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-    //     plot_normal_histograms( hist1, 
-    //                         hist2, 
-    //                         "fakeRate_EventWheelStationTP_"+secTag+"_matched", 
-    //                         "", 
-    //                         "",
-    //                         saveDir, 
-    //                         false);
-    // }
-
-
-    for (const auto & secTag : secTags)
-    {
-        hName = "fakeRate_EventWheelStationTP_"+secTag+"_matched";
-        hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
-        hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-        plot_fakeRate_wheels_histograms(hist1, 
-                                        hist2, 
-                                        "fakeRate_EventWheelStationTP_"+secTag+"_matched", 
-                                        "", 
-                                        "",
-                                        saveDir, 
-                                        false);
-    }
-
-
-
-    // -------------------------------------------------------------------------------
-    saveDir = "output/histogram_comparison_RPCUpdate/";
-
-    hName = "hNSeg";
-    hist1 = (TH1F*)fileNoRPCUpdated->Get(hName.c_str());
-    hist2 = (TH1F*)fileRPCUpdated->Get(hName.c_str());
-    plot_normal_histograms( hist1, 
-                            hist2, 
-                            "hNSegRPCUpdated", 
-                            "", 
-                            "DT AM",
-                            saveDir, 
-                            false);
-
-    hName = "hNTrigs";
-    hist1 = (TH1F*)fileNoRPCUpdated->Get(hName.c_str());
-    hist2 = (TH1F*)fileRPCUpdated->Get(hName.c_str());
-
-    plot_normal_histograms( hist1, 
-                            hist2, 
-                            "hNTrigsRPCUpdated", 
-                            "", 
-                            "DT AM",
-                            saveDir, 
-                            false);
-
-    hName = "hRatioNtpNseg_total";
-    hist1 = (TH1F*)fileNoRPCUpdated->Get(hName.c_str());
-    hist2 = (TH1F*)fileRPCUpdated->Get(hName.c_str());
-    plot_normal_histograms( hist1, 
-                            hist2, 
-                            "hRatioNtpNseg_totalRPCUpdated", 
-                            "", 
-                            "DT AM",
-                            saveDir, 
-                            false);
+    TH1F *hist1;
+    TH1F *hist2;
+    TH1F *hist3;
     
-    hName = "TPnotMatched";
-    hist1 = (TH1F*)fileNoRPCUpdated->Get(hName.c_str());
-    hist2 = (TH1F*)fileRPCUpdated->Get(hName.c_str());
-    plot_normal_histograms( hist1, 
-                            hist2, 
-                            "TPnotMatchedRPCUpdated", 
-                            "", 
-                            "DT AM",
-                            saveDir, 
-                            false);
-
-    hName = "TPMatched";
-    hist1 = (TH1F*)fileNoRPCUpdated->Get(hName.c_str());
-    hist2 = (TH1F*)fileRPCUpdated->Get(hName.c_str());
-    plot_normal_histograms( hist1, 
-                            hist2, 
-                            "TPMatchedRPCUpdated", 
-                            "", 
-                            "DT AM",
-                            saveDir, 
-                            false);
-
-    hName = "hTrigFlag";
-    hist1 = (TH1F*)fileNoRPCUpdated->Get(hName.c_str());
-    hist2 = (TH1F*)fileRPCUpdated->Get(hName.c_str());
-    plot_normal_histograms( hist1, 
-                            hist2, 
-                            "hTrigFlagRPCUpdated", 
-                            "", 
-                            "DT AM",
-                            saveDir, 
-                            false);
-
-    hName = "hTPMatchedRPCflag";
-    hist1 = (TH1F*)fileNoRPCUpdated->Get(hName.c_str());
-    hist2 = (TH1F*)fileRPCUpdated->Get(hName.c_str());
-    plot_normal_histograms( hist1, 
-                            hist2, 
-                            "hTPMatchedRPCflagRPCUpdated", 
-                            "", 
-                            "DT AM",
-                            saveDir, 
-                            false);
-                            
-    hName = "fakeRate_EventWheelStationTP_matched";
-    hist1 = (TH1F*)fileNoRPCUpdated->Get(hName.c_str());
-    hist2 = (TH1F*)fileRPCUpdated->Get(hName.c_str());
-    plot_normal_histograms( hist1, 
-                            hist2, 
-                            "fakeRate_EventWheelStationTP_matchedRPCUpdated", 
-                            "", 
-                            "DT AM",
-                            saveDir, 
-                            false);
-
-    hName = "BX_forFakeRate";
-    hist1 = (TH1F*)fileNoRPCUpdated->Get(hName.c_str());
-    hist2 = (TH1F*)fileRPCUpdated->Get(hName.c_str());
-    plot_normal_histograms( hist1, 
-                            hist2, 
-                            "BX_forFakeRateRPCUpdated", 
-                            "", 
-                            "DT AM",
-                            saveDir, 
-                            false);
-    
-    hName = "RPCFlag_forFakeRate";
-    hist1 = (TH1F*)fileNoRPCUpdated->Get(hName.c_str());
-    hist2 = (TH1F*)fileRPCUpdated->Get(hName.c_str());
-    plot_normal_histograms( hist1, 
-                            hist2, 
-                            "RPCFlag_forFakeRateRPCUpdated", 
-                            "", 
-                            "DT AM",
-                            saveDir, 
-                            false);
-
-    // -------------------------------------------------------------------------------
-    // Comparision with RPC only segments
     std::cout << "--------------------------------" << std::endl;
-    std::cout << "RPC Only Studies" << std::endl;
+    std::cout << "DT AM and DT + RPC time phase2 Studies" << std::endl;
     std::cout << "--------------------------------" << std::endl;
-
-    saveDir = "output/histogram_RPCOnly_comparison/";
+    // saveDir = "output/histogram_comparison_RPCUpdate/";
+    saveDir = "plots/DT+RPCupdated_vs_DTupdated/efficiency/";
     // Create the directory if it doesn't exist
     if (gSystem->AccessPathName(saveDir.c_str())) { 
         gSystem->mkdir(saveDir.c_str(), true); // true = recursive
     }
+    
+    v_plot.clear();
+    v_plot.push_back("Eff_TPwheels");
+    v_plot.push_back("fakeRate_WheelStationTP");
+    v_plot.push_back("fakeRate_TPnot");
+    v_plot.push_back("Eff_TPnotMatched");
+    
+    for (const auto& plot : v_plot) {
+        // hName = plot;
+        TH1F *hTotal1 =   (TH1F*)fileNoRPCUpdated->Get((plot+"_total").c_str());
+        TH1F *hMatched1 = (TH1F*)fileNoRPCUpdated->Get((plot+"_matched").c_str());
+        TH1F *hTotal2 =   (TH1F*)fileRPCUpdated->Get((plot+"_total").c_str());
+        TH1F *hMatched2 = (TH1F*)fileRPCUpdated->Get((plot+"_matched").c_str());
+
+        plotEffWheelStation((plot).c_str(),  // histogram name
+                            hMatched1,   // histogram 1 passed
+                            hTotal1,      // histogram 1 total
+                            hMatched2,   // histogram 2 passed
+                            hTotal2,    // histogram 2 total
+                            "DT AM Updated", // Legend for the histogram 1
+                            "DT AM + RPC Updated", // Legend for the histogram 2
+                            saveDir ); // directory to save 
+    }
+    
+
+    saveDir = "plots/DT+RPCupdated_vs_DTupdated/variables/";
+    if (gSystem->AccessPathName(saveDir.c_str())) { 
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
+    v_plot.clear();
+    v_plot.push_back("hNSeg");
+    v_plot.push_back("hNTrigs");
+    v_plot.push_back("hRatioNtpNseg_total");
+    v_plot.push_back("TPnotMatched");
+    v_plot.push_back("TPMatched");
+    v_plot.push_back("hTrigFlag");
+    v_plot.push_back("hTPMatchedRPCflag");
+    v_plot.push_back("BX_forFakeRate");
+    v_plot.push_back("RPCFlag_forFakeRate");
+    v_plot.push_back("fakeRate_EventWheelStationTP_matched");
+    
+    // for (const auto & secTag : secTags){
+        //     hName = "fakeRate_EventWheelStationTP_"+secTag+"_matched";
+        //     v_plot.push_back(hName);
+        // }
+        
+    for (const auto& plot : v_plot) {
+        // hName = "hNSeg";
+        TH1F *hist1 = (TH1F*)fileNoRPCUpdated->Get(plot.c_str());
+        TH1F *hist2 = (TH1F*)fileRPCUpdated->Get(plot.c_str());
+        plot_normal_histograms( hist1, hist2, plot, 
+                                "", 
+                                "DT AM",
+                                saveDir, 
+                                false);
+    }
+
+    
+    std::cout << "--------------------------------" << std::endl;
+    std::cout << "RPC Only Studies" << std::endl;
+    std::cout << "--------------------------------" << std::endl;
+
+    saveDir = "plots/DT+RPC_vs_RPConly/efficiency/"; 
+    // Create the directory if it doesn't exist
+    if (gSystem->AccessPathName(saveDir.c_str())) { 
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
+    hName = "fakeRate_WheelStationTP";
+    // hName = "Eff_TPwheels";  // Using DT normal efficiency
+    hTotal1 =   (TH1F*)fileRPCOnly->Get((hName+"_total").c_str());
+    if (!hTotal1) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
+    hMatched1 = (TH1F*)fileRPCOnly->Get((hName+"_matched").c_str());
+    if (!hMatched1) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
+
+    plotEffWheelStation(hName,  // histogram name
+                        hMatched1, // histogram passed
+                        hTotal1, // histogram total
+                        "RPConly", // Legend for the histogram
+                        saveDir ); // directory to save
 
     hName = "Eff_TPRPC_wheels";
     // hName = "Eff_TPwheels";  // Using DT normal efficiency
@@ -544,114 +313,95 @@ void plot_histograms() {
     hMatched1 = (TH1F*)fileRPCOnly->Get((hName+"_matched").c_str());
     if (!hMatched1) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
 
-    hName = "Eff_TPwheels";
-    hTotal2 =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
-    if (!hTotal2) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
-    hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
-    if (!hMatched2) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
+    plotEffWheelStation(hName,  // histogram name
+                        hMatched1, // histogram passed
+                        hTotal1, // histogram total
+                        "RPConly", // Legend for the histogram
+                        saveDir ); // directory to save
+    
 
-    plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "RPC Only", saveDir);
+    saveDir = "plots/DT+RPC_vs_RPConly/variables/";
+    if (gSystem->AccessPathName(saveDir.c_str())) { 
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
 
-
-    hName = "hNTrigs";
-    hist1 = (TH1F*)fileRPCOnly->Get(hName.c_str());
-    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-    plot_normal_histograms( hist1, 
-                            hist2, 
-                            "hNTrigs", 
-                            "", 
-                            "RPC Only",
-                            saveDir, 
-                            false);
-
-    hName = "hTrigFlag";
-    hist1 = (TH1F*)fileRPCOnly->Get(hName.c_str());
-    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-    plot_normal_histograms( hist1, 
-                            hist2, 
-                            "hTrigFlag", 
-                            "", 
-                            "RPC Only",
-                            saveDir, 
-                            false);
-
-    hName = "hTPMatchedRPCflag";
-    hist1 = (TH1F*)fileRPCOnly->Get(hName.c_str());
-    hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-    plot_normal_histograms( hist1, 
-                            hist2, 
-                            "hTPMatchedRPCflag", 
-                            "", 
-                            "RPC Only",
-                            saveDir, 
-                            false);
+    v_plot.clear();
+    v_plot.push_back("hNTrigs");
+    v_plot.push_back("hTrigFlag");
+    v_plot.push_back("hTPMatchedRPCflag");
+    
+        
+    for (const auto& plot : v_plot) {
+        // hName = "hNSeg";
+        TH1F *hist1 = (TH1F*)fileRPCOnly->Get(plot.c_str());
+        TH1F *hist2 = (TH1F*)fileRPC->Get(plot.c_str());
+        plot_normal_histograms( hist1, hist2, plot, 
+                                "", 
+                                "RPC Only",
+                                saveDir, 
+                                false);
+    }
 
     // ----------------------------------------------------------
     // ----Time of the TPs associated with prompt muons [ns]-----
     // ----------------------------------------------------------
-    saveDir = "output/t0RPCOnly/";
+    // saveDir = "output/t0RPCOnly/";
+    saveDir = "plots/DT+RPC_vs_RPConly/time/";
     // Create the directory if it doesn't exist
     if (gSystem->AccessPathName(saveDir.c_str())) {
         gSystem->mkdir(saveDir.c_str(), true); // true = recursive
     }
 
-
     for (const auto & wheel : wheelTag) {
         for (const auto & chamb : chambTag) {
-
-            std::string hName = "";
-            // hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
-            hName = "hTPRPCOnlygT0"+wheel+chamb+"_matched";
-            hist1 = (TH1F*)fileRPCOnly->Get(hName.c_str());
-            if (!hist1) std::cerr << "Error: Could not retrieve " << hName << " !!!!!!" << std::endl;
-        
-            hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
-            hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-            if (!hist2) std::cerr << "Error: Could not retrieve " << hName << " !!!!!!" << std::endl;
-            
             std::string wheel2 = wheel;
             wheel2 = wheel2.erase(1, 2);  // Removes "W.": "Wh.-2"→ "W-2"
+            
+            // ---------------------------  
+            // t0
+            std::string hName = "hTPRPCOnlygT0"+wheel+chamb+"_matched";
+            TH1F *hist1 = (TH1F*)fileRPCOnly->Get(hName.c_str());
+            if (!hist1) std::cerr << "Error: Could not retrieve " << hName << " !!!!!!" << std::endl;
 
-            plot_t0_histograms( hist1, hist2, 
-                                "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched", 
+            hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
+            TH1F *hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+            if (!hist2) std::cerr << "Error: Could not retrieve " << hName << " !!!!!!" << std::endl;
+            
+            plot_t0_histograms( hist1, hist2, hName, 
                                 "Time of the TPs associated with prompt muons [ns]", 
                                 (wheel2+" "+chamb).c_str(),
                                 "RPC only",
                                 saveDir, 
                                 true);
 
+            // ---------------------------  
+            // BX
+            hName = "hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched";
+            hist1 = (TH1F*)fileRPCOnly->Get(hName.c_str());
+            hist2 = (TH1F*)fileRPC->Get(hName.c_str());
+            if (!hist1 || !hist2) std::cerr << "Error: Could not retrieve " << hName << " !!!!!!" << std::endl;
+
+            plot_BX_histograms( hist1, hist2, hName, 
+                                "BX of the TPs associated with prompt muons [ns]", 
+                                (wheel2+" "+chamb).c_str(),
+                                "RPC Only",
+                                saveDir, 
+                                false);
+            
         }
     }
-
-    // for (const auto & wheel : wheelTag) {
-    //     for (const auto & chamb : chambTag) {
-            
-    //         std::string hName = "hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched";
-    //         hist1 = (TH1F*)fileRPCOnly->Get(hName.c_str());
-    //         hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-
-    //         std::string wheel2 = wheel;
-    //         wheel2 = wheel2.erase(1, 2);  // Removes "W.": "Wh.-2"→ "W-2"
-
-    //         plot_BX_histograms( hist1, hist2, 
-    //                             "hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched", 
-    //                             "BX of the TPs associated with prompt muons [ns]", 
-    //                             (wheel2+" "+chamb).c_str(),
-    //                             "RPC Only",
-    //                             saveDir, 
-    //                             false);
-
-    //     }
-    // }
 
     std::cout << "--------------------------------" << std::endl;
     std::cout << "RPC Only Updated Studies" << std::endl;
     std::cout << "--------------------------------" << std::endl;
-    saveDir = "output/histogram_RPCOnlyUpdated_comparison/";
+    // saveDir = "output/histogram_RPCOnlyUpdated_comparison/";
+    saveDir = "plots/DT+RPC_vs_RPConlyUpdated/efficiency/";
     // Create the directory if it doesn't exist
     if (gSystem->AccessPathName(saveDir.c_str())) { 
         gSystem->mkdir(saveDir.c_str(), true); // true = recursive
     }
+
+    //  -------------------- OLD --------------------------------------
 
     hName = "Eff_TPRPC_wheels";
     // hName = "Eff_TPwheels";  // Using DT normal efficiency
@@ -660,18 +410,17 @@ void plot_histograms() {
     hMatched1 = (TH1F*)fileRPCOnlyUpdated->Get((hName+"_matched").c_str());
     if (!hMatched1) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
 
-    hName = "Eff_TPwheels";
-    hTotal2 =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
-    if (!hTotal2) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
-    hMatched2 = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
-    if (!hMatched2) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
+    plotEffWheelStation(hName,  // histogram name
+                        hMatched1, // histogram passed
+                        hTotal1, // histogram total
+                        "RPC Only Updated", // Legend for the histogram
+                        saveDir ); // directory to save
 
-    plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "RPC Only Updated", saveDir);
-    
     // ----------------------------------------------------------
     // ----Time of the TPs associated with prompt muons [ns]-----
     // ----------------------------------------------------------
-    saveDir = "output/t0RPCOnlyUpdated/";
+    // saveDir = "output/t0RPCOnlyUpdated/";
+    saveDir = "plots/DT+RPC_vs_RPConlyUpdated/time/";
     // Create the directory if it doesn't exist
     if (gSystem->AccessPathName(saveDir.c_str())) {
         gSystem->mkdir(saveDir.c_str(), true); // true = recursive

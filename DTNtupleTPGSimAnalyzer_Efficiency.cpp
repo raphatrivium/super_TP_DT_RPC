@@ -17,7 +17,6 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
     // flagRPCselection = 2  : RPC only segment
     // flagRPCselection = 3  : RPC single hit not associated to any DT segment
     // flagRPCselection = 10 : RPC Flag == 0 &&  RPC Flag == 1.   "RPC Flag == 0": segment that could not be matched to any RPC cluster
-
     int flagRPCselection = 0;
 
     bool booltest = false;
@@ -888,6 +887,47 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 if (fdebug) std::cout << "DENOMINATOR per Gen: "<<  denTP << std::endl;
                 // std::cout << "eff per Event: "<<  eff << std::endl;
                 if (fdebug) std::cout << "**********************" <<  std::endl;
+
+
+                // -----------------------------
+                // LOOP BEST TRIGGER PRIMITIVES
+                // -----------------------------
+                // For Delta Studies
+                std::cout << "vbestTPAM size: " << vbestTPAM.size() << std::endl;
+                for (std::size_t ibestTP = 0; ibestTP < vbestTPAM.size(); ++ibestTP){
+                    std::cout << "vbestTPAM idx: " << bestTP[ibestTP] << std::endl;
+
+                    Int_t trigAMWh  = ph2TpgPhiEmuAm_wheel->at(vbestTPAM[ibestTP]);
+                    Int_t trigAMSec = ph2TpgPhiEmuAm_sector->at(vbestTPAM[ibestTP]);
+                    Int_t trigAMSt  = ph2TpgPhiEmuAm_station->at(vbestTPAM[ibestTP]);
+                    Double_t trigAMt0 = ph2TpgPhiEmuAm_t0->at(vbestTPAM[ibestTP]);
+                    trigAMt0 = (trigAMt0 * 25 / 32); // DCS to ns
+                    trigAMt0 = trigAMt0 - 390; // Shift to zero (RPC only)
+
+                    // For Delta t0 between station 1 and station 2
+                    for (std::size_t jbestTP = 0; jbestTP < vbestTPAM.size(); ++jbestTP){
+                        
+                        Int_t trigAMWh2  = ph2TpgPhiEmuAm_wheel->at(vbestTPAM[jbestTP]);
+                        Int_t trigAMSec2 = ph2TpgPhiEmuAm_sector->at(vbestTPAM[jbestTP]);
+                        Int_t trigAMSt2  = ph2TpgPhiEmuAm_station->at(vbestTPAM[jbestTP]);
+    
+                        if ( jbestTP == ibestTP ) continue;
+    
+                        // To not repeat combinations
+                        if ( ibestTP > jbestTP) continue;
+                        
+                        Double_t trigAMt02 = ph2TpgPhiEmuAm_t0->at(vbestTPAM[jbestTP]);
+                        trigAMt02 = (trigAMt02 * 25 / 32); // DCS to ns
+                        trigAMt02 = trigAMt02 - 390; // Shift to zero (RPC only)
+                        // std::cout << "vbestTPAM 2: "  <<  "trigAMt02 :" << trigAMt02 << std::endl;
+    
+                        if ( trigAMWh == trigAMWh2 && trigAMSec == trigAMSec2 && trigAMSt != trigAMSt2 ){
+                            // std::cout << "MB1 t0 - MB2 t0: " << trigAMt0 - trigAMt02 << std::endl;
+                            m_plots["hTPStationDeltaT0"] -> Fill( trigAMt0 - trigAMt02 );
+                            // std::cout << "Filled " << std::endl;
+                        } 
+                    }
+                }
                 
             } // END Loop Gen
 

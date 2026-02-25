@@ -92,7 +92,6 @@ void test() {
     v_plot.push_back("fakeRate_WheelStationTP");
     v_plot.push_back("fakeRate_TPnot");
     
-    
     // for (const auto & secTag : secTags){
     //     hName = "Eff_TPwheels_"+secTag;
     //     v_plot.push_back(hName);
@@ -131,9 +130,8 @@ void test() {
                             hTotal2,    // histogram 2 total
                             "DT AM", // Legend for the histogram 1
                             "DT AM + RPC", // Legend for the histogram 2
-                            saveDir // directory to save 
-                        );
-        // plot_eff_fake_rate( plot, hMatched1, hTotal1, hMatched2, hTotal2, "DT AM", saveDir);
+                            saveDir ); // directory to save 
+                        
     }
    
     // ---------------
@@ -239,7 +237,15 @@ void test() {
         TH1F *hMatched1 = (TH1F*)fileNoRPCUpdated->Get((plot+"_matched").c_str());
         TH1F *hTotal2 =   (TH1F*)fileRPCUpdated->Get((plot+"_total").c_str());
         TH1F *hMatched2 = (TH1F*)fileRPCUpdated->Get((plot+"_matched").c_str());
-        plot_eff_fake_rate( plot, hMatched1, hTotal1, hMatched2, hTotal2, "DT AM", saveDir);
+
+        plotEffWheelStation((plot).c_str(),  // histogram name
+                            hMatched1,   // histogram 1 passed
+                            hTotal1,      // histogram 1 total
+                            hMatched2,   // histogram 2 passed
+                            hTotal2,    // histogram 2 total
+                            "DT AM Updated", // Legend for the histogram 1
+                            "DT AM + RPC Updated", // Legend for the histogram 2
+                            saveDir ); // directory to save 
     }
     
 
@@ -277,9 +283,6 @@ void test() {
     }
 
     
-    
-    // -------------------------------------------------------------------------------
-    // Comparision with RPC only segments
     std::cout << "--------------------------------" << std::endl;
     std::cout << "RPC Only Studies" << std::endl;
     std::cout << "--------------------------------" << std::endl;
@@ -297,22 +300,17 @@ void test() {
     hMatched1 = (TH1F*)fileRPCOnly->Get((hName+"_matched").c_str());
     if (!hMatched1) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
 
-    plotEffWheelStationV2("Eff_TPRPC_wheels",  // histogram name
+    plotEffWheelStation("Eff_TPRPC_wheels",  // histogram name
                         hMatched1, // histogram passed
                         hTotal1, // histogram total
                         "DT AM", // Legend for the histogram
                         saveDir ); // directory to save
-
-    
-    
-    // plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "RPC Only", saveDir);
     
 
     saveDir = "plots/DT+RPC_vs_RPConly/variables/";
     if (gSystem->AccessPathName(saveDir.c_str())) { 
         gSystem->mkdir(saveDir.c_str(), true); // true = recursive
     }
-
 
     v_plot.clear();
     v_plot.push_back("hNTrigs");
@@ -399,16 +397,12 @@ void test() {
     hMatched1 = (TH1F*)fileRPCOnlyUpdated->Get((hName+"_matched").c_str());
     if (!hMatched1) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
 
-    // plot_eff_fake_rate( hName, hMatched1, hTotal1, hMatched2, hTotal2, "RPC Only Updated", saveDir);
-
-    plotEffWheelStationV2(hName,  // histogram name
+    plotEffWheelStation(hName,  // histogram name
                         hMatched1, // histogram passed
                         hTotal1, // histogram total
                         "RPC Only Updated", // Legend for the histogram
                         saveDir ); // directory to save
 
-    return;
-    
     // ----------------------------------------------------------
     // ----Time of the TPs associated with prompt muons [ns]-----
     // ----------------------------------------------------------
