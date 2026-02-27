@@ -416,6 +416,20 @@ void plot_histograms() {
                         "RPC Only Updated", // Legend for the histogram
                         saveDir ); // directory to save
 
+
+    hName = "fakeRate_WheelStationTP";
+    // hName = "Eff_TPwheels";  // Using DT normal efficiency
+    hTotal1 =   (TH1F*)fileRPCOnlyUpdated->Get((hName+"_total").c_str());
+    if (!hTotal1) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
+    hMatched1 = (TH1F*)fileRPCOnlyUpdated->Get((hName+"_matched").c_str());
+    if (!hMatched1) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
+
+    plotEffWheelStation(hName,  // histogram name
+                        hMatched1, // histogram passed
+                        hTotal1, // histogram total
+                        "RPConlyUpdated", // Legend for the histogram
+                        saveDir ); // directory to save
+
     // ----------------------------------------------------------
     // ----Time of the TPs associated with prompt muons [ns]-----
     // ----------------------------------------------------------
