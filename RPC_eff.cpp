@@ -559,6 +559,7 @@ int RPC_eff() {
     
             flagFill = false;
 
+            std::cout << "Chamber hit in the Event:" << std::endl;
             for (size_t iChamber = 0; iChamber < vChambersHit.size(); ++iChamber) {
                 int Station = vChambersHit[iChamber][0];
                 int Layer   = vChambersHit[iChamber][1];
@@ -622,7 +623,7 @@ int RPC_eff() {
                     
                 }
                 
-                if (!hitChamber) continue;
+                if (hitChamber) continue;
 
                 m_plots["fakeRate_WheelStationTP_matched"] -> Fill( wheelIdx );
 
