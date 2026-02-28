@@ -533,7 +533,7 @@ int test() {
                 }// End loop Geo
                 
                 if ( tpRPC_num > tpRPC_den){
-                    std::cerr << "Error: Numerator is greater than Denominator " << std::endl;
+                    std::cerr << "Error: Numerator is greater than Denominator !!!" << std::endl;
                     std::cerr << "Numerator  : " << tpRPC_num << std::endl;
                     std::cerr << "Denominator: " << tpRPC_den << std::endl;
                     return 0;
