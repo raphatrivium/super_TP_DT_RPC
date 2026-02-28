@@ -401,8 +401,6 @@ void plot_histograms() {
         gSystem->mkdir(saveDir.c_str(), true); // true = recursive
     }
 
-    //  -------------------- OLD --------------------------------------
-
     hName = "Eff_TPRPC_wheels";
     // hName = "Eff_TPwheels";  // Using DT normal efficiency
     hTotal1 =   (TH1F*)fileRPCOnlyUpdated->Get((hName+"_total").c_str());

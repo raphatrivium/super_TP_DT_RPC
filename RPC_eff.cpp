@@ -108,8 +108,8 @@ int RPC_eff() {
         m_plots["hTpT0_matched_DCS"] = new TH1D("hTpT0_matched_DCS", "Time Distribution of the Trigger Primitives;t0 [DCS];Entries", 40, 630, 650);
         m_plots["hTpT0_matched_ns"]  = new TH1D("hTpT0_matched_ns", "Time Distribution of the Trigger Primitives;t0 [ns];Entries", 40, -20, 20);
 
-        m_plots["hTP_MB1_MB2_DeltaT0"] = new TH1D( "hTP_MB1_MB2_DeltaT0", "Delta t0 between MB1 and MB2; Delta t0 [ns]; Entries", 30, 0, 10);
-        // m_plots["hTP_MB1_MB2_DeltaT0"] = new TH1D( "hTP_MB1_MB2_DeltaT0", "Delta t0 between MB1 and MB2; Delta t0 [ns]; Entries", 60, -10, 10);
+        // m_plots["hTP_MB1_MB2_DeltaT0"] = new TH1D( "hTP_MB1_MB2_DeltaT0", "Delta t0 between MB1 and MB2; Delta t0 [ns]; Entries", 30, 0, 10);
+        m_plots["hTP_MB1_MB2_DeltaT0"] = new TH1D( "hTP_MB1_MB2_DeltaT0", "Delta t0 between MB1 and MB2; Delta t0 [ns]; Entries", 60, -10, 10);
 
         m_plots["Eff_TPRPC_wheels_total"] = new TH1D("Eff_TPRPC_wheels_total", "RPC TP Local Efficiency; Wheel; Efficiency", 22, 0, 22);
         m_plots["Eff_TPRPC_wheels_matched"] = new TH1D("Eff_TPRPC_wheels_matched", "RPC TP Local Efficiency; Wheel; Efficiency",22, 0, 22);
@@ -132,6 +132,33 @@ int RPC_eff() {
 
         m_plots["fakeRate_WheelStationTP_total"] = new TH1D("fakeRate_WheelStationTP_total", "Trigger Primitive not Matched; Wheel; Fake Rate",  22, 0, 22);
         m_plots["fakeRate_WheelStationTP_matched"] = new TH1D("fakeRate_WheelStationTP_matched", "Trigger Primitive not Matched; Wheel; Fake Rate",  22, 0, 22);
+
+        for (const auto & secTag : secTags)
+        {
+        //     m_plots["Eff_TPwheels_"+secTag+"_total"] = new TH1D(("Eff_TPwheels_"+secTag+"_total").c_str(),
+        //     ("DT TP Local Efficiency for " + secTag + "; Wheel; Efficiency").c_str(), 22, 0, 22);
+        //     m_plots["Eff_TPwheels_"+secTag+"_matched"] = new TH1D(("Eff_TPwheels_"+secTag+"_matched").c_str(),
+        //     ("DT TP Local Efficiency for " + secTag + "; Wheel; Efficiency").c_str(), 22, 0, 22);
+            
+        //     m_plots["fakeRateTP_WheelvsStation_"+secTag+"_total"] = new TH1D(("fakeRateTP_WheelvsStation_"+secTag+"_total").c_str(),
+        //     ("Fake Rate Wheel vs Station for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
+        //     m_plots["fakeRateTP_WheelvsStation_"+secTag+"_matched"] = new TH1D(("fakeRateTP_WheelvsStation_"+secTag+"_matched").c_str(),
+        //     ("Fake Rate Wheel vs Station for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
+
+        //     m_plots["fakeRate_EventWheelStationTP_"+secTag+"_matched"] = new TH1D(("fakeRate_EventWheelStationTP_"+secTag+"_matched").c_str(),
+        //     ("Fake Rate per event for " + secTag + "; Wheel; Fake TPs / Event").c_str(), 22, 0, 22);
+
+        //     m_plots["fakeRate_TPnot_"+secTag+"_total"] = new TH1D(("fakeRate_TPnot_"+secTag+"_total").c_str(),
+        //     ("TPs not Matched for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
+        //     m_plots["fakeRate_TPnot_"+secTag+"_matched"] = new TH1D(("fakeRate_TPnot_"+secTag+"_matched").c_str(),
+        //     ("TPs not Matched for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
+
+            m_plots["Eff_TPRPC_wheels_"+secTag+"_total"] = new TH1D(("Eff_TPRPC_wheels_"+secTag+"_total").c_str(),
+            ("TPs not Matched for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
+            m_plots["Eff_TPRPC_wheels_"+secTag+"_matched"] = new TH1D(("Eff_TPRPC_wheels_"+secTag+"_matched").c_str(),
+            ("TPs not Matched for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
+
+        }
 
         // ---------------------------------
         // Open the ROOT file
@@ -243,26 +270,7 @@ int RPC_eff() {
         // std::vector<std::string> secTags   = { "Sec1", "Sec2", "Sec3", "Sec4", "Sec5", "Sec6", "Sec7", "Sec8","Sec9","Sec10","Sec11","Sec12","Sec13","Sec14"};
 
 
-        // for (const auto & secTag : secTags)
-        // {
-        //     m_plots["Eff_TPwheels_"+secTag+"_total"] = new TH1D(("Eff_TPwheels_"+secTag+"_total").c_str(),
-        //     ("DT TP Local Efficiency for " + secTag + "; Wheel; Efficiency").c_str(), 22, 0, 22);
-        //     m_plots["Eff_TPwheels_"+secTag+"_matched"] = new TH1D(("Eff_TPwheels_"+secTag+"_matched").c_str(),
-        //     ("DT TP Local Efficiency for " + secTag + "; Wheel; Efficiency").c_str(), 22, 0, 22);
-            
-        //     m_plots["fakeRateTP_WheelvsStation_"+secTag+"_total"] = new TH1D(("fakeRateTP_WheelvsStation_"+secTag+"_total").c_str(),
-        //     ("Fake Rate Wheel vs Station for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
-        //     m_plots["fakeRateTP_WheelvsStation_"+secTag+"_matched"] = new TH1D(("fakeRateTP_WheelvsStation_"+secTag+"_matched").c_str(),
-        //     ("Fake Rate Wheel vs Station for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
-
-        //     m_plots["fakeRate_EventWheelStationTP_"+secTag+"_matched"] = new TH1D(("fakeRate_EventWheelStationTP_"+secTag+"_matched").c_str(),
-        //     ("Fake Rate per event for " + secTag + "; Wheel; Fake TPs / Event").c_str(), 22, 0, 22);
-
-        //     m_plots["fakeRate_TPnot_"+secTag+"_total"] = new TH1D(("fakeRate_TPnot_"+secTag+"_total").c_str(),
-        //     ("TPs not Matched for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
-        //     m_plots["fakeRate_TPnot_"+secTag+"_matched"] = new TH1D(("fakeRate_TPnot_"+secTag+"_matched").c_str(),
-        //     ("TPs not Matched for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
-        // }
+        
 
 
         // ------------------------------------------------------------------------------
@@ -277,15 +285,19 @@ int RPC_eff() {
 
         int idxGen = 0;
         bool flagFill = false;
+
+        
         for (Long64_t iEvent = 0; iEvent < nEntries; ++iEvent) {
+
+            if (fdebug) std::cout << "=================================" << std::endl;
+            if (fdebug) std::cout << "iEvent " << iEvent << std::endl;
+            if (fdebug) std::cout << "=================================" << std::endl;
 
             tree->GetEntry(iEvent);
             // branch_gen_nGenParts->GetEntry(iEvent);
             // branch_ph2TpgPhiEmuAm_nTrigs->GetEntry(iEvent);
             
             // m_plots["hNSeg"] -> Fill( ph2Seg_nSegments );
-            // m_plots["hNTrigs"] -> Fill( ph2TpgPhiEmuAm_nTrigs );
-
             
             // for (std::size_t itrig = 0; itrig < ph2TpgPhiEmuAm_nTrigs; ++itrig){
             //     m_plots["htrigAMrpcFlag_Total"] -> Fill(ph2TpgPhiEmuAm_rpcFlag->at(itrig));
@@ -300,18 +312,67 @@ int RPC_eff() {
             RatioNtpNseg = double(ph2TpgPhiEmuAm_nTrigs) / double(ph2Seg_nSegments) ;
             // m_plots["hRatioNtpNseg_total"] -> Fill( RatioNtpNseg );
 
-            numTPEvent = 0;
-            denTPEvent = 0;
-            TPnotMatched = 0;
+            // numTPEvent = 0;
+            // denTPEvent = 0;
+            // TPnotMatched = 0;
 
             int coutNTrigs = 0;
+
+            // -----------------------------
+            // Loop in the AM TP
+            // -----------------------------
+            if (fdebug) std::cout << "Loop in the AM TP " << std::endl;
+            if (fdebug) std::cout << "Total number of TP in this event: "<< ph2TpgPhiEmuAm_nTrigs << std::endl;
             
-            // std::vector<int> vbestTPAM;
-            std::vector<int> bestTP;
+            std::vector<int> selectedTP;
+            for (std::size_t iTrigAM = 0; iTrigAM < ph2TpgPhiEmuAm_nTrigs; ++iTrigAM){
+
+                Int_t trigAMWh  = ph2TpgPhiEmuAm_wheel->at(iTrigAM);
+                // Int_t trigAMSec = ph2TpgPhiEmuAm_sector->at(iTrigAM);
+                Int_t trigAMSt  = ph2TpgPhiEmuAm_station->at(iTrigAM);
+                Int_t trigAMBX  = ph2TpgPhiEmuAm_BX->at(iTrigAM);
+                // Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(iTrigAM);
+                Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(iTrigAM);
+
+                if (fileRPCflag){
+                    if (flagRPCselection == 1){
+                        if ( trigAMrpc != 1 ) continue;
+                    }
+                    else if (flagRPCselection == 2){
+                        if ( trigAMrpc != 2 ) continue;
+                    }
+                    else if (flagRPCselection == 3){
+                        if ( trigAMrpc != 3 ) continue;
+                    }
+                    else if (flagRPCselection == 10){
+                        if ( trigAMrpc != 1 && trigAMrpc != 0 ) continue;
+                    }
+                }
+                
+                // For this file, we are ignoring the RPC flags 0 and 1 to simulate only RPC TPs
+                if ( name == "RPCOnly" || name == "RPCOnlyUpdated" ){
+                    if (trigAMrpc == 0) continue;
+                    if (trigAMrpc == 1) continue;
+                }
+                
+                m_plots["hTrigFlag"] -> Fill( trigAMrpc );
+                coutNTrigs++;
+                
+                if (trigAMBX != 20) continue;
+
+                selectedTP.push_back(iTrigAM);
+
+            }
+            if (fdebug) std::cout << "selectedTP.size() " << selectedTP.size() << std::endl;
+
+            m_plots["hNTrigs"] -> Fill( coutNTrigs );
+
+            
+            std::vector<int> vbestTPAM;
+            std::vector<std::vector<double>> vChambersHit;
             // -----------------------------
             // loop Gen Particle
             // -----------------------------
-            std::vector<std::vector<double>> vChambersHit;
             for (int iGenPart = 0; iGenPart < gen_nGenParts; ++iGenPart) {
                 int numTP = 0;
                 int denTP = 0;
@@ -348,6 +409,7 @@ int RPC_eff() {
                 // -----------------------------
                 // Loop in the chambers that the Gen particle pass trhough
                 // -----------------------------
+                std::vector<int> bestTP;
                 for (size_t iGeo = 0; iGeo < geo_info.size(); ++iGeo) {
                     
                     int geoStation = geo_info[iGeo][0];
@@ -384,56 +446,35 @@ int RPC_eff() {
                     vChambersHitTemp.push_back(geoRing);
                     vChambersHit.push_back(vChambersHitTemp);
 
+                    std::string chambTag = chambTags.at(geoStation - 1);
+                    std::string whTag    = whTags.at(geoRing + 2);
+                    std::string secTag   = secTags.at(geoSector - 1);
 
                     int wheelIdx = WheelStationToBins(geoStation, geoRing );
                     m_plots["Eff_TPRPC_wheels_total"] -> Fill( wheelIdx );
+
+                    // Efficiency TP by sector Numerator
+                    m_plots["Eff_TPRPC_wheels_"+secTag+"_total"]->Fill(wheelIdx);
+
+
                     tpRPC_den++;
 
                     // -----------------------------
                     // Loop in the AM TP
                     // -----------------------------
-                    if (fdebug) std::cout << "      Loop in the AM TP " << std::endl;
-                    if (fdebug) std::cout << "      Total number of TP in this event: "<< ph2TpgPhiEmuAm_nTrigs << std::endl;
+                    if (fdebug) std::cout << "      Loop in the Selected AM TP " << std::endl;
+                    // if (fdebug) std::cout << "      Total number of Selected TP in this event: "<< selectedTP.size() << std::endl;
                     
                     Int_t    bestTPidx = -999;
                     Double_t bestTPtime = 999.;
-                    for (std::size_t iTrigAM = 0; iTrigAM < ph2TpgPhiEmuAm_nTrigs; ++iTrigAM){
+                    for (std::size_t iTrigAM = 0; iTrigAM < selectedTP.size(); ++iTrigAM){
 
-                        Int_t trigAMWh  = ph2TpgPhiEmuAm_wheel->at(iTrigAM);
-                        Int_t trigAMSec = ph2TpgPhiEmuAm_sector->at(iTrigAM);
-                        Int_t trigAMSt  = ph2TpgPhiEmuAm_station->at(iTrigAM);
-                        Int_t trigAMBX  = ph2TpgPhiEmuAm_BX->at(iTrigAM);
-                        Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(iTrigAM);
-                        Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(iTrigAM);
-                        
-                        
-                        if (fileRPCflag){
-                            if (flagRPCselection == 1){
-                                if ( trigAMrpc != 1 ) continue;
-                            }
-                            else if (flagRPCselection == 2){
-                                if ( trigAMrpc != 2 ) continue;
-                            }
-                            else if (flagRPCselection == 3){
-                                if ( trigAMrpc != 3 ) continue;
-                            }
-                            else if (flagRPCselection == 10){
-                                if ( trigAMrpc != 1 && trigAMrpc != 0 ) continue;
-                            }
-                        }
-                        
-                        // For this file, we are ignoring the RPC flags 0 and 1 to simulate only RPC TPs
-                        if ( name == "RPCOnly" || name == "RPCOnlyUpdated" ){
-                            if (trigAMrpc == 0) continue;
-                            if (trigAMrpc == 1) continue;
-                        }
-
-
-                        if (!flagFill){
-                            m_plots["hTrigFlag"] -> Fill( trigAMrpc );
-
-                            coutNTrigs++;
-                        }
+                        Int_t trigAMWh  = ph2TpgPhiEmuAm_wheel->at(selectedTP[iTrigAM]); 
+                        Int_t trigAMSec = ph2TpgPhiEmuAm_sector->at(selectedTP[iTrigAM]);
+                        Int_t trigAMSt  = ph2TpgPhiEmuAm_station->at(selectedTP[iTrigAM]);
+                        Int_t trigAMBX  = ph2TpgPhiEmuAm_BX->at(selectedTP[iTrigAM]);
+                        Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(selectedTP[iTrigAM]);
+                        Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(selectedTP[iTrigAM]);
 
                         if (trigAMBX != 20) continue;
                         // if (trigAMBX < 19 && trigAMBX > 21 ) continue;
@@ -444,14 +485,14 @@ int RPC_eff() {
                         if (geoRing == trigAMWh && geoSector == trigAMSec && geoStation  == trigAMSt) {
 
                             // TODO: Check this part to see if it is right.
-                            Double_t trigGlbPhi  = trigPhiInRad(ph2TpgPhiEmuAm_phi->at(iTrigAM),trigAMSec);
+                            Double_t trigGlbPhi  = trigPhiInRad(ph2TpgPhiEmuAm_phi->at(selectedTP[iTrigAM]),trigAMSec);
                             Double_t finalDPhi   = gen_phi->at(iGenPart) - trigGlbPhi;
                             Double_t trigGenDPhi = abs(acos(cos(finalDPhi)));
 
                             // TODO: Check if we will apply a Delta phi cut
                             // if ( trigGenDPhi > 0.15) continue;
 
-                            Double_t trigAMt0 = ph2TpgPhiEmuAm_t0->at(iTrigAM);
+                            Double_t trigAMt0 = ph2TpgPhiEmuAm_t0->at(selectedTP[iTrigAM]);
                             
                             // TODO: Check if we will apply a t0 cut
                             // if ( trigAMt0  < 500) continue;
@@ -459,7 +500,7 @@ int RPC_eff() {
                             trigAMt0 = (trigAMt0 * 25 / 32); // DCS to ns
                             trigAMt0 = trigAMt0 - 390; // Shift to zero (RPC only)
 
-                            if (fdebug) std::cout << " iTrigAM: " << iTrigAM << " | Wh: "<< trigAMWh << 
+                            if (fdebug) std::cout << " iTrigAM: " << selectedTP[iTrigAM] << " | Wh: "<< trigAMWh << 
                                                     " | Sec: " << trigAMSec << " | St: " << trigAMSt << 
                                                     " | BX: " << trigAMBX << " | GlbPhi: " << trigGlbPhi  <<
                                                     " | trigGenDPhi: " << trigGenDPhi  <<" | t0: " << trigAMt0 << std::endl;
@@ -469,138 +510,117 @@ int RPC_eff() {
                             // if (fdebug) std::cout << "       trigAMt0: " << trigAMt0 << " | bestTPtime: "<< bestTPtime << std::endl;
                             if ( abs(trigAMt0) > abs(bestTPtime) ) continue;
                             bestTPtime = trigAMt0;
-                            bestTPidx = iTrigAM;
+                            bestTPidx = selectedTP[iTrigAM];
 
                             m_plots["hGenTPdeltaPhi"] -> Fill( trigGenDPhi );
                             
                         } // GEN AND TP MATCHING
-                        
-                    }// END loop Trigger primitives
-
-                    flagFill = true;
+                    }// END loop Selected Trigger primitives
 
                     // if (fdebug) std::cout << " bestTPidx: " << bestTPidx << std::endl;
-                    // NUMERATOR
-                    if ( bestTPidx > -1 ){
+                    if ( bestTPidx > -1 ){ // NUMERATOR
 
                         tpRPC_num++;
                         bestTP.push_back(bestTPidx);
-
-                        // Organize Wheels and stations in 20 bins
-                        int wheelIdx = WheelStationToBins(geoStation, geoRing );
-
+                        vbestTPAM.push_back(bestTPidx);
+                    
                         m_plots["Eff_TPRPC_wheels_matched"] -> Fill( wheelIdx );
+                        // Efficiency TP by sector Numerator
+                        m_plots["Eff_TPRPC_wheels_"+secTag+"_matched"]->Fill(wheelIdx);
                         
-                        std::string chambTag = chambTags.at(geoStation - 1);
-                        std::string whTag    = whTags.at(geoRing + 2);
-                        std::string secTag   = secTags.at(geoSector - 1);
-
+                        Int_t trigAMBX = ph2TpgPhiEmuAm_BX->at(bestTPidx);
+                        m_plots["hPh2TpgPhiEmuAmBX"+whTag+chambTag+"_matched"]->Fill(trigAMBX);
+                        
                         Double_t trigAMt0 = ph2TpgPhiEmuAm_t0->at(bestTPidx);
                         trigAMt0 = (trigAMt0 * 25 / 32); // DCS to ns
                         trigAMt0 = trigAMt0 - 390; // Shift to zero (RPC only)
 
                         m_plots["hTPRPCOnlygT0"+whTag+chambTag+"_matched"]->Fill(trigAMt0);
-
-                        Int_t trigAMBX = ph2TpgPhiEmuAm_BX->at(bestTPidx);
-                        m_plots["hPh2TpgPhiEmuAmBX"+whTag+chambTag+"_matched"]->Fill(trigAMBX);
-
                     }
 
                 }// End loop Geo
-
-                std::cout << "--------------" << std::endl;
-                std::cout << "tpRPC_num: " << tpRPC_num << std::endl;
-                std::cout << "tpRPC_den: " << tpRPC_den << std::endl;
-                if ( tpRPC_num > tpRPC_den) return 0; 
+                
+                if ( tpRPC_num > tpRPC_den){
+                    std::cerr << "Error: Numerator is greater than Denominator !!!" << std::endl;
+                    std::cerr << "Numerator  : " << tpRPC_num << std::endl;
+                    std::cerr << "Denominator: " << tpRPC_den << std::endl;
+                    return 0;
+                }
+                
 
                 // -----------------------------
                 // LOOP BEST TRIGGER PRIMITIVES
                 // -----------------------------
-                // For Delta Studies
+                // For Delta t0 Studies
                 std::cout << "bestTP size: " << bestTP.size() << std::endl;
-                for (std::size_t ibestTP = 0; ibestTP < bestTP.size(); ++ibestTP){
-    
-                    std::cout << "bestTP idx: " << bestTP[ibestTP] << std::endl;
-    
-                    Int_t trigAMWh  = ph2TpgPhiEmuAm_wheel->at(bestTP[ibestTP]);
-                    Int_t trigAMSec = ph2TpgPhiEmuAm_sector->at(bestTP[ibestTP]);
-                    Int_t trigAMSt  = ph2TpgPhiEmuAm_station->at(bestTP[ibestTP]);
-                    Double_t trigAMt0 = ph2TpgPhiEmuAm_t0->at(bestTP[ibestTP]);
-                    trigAMt0 = (trigAMt0 * 25 / 32); // DCS to ns
-                    trigAMt0 = trigAMt0 - 390; // Shift to zero (RPC only)
-    
-                    // std::cout << "bestTP 1: "  <<  "trigAMt0 :" << trigAMt0 << std::endl;
-    
-                    // For Delta t0 between station 1 and station 2
-                    for (std::size_t jbestTP = 0; jbestTP < bestTP.size(); ++jbestTP){
-                        
-                        Int_t trigAMWh2  = ph2TpgPhiEmuAm_wheel->at(bestTP[jbestTP]);
-                        Int_t trigAMSec2 = ph2TpgPhiEmuAm_sector->at(bestTP[jbestTP]);
-                        Int_t trigAMSt2  = ph2TpgPhiEmuAm_station->at(bestTP[jbestTP]);
-    
-                        if ( jbestTP == ibestTP ) continue; // To avoid self combinations
-                        if ( ibestTP > jbestTP) continue; // To avoid repeated combinations: 01 and 10
-                        
-                        Double_t trigAMt02 = ph2TpgPhiEmuAm_t0->at(bestTP[jbestTP]);
-                        trigAMt02 = (trigAMt02 * 25 / 32); // DCS to ns
-                        trigAMt02 = trigAMt02 - 390; // Shift to zero (RPC only)
-                        // std::cout << "bestTP 2: "  <<  "trigAMt02 :" << trigAMt02 << std::endl;
-    
-                        if ( trigAMWh == trigAMWh2 && trigAMSec == trigAMSec2 && trigAMSt != trigAMSt2 ){
-                            // std::cout << "MB1 t0 - MB2 t0: " << trigAMt0 - trigAMt02 << std::endl;
-                            m_plots["hTP_MB1_MB2_DeltaT0"] -> Fill( trigAMt0 - trigAMt02 );
-                            // std::cout << "Filled " << std::endl;
+                if ( bestTP.size() > 1){
+                    for (std::size_t ibestTP = 0; ibestTP < bestTP.size(); ++ibestTP){
+        
+                        std::cout << "bestTP idx: " << bestTP[ibestTP] << std::endl;
+        
+                        Int_t trigAMWh  = ph2TpgPhiEmuAm_wheel->at(bestTP[ibestTP]);
+                        Int_t trigAMSec = ph2TpgPhiEmuAm_sector->at(bestTP[ibestTP]);
+                        Int_t trigAMSt  = ph2TpgPhiEmuAm_station->at(bestTP[ibestTP]);
+                        Double_t trigAMt0 = ph2TpgPhiEmuAm_t0->at(bestTP[ibestTP]);
+                        trigAMt0 = (trigAMt0 * 25 / 32); // DCS to ns
+                        trigAMt0 = trigAMt0 - 390; // Shift to zero (RPC only)
+        
+                        // std::cout << "bestTP 1: "  <<  "trigAMt0 :" << trigAMt0 << std::endl;
+        
+                        // For Delta t0 between station 1 and station 2
+                        for (std::size_t jbestTP = 0; jbestTP < bestTP.size(); ++jbestTP){
+                            
+                            Int_t trigAMWh2  = ph2TpgPhiEmuAm_wheel->at(bestTP[jbestTP]);
+                            Int_t trigAMSec2 = ph2TpgPhiEmuAm_sector->at(bestTP[jbestTP]);
+                            Int_t trigAMSt2  = ph2TpgPhiEmuAm_station->at(bestTP[jbestTP]);
+        
+                            if ( jbestTP == ibestTP ) continue; // To avoid self combinations
+                            if ( ibestTP > jbestTP) continue; // To avoid repeated combinations: "01" and "10"
+                            
+                            Double_t trigAMt02 = ph2TpgPhiEmuAm_t0->at(bestTP[jbestTP]);
+                            trigAMt02 = (trigAMt02 * 25 / 32); // DCS to ns
+                            trigAMt02 = trigAMt02 - 390; // Shift to zero (RPC only)
+                            // std::cout << "bestTP 2: "  <<  "trigAMt02 :" << trigAMt02 << std::endl;
+        
+                            if ( trigAMWh == trigAMWh2 && trigAMSec == trigAMSec2 && trigAMSt != trigAMSt2 ){
+                                // std::cout << "MB1 t0 - MB2 t0: " << trigAMt0 - trigAMt02 << std::endl;
+                                m_plots["hTP_MB1_MB2_DeltaT0"] -> Fill( trigAMt0 - trigAMt02 );
+                                // std::cout << "Filled " << std::endl;
+                            }
                         }
-                    }
-                } // ENDLOOP BEST TRIGGER PRIMITIVES
+                    } // ENDLOOP BEST TRIGGER PRIMITIVES
+                }
             } // END Loop Gen
 
-            m_plots["hNTrigs"] -> Fill( coutNTrigs );
-    
-            flagFill = false;
-
+            std::cout << "--------------------------" << std::endl;
             std::cout << "Chamber hit in the Event:" << std::endl;
             for (size_t iChamber = 0; iChamber < vChambersHit.size(); ++iChamber) {
                 int Station = vChambersHit[iChamber][0];
                 int Layer   = vChambersHit[iChamber][1];
                 int Sector  = vChambersHit[iChamber][2];
                 int Ring    = vChambersHit[iChamber][3];
-                std::cout << "Ring: " << Ring << " | Sector: " << Sector << " | Station: " << Station << std::endl;
+                std::cout << " Ring: " << Ring << " | Sector: " << Sector << " | Station: " << Station << std::endl;
             }
 
+            std::cout << "Trigger Primitives Associated with the chambers:" << std::endl;
+            for (size_t iTrigAM = 0; iTrigAM < vbestTPAM.size(); ++iTrigAM) {
+                int idx = vbestTPAM[iTrigAM];
+                std::cout << " idx: " << idx << std::endl;
+            }
+
+        
             // -----------------------------
-            // Loop in the AM TP... again
+            // Loop in the Selected AM TP... again
             // -----------------------------
             // For Fake rate Studies
-            for (std::size_t iTrigAM = 0; iTrigAM < ph2TpgPhiEmuAm_nTrigs; ++iTrigAM){
+            for (std::size_t iTrigAM = 0; iTrigAM < selectedTP.size(); ++iTrigAM){
 
-                Int_t trigAMWh  = ph2TpgPhiEmuAm_wheel->at(iTrigAM);
-                Int_t trigAMSec = ph2TpgPhiEmuAm_sector->at(iTrigAM);
-                Int_t trigAMSt  = ph2TpgPhiEmuAm_station->at(iTrigAM);
-                Int_t trigAMBX  = ph2TpgPhiEmuAm_BX->at(iTrigAM);
-                Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(iTrigAM);
-                Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(iTrigAM);
-                
-                if (fileRPCflag){
-                    if (flagRPCselection == 1){
-                        if ( trigAMrpc != 1 ) continue;
-                    }
-                    else if (flagRPCselection == 2){
-                        if ( trigAMrpc != 2 ) continue;
-                    }
-                    else if (flagRPCselection == 3){
-                        if ( trigAMrpc != 3 ) continue;
-                    }
-                    else if (flagRPCselection == 10){
-                        if ( trigAMrpc != 1 && trigAMrpc != 0 ) continue;
-                    }
-                }
-                
-                // For this file, we are ignoring the RPC flags 0 and 1 to simulate only RPC TPs
-                if ( name == "RPCOnly" || name == "RPCOnlyUpdated" ){
-                    if (trigAMrpc == 0) continue;
-                    if (trigAMrpc == 1) continue;
-                }
+                Int_t trigAMWh  = ph2TpgPhiEmuAm_wheel->at(selectedTP[iTrigAM]);
+                Int_t trigAMSec = ph2TpgPhiEmuAm_sector->at(selectedTP[iTrigAM]);
+                Int_t trigAMSt  = ph2TpgPhiEmuAm_station->at(selectedTP[iTrigAM]);
+                Int_t trigAMBX  = ph2TpgPhiEmuAm_BX->at(selectedTP[iTrigAM]);
+                Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(selectedTP[iTrigAM]);
+                Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(selectedTP[iTrigAM]);
 
                 if (trigAMBX != 20) continue;
 
@@ -618,20 +638,16 @@ int RPC_eff() {
 
                     if ( trigAMWh == Ring && trigAMSt == Station && trigAMSt == Sector ){
                         hitChamber = true;
-                        continue;
+                        break;
                     }
                     
                 }
                 
-                if (hitChamber) continue;
-
+                if (!hitChamber) continue;
                 m_plots["fakeRate_WheelStationTP_matched"] -> Fill( wheelIdx );
+            }
 
-            } // End Loop in the AM TP... again (For Fake rate Studies)
-
-
-        } // END Loop Event
-
+        }// END Loop Event
 
         // for (const auto & secTag : secTags)
         // {
@@ -666,7 +682,7 @@ int RPC_eff() {
         }
 
         // -------------------------------------------
-        // Loop over the map to save each histogram in the root file and as png
+        // Loop over the histogram map to save them in the root file and as png
         // -------------------------------------------
         if (plotHistograms){
             for (const auto& pair : m_plots) {
@@ -724,7 +740,6 @@ int RPC_eff() {
         std::cout << "All histograms saved in ROOT file: " << outputFile << std::endl;
         std::cout << "All plots saved in: " << outputDir << std::endl;
         std::cout << "booltest: " << booltest << std::endl;
-        
     }
 
     std::cout << "----------------------------------" << std::endl;
@@ -734,4 +749,4 @@ int RPC_eff() {
     std::cout << "----------------------------------" << std::endl;
 
     return 0;
-} // END Program
+}

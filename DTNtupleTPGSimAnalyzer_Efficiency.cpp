@@ -476,28 +476,28 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
 
                 }// END loop segments
 
-                // Print elements of the vector for test
-                if (fdebug) {
-                std::cout << " \n ------------------------------------------- \n";
-                std::cout << "Best Segments Index" << std::endl;
-                for (size_t iSeg = 0; iSeg < bestSegIndex.size(); ++iSeg) {
-                    std::cout << bestSegIndex[iSeg] << " , ";
-                }
-                std::cout << " \n ------------------------------------------- \n";
-                for (size_t iSeg = 0; iSeg < bestSegIndex.size(); ++iSeg) {
-                    if (bestSegIndex[iSeg] == 999) continue;
-                    Int_t segSt     = ph2Seg_station->at(bestSegIndex[iSeg]);
-                    Int_t segWh  = ph2Seg_wheel->at(bestSegIndex[iSeg]);
-                    Int_t segSec = ph2Seg_sector->at(bestSegIndex[iSeg]);
-                    if (segSec == 13) segSec = 4;
-                    if (segSec == 14) segSec = 10;
-                    std::cout << "  Seg Wheel: " << segWh << " | Seg Sector: "<< segSec << " | Seg Station: " << segSt <<  std::endl;
-                }
-                std::cout << "Best Segments Number of Hits" << std::endl;
-                for (size_t iSeg = 0; iSeg < bestSegNHits.size(); ++iSeg) {
-                    std::cout << bestSegNHits[iSeg] << " , ";
-                }
-                std::cout << " \n";
+                
+                if (fdebug) { // Print elements of the vector for test
+                    std::cout << " \n ------------------------------------------- \n";
+                    std::cout << "Best Segments Index" << std::endl;
+                    for (size_t iSeg = 0; iSeg < bestSegIndex.size(); ++iSeg) {
+                        std::cout << bestSegIndex[iSeg] << " , ";
+                    }
+                    std::cout << " \n ------------------------------------------- \n";
+                    for (size_t iSeg = 0; iSeg < bestSegIndex.size(); ++iSeg) {
+                        if (bestSegIndex[iSeg] == 999) continue;
+                        Int_t segSt     = ph2Seg_station->at(bestSegIndex[iSeg]);
+                        Int_t segWh  = ph2Seg_wheel->at(bestSegIndex[iSeg]);
+                        Int_t segSec = ph2Seg_sector->at(bestSegIndex[iSeg]);
+                        if (segSec == 13) segSec = 4;
+                        if (segSec == 14) segSec = 10;
+                        std::cout << "  Seg Wheel: " << segWh << " | Seg Sector: "<< segSec << " | Seg Station: " << segSt <<  std::endl;
+                    }
+                    std::cout << "Best Segments Number of Hits" << std::endl;
+                    for (size_t iSeg = 0; iSeg < bestSegNHits.size(); ++iSeg) {
+                        std::cout << bestSegNHits[iSeg] << " , ";
+                    }
+                    std::cout << " \n";
                 }
 
                 // Quality Code
@@ -893,41 +893,41 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                 // LOOP BEST TRIGGER PRIMITIVES
                 // -----------------------------
                 // For Delta Studies
-                std::cout << "vbestTPAM size: " << vbestTPAM.size() << std::endl;
-                for (std::size_t ibestTP = 0; ibestTP < vbestTPAM.size(); ++ibestTP){
-                    std::cout << "vbestTPAM idx: " << bestTP[ibestTP] << std::endl;
+                // std::cout << "vbestTPAM size: " << vbestTPAM.size() << std::endl;
+                // for (std::size_t ibestTP = 0; ibestTP < vbestTPAM.size(); ++ibestTP){
+                //     std::cout << "vbestTPAM idx: " << bestTP[ibestTP] << std::endl;
 
-                    Int_t trigAMWh  = ph2TpgPhiEmuAm_wheel->at(vbestTPAM[ibestTP]);
-                    Int_t trigAMSec = ph2TpgPhiEmuAm_sector->at(vbestTPAM[ibestTP]);
-                    Int_t trigAMSt  = ph2TpgPhiEmuAm_station->at(vbestTPAM[ibestTP]);
-                    Double_t trigAMt0 = ph2TpgPhiEmuAm_t0->at(vbestTPAM[ibestTP]);
-                    trigAMt0 = (trigAMt0 * 25 / 32); // DCS to ns
-                    trigAMt0 = trigAMt0 - 390; // Shift to zero (RPC only)
+                //     Int_t trigAMWh  = ph2TpgPhiEmuAm_wheel->at(vbestTPAM[ibestTP]);
+                //     Int_t trigAMSec = ph2TpgPhiEmuAm_sector->at(vbestTPAM[ibestTP]);
+                //     Int_t trigAMSt  = ph2TpgPhiEmuAm_station->at(vbestTPAM[ibestTP]);
+                //     Double_t trigAMt0 = ph2TpgPhiEmuAm_t0->at(vbestTPAM[ibestTP]);
+                //     trigAMt0 = (trigAMt0 * 25 / 32); // DCS to ns
+                //     trigAMt0 = trigAMt0 - 390; // Shift to zero (RPC only)
 
-                    // For Delta t0 between station 1 and station 2
-                    for (std::size_t jbestTP = 0; jbestTP < vbestTPAM.size(); ++jbestTP){
+                //     // For Delta t0 between station 1 and station 2
+                //     for (std::size_t jbestTP = 0; jbestTP < vbestTPAM.size(); ++jbestTP){
                         
-                        Int_t trigAMWh2  = ph2TpgPhiEmuAm_wheel->at(vbestTPAM[jbestTP]);
-                        Int_t trigAMSec2 = ph2TpgPhiEmuAm_sector->at(vbestTPAM[jbestTP]);
-                        Int_t trigAMSt2  = ph2TpgPhiEmuAm_station->at(vbestTPAM[jbestTP]);
+                //         Int_t trigAMWh2  = ph2TpgPhiEmuAm_wheel->at(vbestTPAM[jbestTP]);
+                //         Int_t trigAMSec2 = ph2TpgPhiEmuAm_sector->at(vbestTPAM[jbestTP]);
+                //         Int_t trigAMSt2  = ph2TpgPhiEmuAm_station->at(vbestTPAM[jbestTP]);
     
-                        if ( jbestTP == ibestTP ) continue;
+                //         if ( jbestTP == ibestTP ) continue;
     
-                        // To not repeat combinations
-                        if ( ibestTP > jbestTP) continue;
+                //         // To not repeat combinations
+                //         if ( ibestTP > jbestTP) continue;
                         
-                        Double_t trigAMt02 = ph2TpgPhiEmuAm_t0->at(vbestTPAM[jbestTP]);
-                        trigAMt02 = (trigAMt02 * 25 / 32); // DCS to ns
-                        trigAMt02 = trigAMt02 - 390; // Shift to zero (RPC only)
-                        // std::cout << "vbestTPAM 2: "  <<  "trigAMt02 :" << trigAMt02 << std::endl;
+                //         Double_t trigAMt02 = ph2TpgPhiEmuAm_t0->at(vbestTPAM[jbestTP]);
+                //         trigAMt02 = (trigAMt02 * 25 / 32); // DCS to ns
+                //         trigAMt02 = trigAMt02 - 390; // Shift to zero (RPC only)
+                //         // std::cout << "vbestTPAM 2: "  <<  "trigAMt02 :" << trigAMt02 << std::endl;
     
-                        if ( trigAMWh == trigAMWh2 && trigAMSec == trigAMSec2 && trigAMSt != trigAMSt2 ){
-                            // std::cout << "MB1 t0 - MB2 t0: " << trigAMt0 - trigAMt02 << std::endl;
-                            m_plots["hTPStationDeltaT0"] -> Fill( trigAMt0 - trigAMt02 );
-                            // std::cout << "Filled " << std::endl;
-                        } 
-                    }
-                }
+                //         if ( trigAMWh == trigAMWh2 && trigAMSec == trigAMSec2 && trigAMSt != trigAMSt2 ){
+                //             // std::cout << "MB1 t0 - MB2 t0: " << trigAMt0 - trigAMt02 << std::endl;
+                //             m_plots["hTPStationDeltaT0"] -> Fill( trigAMt0 - trigAMt02 );
+                //             // std::cout << "Filled " << std::endl;
+                //         } 
+                //     }
+                // }
                 
             } // END Loop Gen
 

@@ -502,8 +502,7 @@ int test() {
                     }// END loop Selected Trigger primitives
 
                     // if (fdebug) std::cout << " bestTPidx: " << bestTPidx << std::endl;
-                    // NUMERATOR
-                    if ( bestTPidx > -1 ){
+                    if ( bestTPidx > -1 ){ // NUMERATOR
 
                         tpRPC_num++;
                         bestTP.push_back(bestTPidx);
