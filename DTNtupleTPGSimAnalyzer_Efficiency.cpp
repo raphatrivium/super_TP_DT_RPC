@@ -5,32 +5,27 @@
 
 #include "DTNtupleTPGSimAnalyzer.h"
 
-int DTNtupleTPGSimAnalyzer_Efficiency() {
+int DTNtupleTPGSimAnalyzer_Efficiency() { // 
 
     bool testFlag = false;   // false - true
     bool fdebug = false;
 
     bool plotHistograms = true; // false - true
 
-    // flagRPCselection = 0  : all RPC Flags
-    // flagRPCselection = 1  : RPC used to overwrite TP timing info (both t0 and BX)
-    // flagRPCselection = 2  : RPC only segment
-    // flagRPCselection = 3  : RPC single hit not associated to any DT segment
-    // flagRPCselection = 10 : RPC Flag == 0 &&  RPC Flag == 1.   "RPC Flag == 0": segment that could not be matched to any RPC cluster
-    int flagRPCselection = 0;
-
-    bool booltest = false;
-
     // ------------------------------------------------------------------------------
     // INPUT FILES
     // ------------------------------------------------------------------------------
     std::string inputDir = "input/";
     std::map<std::string,std::string> m_files;
-    m_files["noRPC"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
-    m_files["RPC"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
-    m_files["RPCUpdated"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root";
-    m_files["noRPCUpdated"] = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root";
-    m_files["RPCOnly"]      = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
+    m_files["DTAM"]              = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
+    m_files["RPC"]               = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
+    m_files["RPC_Flag1"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
+    m_files["RPC_Flag2"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
+    m_files["DTAMUpdated"]       = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root";
+    m_files["RPCUpdated"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root";
+    m_files["DTRPCOnly"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
+    // m_files["RPCOnly"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
+    // m_files["RPCOnlyUpdated"] = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCPhase2_RPCOnlyFlag.root";
     m_files["test"]         = "test.root"; // It is a copy of m_files["RPC"]
 
     // ------------------------------------------------------------------------------
@@ -64,12 +59,6 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
         std::cout << "["+name+"]: "+inputDir+file_name+"\n" <<std::endl;
         // std::cout << "-------------------------------------------" <<std::endl;
 
-        bool fileRPCflag = false;
-        if ( name == "RPCOnly" ) fileRPCflag = true;
-        else if ( name == "RPCUpdated" ) fileRPCflag = true;
-        else if ( name == "RPC" ) fileRPCflag = true;
-        else if ( name == "test" ) fileRPCflag = true;
-   
         // ---------------------------------------
         // Making Map of Histograms 
         // ---------------------------------------
@@ -81,6 +70,11 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
         std::vector<std::string> totalTag = {"matched", "total"};
         std::vector<std::string> chambTag = {"MB1",     "MB2", "MB3", "MB4"};
         std::vector<std::string> wheelTag = {"Wh.-2","Wh.-1","Wh.0","Wh.+1","Wh.+2",};
+
+        std::vector<std::string> chambTags = { "MB1", "MB2", "MB3", "MB4"};
+        std::vector<std::string> whTags    = { "Wh.-2", "Wh.-1", "Wh.0", "Wh.+1", "Wh.+2"};
+        std::vector<std::string> secTags   = { "Sec1", "Sec2", "Sec3", "Sec4", "Sec5", "Sec6", "Sec7", 
+                                               "Sec8", "Sec9","Sec10","Sec11","Sec12","Sec13","Sec14"};
 
         m_plots["hNSeg"] = new TH1D("hNSeg", "Number of Segments ; Number of Segments; Entries / Event", 50, 0, 300);
         m_plots["hNTrigs"] = new TH1D("hNTrigs", "Number of Triggers ; Number of Triggers; Entries / Event", 50, 0, 300);
@@ -97,8 +91,8 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
         
         m_plots["TPnotMatched"] = new TH1D("TPnotMatched", "Trigger Primitive not Matched per Event; TP not Matched per Event; Entries", 100, 0, 300);
 
-        m_plots["fakeRate_TPnot_matched"] = new TH1D("fakeRate_TPnot_matched", "TPs not Matched; Wheel; Fake Rate", 22, 0, 22); // 22, 0, 22  5, -2.5, +2.5
-        m_plots["fakeRate_TPnot_total"] = new TH1D("fakeRate_TPnot_total", "TPs not Matched; Wheel; Fake Rate", 22, 0, 22);
+        m_plots["fakeRate_TP_matched"] = new TH1D("fakeRate_TP_matched", "TPs not Matched; Wheel; Fake Rate", 22, 0, 22); // 22, 0, 22  5, -2.5, +2.5
+        m_plots["fakeRate_TP_total"] = new TH1D("fakeRate_TP_total", "TPs not Matched; Wheel; Fake Rate", 22, 0, 22);
 
         m_plots["fakeRate_WheelStationTP_matched"] = new TH1D("fakeRate_WheelStationTP_matched", "Trigger Primitive not Matched; Wheel; Fake Rate",  22, 0, 22);
         m_plots["fakeRate_WheelStationTP_total"] = new TH1D("fakeRate_WheelStationTP_total", "Trigger Primitive not Matched; Wheel; Fake Rate",  22, 0, 22);
@@ -224,6 +218,27 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
             }
         }
 
+        for (const auto & secTag : secTags)
+        {
+            m_plots["Eff_TPwheels_"+secTag+"_total"] = new TH1D(("Eff_TPwheels_"+secTag+"_total").c_str(),
+            ("DT TP Local Efficiency for " + secTag + "; Wheel; Efficiency").c_str(), 22, 0, 22);
+            m_plots["Eff_TPwheels_"+secTag+"_matched"] = new TH1D(("Eff_TPwheels_"+secTag+"_matched").c_str(),
+            ("DT TP Local Efficiency for " + secTag + "; Wheel; Efficiency").c_str(), 22, 0, 22);
+            
+            m_plots["fakeRateTP_WheelvsStation_"+secTag+"_total"] = new TH1D(("fakeRateTP_WheelvsStation_"+secTag+"_total").c_str(),
+            ("Fake Rate Wheel vs Station for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
+            m_plots["fakeRateTP_WheelvsStation_"+secTag+"_matched"] = new TH1D(("fakeRateTP_WheelvsStation_"+secTag+"_matched").c_str(),
+            ("Fake Rate Wheel vs Station for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
+
+            m_plots["fakeRate_EventWheelStationTP_"+secTag+"_matched"] = new TH1D(("fakeRate_EventWheelStationTP_"+secTag+"_matched").c_str(),
+            ("Fake Rate per event for " + secTag + "; Wheel; Fake TPs / Event").c_str(), 22, 0, 22);
+
+            m_plots["fakeRate_TP_"+secTag+"_total"] = new TH1D(("fakeRate_TP_"+secTag+"_total").c_str(),
+            ("TPs not Matched for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
+            m_plots["fakeRate_TP_"+secTag+"_matched"] = new TH1D(("fakeRate_TP_"+secTag+"_matched").c_str(),
+            ("TPs not Matched for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
+        }
+
         // ---------------------------------
         // Open the ROOT file
         TFile *file = new TFile( (inputDir+file_name).c_str() );
@@ -238,9 +253,9 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
         TTree *tree = (TTree*)dir->Get("DTTREE");
         Long64_t nEntries = tree->GetEntries();
 
-
-        // For vector type
-        // --------------------------
+        // ---------------------------------
+        // Branching Adressing
+        // ---------------------------------
         TBranch *branch_gen_nGenParts = tree->GetBranch("gen_nGenParts");
         int gen_nGenParts;
         branch_gen_nGenParts->SetAddress(&gen_nGenParts);
@@ -254,7 +269,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
         std::vector<float> *gen_phi = nullptr;
         tree->SetBranchAddress("gen_phi", &gen_phi);
 
-
+        // ------------------------------------------------------------------------------
         TBranch *branch_ph2Seg_nSegments = tree->GetBranch("ph2Seg_nSegments");
         int ph2Seg_nSegments;
         branch_ph2Seg_nSegments->SetAddress(&ph2Seg_nSegments);
@@ -316,10 +331,10 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
         std::vector<float> *ph2TpgPhiEmuAm_dirLoc_phi = nullptr;
         tree->SetBranchAddress("ph2TpgPhiEmuAm_dirLoc_phi", &ph2TpgPhiEmuAm_dirLoc_phi);
         
-
+        // ------------------------------------------------------------------------------
+        // Quality Selection Cuts
+        // ------------------------------------------------------------------------------
         double m_minMuPt = 20;
-        m_minMuPt = 20;
-
         //m_maxMuSegDPhi = 0.3;
         // m_maxMuSegDPhi = 20;
         double m_maxMuSegDPhi = 0.1;
@@ -335,6 +350,9 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
         
         double m_maxSegT0 = 15;
 
+        // ------------------------------------------------------------------------------
+        // Control Variables
+        // ------------------------------------------------------------------------------
         int numTPAll = 0;
         int denTPAll = 0;
         int numTPEvent = 0;
@@ -343,33 +361,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
         int denTP = 0;
         int TPnotMatched = 0;
 
-        std::vector<std::string> chambTags = { "MB1", "MB2", "MB3", "MB4"};
-        std::vector<std::string> whTags    = { "Wh.-2", "Wh.-1", "Wh.0", "Wh.+1", "Wh.+2"};
-        std::vector<std::string> secTags   = { "Sec1", "Sec2", "Sec3", "Sec4", "Sec5", "Sec6", "Sec7", "Sec8","Sec9","Sec10","Sec11","Sec12","Sec13","Sec14"};
-
-
-        for (const auto & secTag : secTags)
-        {
-            m_plots["Eff_TPwheels_"+secTag+"_total"] = new TH1D(("Eff_TPwheels_"+secTag+"_total").c_str(),
-            ("DT TP Local Efficiency for " + secTag + "; Wheel; Efficiency").c_str(), 22, 0, 22);
-            m_plots["Eff_TPwheels_"+secTag+"_matched"] = new TH1D(("Eff_TPwheels_"+secTag+"_matched").c_str(),
-            ("DT TP Local Efficiency for " + secTag + "; Wheel; Efficiency").c_str(), 22, 0, 22);
-            
-            m_plots["fakeRateTP_WheelvsStation_"+secTag+"_total"] = new TH1D(("fakeRateTP_WheelvsStation_"+secTag+"_total").c_str(),
-            ("Fake Rate Wheel vs Station for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
-            m_plots["fakeRateTP_WheelvsStation_"+secTag+"_matched"] = new TH1D(("fakeRateTP_WheelvsStation_"+secTag+"_matched").c_str(),
-            ("Fake Rate Wheel vs Station for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
-
-            m_plots["fakeRate_EventWheelStationTP_"+secTag+"_matched"] = new TH1D(("fakeRate_EventWheelStationTP_"+secTag+"_matched").c_str(),
-            ("Fake Rate per event for " + secTag + "; Wheel; Fake TPs / Event").c_str(), 22, 0, 22);
-
-            m_plots["fakeRate_TPnot_"+secTag+"_total"] = new TH1D(("fakeRate_TPnot_"+secTag+"_total").c_str(),
-            ("TPs not Matched for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
-            m_plots["fakeRate_TPnot_"+secTag+"_matched"] = new TH1D(("fakeRate_TPnot_"+secTag+"_matched").c_str(),
-            ("TPs not Matched for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
-        }
-
-
+        
         // ------------------------------------------------------------------------------
         // Loop in the events
         // ------------------------------------------------------------------------------
@@ -390,7 +382,6 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
             m_plots["hNSeg"] -> Fill( ph2Seg_nSegments );
             // m_plots["hNTrigs"] -> Fill( ph2TpgPhiEmuAm_nTrigs );
 
-            
             // for (std::size_t itrig = 0; itrig < ph2TpgPhiEmuAm_nTrigs; ++itrig){
             //     m_plots["htrigAMrpcFlag_Total"] -> Fill(ph2TpgPhiEmuAm_rpcFlag->at(itrig));
             //     m_plots["htrigAMBX_Total"] -> Fill(ph2TpgPhiEmuAm_BX->at(itrig));
@@ -672,27 +663,16 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                         Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(iTrigAM);
                         Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(iTrigAM);
 
-                        if (fileRPCflag){
-                            if (flagRPCselection == 1){
-                                if ( trigAMrpc != 1 ) continue;
-                            }
-                            else if (flagRPCselection == 2){
-                                if ( trigAMrpc != 2 ) continue;
-                            }
-                            else if (flagRPCselection == 3){
-                                if ( trigAMrpc != 3 ) continue;
-                            }
-                            else if (flagRPCselection == 10){
-                                if ( trigAMrpc != 1 && trigAMrpc != 0 ) continue;
-                            }
+                        if ( name == "RPC_Flag1" ) {
+                            if ( trigAMrpc != 1 ) continue;
                         }
-                       
-                        // For this file, we are ignoring the RPC flags 0 and 1 to simulate only RPC TPs
-                        if ( name == "RPCOnly" ){
-                            if (trigAMrpc == 0) continue;
-                            if (trigAMrpc == 1) continue;
+                        else if ( name == "RPC_Flag2" ){
+                            if ( trigAMrpc != 2 ) continue;
+                        } 
+                        else if ( name == "DTRPCOnly" ){
+                            if ( trigAMrpc != 2 ) continue; 
                         }
-
+                        
                         // m_plots["hPh2TpgPhiEmuAmBX"+whTag+chambTag+"_matched"]->Fill(trigAMBX);
 
                         // -----------------------------
@@ -808,10 +788,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                         m_plots["hPh2TpgPhiEmuAmBX"+whTag+chambTag+"_matched"]->Fill(besttrigAMBX);
 
                         // Organize Wheels and stations in 20 bins
-                        int wheelIdx = 0;
-                        if (segSt >= 1 && segSt <= 4 && segWh >= -2 && segWh <= 2) {
-                            wheelIdx = (segSt - 1) * 5 + (segWh + 2) + 1;
-                        }
+                        int wheelIdx = WheelStationToBins(segSt, segWh );
 
                         // Efficiency TP Numerator
                         m_plots["Eff_TPwheels_matched"] -> Fill( wheelIdx );
@@ -854,10 +831,8 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
                         m_plots["Eff_" + chambTag + "_AM+RPC_total"]->Fill(segWh);
 
                         // Organize Wheels and stations in 20 bins
-                        int wheelIdx = 0;
-                        if (segSt >= 1 && segSt <= 4 && segWh >= -2 && segWh <= 2) {
-                            wheelIdx = (segSt - 1) * 5 + (segWh + 2) + 1;
-                        }
+                        int wheelIdx = WheelStationToBins(segSt, segWh );
+
                         // Efficiency TP Denominator
                         m_plots["Eff_TPwheels_total"]->Fill(wheelIdx);
 
@@ -946,98 +921,82 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
             if (fdebug) std::cout << "**********************" <<  std::endl;
 
             int coutNTrigs = 0;
+            // -----------------------------
+            // Loop in the AM TP
+            // -----------------------------
+            // For Fake rate Studies
             for (std::size_t itrig = 0; itrig < ph2TpgPhiEmuAm_nTrigs; ++itrig){
 
                 Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(itrig);
-
-                if (fileRPCflag){
-                    if (flagRPCselection == 1){
-                        if ( trigAMrpc != 1 ) continue;
-                    }
-                    else if (flagRPCselection == 2){
-                        if ( trigAMrpc != 2 ) continue;
-                    }
-                    else if (flagRPCselection == 3){
-                        if ( trigAMrpc != 3 ) continue;
-                    }
-                    else if (flagRPCselection == 10){
-                        if ( trigAMrpc != 1 && trigAMrpc != 0 ) continue;
-                    }
-                }
-         
-                // For this file, we are ignoring the RPC flags 0 and 1 to simulate only RPC TPs
-                if ( name == "RPCOnly" ){
-                    if (trigAMrpc == 0) continue;
-                    if (trigAMrpc == 1) continue;
-                }
-
-                m_plots["hTrigFlag"] -> Fill( trigAMrpc );
-
-                coutNTrigs++;
-
                 Int_t trigAMWh  = ph2TpgPhiEmuAm_wheel->at(itrig);
                 Int_t trigAMSt  = ph2TpgPhiEmuAm_station->at(itrig);
                 Int_t trigAMSec = ph2TpgPhiEmuAm_sector->at(itrig);
                 Int_t trigAMBX  = ph2TpgPhiEmuAm_BX->at(itrig);
                 // Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(itrig);
 
-                // if ( !(trigAMBX == 20) ) continue;
+                std::string secTag = secTags.at(trigAMSec - 1);
+                
+                if ( name == "RPC_Flag1" ) {
+                    if ( trigAMrpc != 1 ) continue;
+                }
+                else if ( name == "RPC_Flag2" ){
+                    if ( trigAMrpc != 2 ) continue;
+                } 
+                else if ( name == "DTRPCOnly" ){
+                    if ( trigAMrpc != 2 ) continue; 
+                }
+                    
 
-                m_plots["BX_forFakeRate"] -> Fill( trigAMBX );
-                m_plots["RPCFlag_forFakeRate"] -> Fill( trigAMrpc );
+                m_plots["hTrigFlag"] -> Fill( trigAMrpc );
+                coutNTrigs++;
+
+                if ( !(trigAMBX == 20) ) continue;
+
+                // m_plots["BX_forFakeRate"] -> Fill( trigAMBX );
+                // m_plots["RPCFlag_forFakeRate"] -> Fill( trigAMrpc );
 
                 // Organize Wheels and stations in 20 bins
-                int wheelIdx = 0;
-                if (trigAMSt >= 1 && trigAMSt <= 4 && trigAMWh >= -2 && trigAMWh <= 2) {
-                    wheelIdx = (trigAMSt - 1) * 5 + (trigAMWh + 2) + 1;
-                }
-
-                m_plots["fakeRate_TPnot_total"] -> Fill( wheelIdx ); //
+                int wheelIdx = WheelStationToBins(trigAMSt, trigAMWh );
+                    
+                m_plots["fakeRate_TP_total"] -> Fill( wheelIdx );
                 m_plots["fakeRate_WheelStationTP_total"] -> Fill( wheelIdx );
 
-                std::string secTag = secTags.at(trigAMSec - 1);
                 m_plots["fakeRateTP_WheelvsStation_"+secTag+"_total"]->Fill(wheelIdx);
-                m_plots["fakeRate_TPnot_"+secTag+"_total"] -> Fill( wheelIdx );
+                m_plots["fakeRate_TP_"+secTag+"_total"] -> Fill( wheelIdx );
        
-                // Checking the station without segments to compute Real fake TPs
-                bool notFakeTP = false;
-                for (size_t i = 0; i < SegMatchedWheelAndStation.size(); ++i) {
-                    if ( trigAMWh == SegMatchedWheelAndStation[i][0] && trigAMSt == SegMatchedWheelAndStation[i][1] )
-                        notFakeTP = true;
-                    if (notFakeTP) break;
-                }
-                if (!notFakeTP){
-                    if (fdebug) std::cout << "Wheel " << trigAMWh << " | Station: " << trigAMSt << std::endl;
-                    m_plots["fakeRate_WheelStationTP_matched"] -> Fill(wheelIdx);
-                    m_plots["fakeRate_EventWheelStationTP_matched"] -> Fill(wheelIdx);
-                }
+                // -----------------------------------------------------------
+                // Real fake rate (TPs from chambers without muons passing through)
+                // -----------------------------------------------------------
+                bool hitChamber = false;
+                for (size_t iChamber = 0; iChamber < SegMatchedWheelAndStation.size(); ++iChamber) {
+                    int Wheel   = SegMatchedWheelAndStation[iChamber][0];
+                    int Station = SegMatchedWheelAndStation[iChamber][1];
+                    int Sector  = SegMatchedWheelAndStation[iChamber][2];
 
-                // Checking the station without segments to compute Realfake TPs by Sectors
-                notFakeTP = false;
-                for (size_t i = 0; i < SegMatchedWheelAndStation.size(); ++i) {
-                    if ( trigAMWh == SegMatchedWheelAndStation[i][0] && trigAMSt == SegMatchedWheelAndStation[i][1] && trigAMSec == SegMatchedWheelAndStation[i][2] )
-                        notFakeTP = true;
-                    if (notFakeTP) break;
+                    if ( trigAMWh == Wheel && trigAMSt == Station && trigAMSec == Sector ){
+                        hitChamber = true;
+                        break;
+                    }
                 }
-                if (!notFakeTP){
-                    // std::cout << "Wheel " << trigAMWh << " | Station: " << trigAMSt << std::endl;
-                    m_plots["fakeRate_EventWheelStationTP_"+secTag+"_matched"] -> Fill(wheelIdx);
+                if (hitChamber == false){
+                    m_plots["fakeRate_WheelStationTP_matched"] -> Fill( wheelIdx );
                     m_plots["fakeRateTP_WheelvsStation_"+secTag+"_matched"]->Fill(wheelIdx);
                 }
                 
-                // To skip matched TP
-                int target = itrig;
+                // -----------------------------------------------------------
+                // Fake rate (TPs not associated with Gen Muons)
+                // -----------------------------------------------------------
                 bool found = false;
                 for (int value : vbestTPAM) {
-                    if (value == target) {
+                    if (value == itrig) {
                         found = true;
                         break;
                     }
                 }
-                if (found) continue;
-
-                m_plots["fakeRate_TPnot_matched"] -> Fill( wheelIdx );
-                m_plots["fakeRate_TPnot_"+secTag+"_matched"] -> Fill( wheelIdx );
+                if (found == false){
+                    m_plots["fakeRate_TP_matched"] -> Fill( wheelIdx );
+                    m_plots["fakeRate_TP_"+secTag+"_matched"] -> Fill( wheelIdx );
+                }
                 
             }
 
@@ -1168,15 +1127,12 @@ int DTNtupleTPGSimAnalyzer_Efficiency() {
         // Close the file (optional, as it will be automatically closed when outFile goes out of scope)
         outFile.Close();
         std::cout << "All histograms saved in ROOT file: " << outputFile << std::endl;
-        std::cout << "All plots saved in: " << outputDir << std::endl;
-        // std::cout << "booltest: " << booltest << std::endl;
-        
+        std::cout << "All plots saved in: " << outputDir << std::endl;        
     }
 
     std::cout << "----------------------------------" << std::endl;
     std::cout << "TEST FLAG: " << testFlag << std::endl;
     std::cout << "plotHistograms FLAG: " << plotHistograms << std::endl;
-    std::cout << "flag RPC: " << flagRPCselection << std::endl;
     std::cout << "----------------------------------" << std::endl;
 
     return 0;

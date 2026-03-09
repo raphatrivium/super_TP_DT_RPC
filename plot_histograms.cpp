@@ -1,177 +1,79 @@
 #include "DTNtupleTPGSimAnalyzer.h"
 
-void plot_histograms() {
+void plot_histograms() { 
 
     // Open ROOT files
     std::string inputDir = "output/";
     std::string fileName = "DTNtupleTPGSimAnalyzer_Efficiency.root";
 
-    TFile *fileNoRPC          = TFile::Open((inputDir+"noRPC/"+fileName).c_str());
+    TFile *fileDTAM           = TFile::Open((inputDir+"DTAM/"+fileName).c_str());
     TFile *fileRPC            = TFile::Open((inputDir+"RPC/"+fileName).c_str());
-    TFile *fileNoRPCUpdated   = TFile::Open((inputDir+"noRPCUpdated/"+fileName).c_str());
+    TFile *fileRPC_Flag1      = TFile::Open((inputDir+"RPC_Flag1/"+fileName).c_str());
+    TFile *fileRPC_Flag2      = TFile::Open((inputDir+"RPC_Flag2/"+fileName).c_str());
+    TFile *fileDTAMUpdated    = TFile::Open((inputDir+"DTAMUpdated/"+fileName).c_str());
     TFile *fileRPCUpdated     = TFile::Open((inputDir+"RPCUpdated/"+fileName).c_str());
+    TFile *fileDTRPCOnly      = TFile::Open((inputDir+"DTRPCOnly/"+fileName).c_str());
     TFile *fileRPCOnly        = TFile::Open((inputDir+"RPCOnly/"+fileName).c_str());
     TFile *fileRPCOnlyUpdated = TFile::Open((inputDir+"RPCOnlyUpdated/"+fileName).c_str());
 
-
     std::string saveDir = "--";
     
-    // // ------------------------------------------------------------------------------
-    // // INPUT FILES
-    // // ------------------------------------------------------------------------------
-    // std::string inputDir = "input/";
-    // std::map<std::string,std::string> m_files;
-    // // m_files["noRPC"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
-    // // m_files["RPC"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
-    // // m_files["RPCUpdated"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root";
-    // // m_files["noRPCUpdated"] = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root";
-    // m_files["RPCOnly"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
-    // m_files["RPCOnlyUpdated"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCPhase2_RPCOnlyFlag.root";
-    // m_files["test"]            = "test.root"; // It is a copy of m_files["RPC"]
-
     std::vector<std::string> algoTag  = {"AM", "AM+RPC"};
     // std::vector<std::string> totalTag = {"matched", "total"};
     std::vector<std::string> chambTag = {"MB1", "MB2", "MB3", "MB4"};
     std::vector<std::string> wheelTag = {"Wh.-2","Wh.-1","Wh.0","Wh.+1","Wh.+2",};
     std::vector<std::string> secTags   = { "Sec1", "Sec2", "Sec3", "Sec4", "Sec5", "Sec6", "Sec7", "Sec8","Sec9","Sec10","Sec11","Sec12"};
 
-    // std::vector<std::string> effDir = {
-    //                                    "output/noRPC/histograms/effPlots/",
-    //                                    "output/RPC/histograms/effPlots/",
-    //                                    "output/noRPCUpdated/histograms/effPlots/", 
-    //                                    "output/RPCUpdated/histograms/effPlots/",
-    //                                 };
-
-    TH1F *hTotal;
-    TH1F *hMatched;
-    std::string hName = "";
-    std::vector<std::string> v_plot;
-
-    std::cout << "--------------------------------" << std::endl;
-    std::cout << "DT AM and DT + RPC  Studies" << std::endl;
-    std::cout << "--------------------------------" << std::endl;
-    v_plot.clear();                                
-    v_plot.push_back("EffEtaGenSeg");
-    v_plot.push_back("EffEtaGenSeg20");
-    v_plot.push_back("Eff_TPwheels");
-    // v_plot.push_back("Eff_TPnotMatched");
-    
-    // for (int i = 0; i < 4; ++i){
-    //     for (const auto & algo : algoTag){
-    //         int chamberNumber = i+1;
-    //         v_plot.push_back("hEff_MB" + std::to_string(chamberNumber) + "_"+algo);
-    //     }
-    // }
-
-    // for (const auto& plot : v_plot) {
-    //     hName = plot;
-    //     hTotal =   (TH1F*)fileNoRPC->Get((hName+"_total").c_str());
-    //     hMatched = (TH1F*)fileNoRPC->Get((hName+"_matched").c_str());
-    //     plot_eff( hName, hMatched, hTotal, effDir[0]);
-    //     hTotal =   (TH1F*)fileRPC->Get((hName+"_total").c_str());
-    //     hMatched = (TH1F*)fileRPC->Get((hName+"_matched").c_str());
-    //     plot_eff( hName, hMatched, hTotal, effDir[1]);
-    // }
-
-    // -------------------------------------------
-    // For comparison plots
-    // -------------------------------------------
-    // std::string saveDir = "output/histogram_comparison/";
-
+    // --------------------------------
+    // DT AM and DT + RPC  Studies" 
+    // --------------------------------
+    std::cout << "----------- DT AM and DT + RPC  Studies -----------" << std::endl;
+   
+    // ---------------
+    // eff plots
+    // ---------------
     saveDir = "plots/DT+RPC_vs_DT/efficiency/";
     // Create the directory if it doesn't exist
     if (gSystem->AccessPathName(saveDir.c_str())) {
         gSystem->mkdir(saveDir.c_str(), true); // true = recursive
     }
 
-    
-    // ---------------
-    // eff plots
-    v_plot.clear();
-    v_plot.push_back("Eff_TPwheels");
-    v_plot.push_back("fakeRate_WheelStationTP");
-    v_plot.push_back("fakeRate_TPnot");
-    
+    // For 1 histogram
+    // plotEffWheelStation("Eff_TPwheels", fileDTAM, "DT AM", kRed, saveDir  );
+
+    // For 2 histogram
+    plotEffWheelStation("Eff_TPwheels", fileDTAM, "DT AM", kRed ,fileRPC, "DT AM + RPC", kBlue, saveDir );
+    plotEffWheelStation("fakeRate_WheelStationTP", fileDTAM, "DT AM", kRed ,fileRPC, "DT AM + RPC", kBlue, saveDir );
+    plotEffWheelStation("fakeRate_TP", fileDTAM, "DT AM", kRed ,fileRPC, "DT AM + RPC", kBlue, saveDir );
     // for (const auto & secTag : secTags){
-    //     hName = "Eff_TPwheels_"+secTag;
-    //     v_plot.push_back(hName);
+    //     plotEffWheelStation("Eff_TPwheels_"+secTag, fileDTAM, "DT AM", kRed ,fileRPC, "DT AM + RPC", kBlue, saveDir );
     // }
     // for (const auto & secTag : secTags){
-    //     hName = "fakeRateTP_WheelvsStation_"+secTag;
-    //     v_plot.push_back(hName);
+    //     plotEffWheelStation("fakeRateTP_WheelvsStation_"+secTag, fileDTAM, "DT AM", kRed ,fileRPC, "DT AM + RPC", kBlue, saveDir );
     // }
 
-    TH1F *hTotal1;
-    TH1F *hMatched1;
-    TH1F *hTotal2;
-    TH1F *hMatched2;
-
-    // hMatched1 = (TH1F*)fileNoRPC->Get("Eff_TPwheels_matched");
-    // hTotal1 =   (TH1F*)fileNoRPC->Get("Eff_TPwheels_total");
-
-    // plotEffWheelStation("Eff_TPwheels",  // histogram name
-    //                     hMatched1, // histogram passed
-    //                     hTotal1, // histogram total
-    //                     "DT AM", // Legend for the histogram
-    //                     saveDir ); // directory to save
-
-    // return;
-
-    for (const auto& plot : v_plot) {
-        // hName = plot;
-        TH1F *hTotal1 =   (TH1F*)fileNoRPC->Get((plot+"_total").c_str());
-        TH1F *hMatched1 = (TH1F*)fileNoRPC->Get((plot+"_matched").c_str());
-        TH1F *hTotal2 =   (TH1F*)fileRPC->Get((plot+"_total").c_str());
-        TH1F *hMatched2 = (TH1F*)fileRPC->Get((plot+"_matched").c_str());
-        plotEffWheelStation((plot).c_str(),  // histogram name
-                            hMatched1,   // histogram 1 passed
-                            hTotal1,      // histogram 1 total
-                            hMatched2,   // histogram 2 passed
-                            hTotal2,    // histogram 2 total
-                            "DT AM", // Legend for the histogram 1
-                            "DT AM + RPC", // Legend for the histogram 2
-                            saveDir ); // directory to save 
-                        
-    }
-   
     // ---------------
-    // Normal plot
+    // Other variables
+    // ---------------
     saveDir = "plots/DT+RPC_vs_DT/variables/";
     // Create the directory if it doesn't exist
     if (gSystem->AccessPathName(saveDir.c_str())) {
         gSystem->mkdir(saveDir.c_str(), true); // true = recursive
     }
-    v_plot.clear();
-    v_plot.push_back("hNSeg");
-    v_plot.push_back("hNTrigs");
-    v_plot.push_back("hRatioNtpNseg_total");
-    v_plot.push_back("TPnotMatched");
-    v_plot.push_back("TPMatched");
-    v_plot.push_back("hTrigFlag");
-    v_plot.push_back("hTPMatchedRPCflag");
-    v_plot.push_back("BX_forFakeRate");
-    v_plot.push_back("RPCFlag_forFakeRate");
-    v_plot.push_back("fakeRate_EventWheelStationTP_matched");
 
-    // for (const auto & secTag : secTags){
-    //     hName = "fakeRate_EventWheelStationTP_"+secTag+"_matched";
-    //     v_plot.push_back(hName);
-    // }
+    // plot_histo("hNSeg", fileDTAM, "DT AM", kRed ,fileRPC, "DT AM + RPC", kBlue, saveDir);
+    plot_histo("hNTrigs", fileDTAM, "DT AM", kRed ,fileRPC, "DT AM + RPC", kBlue, saveDir);
+    plot_histo("hRatioNtpNseg_total", fileDTAM, "DT AM", kRed ,fileRPC, "DT AM + RPC", kBlue, saveDir);
+    plot_histo("hTrigFlag", fileDTAM, "DT AM", kRed ,fileRPC, "DT AM + RPC", kBlue, saveDir);
+    plot_histo("TPMatched", fileDTAM, "DT AM", kRed ,fileRPC, "DT AM + RPC", kBlue, saveDir);
+    plot_histo("hTPMatchedRPCflag", fileDTAM, "DT AM", kRed ,fileRPC, "DT AM + RPC", kBlue, saveDir);
+    plot_histo("BX_forFakeRate", fileDTAM, "DT AM", kRed ,fileRPC, "DT AM + RPC", kBlue, saveDir);
+    plot_histo("RPCFlag_forFakeRate", fileDTAM, "DT AM", kRed ,fileRPC, "DT AM + RPC", kBlue, saveDir);
+    // plot_histo("fakeRate_EventWheelStationTP_matched", fileDTAM, "DT AM", kRed ,fileRPC, "DT AM + RPC", kBlue, saveDir);
 
-    for (const auto& plot : v_plot) {
-        // hName = "hNSeg";
-        TH1F *hist1 = (TH1F*)fileNoRPC->Get(plot.c_str());
-        TH1F *hist2 = (TH1F*)fileRPC->Get(plot.c_str());
-        plot_normal_histograms( hist1, 
-                                hist2, 
-                                plot, 
-                                "", 
-                                "DT AM",
-                                saveDir, 
-                                false);
-    }
-    
-    // ----Time of the TPs associated with prompt muons [ns]-----
+    // --------------------
+    // Time of the TPs 
+    // --------------------
     saveDir = "plots/DT+RPC_vs_DT/time/";
     // Create the directory if it doesn't exist
     if (gSystem->AccessPathName(saveDir.c_str())) {
@@ -179,173 +81,90 @@ void plot_histograms() {
     }
 
     for (const auto & wheel : wheelTag) {
+        std::string wh = wheel;  
+        wh = wh.erase(1, 2); // Removes "h.": "Wh.-2"→ "W-2"
         for (const auto & chamb : chambTag) {
-            // ---------------------------  
-            // t0
             std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
-            TH1F *hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
-            TH1F *hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-            
-            std::string wheel2 = wheel;
-            wheel2 = wheel2.erase(1, 2);  // Removes "W.": "Wh.-2"→ "W-2"
-            
-            plot_t0_histograms( hist1, hist2, hName, 
-                "Time of the TPs associated with prompt muons [ns]", 
-                (wheel2+" "+chamb).c_str(),
-                "DT AM",
-                saveDir, 
-                true);
-            // ---------------------------    
-            // BX
-            hName = "hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched";
-            hist1 = (TH1F*)fileNoRPC->Get(hName.c_str());
-            hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-
-            plot_BX_histograms( hist1, hist2, hName, 
-                "BX of the TPs associated with prompt muons [ns]", 
-                (wheel2+" "+chamb).c_str(),
-                "DT AM",
-                saveDir, 
-                false);
+            plot_t0_histo( hName, fileDTAM, "DT AM", kRed, fileRPC, "DT AM + RPC", kBlue, (wh+" "+chamb), saveDir, true);
+            // TODO
+            //plot_BX_histo( hName, fileDTAM, "DT AM", kRed, fileRPC, "DT AM + RPC", kBlue, (wh+" "+chamb), saveDir, true);
         }
     }
 
     
-    TH1F *hist1;
-    TH1F *hist2;
-    TH1F *hist3;
-    
+    // --------------------------------
+    // DT AM and DT + RPC time phase2 Studies" 
+    // --------------------------------
     std::cout << "--------------------------------" << std::endl;
     std::cout << "DT AM and DT + RPC time phase2 Studies" << std::endl;
     std::cout << "--------------------------------" << std::endl;
-    // saveDir = "output/histogram_comparison_RPCUpdate/";
+
+    // ---------------
+    // eff plots
+    // ---------------
     saveDir = "plots/DT+RPCupdated_vs_DTupdated/efficiency/";
     // Create the directory if it doesn't exist
     if (gSystem->AccessPathName(saveDir.c_str())) { 
         gSystem->mkdir(saveDir.c_str(), true); // true = recursive
     }
     
-    v_plot.clear();
-    v_plot.push_back("Eff_TPwheels");
-    v_plot.push_back("fakeRate_WheelStationTP");
-    v_plot.push_back("fakeRate_TPnot");
-    v_plot.push_back("Eff_TPnotMatched");
-    
-    for (const auto& plot : v_plot) {
-        // hName = plot;
-        TH1F *hTotal1 =   (TH1F*)fileNoRPCUpdated->Get((plot+"_total").c_str());
-        TH1F *hMatched1 = (TH1F*)fileNoRPCUpdated->Get((plot+"_matched").c_str());
-        TH1F *hTotal2 =   (TH1F*)fileRPCUpdated->Get((plot+"_total").c_str());
-        TH1F *hMatched2 = (TH1F*)fileRPCUpdated->Get((plot+"_matched").c_str());
+    plotEffWheelStation("Eff_TPwheels", fileDTAMUpdated, "DT AM Updated", kRed ,fileRPCUpdated, "DT AM + RPC Updated", kBlue, saveDir );
+    plotEffWheelStation("fakeRate_WheelStationTP", fileDTAMUpdated, "DT AM Updated", kRed ,fileRPCUpdated, "DT AM + RPC Updated", kBlue, saveDir );
+    plotEffWheelStation("fakeRate_TP", fileDTAMUpdated, "DT AM Updated", kRed ,fileRPCUpdated, "DT AM + RPC Updated", kBlue, saveDir );
+    plotEffWheelStation("Eff_TPnotMatched", fileDTAMUpdated, "DT AM Updated", kRed ,fileRPCUpdated, "DT AM + RPC Updated", kBlue, saveDir );
 
-        plotEffWheelStation((plot).c_str(),  // histogram name
-                            hMatched1,   // histogram 1 passed
-                            hTotal1,      // histogram 1 total
-                            hMatched2,   // histogram 2 passed
-                            hTotal2,    // histogram 2 total
-                            "DT AM Updated", // Legend for the histogram 1
-                            "DT AM + RPC Updated", // Legend for the histogram 2
-                            saveDir ); // directory to save 
-    }
-    
-
+    // ---------------
+    // Other variables
+    // ---------------
     saveDir = "plots/DT+RPCupdated_vs_DTupdated/variables/";
     if (gSystem->AccessPathName(saveDir.c_str())) { 
         gSystem->mkdir(saveDir.c_str(), true); // true = recursive
     }
 
-    v_plot.clear();
-    v_plot.push_back("hNSeg");
-    v_plot.push_back("hNTrigs");
-    v_plot.push_back("hRatioNtpNseg_total");
-    v_plot.push_back("TPnotMatched");
-    v_plot.push_back("TPMatched");
-    v_plot.push_back("hTrigFlag");
-    v_plot.push_back("hTPMatchedRPCflag");
-    v_plot.push_back("BX_forFakeRate");
-    v_plot.push_back("RPCFlag_forFakeRate");
-    v_plot.push_back("fakeRate_EventWheelStationTP_matched");
-    
-    // for (const auto & secTag : secTags){
-        //     hName = "fakeRate_EventWheelStationTP_"+secTag+"_matched";
-        //     v_plot.push_back(hName);
-        // }
-        
-    for (const auto& plot : v_plot) {
-        // hName = "hNSeg";
-        TH1F *hist1 = (TH1F*)fileNoRPCUpdated->Get(plot.c_str());
-        TH1F *hist2 = (TH1F*)fileRPCUpdated->Get(plot.c_str());
-        plot_normal_histograms( hist1, hist2, plot, 
-                                "", 
-                                "DT AM",
-                                saveDir, 
-                                false);
-    }
+    plot_histo("hNTrigs", fileDTAMUpdated, "DT AM Updated", kRed ,fileRPCUpdated, "DT AM + RPC", kBlue, saveDir);
+    plot_histo("TPnotMatched", fileDTAMUpdated, "DT AM Updated", kRed ,fileRPCUpdated, "DT AM + RPC", kBlue, saveDir);
+    plot_histo("hRatioNtpNseg_total", fileDTAMUpdated, "DT AM Updated", kRed ,fileRPCUpdated, "DT AM + RPC", kBlue, saveDir);
+    plot_histo("hTrigFlag", fileDTAMUpdated, "DT AM Updated", kRed ,fileRPCUpdated, "DT AM + RPC", kBlue, saveDir);
+    plot_histo("TPMatched", fileDTAMUpdated, "DT AM Updated", kRed ,fileRPCUpdated, "DT AM + RPC", kBlue, saveDir);
+    plot_histo("hTPMatchedRPCflag", fileDTAMUpdated, "DT AM Updated", kRed ,fileRPCUpdated, "DT AM + RPC", kBlue, saveDir);
+    plot_histo("BX_forFakeRate", fileDTAMUpdated, "DT AM Updated", kRed ,fileRPCUpdated, "DT AM + RPC", kBlue, saveDir);
+    plot_histo("RPCFlag_forFakeRate", fileDTAMUpdated, "DT AM Updated", kRed ,fileRPCUpdated, "DT AM + RPC", kBlue, saveDir);
 
     
     std::cout << "--------------------------------" << std::endl;
     std::cout << "RPC Only Studies" << std::endl;
     std::cout << "--------------------------------" << std::endl;
 
+    // ---------------
+    // eff plots
+    // ---------------
     saveDir = "plots/DT+RPC_vs_RPConly/efficiency/"; 
     // Create the directory if it doesn't exist
     if (gSystem->AccessPathName(saveDir.c_str())) { 
         gSystem->mkdir(saveDir.c_str(), true); // true = recursive
     }
 
-    hName = "fakeRate_WheelStationTP";
-    // hName = "Eff_TPwheels";  // Using DT normal efficiency
-    hTotal1 =   (TH1F*)fileRPCOnly->Get((hName+"_total").c_str());
-    if (!hTotal1) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
-    hMatched1 = (TH1F*)fileRPCOnly->Get((hName+"_matched").c_str());
-    if (!hMatched1) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
+    plotEffWheelStation("Eff_TPwheels", fileRPCOnly, "RPConly", kGreen ,fileRPC, "DT AM + RPC Updated", kBlue, saveDir );
+    plotEffWheelStation("fakeRate_WheelStationTP", fileRPCOnly, "RPConly", kGreen ,fileRPC, "DT AM + RPC Updated", kBlue, saveDir );
 
-    plotEffWheelStation(hName,  // histogram name
-                        hMatched1, // histogram passed
-                        hTotal1, // histogram total
-                        "RPConly", // Legend for the histogram
-                        saveDir ); // directory to save
 
-    hName = "Eff_TPRPC_wheels";
-    // hName = "Eff_TPwheels";  // Using DT normal efficiency
-    hTotal1 =   (TH1F*)fileRPCOnly->Get((hName+"_total").c_str());
-    if (!hTotal1) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
-    hMatched1 = (TH1F*)fileRPCOnly->Get((hName+"_matched").c_str());
-    if (!hMatched1) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
-
-    plotEffWheelStation(hName,  // histogram name
-                        hMatched1, // histogram passed
-                        hTotal1, // histogram total
-                        "RPConly", // Legend for the histogram
-                        saveDir ); // directory to save
-    
-
+    // ---------------
+    // Other variables
+    // ---------------
     saveDir = "plots/DT+RPC_vs_RPConly/variables/";
     if (gSystem->AccessPathName(saveDir.c_str())) { 
         gSystem->mkdir(saveDir.c_str(), true); // true = recursive
     }
 
-    v_plot.clear();
-    v_plot.push_back("hNTrigs");
-    v_plot.push_back("hTrigFlag");
-    v_plot.push_back("hTPMatchedRPCflag");
-    
-        
-    for (const auto& plot : v_plot) {
-        // hName = "hNSeg";
-        TH1F *hist1 = (TH1F*)fileRPCOnly->Get(plot.c_str());
-        TH1F *hist2 = (TH1F*)fileRPC->Get(plot.c_str());
-        plot_normal_histograms( hist1, hist2, plot, 
-                                "", 
-                                "RPC Only",
-                                saveDir, 
-                                false);
-    }
+
+    plot_histo("hNTrigs", fileRPCOnly, "RPConly", kGreen ,fileRPC, "DT AM + RPC", kBlue, saveDir);
+    plot_histo("hTrigFlag", fileRPCOnly, "RPConly", kGreen ,fileRPC, "DT AM + RPC", kBlue, saveDir);
+    // plot_histo("hTPMatchedRPCflag", fileRPCOnly, "RPConly", kGreen ,fileRPC, "DT AM + RPC", kBlue, saveDir);
+
 
     // ----------------------------------------------------------
-    // ----Time of the TPs associated with prompt muons [ns]-----
+    // Time of the TPs associated with prompt muons 
     // ----------------------------------------------------------
-    // saveDir = "output/t0RPCOnly/";
     saveDir = "plots/DT+RPC_vs_RPConly/time/";
     // Create the directory if it doesn't exist
     if (gSystem->AccessPathName(saveDir.c_str())) {
@@ -353,85 +172,72 @@ void plot_histograms() {
     }
 
     for (const auto & wheel : wheelTag) {
+        std::string wh = wheel;  
+        wh = wh.erase(1, 2); // Removes "h.": "Wh.-2"→ "W-2"
         for (const auto & chamb : chambTag) {
-            std::string wheel2 = wheel;
-            wheel2 = wheel2.erase(1, 2);  // Removes "W.": "Wh.-2"→ "W-2"
-            
-            // ---------------------------  
-            // t0
-            std::string hName = "hTPRPCOnlygT0"+wheel+chamb+"_matched";
-            TH1F *hist1 = (TH1F*)fileRPCOnly->Get(hName.c_str());
-            if (!hist1) std::cerr << "Error: Could not retrieve " << hName << " !!!!!!" << std::endl;
-
-            hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
-            TH1F *hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-            if (!hist2) std::cerr << "Error: Could not retrieve " << hName << " !!!!!!" << std::endl;
-            
-            plot_t0_histograms( hist1, hist2, hName, 
-                                "Time of the TPs associated with prompt muons [ns]", 
-                                (wheel2+" "+chamb).c_str(),
-                                "RPC only",
-                                saveDir, 
-                                true);
-
-            // ---------------------------  
-            // BX
-            hName = "hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched";
-            hist1 = (TH1F*)fileRPCOnly->Get(hName.c_str());
-            hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-            if (!hist1 || !hist2) std::cerr << "Error: Could not retrieve " << hName << " !!!!!!" << std::endl;
-
-            plot_BX_histograms( hist1, hist2, hName, 
-                                "BX of the TPs associated with prompt muons [ns]", 
-                                (wheel2+" "+chamb).c_str(),
-                                "RPC Only",
-                                saveDir, 
-                                false);
-            
+            std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
+            plot_t0_histo( hName, fileRPCOnly, "RPConly", kGreen, fileRPC, "DT AM + RPC", kBlue, (wh+" "+chamb), saveDir, true);
+            // TODO
+            //plot_BX_histo( hName, fileDTAM, "DT AM", kRed, fileRPC, "DT AM + RPC", kBlue, (wh+" "+chamb), saveDir, true);
         }
     }
+
 
     std::cout << "--------------------------------" << std::endl;
     std::cout << "RPC Only Updated Studies" << std::endl;
     std::cout << "--------------------------------" << std::endl;
-    // saveDir = "output/histogram_RPCOnlyUpdated_comparison/";
+
+    // ---------------
+    // eff plots
+    // ---------------
     saveDir = "plots/DT+RPC_vs_RPConlyUpdated/efficiency/";
     // Create the directory if it doesn't exist
     if (gSystem->AccessPathName(saveDir.c_str())) { 
         gSystem->mkdir(saveDir.c_str(), true); // true = recursive
     }
 
-    hName = "Eff_TPRPC_wheels";
-    // hName = "Eff_TPwheels";  // Using DT normal efficiency
-    hTotal1 =   (TH1F*)fileRPCOnlyUpdated->Get((hName+"_total").c_str());
-    if (!hTotal1) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
-    hMatched1 = (TH1F*)fileRPCOnlyUpdated->Get((hName+"_matched").c_str());
-    if (!hMatched1) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
+    plotEffWheelStation("Eff_TPwheels", 
+                        fileRPCOnly, "RPC Only", kGreen, 
+                        fileRPCOnlyUpdated, "RPC Only Updated", kBlack, 
+                        saveDir );
 
-    plotEffWheelStation(hName,  // histogram name
-                        hMatched1, // histogram passed
-                        hTotal1, // histogram total
-                        "RPC Only Updated", // Legend for the histogram
-                        saveDir ); // directory to save
+    plotEffWheelStationMB1MB2V2("Eff_TPwheels",
+                          {fileRPCOnly, fileRPCOnlyUpdated },
+                          {"RPC Only", "RPC Only Phase2"},
+                          {{kGreen, 22}, {kBlack, 23}},
+                          saveDir ) ;
 
+    // plotEffWheelStation("fakeRate_WheelStationTP", 
+    //                     fileRPCOnly, "RPC Only", kGreen, 
+    //                     fileRPCOnlyUpdated, "RPC Only Updated", kBlack, saveDir );
 
-    hName = "fakeRate_WheelStationTP";
-    // hName = "Eff_TPwheels";  // Using DT normal efficiency
-    hTotal1 =   (TH1F*)fileRPCOnlyUpdated->Get((hName+"_total").c_str());
-    if (!hTotal1) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
-    hMatched1 = (TH1F*)fileRPCOnlyUpdated->Get((hName+"_matched").c_str());
-    if (!hMatched1) std::cerr << "Error: Could not retrieve " << hName+"_total" << " !!!!!!" << std::endl;
+    // plotEffWheelStation("Eff_TPwheels", 
+    //                     fileRPCOnly, "RPC Only", {kGreen, 22}, 
+    //                     fileRPC, "DT AM + RPC", {kBlue, 21}, 
+    //                     fileRPCOnlyUpdated, "RPC Only Updated", {kBlack, 23},
+    //                     saveDir );
 
-    plotEffWheelStation(hName,  // histogram name
-                        hMatched1, // histogram passed
-                        hTotal1, // histogram total
-                        "RPConlyUpdated", // Legend for the histogram
-                        saveDir ); // directory to save
+    // plotEffWheelStationV2(  "Eff_TPwheels",
+    //                         {fileRPC, fileRPCOnly},
+    //                         {"DT AM + RPC", "RPC Only"},
+    //                         {{kBlue, 21},{kGreen, 22}},
+    //                         saveDir ) ;
 
-    // ----------------------------------------------------------
-    // ----Time of the TPs associated with prompt muons [ns]-----
-    // ----------------------------------------------------------
-    // saveDir = "output/t0RPCOnlyUpdated/";
+    // plotEffWheelStationV2("Eff_TPwheels",
+    //                       {fileRPC, fileRPCOnly, fileRPCOnlyUpdated, fileDTAM},
+    //                       {"DT AM + RPC", "RPC Only", "RPC Only Updated", "DT AM"},
+    //                       {{kBlue, 21},{kGreen, 22}, {kBlack, 23}, {kRed, 20}},
+    //                       saveDir ) ;
+
+    // plotEffWheelStationV2("Eff_TPwheels",
+    //                       {fileDTAM, fileRPC, fileRPCOnly, fileRPCOnlyUpdated },
+    //                       {"DT AM", "DT AM + RPC", "RPC Only", "RPC Only Phase2"},
+    //                       {{kRed, 20}, {kBlue, 21}, {kGreen, 22}, {kBlack, 23}},
+    //                       saveDir ) ;
+    
+    // -----------------------------------------------------
+    // Time of the TPs associated with prompt muons
+    // ------------------------------------------------------
     saveDir = "plots/DT+RPC_vs_RPConlyUpdated/time/";
     // Create the directory if it doesn't exist
     if (gSystem->AccessPathName(saveDir.c_str())) {
@@ -439,29 +245,83 @@ void plot_histograms() {
     }
 
     for (const auto & wheel : wheelTag) {
+        std::string wh = wheel;  
+        wh = wh.erase(1, 2); // Removes "h.": "Wh.-2"→ "W-2"
         for (const auto & chamb : chambTag) {
-            
-            std::string hName = "";
-            hName = "hTPRPCOnlygT0"+wheel+chamb+"_matched";
-            hist1 = (TH1F*)fileRPCOnlyUpdated->Get(hName.c_str());
-            if (!hist1) std::cerr << "Error: Could not retrieve " << hName << " !!!!!!" << std::endl;
-            hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
-            hist2 = (TH1F*)fileRPC->Get(hName.c_str());
-            if (!hist2) std::cerr << "Error: Could not retrieve " << hName << " !!!!!!" << std::endl;
-
-            std::string wheel2 = wheel;
-            wheel2 = wheel2.erase(1, 2);  // Removes "h.": "Wh.-2"→ "W-2"
-
-            plot_t0_histograms( hist1, hist2,
-                                "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched",
-                                "Time of the TPs associated with prompt muons [ns]",
-                                (wheel2+" "+chamb).c_str(),
-                                "RPC Only Updated",
-                                saveDir,
-                                true);
-
+            std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
+            plot_t0_histo( hName, fileRPCOnly, "RPConly", kGreen, fileRPCOnlyUpdated, "RPC Only Updated", kBlack, (wh+" "+chamb), saveDir, true);
+            // TODO
+            //plot_BX_histo( hName, fileDTAM, "DT AM", kRed, fileRPC, "DT AM + RPC", kBlue, (wh+" "+chamb), saveDir, true);
         }
     }
+
+    std::cout << "--------------------------------" << std::endl;
+    std::cout << "Different Flags Studies" << std::endl;
+    std::cout << "--------------------------------" << std::endl;
+
+    // ---------------
+    // eff plots
+    // ---------------
+    saveDir = "plots/differentFlags/efficiency/";
+    // Create the directory if it doesn't exist
+    if (gSystem->AccessPathName(saveDir.c_str())) { 
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
+    plotEffWheelStationV2("Eff_TPwheels",
+                          {fileDTAM, fileRPC, fileRPC_Flag1, fileRPC_Flag2},
+                          {"DT AM", "DT AM + RPC", "Flag 1", "Flag 2"},
+                          {{kRed, 20}, {kBlue, 21}, {kGreen+2, 24}, {kBlack, 25}},
+                          saveDir ) ;
+
+    std::cout << "--------------------------------" << std::endl;
+    std::cout << "All Studies" << std::endl;
+    std::cout << "--------------------------------" << std::endl;
+
+    // ---------------------------------------------------------------------------
+    //                            eff plots
+    // ---------------------------------------------------------------------------
+    saveDir = "plots/all/efficiency/";
+    // Create the directory if it doesn't exist
+    if (gSystem->AccessPathName(saveDir.c_str())) { 
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
+    plotEffWheelStationV2("Eff_TPwheels",
+                          {fileDTAM, fileRPC, fileRPCOnly, fileRPCOnlyUpdated, fileDTRPCOnly },
+                          {"DT AM", "DT AM + RPC", "RPC Only", "RPC Only Phase2", "RPC Only (DT)"},
+                          {{kRed, 20}, {kBlue, 21}, {kGreen+2, 22}, {kBlack, 23}, {kMagenta, 33}},
+                          saveDir ) ;
+
+    // plotEffWheelStationMB1MB2V2("Eff_TPwheels",
+    //                             {fileRPCOnly, fileDTAM, fileRPC, fileRPCOnlyUpdated, fileDTRPCOnly },
+    //                             {"RPC Only", "DT AM", "DT AM + RPC", "RPC Only Phase2", "RPC Only (DT)"},
+    //                             {{kGreen+2, 22}, {kRed, 20}, {kBlue, 21}, {kBlack, 23}, {kMagenta, 33}},
+    //                             saveDir ) ;
+
+    plotEffWheelStationMB1MB2V2("Eff_TPwheels",
+                                {fileRPCOnly },
+                                {"RPC Only"},
+                                {{kGreen+2, 22}},
+                                saveDir ) ;
+
+
+    saveDir = "plots/all/time/";
+    // Create the directory if it doesn't exist
+    if (gSystem->AccessPathName(saveDir.c_str())) {
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+    for (const auto & wheel : wheelTag) {
+        std::string wh = wheel;  
+        wh = wh.erase(1, 2); // Removes "h.": "Wh.-2"→ "W-2"
+        for (const auto & chamb : chambTag) {
+            std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
+            plot_t0_histo( hName, fileRPCOnly, "RPConly", kGreen, fileRPC, "DT AM + RPC", kBlue, (wh+" "+chamb), saveDir, true);
+            // TODO
+            //plot_BX_histo( hName, fileDTAM, "DT AM", kRed, fileRPC, "DT AM + RPC", kBlue, (wh+" "+chamb), saveDir, true);
+        }
+    }
+
 
     std::cout << "--------------------------------" << std::endl;
     std::cout << "END PROGRAM" << std::endl;

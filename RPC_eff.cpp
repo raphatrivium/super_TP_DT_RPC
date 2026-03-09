@@ -12,25 +12,18 @@ int RPC_eff() {
 
     bool plotHistograms = true; // false - true
 
-    // flagRPCselection = 0  : all RPC Flags
-    // flagRPCselection = 1  : RPC used to overwrite TP timing info (both t0 and BX)
-    // flagRPCselection = 2  : RPC only segment
-    // flagRPCselection = 3  : RPC single hit not associated to any DT segment
-    // flagRPCselection = 10 : RPC Flag == 0 &&  RPC Flag == 1.   "RPC Flag == 0": segment that could not be matched to any RPC cluster
-
-    int flagRPCselection = 0;
-
-    bool booltest = false;
-
     // ------------------------------------------------------------------------------
     // INPUT FILES
     // ------------------------------------------------------------------------------
     std::string inputDir = "input/";
     std::map<std::string,std::string> m_files;
-    // m_files["noRPC"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
-    // m_files["RPC"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
-    // m_files["RPCUpdated"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root";
-    // m_files["noRPCUpdated"] = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root";
+    // m_files["DTAM"]              = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
+    // m_files["RPC"]               = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
+    // m_files["RPC_Flag1"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
+    // m_files["RPC_Flag2"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
+    // m_files["DTAMUpdated"]       = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root";
+    // m_files["RPCUpdated"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root";
+    // m_files["DTRPCOnly"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
     m_files["RPCOnly"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
     m_files["RPCOnlyUpdated"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCPhase2_RPCOnlyFlag.root";
     m_files["test"]            = "test.root"; // It is a copy of m_files["RPC"]
@@ -65,13 +58,6 @@ int RPC_eff() {
         std::cout << "-------------------------------------------" <<std::endl;
         std::cout << "["+name+"]: "+inputDir+file_name+"\n" <<std::endl;
         // std::cout << "-------------------------------------------" <<std::endl;
-
-        bool fileRPCflag = false;
-        if ( name == "RPCOnly" ) fileRPCflag = true;
-        else if ( name == "RPCOnlyUpdated" ) fileRPCflag = true;
-        else if ( name == "RPCUpdated" ) fileRPCflag = true;
-        else if ( name == "RPC" ) fileRPCflag = true;
-        else if ( name == "test" ) fileRPCflag = true;
 
         // BarrelGeo barGeo("barrel_geometry.txt");
         BarrelGeo barGeo;
@@ -111,8 +97,8 @@ int RPC_eff() {
         // m_plots["hTP_MB1_MB2_DeltaT0"] = new TH1D( "hTP_MB1_MB2_DeltaT0", "Delta t0 between MB1 and MB2; Delta t0 [ns]; Entries", 30, 0, 10);
         m_plots["hTP_MB1_MB2_DeltaT0"] = new TH1D( "hTP_MB1_MB2_DeltaT0", "Delta t0 between MB1 and MB2; Delta t0 [ns]; Entries", 60, -10, 10);
 
-        m_plots["Eff_TPRPC_wheels_total"] = new TH1D("Eff_TPRPC_wheels_total", "RPC TP Local Efficiency; Wheel; Efficiency", 22, 0, 22);
-        m_plots["Eff_TPRPC_wheels_matched"] = new TH1D("Eff_TPRPC_wheels_matched", "RPC TP Local Efficiency; Wheel; Efficiency",22, 0, 22);
+        m_plots["Eff_TPwheels_total"] = new TH1D("Eff_TPwheels_total", "RPC TP Local Efficiency; Wheel; Efficiency", 22, 0, 22);
+        m_plots["Eff_TPwheels_matched"] = new TH1D("Eff_TPwheels_matched", "RPC TP Local Efficiency; Wheel; Efficiency",22, 0, 22);
 
         for (const auto & chamb : chambTag) {
             for (const auto & wheel : wheelTag) {
@@ -121,8 +107,8 @@ int RPC_eff() {
                 // m_plots["hGenSegDeltaEta"+wheel+chamb] = new TH1D(("hGenSegDeltaEta"+wheel+chamb).c_str(),
                 // "Gen Muon - Segment Delta Eta distribution ; Delta Eta; Entries", 600, 0,  0.5);
 
-                m_plots["hTPRPCOnlygT0"+wheel+chamb+"_matched"] = new TH1D( ("hTPRPCOnlygT0"+wheel+chamb+"_matched").c_str(),
-                ("hTPRPCOnlygT0"+wheel+chamb+"_matched; Time of the TPs associated with prompt muons [ns]; Entries").c_str(), 27, -10, 10); // 40, 0, 700  // 40, 630, 650
+                m_plots["hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched"] = new TH1D( ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str(),
+                ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched; Time of the TPs associated with prompt muons [ns]; Entries").c_str(), 27, -10, 10); // 40, 0, 700  // 40, 630, 650
 
                 m_plots["hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched"] = new TH1D( ("hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched").c_str(),
                 ("hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched; BXs of the TPs associated with prompt muons [ns]; Entries").c_str(), 20, 10, 30);
@@ -133,12 +119,15 @@ int RPC_eff() {
         m_plots["fakeRate_WheelStationTP_total"] = new TH1D("fakeRate_WheelStationTP_total", "Trigger Primitive not Matched; Wheel; Fake Rate",  22, 0, 22);
         m_plots["fakeRate_WheelStationTP_matched"] = new TH1D("fakeRate_WheelStationTP_matched", "Trigger Primitive not Matched; Wheel; Fake Rate",  22, 0, 22);
 
+        m_plots["fakeRate_TP_total"] = new TH1D("fakeRate_TP_total", "Trigger Primitive not Matched; Wheel; Fake Rate",  22, 0, 22);
+        m_plots["fakeRate_TP_matched"] = new TH1D("fakeRate_TP_matched", "Trigger Primitive not Matched; Wheel; Fake Rate",  22, 0, 22);
+
         for (const auto & secTag : secTags)
         {
-        //     m_plots["Eff_TPwheels_"+secTag+"_total"] = new TH1D(("Eff_TPwheels_"+secTag+"_total").c_str(),
-        //     ("DT TP Local Efficiency for " + secTag + "; Wheel; Efficiency").c_str(), 22, 0, 22);
-        //     m_plots["Eff_TPwheels_"+secTag+"_matched"] = new TH1D(("Eff_TPwheels_"+secTag+"_matched").c_str(),
-        //     ("DT TP Local Efficiency for " + secTag + "; Wheel; Efficiency").c_str(), 22, 0, 22);
+            m_plots["Eff_TPwheels_"+secTag+"_total"] = new TH1D(("Eff_TPwheels_"+secTag+"_total").c_str(),
+            ("DT TP Local Efficiency for " + secTag + "; Wheel; Efficiency").c_str(), 22, 0, 22);
+            m_plots["Eff_TPwheels_"+secTag+"_matched"] = new TH1D(("Eff_TPwheels_"+secTag+"_matched").c_str(),
+            ("DT TP Local Efficiency for " + secTag + "; Wheel; Efficiency").c_str(), 22, 0, 22);
             
         //     m_plots["fakeRateTP_WheelvsStation_"+secTag+"_total"] = new TH1D(("fakeRateTP_WheelvsStation_"+secTag+"_total").c_str(),
         //     ("Fake Rate Wheel vs Station for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
@@ -148,15 +137,15 @@ int RPC_eff() {
         //     m_plots["fakeRate_EventWheelStationTP_"+secTag+"_matched"] = new TH1D(("fakeRate_EventWheelStationTP_"+secTag+"_matched").c_str(),
         //     ("Fake Rate per event for " + secTag + "; Wheel; Fake TPs / Event").c_str(), 22, 0, 22);
 
-        //     m_plots["fakeRate_TPnot_"+secTag+"_total"] = new TH1D(("fakeRate_TPnot_"+secTag+"_total").c_str(),
-        //     ("TPs not Matched for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
-        //     m_plots["fakeRate_TPnot_"+secTag+"_matched"] = new TH1D(("fakeRate_TPnot_"+secTag+"_matched").c_str(),
-        //     ("TPs not Matched for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
+            m_plots["fakeRate_TP_"+secTag+"_total"] = new TH1D(("fakeRate_TP_"+secTag+"_total").c_str(),
+            ("TPs not Matched for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
+            m_plots["fakeRate_TP_"+secTag+"_matched"] = new TH1D(("fakeRate_TP_"+secTag+"_matched").c_str(),
+            ("TPs not Matched for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
 
-            m_plots["Eff_TPRPC_wheels_"+secTag+"_total"] = new TH1D(("Eff_TPRPC_wheels_"+secTag+"_total").c_str(),
-            ("TPs not Matched for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
-            m_plots["Eff_TPRPC_wheels_"+secTag+"_matched"] = new TH1D(("Eff_TPRPC_wheels_"+secTag+"_matched").c_str(),
-            ("TPs not Matched for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
+            // m_plots["Eff_TPwheels_"+secTag+"_total"] = new TH1D(("Eff_TPwheels_"+secTag+"_total").c_str(),
+            // ("TPs not Matched for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
+            // m_plots["Eff_TPwheels_"+secTag+"_matched"] = new TH1D(("Eff_TPwheels_"+secTag+"_matched").c_str(),
+            // ("TPs not Matched for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
 
         }
 
@@ -265,14 +254,6 @@ int RPC_eff() {
         int denTP = 0;
         int TPnotMatched = 0;
 
-        // std::vector<std::string> chambTags = { "MB1", "MB2", "MB3", "MB4"};
-        // std::vector<std::string> whTags    = { "Wh.-2", "Wh.-1", "Wh.0", "Wh.+1", "Wh.+2"};
-        // std::vector<std::string> secTags   = { "Sec1", "Sec2", "Sec3", "Sec4", "Sec5", "Sec6", "Sec7", "Sec8","Sec9","Sec10","Sec11","Sec12","Sec13","Sec14"};
-
-
-        
-
-
         // ------------------------------------------------------------------------------
         // Loop in the events
         // ------------------------------------------------------------------------------
@@ -334,26 +315,14 @@ int RPC_eff() {
                 // Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(iTrigAM);
                 Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(iTrigAM);
 
-                if (fileRPCflag){
-                    if (flagRPCselection == 1){
-                        if ( trigAMrpc != 1 ) continue;
-                    }
-                    else if (flagRPCselection == 2){
-                        if ( trigAMrpc != 2 ) continue;
-                    }
-                    else if (flagRPCselection == 3){
-                        if ( trigAMrpc != 3 ) continue;
-                    }
-                    else if (flagRPCselection == 10){
-                        if ( trigAMrpc != 1 && trigAMrpc != 0 ) continue;
-                    }
+                if ( name == "RPCOnly" || name == "RPCOnlyUpdated" ) {
+                    if ( trigAMrpc != 2 ) continue;
                 }
-                
-                // For this file, we are ignoring the RPC flags 0 and 1 to simulate only RPC TPs
-                if ( name == "RPCOnly" || name == "RPCOnlyUpdated" ){
-                    if (trigAMrpc == 0) continue;
-                    if (trigAMrpc == 1) continue;
-                }
+
+                // if ( name == "RPCOnly" || name == "RPCOnlyUpdated" ) {
+                //     if ( trigAMrpc == 0 ) continue;
+                //     if ( trigAMrpc == 1 ) continue;
+                // }
                 
                 m_plots["hTrigFlag"] -> Fill( trigAMrpc );
                 coutNTrigs++;
@@ -451,10 +420,10 @@ int RPC_eff() {
                     std::string secTag   = secTags.at(geoSector - 1);
 
                     int wheelIdx = WheelStationToBins(geoStation, geoRing );
-                    m_plots["Eff_TPRPC_wheels_total"] -> Fill( wheelIdx );
+                    m_plots["Eff_TPwheels_total"] -> Fill( wheelIdx );
 
                     // Efficiency TP by sector Numerator
-                    m_plots["Eff_TPRPC_wheels_"+secTag+"_total"]->Fill(wheelIdx);
+                    m_plots["Eff_TPwheels_"+secTag+"_total"]->Fill(wheelIdx);
 
 
                     tpRPC_den++;
@@ -524,9 +493,9 @@ int RPC_eff() {
                         bestTP.push_back(bestTPidx);
                         vbestTPAM.push_back(bestTPidx);
                     
-                        m_plots["Eff_TPRPC_wheels_matched"] -> Fill( wheelIdx );
+                        m_plots["Eff_TPwheels_matched"] -> Fill( wheelIdx );
                         // Efficiency TP by sector Numerator
-                        m_plots["Eff_TPRPC_wheels_"+secTag+"_matched"]->Fill(wheelIdx);
+                        m_plots["Eff_TPwheels_"+secTag+"_matched"]->Fill(wheelIdx);
                         
                         Int_t trigAMBX = ph2TpgPhiEmuAm_BX->at(bestTPidx);
                         m_plots["hPh2TpgPhiEmuAmBX"+whTag+chambTag+"_matched"]->Fill(trigAMBX);
@@ -535,7 +504,7 @@ int RPC_eff() {
                         trigAMt0 = (trigAMt0 * 25 / 32); // DCS to ns
                         trigAMt0 = trigAMt0 - 390; // Shift to zero (RPC only)
 
-                        m_plots["hTPRPCOnlygT0"+whTag+chambTag+"_matched"]->Fill(trigAMt0);
+                        m_plots["hPh2TpgPhiEmuAmT0"+whTag+chambTag+"_matched"]->Fill(trigAMt0);
                     }
 
                 }// End loop Geo
@@ -739,13 +708,11 @@ int RPC_eff() {
         outFile.Close();
         std::cout << "All histograms saved in ROOT file: " << outputFile << std::endl;
         std::cout << "All plots saved in: " << outputDir << std::endl;
-        std::cout << "booltest: " << booltest << std::endl;
     }
 
     std::cout << "----------------------------------" << std::endl;
     std::cout << "TEST FLAG: " << testFlag << std::endl;
     std::cout << "plotHistograms FLAG: " << plotHistograms << std::endl;
-    std::cout << "flag RPC: " << flagRPCselection << std::endl;
     std::cout << "----------------------------------" << std::endl;
 
     return 0;
