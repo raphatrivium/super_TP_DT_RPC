@@ -295,17 +295,13 @@ int test() {
         // ------------------------------------------------------------------------------
         // Loop in the events
         // ------------------------------------------------------------------------------
-        // nEntries = 10;   // 100   nEntries
+        // nEntries = 1;   // 100   nEntries
         if (testFlag){
             nEntries = 100;
             std::cout << "FOR TESTE:" <<std::endl;
         }
         std::cout << "Total entries:" << nEntries <<std::endl;
 
-        int idxGen = 0;
-        bool flagFill = false;
-
-        
         for (Long64_t iEvent = 0; iEvent < nEntries; ++iEvent) {
 
             if (fdebug) std::cout << "=================================" << std::endl;
@@ -313,30 +309,12 @@ int test() {
             if (fdebug) std::cout << "=================================" << std::endl;
 
             tree->GetEntry(iEvent);
-            // branch_gen_nGenParts->GetEntry(iEvent);
-            // branch_ph2TpgPhiEmuAm_nTrigs->GetEntry(iEvent);
             
-            // m_plots["hNSeg"] -> Fill( ph2Seg_nSegments );
-            
-            // for (std::size_t itrig = 0; itrig < ph2TpgPhiEmuAm_nTrigs; ++itrig){
-            //     m_plots["htrigAMrpcFlag_Total"] -> Fill(ph2TpgPhiEmuAm_rpcFlag->at(itrig));
-            //     m_plots["htrigAMBX_Total"] -> Fill(ph2TpgPhiEmuAm_BX->at(itrig));
-            //     m_plots["trigAMt0_Total"] -> Fill(ph2TpgPhiEmuAm_t0->at(itrig));
-            //     m_plots2["trigAMt0VsRpcFlag_Total"] -> Fill(ph2TpgPhiEmuAm_t0->at(itrig),ph2TpgPhiEmuAm_rpcFlag->at(itrig));
-            // }
-
-            // std::vector<std::vector<int>> SegMatchedWheelAndStation;
-
-            // double RatioNtpNseg;
-            // RatioNtpNseg = double(ph2TpgPhiEmuAm_nTrigs) / double(ph2Seg_nSegments) ;
-            // m_plots["hRatioNtpNseg_total"] -> Fill( RatioNtpNseg );
-
-            // numTPEvent = 0;
-            // denTPEvent = 0;
-            // TPnotMatched = 0;
-
             int coutNTrigs = 0;
 
+            std::vector<std::vector<int>> SimLinkMatchedWheelAndStation;
+
+            std::vector<int> vbestTPAM;
             // -----------------------------
             // Loop in the AM TP
             // -----------------------------
@@ -353,16 +331,18 @@ int test() {
                 // Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(iTrigAM);
                 Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(iTrigAM);
 
-                if ( name == "RPCOnly" || name == "RPCOnlyUpdated" ) {
-                    if ( trigAMrpc != 2 ) continue;
-                }
+
 
                 // if ( name == "RPCOnly" || name == "RPCOnlyUpdated" ) {
-                //     if ( trigAMrpc == 0 ) continue;
-                //     if ( trigAMrpc == 1 ) continue;
+                //     if ( trigAMrpc != 2 ) continue;
                 // }
-                
+
+                if ( name == "RPCOnly" || name == "RPCOnlyUpdated" ) {
+                    if ( trigAMrpc == 0 ) continue;
+                    if ( trigAMrpc == 1 ) continue;
+                }
                 m_plots["hTrigFlag"] -> Fill( trigAMrpc );
+                
                 coutNTrigs++;
                 
                 if (trigAMBX != 20) continue;
@@ -387,7 +367,11 @@ int test() {
             bool vSimLinkFilled = false;
             for (int iSimLink = 0; iSimLink < rpcSimLink_nSimLinks; ++iSimLink) {
 
+                m_plots["hNSimLinkIdPDG"] -> Fill( rpcSimLink_particleId->at(iSimLink));
+
                 if (  std::abs(rpcSimLink_particleId->at(iSimLink)) != 13) continue;
+
+                coutNrpcSimLink++;
 
                 Int_t SimLinkRing    = rpcSimLink_ring->at(iSimLink);
                 Int_t SimLinkSector  = rpcSimLink_sector->at(iSimLink);
@@ -420,7 +404,6 @@ int test() {
 
                 if (flagDuplicate == false) vSimLink.push_back(iSimLink);
                 
-
             }
             if (fdebug) std::cout << "vSimLink.size(): "<< vSimLink.size() << std::endl;
 
@@ -457,12 +440,8 @@ int test() {
 
                 if (SimProType != 0) continue;
 
-                // if (fdebug) std::cout << "vSimLink " vSimLink[iSimLink]<< std::endl;
-
                 bool flag2LayerHit = false;
                 for (int iSimLink2 = 0; iSimLink2 < vSimLink.size(); ++iSimLink2){
-
-                    // if (fdebug) std::cout << "vSimLink " vSimLink[iSimLink]<< std::endl;
 
                     Int_t SimLinkRing2    = rpcSimLink_ring->at(vSimLink[iSimLink2]);
                     Int_t SimLinkSector2  = rpcSimLink_sector->at(vSimLink[iSimLink2]);
@@ -504,6 +483,12 @@ int test() {
 
                 if (SimLinkBx != 0) continue;
 
+                std::vector<int> tempVec; // tempVec = [Seg Wheel][Seg Station][Seg Sector] 
+                tempVec.push_back(SimLinkRing);
+                tempVec.push_back(SimLinkStation);
+                tempVec.push_back(SimLinkSector);
+                SimLinkMatchedWheelAndStation.push_back(tempVec); 
+
                 if (fdebug) std::cout << "==============================================================================" << std::endl;
                 if (fdebug) std::cout << "iSim " << iSimLink << ", iSimLink " << vSimLink[iSimLink] << ", partID " << rpcSimLink_particleId->at(vSimLink[iSimLink]) 
                                       << " | " << "eta: "<< rpcSimLink_global_eta->at(vSimLink[iSimLink]) << " | phi: "<< rpcSimLink_global_phi->at(vSimLink[iSimLink])
@@ -512,7 +497,7 @@ int test() {
                 // if (fdebug) std::cout << "\n" << std::endl;
 
 
-                m_plots["hNSimLinkIdPDG"] -> Fill( rpcSimLink_particleId->at(vSimLink[iSimLink]));
+                // m_plots["hNSimLinkIdPDG"] -> Fill( rpcSimLink_particleId->at(vSimLink[iSimLink]));
                 
                 std::string chambTag = chambTags.at(SimLinkStation - 1);
                 std::string whTag    = whTags.at(SimLinkRing + 2);
@@ -520,10 +505,8 @@ int test() {
 
                 int wheelIdx = WheelStationToBins(SimLinkStation, SimLinkRing );
                 m_plots["Eff_TPwheels_total"] -> Fill( wheelIdx );
-                
-                coutNrpcSimLink++;
 
-                Int_t    bestTPidx = -999;
+                Int_t    bestTPAM = -999;
                 Double_t bestTPtime = 999.;
                 Double_t bestDeltaPhi = 999.;
                 for (std::size_t iTrigAM = 0; iTrigAM < ph2TpgPhiEmuAm_nTrigs; ++iTrigAM){
@@ -569,7 +552,7 @@ int test() {
 
                         if ( trigSimDPhi > bestDeltaPhi ) continue;
                         bestDeltaPhi = trigSimDPhi;
-                        bestTPidx = iTrigAM;
+                        bestTPAM = iTrigAM;
 
                         m_plots["hSimLinkTPdeltaPhi"] -> Fill( trigSimDPhi );
 
@@ -579,20 +562,19 @@ int test() {
                     } // GEN AND TP MATCHING
                 }// END loop Selected Trigger primitives
 
-                if ( bestTPidx > -1 ){ // NUMERATOR
-                        if (fdebug) std::cout << " bestTPidx: " << bestTPidx << std::endl;
-                        // tpRPC_num++;
-                        // bestTP.push_back(bestTPidx);
-                        // vbestTPAM.push_back(bestTPidx);
+                if ( bestTPAM > -1 ){ // NUMERATOR
+                        if (fdebug) std::cout << " bestTPAM: " << bestTPAM << std::endl;
+ 
+                        vbestTPAM.push_back(bestTPAM);
                     
                         m_plots["Eff_TPwheels_matched"] -> Fill( wheelIdx );
                         // Efficiency TP by sector Numerator
                         // m_plots["Eff_TPwheels_"+secTag+"_matched"]->Fill(wheelIdx);
                         
-                        Int_t trigAMBX = ph2TpgPhiEmuAm_BX->at(bestTPidx);
+                        Int_t trigAMBX = ph2TpgPhiEmuAm_BX->at(bestTPAM);
                         m_plots["hPh2TpgPhiEmuAmBX"+whTag+chambTag+"_matched"]->Fill(trigAMBX);
                         
-                        Double_t trigAMt0 = ph2TpgPhiEmuAm_t0->at(bestTPidx);
+                        Double_t trigAMt0 = ph2TpgPhiEmuAm_t0->at(bestTPAM);
                         trigAMt0 = (trigAMt0 * 25 / 32); // DCS to ns
                         trigAMt0 = trigAMt0 - 390; // Shift to zero (RPC only)
 
@@ -603,6 +585,73 @@ int test() {
 
             m_plots["hNSimLinks"] -> Fill( rpcSimLink_nSimLinks );
             m_plots["hNSimLinksPDG13"] -> Fill( coutNrpcSimLink );
+
+            // -----------------------------
+            // Loop in the Selected AM TP... again
+            // -----------------------------
+            // For Fake rate Studies
+            for (std::size_t iTrigAM = 0; iTrigAM < selectedTP.size(); ++iTrigAM){
+
+                Int_t trigAMWh  = ph2TpgPhiEmuAm_wheel->at(selectedTP[iTrigAM]);
+                Int_t trigAMSec = ph2TpgPhiEmuAm_sector->at(selectedTP[iTrigAM]);
+                Int_t trigAMSt  = ph2TpgPhiEmuAm_station->at(selectedTP[iTrigAM]);
+                Int_t trigAMBX  = ph2TpgPhiEmuAm_BX->at(selectedTP[iTrigAM]);
+                Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(selectedTP[iTrigAM]);
+                Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(selectedTP[iTrigAM]);
+
+                if (trigAMBX != 20) continue;
+
+                // Organize Wheels and stations in 20 bins
+                int wheelIdx = WheelStationToBins(trigAMSt, trigAMWh );
+
+                // std::string chambTag = chambTags.at(segSt - 1);
+                // std::string whTag    = whTags.at(segWh + 2);
+                std::string secTag   = secTags.at(trigAMSec - 1);
+                    
+                m_plots["fakeRate_TP_total"] -> Fill( wheelIdx );
+                m_plots["fakeRate_WheelStationTP_total"] -> Fill( wheelIdx );
+
+                // m_plots["fakeRateTP_WheelvsStation_"+secTag+"_total"]->Fill(wheelIdx);
+                // m_plots["fakeRate_TP_"+secTag+"_total"] -> Fill( wheelIdx );
+
+                // -----------------------------------------------------------
+                // Real fake rate (TPs from chambers without muons passing through)
+                // -----------------------------------------------------------
+                bool hitChamber = false;
+                for (size_t iChamber = 0; iChamber < SimLinkMatchedWheelAndStation.size(); ++iChamber) {
+                    int Wheel   = SimLinkMatchedWheelAndStation[iChamber][0];
+                    int Station = SimLinkMatchedWheelAndStation[iChamber][1];
+                    int Sector  = SimLinkMatchedWheelAndStation[iChamber][2];
+
+                    if ( trigAMWh == Wheel && trigAMSt == Station && trigAMSec == Sector ){
+                        hitChamber = true;
+                        break;
+                    }
+                }
+                if (hitChamber == false){
+                    m_plots["fakeRate_WheelStationTP_matched"] -> Fill( wheelIdx );
+                    // m_plots["fakeRateTP_WheelvsStation_"+secTag+"_matched"]->Fill(wheelIdx);
+                }
+                
+                // -----------------------------------------------------------
+                // Fake rate (TPs not associated with Gen Muons)
+                // -----------------------------------------------------------
+                bool found = false;
+                for (int value : vbestTPAM) {
+                    if (value == selectedTP[iTrigAM]) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (found == false){
+                    m_plots["fakeRate_TP_matched"] -> Fill( wheelIdx );
+                    // m_plots["fakeRate_TP_"+secTag+"_matched"] -> Fill( wheelIdx );
+                }
+
+
+            }
+
+            SimLinkMatchedWheelAndStation.clear();
             
         }// END Loop Event
 
