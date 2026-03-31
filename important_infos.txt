@@ -1,0 +1,13 @@
+
+
+
+In  "DTTrigPhase2Prod.cc"
+
+nanosenconds (ns) -> TDC
+
+float tp_t0 = (metaPrimitiveIt.t0 - shift_back * LHC_CLK_FREQ) * ((float)TIME_TO_TDC_COUNTS / (float)LHC_CLK_FREQ);
+
+shift_back = 400
+LHC_CLK_FREQ = 25
+TIME_TO_TDC_COUNTS = 32
+

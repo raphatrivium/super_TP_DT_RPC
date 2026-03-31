@@ -17,9 +17,11 @@ int test2() { //
     // ------------------------------------------------------------------------------
     std::string inputDir = "input/";
     std::map<std::string,std::string> m_files;
-    m_files["DTAM"]              = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_1Event.root";
-    m_files["RPC"]               = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPC_1Event.root";
+    m_files["DTAM"]              = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
+    m_files["RPC"]               = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
     
+    // m_files["DTAM"]              = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_1Event.root";
+    // m_files["RPC"]               = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPC_1Event.root";
     m_files["test"]         = "test.root"; // It is a copy of m_files["RPC"]
 
     // ------------------------------------------------------------------------------
@@ -183,7 +185,7 @@ int test2() { //
         // ------------------------------------------------------------------------------
         // Loop in the events
         // ------------------------------------------------------------------------------
-        // nEntries = 2;   // 100   nEntries
+        nEntries = 1;   // 100   nEntries
         if (testFlag){
             nEntries = 100;
             std::cout << "FOR TESTE:" <<std::endl;
@@ -194,13 +196,18 @@ int test2() { //
         for (Long64_t iEvent = 0; iEvent < nEntries; ++iEvent) { 
 
             tree->GetEntry(iEvent);
-            
+
+            std::cout << "==============================================================================" << std::endl;
+            std::cout << "iEvent " << iEvent << std::endl;
+            std::cout << "==============================================================================" << std::endl;
+        
             // -----------------------------
             // Loop in the AM TP
             // -----------------------------
-            if (fdebug) std::cout << "      Loop in the AM TP " << std::endl;
-            if (fdebug) std::cout << "      Total number of TP in this event: "<< ph2TpgPhiEmuAm_nTrigs << std::endl;  
-            for (std::size_t iTrigAM = 0; iTrigAM < ph2TpgPhiEmuAm_nTrigs; ++iTrigAM){
+            std::cout << "      Loop in the AM TP " << std::endl;
+            std::cout << "      Total number of TP in this event: "<< ph2TpgPhiEmuAm_nTrigs << std::endl;  
+            // for (std::size_t iTrigAM = 0; iTrigAM < ph2TpgPhiEmuAm_nTrigs; ++iTrigAM){
+            for (std::size_t iTrigAM = 0; iTrigAM < 30; ++iTrigAM){ // For test
 
                 Int_t trigAMWh   = ph2TpgPhiEmuAm_wheel->at(iTrigAM);
                 Int_t trigAMSec  = ph2TpgPhiEmuAm_sector->at(iTrigAM);
@@ -210,12 +217,14 @@ int test2() { //
                 Int_t trigAMt0   = ph2TpgPhiEmuAm_t0->at(iTrigAM);
                 Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(iTrigAM);
 
-                // std::cout << "      iTrigAM: " << iTrigAM << " | Wheel: "<< trigAMWh << " | Sector: " << trigAMSec << " | Station: " << trigAMSt << " | trigAMBX: " << trigAMBX << " | segTrigAMDPhi: " << segTrigAMDPhi <<  std::endl;
-                // std::cout << "          trigGlbPhi: " << trigGlbPhi << " | finalAMDPhi: " << finalAMDPhi << " | segTrigAMDPhi: " << segTrigAMDPhi <<  std::endl;
+                if ( trigAMrpc != 0 && trigAMrpc != 1) continue; // To avoid RPC only segments
 
+                std::cout << " iTrigAM: " << iTrigAM << " | Wheel: "<< trigAMWh << " | Sector: " << trigAMSec << " | Station: " << trigAMSt << " | BX: " << trigAMBX << " | t0: " << trigAMt0  <<  " | Flag: " << trigAMrpc << std::endl;
 
             }
 
         }
     }
+
+    return 0;
 }
