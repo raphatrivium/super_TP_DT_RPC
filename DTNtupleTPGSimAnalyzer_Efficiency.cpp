@@ -19,6 +19,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
     std::map<std::string,std::string> m_files;
     m_files["DTAM"]              = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
     m_files["RPC"]               = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
+    m_files["RPC_Flag0and1"]     = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
     m_files["RPC_Flag1"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
     m_files["RPC_Flag2"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
     m_files["DTAMUpdated"]       = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root";
@@ -666,13 +667,16 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
                         if ( name == "RPC_Flag1" ) {
                             if ( trigAMrpc != 1 ) continue;
                         }
+                        else if ( name == "RPC_Flag0and1" ){
+                            if ( trigAMrpc != 0 && trigAMrpc != 1 ) continue; 
+                        }
                         else if ( name == "RPC_Flag2" ){
                             if ( trigAMrpc != 2 ) continue;
                         } 
                         else if ( name == "DTRPCOnly" ){
                             if ( trigAMrpc != 2 ) continue; 
                         }
-                        
+
                         // m_plots["hPh2TpgPhiEmuAmBX"+whTag+chambTag+"_matched"]->Fill(trigAMBX);
 
                         // -----------------------------
@@ -939,6 +943,9 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
                 if ( name == "RPC_Flag1" ) {
                     if ( trigAMrpc != 1 ) continue;
                 }
+                else if ( name == "RPC_Flag0and1" ){
+                    if ( trigAMrpc != 0 && trigAMrpc != 1 ) continue; 
+                }
                 else if ( name == "RPC_Flag2" ){
                     if ( trigAMrpc != 2 ) continue;
                 } 
@@ -946,6 +953,8 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
                     if ( trigAMrpc != 2 ) continue; 
                 }
                     
+
+                if ( trigAMrpc > 2 ) continue; 
 
                 m_plots["hTrigFlag"] -> Fill( trigAMrpc );
                 coutNTrigs++;

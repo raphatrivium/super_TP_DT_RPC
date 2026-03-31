@@ -8,6 +8,7 @@ void plot_histograms() {
 
     TFile *fileDTAM           = TFile::Open((inputDir+"DTAM/"+fileName).c_str());
     TFile *fileRPC            = TFile::Open((inputDir+"RPC/"+fileName).c_str());
+    TFile *fileRPC_Flag01     = TFile::Open((inputDir+"RPC_Flag0and1/"+fileName).c_str());
     TFile *fileRPC_Flag1      = TFile::Open((inputDir+"RPC_Flag1/"+fileName).c_str());
     TFile *fileRPC_Flag2      = TFile::Open((inputDir+"RPC_Flag2/"+fileName).c_str());
     TFile *fileDTAMUpdated    = TFile::Open((inputDir+"DTAMUpdated/"+fileName).c_str());
@@ -332,6 +333,13 @@ void plot_histograms() {
                  {{kRed, 1}, {kBlue, 1}, {kGreen+2, 1}},
                  saveDir, 
                  false);
+                 
+    // plot_histo("hNTrigs",
+    //             {fileDTAM, fileRPC_Flag1, fileRPCOnly},
+    //             {"DT AM", "DT AM + RPC", "RPC Only"},
+    //             {{kRed, 1}, {kBlue, 1}, {kGreen+2, 1}},
+    //             saveDir, 
+    //             false);             
 
     plot_histo("hTrigFlag",
                  {fileDTAM, fileRPC, fileRPCOnly},
@@ -341,11 +349,25 @@ void plot_histograms() {
                  false);
     
     // plot_histo("hTrigFlag",
+    //              {fileDTAM, fileRPC_Flag1, fileRPCOnly},
+    //              {"DT AM", "DT AM + RPC", "RPC Only"},
+    //              {{kRed, 1}, {kBlue, 1}, {kGreen+2, 1}},
+    //              saveDir, 
+    //              false);
+    
+    // plot_histo("hTrigFlag",
     // {fileDTAM, fileRPC},
     // {"DT AM", "DT AM + RPC"},
     // {{kRed, 1}, {kBlue, 1}},
     // saveDir, 
     // false);
+
+    plot_histo("hT0Flag2",
+                 {fileRPCOnly},
+                 {"RPC Only"},
+                 {{kGreen+2, 1}},
+                 saveDir, 
+                 false, true);
 
     // plot_histoV2("hTrigFlag", fileRPCOnly, "RPConly", kGreen ,fileRPC, "DT AM + RPC", kBlue, saveDir);
     // plot_histo("hTPMatchedRPCflag", fileRPCOnly, "RPConly", kGreen ,fileRPC, "DT AM + RPC", kBlue, saveDir);
@@ -360,13 +382,30 @@ void plot_histograms() {
         gSystem->mkdir(saveDir.c_str(), true); // true = recursive
     }
 
+    // for (const auto & wheel : wheelTag) {
+    //     std::string wh = wheel;  
+    //     wh = wh.erase(1, 2); // Removes "h.": "Wh.-2"→ "W-2"
+    //     for (const auto & chamb : chambTag) {
+    //         std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
+    //         plot_t0_histo( hName,
+    //                         {fileDTAM, fileRPC, fileRPCOnly},
+    //                         {"DT AM", "DT AM + RPC", "RPC Only"},
+    //                         {{kRed, 1}, {kBlue, 1}, {kGreen+2, 1}},
+    //                         (wh+" "+chamb), 
+    //                         saveDir, 
+    //                         true);
+    //         // TODO
+    //         //plot_BX_histo( hName, fileDTAM, "DT AM", kRed, fileRPC, "DT AM + RPC", kBlue, (wh+" "+chamb), saveDir, true);
+    //     }
+    // }
+
     for (const auto & wheel : wheelTag) {
         std::string wh = wheel;  
         wh = wh.erase(1, 2); // Removes "h.": "Wh.-2"→ "W-2"
         for (const auto & chamb : chambTag) {
             std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
             plot_t0_histo( hName,
-                            {fileDTAM, fileRPC, fileRPCOnly},
+                            {fileDTAM, fileRPC_Flag1, fileRPCOnly},
                             {"DT AM", "DT AM + RPC", "RPC Only"},
                             {{kRed, 1}, {kBlue, 1}, {kGreen+2, 1}},
                             (wh+" "+chamb), 

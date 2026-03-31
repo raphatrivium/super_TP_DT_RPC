@@ -59,6 +59,8 @@ int RPC_eff() {
         std::cout << "["+name+"]: "+inputDir+file_name+"\n" <<std::endl;
         // std::cout << "-------------------------------------------" <<std::endl;
 
+        ofstream BXfile("BX_time_distribution.txt");
+
         // BarrelGeo barGeo("barrel_geometry.txt");
         BarrelGeo barGeo;
         if ( name == "RPCOnly" || name == "RPCOnlyUpdated" ) barGeo = BarrelGeo("barrel_geometry.txt");
@@ -315,9 +317,13 @@ int RPC_eff() {
                 // Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(iTrigAM);
                 Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(iTrigAM);
 
+                if ( name == "RPCOnly") BXfile << trigAMBX << ph2TpgPhiEmuAm_t0->at(iTrigAM);
+
                 if ( name == "RPCOnly" || name == "RPCOnlyUpdated" ) {
                     if ( trigAMrpc != 2 ) continue;
                 }
+
+                if ( trigAMrpc > 2 ) continue;
 
                 // if ( name == "RPCOnly" || name == "RPCOnlyUpdated" ) {
                 //     if ( trigAMrpc == 0 ) continue;
@@ -617,6 +623,9 @@ int RPC_eff() {
             }
 
         }// END Loop Event
+
+        // Close the file
+        BXfile.close();
 
         // for (const auto & secTag : secTags)
         // {
