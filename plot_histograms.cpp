@@ -6,8 +6,11 @@ void plot_histograms() {
     std::string inputDir = "output/";
     std::string fileName = "DTNtupleTPGSimAnalyzer_Efficiency.root";
 
+    TFile *fileDTAMv23        = TFile::Open((inputDir+"DTAMv2.3/"+fileName).c_str());
+    TFile *fileRPCv23         = TFile::Open((inputDir+"RPCv2.3/"+fileName).c_str());
     TFile *fileDTAM           = TFile::Open((inputDir+"DTAM/"+fileName).c_str());
     TFile *fileRPC            = TFile::Open((inputDir+"RPC/"+fileName).c_str());
+    TFile *fileRPCcorrected   = TFile::Open((inputDir+"RPCcorrected/"+fileName).c_str());
     TFile *fileRPC_Flag01     = TFile::Open((inputDir+"RPC_Flag0and1/"+fileName).c_str());
     TFile *fileRPC_Flag1      = TFile::Open((inputDir+"RPC_Flag1/"+fileName).c_str());
     TFile *fileRPC_Flag2      = TFile::Open((inputDir+"RPC_Flag2/"+fileName).c_str());
@@ -16,6 +19,7 @@ void plot_histograms() {
     TFile *fileDTRPCOnly      = TFile::Open((inputDir+"DTRPCOnly/"+fileName).c_str());
     TFile *fileRPCOnly        = TFile::Open((inputDir+"RPCOnly/"+fileName).c_str());
     TFile *fileRPCOnlyUpdated = TFile::Open((inputDir+"RPCOnlyUpdated/"+fileName).c_str());
+
 
     std::string saveDir = "--";
     
@@ -295,11 +299,26 @@ void plot_histograms() {
     //                       {{kRed, 20}, {kBlue, 21}, {kGreen+2, 22}, {kBlack, 23}, {kMagenta, 33}},
     //                       saveDir ) ;
 
+    // plotEffWheelStationMB1MB2("Eff_TPwheels",
+    //                             {fileDTAM, fileRPC, fileRPCOnly},
+    //                             {"DT AM", "DT AM + RPC", "RPC Only"},
+    //                             {{kRed, 20}, {kBlue, 21}, {kGreen+2, 22}},
+    //                             saveDir ) ;
+
     plotEffWheelStationMB1MB2("Eff_TPwheels",
-                                {fileDTAM, fileRPC, fileRPCOnly},
-                                {"DT AM", "DT AM + RPC", "RPC Only"},
-                                {{kRed, 20}, {kBlue, 21}, {kGreen+2, 22}},
+                                {fileDTAM, fileRPC, fileRPCcorrected},
+                                {"DT AM", "DT AM + RPC", "DT+RPC Corrected"},
+                                {{kRed, 20}, {kBlue, 21}, {kYellow+2, 33}},
                                 saveDir ) ;
+
+    // plotEffWheelStation("Eff_TPwheels",
+    //                             {fileDTAM, fileRPC, fileDTAMv23, fileRPCv23},
+    //                             {"DT AM", "DT AM + RPC", "DT AMv2.3", "DT AMv2.3 + RPC"},
+    //                             {{kRed, 1}, {kBlue, 1}, {kRed, 22}, {kBlue, 33}},
+    //                             saveDir ) ;
+
+
+                                
     
     // plotEffWheelStationMB1MB2("Eff_TPwheels",
     //                             {fileRPCOnly},
@@ -333,6 +352,14 @@ void plot_histograms() {
                  {{kRed, 1}, {kBlue, 1}, {kGreen+2, 1}},
                  saveDir, 
                  false);
+
+    plot_histo("hNTrigs",
+                 {fileDTAM, fileRPC, fileDTAMv23, fileRPCv23},
+                 {"DT AM", "DT AM + RPC", "DT AMv2.3", "DT AMv2.3 + RPC"},
+                 {{kRed, 1}, {kBlue, 1}, {kRed, 2}, {kBlue, 2}},
+                 saveDir, 
+                 false);
+
                  
     // plot_histo("hNTrigs",
     //             {fileDTAM, fileRPC_Flag1, fileRPCOnly},
@@ -399,15 +426,32 @@ void plot_histograms() {
     //     }
     // }
 
+    // for (const auto & wheel : wheelTag) {
+    //     std::string wh = wheel;  
+    //     wh = wh.erase(1, 2); // Removes "h.": "Wh.-2"→ "W-2"
+    //     for (const auto & chamb : chambTag) {
+    //         std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
+    //         plot_t0_histo( hName,
+    //                         {fileDTAM, fileRPC_Flag1, fileRPCOnly},
+    //                         {"DT AM", "DT AM + RPC", "RPC Only"},
+    //                         {{kRed, 1}, {kBlue, 1}, {kGreen+2, 1}},
+    //                         (wh+" "+chamb), 
+    //                         saveDir, 
+    //                         true);
+    //         // TODO
+    //         //plot_BX_histo( hName, fileDTAM, "DT AM", kRed, fileRPC, "DT AM + RPC", kBlue, (wh+" "+chamb), saveDir, true);
+    //     }
+    // }
+
     for (const auto & wheel : wheelTag) {
         std::string wh = wheel;  
         wh = wh.erase(1, 2); // Removes "h.": "Wh.-2"→ "W-2"
         for (const auto & chamb : chambTag) {
             std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
             plot_t0_histo( hName,
-                            {fileDTAM, fileRPC_Flag1, fileRPCOnly},
-                            {"DT AM", "DT AM + RPC", "RPC Only"},
-                            {{kRed, 1}, {kBlue, 1}, {kGreen+2, 1}},
+                            {fileDTAM, fileRPC, fileRPCcorrected},
+                            {"DT AM", "DT AM + RPC", "DT+RPC Corrected"},
+                            {{kRed, 1}, {kBlue, 1}, {kYellow+2, 1}},
                             (wh+" "+chamb), 
                             saveDir, 
                             true);
@@ -415,6 +459,25 @@ void plot_histograms() {
             //plot_BX_histo( hName, fileDTAM, "DT AM", kRed, fileRPC, "DT AM + RPC", kBlue, (wh+" "+chamb), saveDir, true);
         }
     }
+
+    // for (const auto & wheel : wheelTag) {
+    //     std::string wh = wheel;  
+    //     wh = wh.erase(1, 2); // Removes "h.": "Wh.-2"→ "W-2"
+    //     for (const auto & chamb : chambTag) {
+    //         std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
+    //         plot_t0_histo( hName,
+    //                         {fileDTAM, fileRPC, fileDTAMv23, fileRPCv23},
+    //                         {"DT AM", "DT AM + RPC", "DT AMv2.3", "DT AMv2.3 + RPC"},
+    //                         {{kRed, 1}, {kBlue, 1}, {kRed, 2}, {kBlue, 2}},
+    //                         (wh+" "+chamb), 
+    //                         saveDir, 
+    //                         true);
+    //         // TODO
+    //         //plot_BX_histo( hName, fileDTAM, "DT AM", kRed, fileRPC, "DT AM + RPC", kBlue, (wh+" "+chamb), saveDir, true);
+    //     }
+    // }
+
+    
 
 
     std::cout << "--------------------------------" << std::endl;
