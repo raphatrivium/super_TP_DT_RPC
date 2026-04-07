@@ -90,6 +90,8 @@ int test() {
         m_plots["hNTrigs"] = new TH1D("hNTrigs", "Number of Triggers ; Number of Triggers; Entries / Event", 50, 0, 300);
         m_plots["hTrigFlag"] = new TH1D("hTrigFlag", "Trigger Primitive RPC Flag; RPC Flag; Entries", 5, 0, 5);
 
+        // m_plots["hT0Flag0"] = new TH1D("hT0Flag0", "Number of Triggers ; Number of Triggers; Entries / Event", 100, 440, 560);
+        // m_plots["hT0Flag01"] = new TH1D("hT0Flag01", "Number of Triggers ; Number of Triggers; Entries / Event", 100, 440, 560);
         m_plots["hT0Flag2"] = new TH1D("hT0Flag2", "Number of Triggers ; Number of Triggers; Entries / Event", 100, 440, 560);
 
         m_plots["hGenTPdeltaPhi"] = new TH1D("hGenTPdeltaPhi", "Delta Phi between Gen and TP ; Delta Phi; Entries", 600, 0, 0.5);

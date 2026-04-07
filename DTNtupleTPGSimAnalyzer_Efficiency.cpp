@@ -28,10 +28,10 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
     // m_files["DTAMUpdated"]       = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root";
     // m_files["RPCUpdated"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root";
     // m_files["DTRPCOnly"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
+    m_files["test"]         = "test.root"; // It is a copy of m_files["RPC"]
+    
     // m_files["RPCOnly"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
     // m_files["RPCOnlyUpdated"] = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCPhase2_RPCOnlyFlag.root";
-    m_files["test"]         = "test.root"; // It is a copy of m_files["RPC"]
-
     // ------------------------------------------------------------------------------
     // Check if the files are present.
     // ------------------------------------------------------------------------------
@@ -82,6 +82,10 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
 
         m_plots["hNSeg"] = new TH1D("hNSeg", "Number of Segments ; Number of Segments; Entries / Event", 50, 0, 300);
         m_plots["hNTrigs"] = new TH1D("hNTrigs", "Number of Triggers ; Number of Triggers; Entries / Event", 50, 0, 300);
+
+        m_plots["hT0Flag0"] = new TH1D("hT0Flag0", "Number of Triggers ; Number of Triggers; Entries / Event", 100, 560, 690);
+        m_plots["hT0Flag1"] = new TH1D("hT0Flag1", "Number of Triggers ; Number of Triggers; Entries / Event", 100, 560, 690);
+        // m_plots["hT0Flag2"] = new TH1D("hT0Flag2", "Number of Triggers ; Number of Triggers; Entries / Event", 100, 440, 560);
 
         m_plots["hRatioNtpNseg_total"] = new TH1D("hRatioNtpNseg_total", "Number of Triggers / Number of Segments ; N tp / N seg; Entries", 20, 0, 10);
 
@@ -955,9 +959,11 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
                 else if ( name == "DTRPCOnly" ){
                     if ( trigAMrpc != 2 ) continue; 
                 }
-                    
+                
+                if ( trigAMrpc == 0 ) m_plots["hT0Flag0"] -> Fill( ph2TpgPhiEmuAm_t0->at(itrig) );
+                if ( trigAMrpc == 1 ) m_plots["hT0Flag1"] -> Fill( ph2TpgPhiEmuAm_t0->at(itrig) );
 
-                if ( trigAMrpc > 2 ) continue; 
+                // if ( trigAMrpc > 2 ) continue; // For SHOW DT people
 
                 m_plots["hTrigFlag"] -> Fill( trigAMrpc );
                 coutNTrigs++;

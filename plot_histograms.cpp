@@ -389,12 +389,41 @@ void plot_histograms() {
     // saveDir, 
     // false);
 
+    // plot_histo("hT0Flag0",
+    //              {fileRPC},
+    //              {"DT AM"},
+    //              {{kRed, 1}},
+    //              saveDir, 
+    //              false, true);
+    
+    plot_histo("hT0Flag0",
+                 {fileDTAMv23},
+                 {"DT AM"},
+                 {{kRed, 1}},
+                 saveDir, 
+                 false, true);
+
+    // plot_histo("hT0Flag1",
+    //              {fileRPC},
+    //              {"DT AM + RPC"},
+    //              {{kBlue, 1}},
+    //              saveDir, 
+    //              false, true);
+
+    plot_histo("hT0Flag1",
+                 {fileRPCv23},
+                 {"DT AM + RPC"},
+                 {{kBlue, 1}},
+                 saveDir, 
+                 false, true);
+    
     plot_histo("hT0Flag2",
                  {fileRPCOnly},
                  {"RPC Only"},
                  {{kGreen+2, 1}},
                  saveDir, 
                  false, true);
+
 
     // plot_histoV2("hTrigFlag", fileRPCOnly, "RPConly", kGreen ,fileRPC, "DT AM + RPC", kBlue, saveDir);
     // plot_histo("hTPMatchedRPCflag", fileRPCOnly, "RPConly", kGreen ,fileRPC, "DT AM + RPC", kBlue, saveDir);
