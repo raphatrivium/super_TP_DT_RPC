@@ -8,7 +8,7 @@
 int DTNtupleTPGSimAnalyzer_Efficiency() { // 
 
     bool testFlag = false;   // false - true
-    bool fdebug = false;
+    bool fdebug = true;
 
     bool plotHistograms = true; // false - true
 
@@ -17,8 +17,8 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
     // ------------------------------------------------------------------------------
     std::string inputDir = "input/";
     std::map<std::string,std::string> m_files;
-    m_files["DTAMv2.3"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_DTAM.root";
-    m_files["RPCv2.3"]           = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_RPC.root";
+    // m_files["DTAMv2.3"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_DTAM.root";
+    // m_files["RPCv2.3"]           = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_RPC.root";
     // m_files["DTAM"]              = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
     // m_files["RPC"]               = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
     // m_files["RPCcorrected"]      = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCcorrected.root";
@@ -27,7 +27,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
     // m_files["RPC_Flag2"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
     // m_files["DTAMUpdated"]       = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root";
     // m_files["RPCUpdated"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root";
-    // m_files["DTRPCOnly"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
+    m_files["DTRPCOnly"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
     m_files["test"]         = "test.root"; // It is a copy of m_files["RPC"]
     
     // m_files["RPCOnly"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
@@ -354,7 +354,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
         double m_minZSegHits = 4;
         
         double m_maxSegTrigDPhi = 0.1;
-        double m_maxMuTrigDPhi  = 0.2;
+        // double m_maxMuTrigDPhi  = 0.2;
         
         double m_maxSegT0 = 15;
 
@@ -373,7 +373,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
         // ------------------------------------------------------------------------------
         // Loop in the events
         // ------------------------------------------------------------------------------
-        // nEntries = 2;   // 100   nEntries
+        nEntries = 1;   // 100   nEntries
         if (testFlag){
             nEntries = 100;
             std::cout << "FOR TESTE:" <<std::endl;
@@ -398,6 +398,10 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
             // }
 
             std::vector<std::vector<int>> SegMatchedWheelAndStation;
+            std::vector<std::vector<int>> TrigMatchedWheelAndStation;
+            std::vector<double> TrigMatchedDeltaPhi;
+
+            
 
             double RatioNtpNseg;
             RatioNtpNseg = double(ph2TpgPhiEmuAm_nTrigs) / double(ph2Seg_nSegments) ;
@@ -606,10 +610,12 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
                     if (segSec == 13) segSec = 4;
                     if (segSec == 14) segSec = 10;
                     
-                    std::vector<int> tempVec; // tempVec = [Seg Wheel][Seg Station][Seg Sector] 
+                    std::vector<int> tempVec; // tempVec = [Seg Wheel][Seg Station][Seg Sector][segIdx][genIdx] 
                     tempVec.push_back(segWh);
                     tempVec.push_back(segSt);
                     tempVec.push_back(segSec);
+                    tempVec.push_back(iSeg);
+                    tempVec.push_back(iGenPart);
                     SegMatchedWheelAndStation.push_back(tempVec); 
                     
                     std::string chambTag = chambTags.at(segSt - 1);
@@ -694,8 +700,8 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
                             Double_t trigGlbPhi    = trigPhiInRad(ph2TpgPhiEmuAm_phi->at(iTrigAM),trigAMSec);
                             Double_t finalAMDPhi   = ph2Seg_posGlb_phi->at(iSeg) - trigGlbPhi;
                             Double_t segTrigAMDPhi = abs(acos(cos(finalAMDPhi)));
-                            if (fdebug) std::cout << "      iTrigAM: " << iTrigAM << " | Wheel: "<< trigAMWh << " | Sector: " << trigAMSec << " | Station: " << trigAMSt << " | trigAMBX: " << trigAMBX << " | segTrigAMDPhi: " << segTrigAMDPhi <<  std::endl;
-                            if (fdebug) std::cout << "          trigGlbPhi: " << trigGlbPhi << " | finalAMDPhi: " << finalAMDPhi << " | segTrigAMDPhi: " << segTrigAMDPhi <<  std::endl;
+                            if (fdebug) std::cout << "      iTrigAM: " << iTrigAM << " | Wh: "<< trigAMWh << " | Sec: " << trigAMSec << " | St: " << trigAMSt << " | BX: " << trigAMBX << " | segTrigDPhi: " << segTrigAMDPhi <<  std::endl;
+                            // if (fdebug) std::cout << "          trigGlbPhi: " << trigGlbPhi << " | finalAMDPhi: " << finalAMDPhi << " | segTrigAMDPhi: " << segTrigAMDPhi <<  std::endl;
 
                             m_plots["hPrimPsiAM"] -> Fill( ph2TpgPhiEmuAm_dirLoc_phi->at(iTrigAM) );
                             m_plots["hDeltaPhiAM"] -> Fill( segTrigAMDPhi );
@@ -716,7 +722,17 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
                             if (qualityConfirmed && (trigAMqual < LOWLOWQ && trigAMqual != CLOWQ && trigAMqual != CHIGHQ)) continue;
                             if (qualityLegacy && (trigAMqual < HIGHQ)) continue;
 
-                            // std::cout << "   Denominator -------- \n " << std::endl; 
+                            // std::cout << "   Denominator -------- \n " << std::endl;
+
+                            std::vector<int> tempVec2; // tempVec = [Seg Wheel][Seg Station][Seg Sector][segIdx][trigIdx] 
+                            tempVec2.push_back(trigAMWh);
+                            tempVec2.push_back(trigAMSt);
+                            tempVec2.push_back(trigAMSec);
+                            tempVec2.push_back(iSeg);
+                            tempVec2.push_back(iTrigAM);
+                            tempVec2.push_back(trigAMBX);
+                            TrigMatchedWheelAndStation.push_back(tempVec2); 
+                            TrigMatchedDeltaPhi.push_back(segTrigAMDPhi);
 
                             if ((segTrigAMDPhi < m_maxSegTrigDPhi) && (trigAMBX == 20) && (bestSegTrigAMDPhi > segTrigAMDPhi) && (ph2TpgPhiEmuAm_quality->at(iTrigAM) >= minQuality))
                             {
@@ -918,10 +934,19 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
             } // END Loop Gen
 
 
-            if (fdebug) {
+            if (fdebug) { // [Seg Wheel][Seg Station][Seg Sector][segIdx][genIdx] 
                 for (size_t i = 0; i < SegMatchedWheelAndStation.size(); ++i) {
-                    std::cout << "Segment " << i << ": ";
-                    std::cout << SegMatchedWheelAndStation[i][0] << " " << SegMatchedWheelAndStation[i][1]<< " " << SegMatchedWheelAndStation[i][2] << std::endl;
+                    std::cout << "Segment: " << i << " | genIdx: " << SegMatchedWheelAndStation[i][4] << " | segIdx: " << SegMatchedWheelAndStation[i][3]
+                              << " | Wh: "<< SegMatchedWheelAndStation[i][0] << " | Sec: " << SegMatchedWheelAndStation[i][2] << " | St: " << SegMatchedWheelAndStation[i][1] << std::endl;
+                }   
+            }
+            if (fdebug)  std::cout << " " << std::endl;
+            if (fdebug) { // [Seg Wheel][Seg Station][Seg Sector][segIdx][trigIdx][BX] 
+                for (size_t i = 0; i < TrigMatchedWheelAndStation.size(); ++i) {
+                    std::cout << "Trig: " << i << " | segIdx: " << TrigMatchedWheelAndStation[i][3] << " | trigIdx: " << TrigMatchedWheelAndStation[i][4] 
+                              << " | Wh: "<< TrigMatchedWheelAndStation[i][0] << " | Sec: " << TrigMatchedWheelAndStation[i][2] << " | St: " << TrigMatchedWheelAndStation[i][1] 
+                              << " | BX: " << TrigMatchedWheelAndStation[i][5] << " | segTrigAMDPhi: " << TrigMatchedDeltaPhi[i]
+                              << std::endl;
                 }   
             }
             
@@ -1031,6 +1056,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
             // std::cout << "**********************" <<  std::endl;
             
             SegMatchedWheelAndStation.clear();
+            TrigMatchedWheelAndStation.clear(); 
 
         } // END Loop Event
 
