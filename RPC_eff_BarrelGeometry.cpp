@@ -5,7 +5,7 @@
 
 #include "DTNtupleTPGSimAnalyzer.h"
 
-int RPC_eff() {
+int RPC_eff_BarrelGeometry() {
 
     bool testFlag = false;   // false - true
     bool fdebug = true;
@@ -17,13 +17,7 @@ int RPC_eff() {
     // ------------------------------------------------------------------------------
     std::string inputDir = "input/";
     std::map<std::string,std::string> m_files;
-    // m_files["DTAM"]              = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
-    // m_files["RPC"]               = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
-    // m_files["RPC_Flag1"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
-    // m_files["RPC_Flag2"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
-    // m_files["DTAMUpdated"]       = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root";
-    // m_files["RPCUpdated"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root";
-    // m_files["DTRPCOnly"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
+    
     m_files["RPCOnly"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
     m_files["RPCOnlyUpdated"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCPhase2_RPCOnlyFlag.root";
     m_files["test"]            = "test.root"; // It is a copy of m_files["RPC"]

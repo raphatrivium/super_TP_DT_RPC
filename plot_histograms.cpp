@@ -6,8 +6,6 @@ void plot_histograms() {
     std::string inputDir = "output/";
     std::string fileName = "DTNtupleTPGSimAnalyzer_Efficiency.root";
 
-    TFile *fileDTAMv23        = TFile::Open((inputDir+"DTAMv2.3/"+fileName).c_str());
-    TFile *fileRPCv23         = TFile::Open((inputDir+"RPCv2.3/"+fileName).c_str());
     TFile *fileDTAM           = TFile::Open((inputDir+"DTAM/"+fileName).c_str());
     TFile *fileRPC            = TFile::Open((inputDir+"RPC/"+fileName).c_str());
     TFile *fileRPCcorrected   = TFile::Open((inputDir+"RPCcorrected/"+fileName).c_str());
@@ -19,6 +17,9 @@ void plot_histograms() {
     TFile *fileDTRPCOnly      = TFile::Open((inputDir+"DTRPCOnly/"+fileName).c_str());
     TFile *fileRPCOnly        = TFile::Open((inputDir+"RPCOnly/"+fileName).c_str());
     TFile *fileRPCOnlyUpdated = TFile::Open((inputDir+"RPCOnlyUpdated/"+fileName).c_str());
+    
+    TFile *fileDTAMv23        = TFile::Open((inputDir+"DTAMv2.3/"+fileName).c_str());
+    TFile *fileRPCv23         = TFile::Open((inputDir+"RPCv2.3/"+fileName).c_str());
 
 
     std::string saveDir = "--";
