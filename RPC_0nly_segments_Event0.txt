@@ -1,0 +1,43 @@
+Segment: 0 | genIdx: 0 | segIdx: 38 | Wh: 1 | Sec: 10 | St: 2
+    Trig: 1 | segIdx: 29 | trigIdx: 152 | Wh: -1 | Sec: 4 | St: 2 | BX: 20 | flag: 2 | t0: 500 | segTrigAMDPhi: 0.116268
+
+Segment: 2 | genIdx: 1 | segIdx: 29 | Wh: -1 | Sec: 4 | St: 2
+    Trig: 2 | segIdx: 40 | trigIdx: 155 | Wh: 1 | Sec: 11 | St: 2 | BX: 20 | flag: 2 | t0: 497 | segTrigAMDPhi: 0.00435033
+
+Segment: 7 | genIdx: 3 | segIdx: 40 | Wh: 1 | Sec: 11 | St: 2
+    Trig: 3 | segIdx: 1 | trigIdx: 149 | Wh: 0 | Sec: 1 | St: 1 | BX: 20 | flag: 2 | t0: 499 | segTrigAMDPhi: 0.25749
+
+Segment: 10 | genIdx: 4 | segIdx: 1 | Wh: 0 | Sec: 1 | St: 1
+    Trig: 3 | segIdx: 1 | trigIdx: 149 | Wh: 0 | Sec: 1 | St: 1 | BX: 20 | flag: 2 | segTrigAMDPhi: 0.25749
+
+Segment: 13 | genIdx: 5 | segIdx: 19 | Wh: 0 | Sec: 8 | St: 1
+
+Segment: 16 | genIdx: 6 | segIdx: 30 | Wh: 0 | Sec: 4 | St: 2
+    Trig: 4 | segIdx: 30 | trigIdx: 156 | Wh: 0 | Sec: 4 | St: 2 | BX: 20 | flag: 2 | t0: 498 | segTrigAMDPhi: 0.0550923
+
+Segment: 19 | genIdx: 7 | segIdx: 21 | Wh: 0 | Sec: 10 | St: 1
+    Trig: 5 | segIdx: 21 | trigIdx: 146 | Wh: 0 | Sec: 10 | St: 1 | BX: 20 | flag: 2 | t0: 499 | segTrigAMDPhi: 0.150806
+
+Segment: 20 | genIdx: 7 | segIdx: 37 | Wh: 0 | Sec: 10 | St: 2
+    Trig: 6 | segIdx: 37 | trigIdx: 157 | Wh: 0 | Sec: 10 | St: 2 | BX: 20 | flag: 2 | t0: 500 | segTrigAMDPhi: 0.154772
+ 
+
+
+=============  RPCIntegrator: makeRPCOnlySegments ============= 
+ | Wh: 1 | St: 1 | Sec: 1 | phiB: -0.960558 | global_phi: 0.0272557 | BX: 22 | t0: 552.254
+ | Wh: 0 | St: 1 | Sec: 4 | phiB: -0.0718905 | global_phi: 1.63394 | BX: 20 | t0: 498.569
+ | Wh: -1 | St: 1 | Sec: 5 | phiB: 0.0436196 | global_phi: 2.06357 | BX: 20 | t0: 501.676
+ | Wh: 2 | St: 1 | Sec: 5 | phiB: -0.501809 | global_phi: 2.40456 | BX: 16 | t0: 403.333
+ | Wh: -1 | St: 1 | Sec: 6 | phiB: 0.26914 | global_phi: 2.82749 | BX: 19 | t0: 480.48
+ | Wh: 0 | St: 1 | Sec: 10 | phiB: 0.0141467 | global_phi: -1.41749 | BX: 20 | t0: 499.03
+ | Wh: 1 | St: 1 | Sec: 11 | phiB: 0.00571348 | global_phi: -1.05037 | BX: 20 | t0: 502.41
+ | Wh: 1 | St: 1 | Sec: 11 | phiB: 0.424477 | global_phi: -1.08631 | BX: 20 | t0: 501.672
+ | Wh: 0 | St: 1 | Sec: 1 | phiB: -0.0327518 | global_phi: 0.26438 | BX: 20 | t0: 499.283
+ | Wh: -2 | St: 1 | Sec: 4 | phiB: 0.0901124 | global_phi: 1.6587 | BX: 22 | t0: 558.419
+ | Wh: 1 | St: 1 | Sec: 7 | phiB: 0.493856 | global_phi: -2.90578 | BX: 16 | t0: 405.619
+ | Wh: -1 | St: 2 | Sec: 4 | phiB: 0.0150334 | global_phi: 1.45424 | BX: 20 | t0: 500.84
+ | Wh: -1 | St: 2 | Sec: 5 | phiB: -0.0247123 | global_phi: 2.06361 | BX: 20 | t0: 500.324
+ | Wh: 1 | St: 2 | Sec: 10 | phiB: -0.0249373 | global_phi: -1.77411 | BX: 20 | t0: 502.698
+ | Wh: 1 | St: 2 | Sec: 11 | phiB: 0.0161986 | global_phi: -1.05294 | BX: 20 | t0: 497.637
+ | Wh: 0 | St: 2 | Sec: 4 | phiB: -0.0641836 | global_phi: 1.629 | BX: 20 | t0: 498.119
+ | Wh: 0 | St: 2 | Sec: 10 | phiB: 0.0180084 | global_phi: -1.41634 | BX: 20 | t0: 500.646

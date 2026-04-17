@@ -214,7 +214,7 @@ int test2() { //
                 Int_t trigAMSt   = ph2TpgPhiEmuAm_station->at(iTrigAM);
                 Int_t trigAMBX   = ph2TpgPhiEmuAm_BX->at(iTrigAM);
                 Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(iTrigAM);
-                Int_t trigAMt0   = ph2TpgPhiEmuAm_t0->at(iTrigAM);
+                Double_t trigAMt0   = ph2TpgPhiEmuAm_t0->at(iTrigAM);
                 Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(iTrigAM);
 
                 if ( trigAMrpc != 0 && trigAMrpc != 1) continue; // To avoid RPC only segments

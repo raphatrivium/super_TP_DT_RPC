@@ -724,13 +724,15 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
 
                             // std::cout << "   Denominator -------- \n " << std::endl;
 
-                            std::vector<int> tempVec2; // tempVec = [Seg Wheel][Seg Station][Seg Sector][segIdx][trigIdx] 
+                            std::vector<int> tempVec2; // tempVec = [Wheel][Station][Sector][segIdx][trigIdx][BX][flag][t0] 
                             tempVec2.push_back(trigAMWh);
                             tempVec2.push_back(trigAMSt);
                             tempVec2.push_back(trigAMSec);
                             tempVec2.push_back(iSeg);
                             tempVec2.push_back(iTrigAM);
                             tempVec2.push_back(trigAMBX);
+                            tempVec2.push_back(trigAMrpc);
+                            tempVec2.push_back(ph2TpgPhiEmuAm_t0->at(iTrigAM));
                             TrigMatchedWheelAndStation.push_back(tempVec2); 
                             TrigMatchedDeltaPhi.push_back(segTrigAMDPhi);
 
@@ -941,11 +943,13 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
                 }   
             }
             if (fdebug)  std::cout << " " << std::endl;
-            if (fdebug) { // [Seg Wheel][Seg Station][Seg Sector][segIdx][trigIdx][BX] 
+            if (fdebug) { // [Seg Wheel][Seg Station][Seg Sector][segIdx][trigIdx][BX][flag] 
                 for (size_t i = 0; i < TrigMatchedWheelAndStation.size(); ++i) {
                     std::cout << "Trig: " << i << " | segIdx: " << TrigMatchedWheelAndStation[i][3] << " | trigIdx: " << TrigMatchedWheelAndStation[i][4] 
-                              << " | Wh: "<< TrigMatchedWheelAndStation[i][0] << " | Sec: " << TrigMatchedWheelAndStation[i][2] << " | St: " << TrigMatchedWheelAndStation[i][1] 
-                              << " | BX: " << TrigMatchedWheelAndStation[i][5] << " | segTrigAMDPhi: " << TrigMatchedDeltaPhi[i]
+                              << " | Wh: "<< TrigMatchedWheelAndStation[i][0] << " | Sec: " << TrigMatchedWheelAndStation[i][2] 
+                              << " | St: " << TrigMatchedWheelAndStation[i][1] << " | BX: " << TrigMatchedWheelAndStation[i][5]  
+                              << " | flag: " << TrigMatchedWheelAndStation[i][6] << " | t0: " << ph2TpgPhiEmuAm_t0->at(TrigMatchedWheelAndStation[i][4])
+                              << " | segTrigAMDPhi: " << TrigMatchedDeltaPhi[i] 
                               << std::endl;
                 }   
             }
