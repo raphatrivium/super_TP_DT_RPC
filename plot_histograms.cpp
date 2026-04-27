@@ -18,9 +18,13 @@ void plot_histograms() {
     TFile *fileRPCOnly        = TFile::Open((inputDir+"RPCOnly/"+fileName).c_str());
     TFile *fileRPCOnlyUpdated = TFile::Open((inputDir+"RPCOnlyUpdated/"+fileName).c_str());
     
-    TFile *fileDTAMv23        = TFile::Open((inputDir+"DTAMv2.3/"+fileName).c_str());
-    TFile *fileRPCv23         = TFile::Open((inputDir+"RPCv2.3/"+fileName).c_str());
+    TFile *fileDTAMv23         = TFile::Open((inputDir+"DTAMv2.3/"+fileName).c_str());
+    TFile *fileRPCv23          = TFile::Open((inputDir+"RPCv2.3/"+fileName).c_str());
+    TFile *fileRPCcorrectedv23 = TFile::Open((inputDir+"RPCcorrected2.3/"+fileName).c_str());
+    TFile *fileRPCOnlyv23      = TFile::Open((inputDir+"RPCOnlyv2.3/"+fileName).c_str());
+    TFile *fileRPCOnlyUpdatedv23      = TFile::Open((inputDir+"RPCOnlyUpdatedv2.3/"+fileName).c_str());
 
+    
 
     std::string saveDir = "--";
     
@@ -98,6 +102,218 @@ void plot_histograms() {
     // }
 
     
+    // --------------------------------
+    // Comparison between AM 2.0 (CMSSW 14) and AM 2.3 (CMSSW 15)
+    // --------------------------------
+    saveDir = "plots/Comparison_AM2.0_AM2.3/efficiency/";
+    // Create the directory if it doesn't exist
+    if (gSystem->AccessPathName(saveDir.c_str())) { 
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
+    plotEffWheelStation("Eff_TPwheels",
+                        {fileDTAM, fileRPC, fileDTAMv23, fileRPCv23},
+                        {"DT AM", "DT AM + RPC", "DT AMv2.3", "DT AMv2.3 + RPC"},
+                        {{kRed, 1}, {kBlue, 1}, {kRed, 22}, {kBlue, 33}},
+                        saveDir ) ;
+
+    // --------------------------------
+    saveDir = "plots/Comparison_AM2.0_AM2.3/variables/";
+    if (gSystem->AccessPathName(saveDir.c_str())) { 
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
+    plot_histo("hNTrigs",
+                {fileDTAM, fileRPC, fileDTAMv23, fileRPCv23},
+                {"DT AM", "DT AM + RPC", "DT AMv2.3", "DT AMv2.3 + RPC"},
+                {{kRed, 1}, {kBlue, 1}, {kRed, 2}, {kBlue, 2}},
+                saveDir, 
+                false);
+
+    // --------------------------------
+    saveDir = "plots/Comparison_AM2.0_AM2.3/time/";
+    // Create the directory if it doesn't exist
+    if (gSystem->AccessPathName(saveDir.c_str())) {
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
+    
+    for (const auto & wheel : wheelTag) {
+        std::string wh = wheel;  
+        wh = wh.erase(1, 2); // Removes "h.": "Wh.-2"→ "W-2"
+        for (const auto & chamb : chambTag) {
+            std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
+            plot_t0_histo( hName,
+                            {fileDTAM, fileRPC, fileDTAMv23, fileRPCv23},
+                            {"DT AM 2.0", "DT AMv2.0 + RPC", "DT AMv2.3", "DT AMv2.3 + RPC"},
+                            {{kRed, 1}, {kBlue, 1}, {kRed, 2}, {kBlue, 2}},
+                            (wh+" "+chamb), 
+                            saveDir, 
+                            true);
+            // TODO
+            //plot_BX_histo( hName, fileDTAM, "DT AM", kRed, fileRPC, "DT AM + RPC", kBlue, (wh+" "+chamb), saveDir, true);
+        }
+    }
+    
+
+    // --------------------------------
+    // Comparison RPC correction (2 layers time combination)
+    // --------------------------------
+    saveDir = "plots/RPC_Corrected/efficiency/";
+    // Create the directory if it doesn't exist
+    if (gSystem->AccessPathName(saveDir.c_str())) { 
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
+    plotEffWheelStationMB1MB2("Eff_TPwheels",
+                                {fileDTAMv23, fileRPCv23, fileRPCcorrectedv23},
+                                {"DT AM", "DT AM + RPC", "DT+RPC Corrected"},
+                                {{kRed, 20}, {kBlue, 21}, {kYellow+2, 33}},
+                                saveDir ) ;
+
+    // --------------------------------
+    saveDir = "plots/RPC_Corrected/variables/";
+    if (gSystem->AccessPathName(saveDir.c_str())) { 
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
+    plot_histo("hNTrigs",
+                {fileDTAMv23, fileRPCv23, fileRPCcorrectedv23},
+                {"DT AM", "DT AM + RPC", "DT+RPC Corrected"},
+                {{kRed, 1}, {kBlue, 1}, {kYellow+2, 1}},
+                saveDir, 
+                false);
+
+    // --------------------------------
+    saveDir = "plots/RPC_Corrected/time/";
+    // Create the directory if it doesn't exist
+    if (gSystem->AccessPathName(saveDir.c_str())) { 
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
+    for (const auto & wheel : wheelTag) {
+        std::string wh = wheel;  
+        wh = wh.erase(1, 2); // Removes "h.": "Wh.-2"→ "W-2"
+        for (const auto & chamb : chambTag) {
+            std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
+            plot_t0_histo( hName,
+                            {fileDTAMv23, fileRPCv23, fileRPCcorrectedv23},
+                            {"DT AM", "DT AM + RPC", "DT+RPC Corrected"},
+                            {{kRed, 1}, {kBlue, 1}, {kYellow+2, 1}},
+                            (wh+" "+chamb), 
+                            saveDir, 
+                            true);
+            // TODO
+            //plot_BX_histo( hName, fileDTAM, "DT AM", kRed, fileRPC, "DT AM + RPC", kBlue, (wh+" "+chamb), saveDir, true);
+        }
+    }
+
+    // --------------------------------
+    // RPC Efficiency SimLinks
+    // --------------------------------
+    saveDir = "plots/RPC_Efficiency/efficiency/";
+    // Create the directory if it doesn't exist
+    if (gSystem->AccessPathName(saveDir.c_str())) { 
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
+    plotEffWheelStationMB1MB2("Eff_TPwheels",
+                                {fileDTAMv23, fileRPCv23, fileRPCOnlyv23},
+                                {"DT AM", "DT AM + RPC", "RPC Only"},
+                                {{kRed, 20}, {kBlue, 21}, {kGreen+2, 22}},
+                                saveDir ) ;
+
+    // --------------------------------
+    saveDir = "plots/RPC_Efficiency/variables/";
+    if (gSystem->AccessPathName(saveDir.c_str())) { 
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
+    plot_histo("hNTrigs",
+                {fileDTAMv23, fileRPCv23, fileRPCcorrectedv23, fileRPCOnlyv23},
+                {"DT AM", "DT AM + RPC", "DT+RPC Corrected", "RPC Only"},
+                {{kRed, 1}, {kBlue, 1}, {kYellow+2, 1}, {kGreen+2, 1}},
+                saveDir, 
+                false);
+
+    // --------------------------------
+    saveDir = "plots/RPC_Efficiency/time/";
+    // Create the directory if it doesn't exist
+    if (gSystem->AccessPathName(saveDir.c_str())) { 
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
+    for (const auto & wheel : wheelTag) {
+        std::string wh = wheel;  
+        wh = wh.erase(1, 2); // Removes "h.": "Wh.-2"→ "W-2"
+        for (const auto & chamb : chambTag) {
+            std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
+            plot_t0_histo(  hName,
+                            {fileDTAMv23, fileRPCv23, fileRPCcorrectedv23, fileRPCOnlyv23},
+                            {"DT AM", "DT AM + RPC", "DT+RPC Corrected", "RPC Only"},
+                            {{kRed, 1}, {kBlue, 1}, {kYellow+2, 1}, {kGreen+2, 1}},
+                            (wh+" "+chamb), 
+                            saveDir, 
+                            true);
+            // TODO
+            //plot_BX_histo( hName, fileDTAM, "DT AM", kRed, fileRPC, "DT AM + RPC", kBlue, (wh+" "+chamb), saveDir, true);
+        }
+    }
+
+    // --------------------------------
+    // RPC Phase 2 time
+    // --------------------------------
+    saveDir = "plots/RPC_Phase_2/efficiency/";
+    // Create the directory if it doesn't exist
+    if (gSystem->AccessPathName(saveDir.c_str())) { 
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
+    plotEffWheelStationMB1MB2("Eff_TPwheels",
+                                {fileDTAMv23, fileRPCv23, fileRPCOnlyv23, fileRPCOnlyUpdatedv23},
+                                {"DT AM", "DT AM + RPC", "RPC Only", "RPC Only Phase 2"},
+                                {{kRed, 20}, {kBlue, 21}, {kGreen+2, 22}, {kOrange+1, 22}}, 
+                                saveDir ) ;
+
+    // --------------------------------
+    saveDir = "plots/RPC_Phase_2/variables/";
+    if (gSystem->AccessPathName(saveDir.c_str())) { 
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
+    plot_histo("hNTrigs",
+                {fileDTAMv23, fileRPCv23, fileRPCcorrectedv23, fileRPCOnlyv23, fileRPCOnlyUpdatedv23},
+                {"DT AM", "DT AM + RPC", "DT+RPC Corrected", "RPC Only", "RPC Only Phase 2"},
+                {{kRed, 1}, {kBlue, 1}, {kYellow+2, 1}, {kGreen+2, 1}, {kOrange+1, 1}},
+                saveDir, 
+                false);
+
+    // --------------------------------
+    saveDir = "plots/RPC_Phase_2/time/";
+    // Create the directory if it doesn't exist
+    if (gSystem->AccessPathName(saveDir.c_str())) { 
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
+    for (const auto & wheel : wheelTag) {
+        std::string wh = wheel;  
+        wh = wh.erase(1, 2); // Removes "h.": "Wh.-2"→ "W-2"
+        for (const auto & chamb : chambTag) {
+            std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
+            plot_t0_histo(  hName,
+                            {fileDTAMv23, fileRPCv23, fileRPCcorrectedv23, fileRPCOnlyv23, fileRPCOnlyUpdatedv23},
+                            {"DT AM", "DT AM + RPC", "DT+RPC Corrected", "RPC Only", "RPC Only Phase 2"},
+                            {{kRed, 1}, {kBlue, 1}, {kYellow+2, 1}, {kGreen+2, 1}, {kOrange+1, 1}},
+                            (wh+" "+chamb), 
+                            saveDir, 
+                            true);
+            // TODO
+            //plot_BX_histo( hName, fileDTAM, "DT AM", kRed, fileRPC, "DT AM + RPC", kBlue, (wh+" "+chamb), saveDir, true);
+        }
+    }
+
+    return;
+
     // --------------------------------
     // DT AM and DT + RPC time phase2 Studies" 
     // --------------------------------
@@ -306,17 +522,9 @@ void plot_histograms() {
     //                             {{kRed, 20}, {kBlue, 21}, {kGreen+2, 22}},
     //                             saveDir ) ;
 
-    plotEffWheelStationMB1MB2("Eff_TPwheels",
-                                {fileDTAM, fileRPC, fileRPCcorrected},
-                                {"DT AM", "DT AM + RPC", "DT+RPC Corrected"},
-                                {{kRed, 20}, {kBlue, 21}, {kYellow+2, 33}},
-                                saveDir ) ;
+    
 
-    // plotEffWheelStation("Eff_TPwheels",
-    //                             {fileDTAM, fileRPC, fileDTAMv23, fileRPCv23},
-    //                             {"DT AM", "DT AM + RPC", "DT AMv2.3", "DT AMv2.3 + RPC"},
-    //                             {{kRed, 1}, {kBlue, 1}, {kRed, 22}, {kBlue, 33}},
-    //                             saveDir ) ;
+    
 
 
                                 
@@ -351,13 +559,6 @@ void plot_histograms() {
                  {fileDTAM, fileRPC, fileRPCOnly},
                  {"DT AM", "DT AM + RPC", "RPC Only"},
                  {{kRed, 1}, {kBlue, 1}, {kGreen+2, 1}},
-                 saveDir, 
-                 false);
-
-    plot_histo("hNTrigs",
-                 {fileDTAM, fileRPC, fileDTAMv23, fileRPCv23},
-                 {"DT AM", "DT AM + RPC", "DT AMv2.3", "DT AMv2.3 + RPC"},
-                 {{kRed, 1}, {kBlue, 1}, {kRed, 2}, {kBlue, 2}},
                  saveDir, 
                  false);
 
@@ -473,42 +674,9 @@ void plot_histograms() {
     //     }
     // }
 
-    for (const auto & wheel : wheelTag) {
-        std::string wh = wheel;  
-        wh = wh.erase(1, 2); // Removes "h.": "Wh.-2"→ "W-2"
-        for (const auto & chamb : chambTag) {
-            std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
-            plot_t0_histo( hName,
-                            {fileDTAM, fileRPC, fileRPCcorrected},
-                            {"DT AM", "DT AM + RPC", "DT+RPC Corrected"},
-                            {{kRed, 1}, {kBlue, 1}, {kYellow+2, 1}},
-                            (wh+" "+chamb), 
-                            saveDir, 
-                            true);
-            // TODO
-            //plot_BX_histo( hName, fileDTAM, "DT AM", kRed, fileRPC, "DT AM + RPC", kBlue, (wh+" "+chamb), saveDir, true);
-        }
-    }
-
-    // for (const auto & wheel : wheelTag) {
-    //     std::string wh = wheel;  
-    //     wh = wh.erase(1, 2); // Removes "h.": "Wh.-2"→ "W-2"
-    //     for (const auto & chamb : chambTag) {
-    //         std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
-    //         plot_t0_histo( hName,
-    //                         {fileDTAM, fileRPC, fileDTAMv23, fileRPCv23},
-    //                         {"DT AM", "DT AM + RPC", "DT AMv2.3", "DT AMv2.3 + RPC"},
-    //                         {{kRed, 1}, {kBlue, 1}, {kRed, 2}, {kBlue, 2}},
-    //                         (wh+" "+chamb), 
-    //                         saveDir, 
-    //                         true);
-    //         // TODO
-    //         //plot_BX_histo( hName, fileDTAM, "DT AM", kRed, fileRPC, "DT AM + RPC", kBlue, (wh+" "+chamb), saveDir, true);
-    //     }
-    // }
-
     
 
+ 
 
     std::cout << "--------------------------------" << std::endl;
     std::cout << "END PROGRAM" << std::endl;

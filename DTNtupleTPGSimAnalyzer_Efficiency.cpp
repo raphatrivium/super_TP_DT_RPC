@@ -17,17 +17,22 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
     // ------------------------------------------------------------------------------
     std::string inputDir = "input/";
     std::map<std::string,std::string> m_files;
-    // m_files["DTAMv2.3"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_DTAM.root";
-    // m_files["RPCv2.3"]           = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_RPC.root";
-    // m_files["DTAM"]              = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
-    // m_files["RPC"]               = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
+    
+    m_files["DTAM"]              = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
+    m_files["RPC"]               = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
     // m_files["RPCcorrected"]      = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCcorrected.root";
     // m_files["RPC_Flag0and1"]     = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
     // m_files["RPC_Flag1"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
     // m_files["RPC_Flag2"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
     // m_files["DTAMUpdated"]       = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_noRPC_PHASE2_TN_33BX.root";
     // m_files["RPCUpdated"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root";
-    m_files["DTRPCOnly"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
+    // m_files["DTRPCOnly"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
+
+    m_files["DTAMv2.3"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_DTAM.root";
+    m_files["RPCv2.3"]           = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_RPC.root";
+    m_files["RPCcorrected2.3"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_RPCcorrected.root";
+
+
     m_files["test"]         = "test.root"; // It is a copy of m_files["RPC"]
     
     // m_files["RPCOnly"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
@@ -373,7 +378,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
         // ------------------------------------------------------------------------------
         // Loop in the events
         // ------------------------------------------------------------------------------
-        nEntries = 1;   // 100   nEntries
+        // nEntries = 1;   // 100   nEntries
         if (testFlag){
             nEntries = 100;
             std::cout << "FOR TESTE:" <<std::endl;
@@ -384,8 +389,6 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
         for (Long64_t iEvent = 0; iEvent < nEntries; ++iEvent) { 
 
             tree->GetEntry(iEvent);
-            // branch_gen_nGenParts->GetEntry(iEvent);
-            // branch_ph2TpgPhiEmuAm_nTrigs->GetEntry(iEvent);
             
             m_plots["hNSeg"] -> Fill( ph2Seg_nSegments );
             // m_plots["hNTrigs"] -> Fill( ph2TpgPhiEmuAm_nTrigs );

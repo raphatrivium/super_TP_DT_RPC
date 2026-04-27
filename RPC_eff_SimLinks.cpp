@@ -18,8 +18,14 @@ int RPC_eff_SimLinks() {
     std::string inputDir = "input/";
     std::map<std::string,std::string> m_files;
    
-    m_files["RPCOnly"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_OldSample_WithRPCDIGISIM.root";
+    // m_files["RPCOnly"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_OldSample_WithRPCDIGISIM.root";
     // m_files["RPCOnlyUpdated"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCPhase2_RPCOnlyFlag.root";
+    
+    m_files["RPCOnlyv2.3"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPC_correctedFlag1Timing.root";
+
+    m_files["RPCOnlyUpdatedv2.3"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPCphase2_correctedFlag1Timing.root";
+    // m_files["RPCOnlyUpdatedv2.3"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPCphase2_correctedFlag1Timing_2.root";
+
     m_files["test"]            = "test.root"; // It is a copy of m_files["RPC"]
 
 
@@ -302,11 +308,12 @@ int RPC_eff_SimLinks() {
         std::ofstream BXfile("BX_time_distribution.txt");
         for (Long64_t iEvent = 0; iEvent < nEntries; ++iEvent) {
 
+            tree->GetEntry(iEvent);
+            
             if (fdebug) std::cout << "=================================" << std::endl;
             if (fdebug) std::cout << "iEvent " << iEvent << std::endl;
             if (fdebug) std::cout << "=================================" << std::endl;
-
-            tree->GetEntry(iEvent);
+            if (fdebug) std::cout << "number of muon in this event " << gen_nGenParts << std::endl;
             
             int coutNTrigs = 0;
 
@@ -329,7 +336,9 @@ int RPC_eff_SimLinks() {
                 // Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(iTrigAM);
                 Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(iTrigAM);
                 
-                if ( name == "RPCOnly" || name == "RPCOnlyUpdated" ) {
+                if ( name == "RPCOnly" || name == "RPCOnlyv2.3" || 
+                     name == "RPCOnlyUpdated" || name == "RPCOnlyUpdatedv2.3") {
+
                     if ( trigAMrpc != 2 ) continue;
                 }
                 BXfile << trigAMBX << "\t" << ph2TpgPhiEmuAm_t0->at(iTrigAM) << "\n";
@@ -405,7 +414,7 @@ int RPC_eff_SimLinks() {
                 if (flagDuplicate == false) vSimLink.push_back(iSimLink);
                 
             }
-            if (fdebug) std::cout << "vSimLink.size(): "<< vSimLink.size() << std::endl;
+            if (fdebug) std::cout << "SimLinks PDG 13 without duplicates: "<< vSimLink.size() << std::endl;
 
             // for (int iSimLink = 0; iSimLink < vSimLink.size(); ++iSimLink) {
                 
@@ -518,10 +527,11 @@ int RPC_eff_SimLinks() {
                     // Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(iTrigAM);
                     Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(iTrigAM);
 
-                    if ( name == "RPCOnly" || name == "RPCOnlyUpdated" ) {
+                    if ( name == "RPCOnly" || name == "RPCOnlyv2.3" || 
+                         name == "RPCOnlyUpdated" || name == "RPCOnlyUpdatedv2.3") {
+
                         if ( trigAMrpc != 2 ) continue;
                     }
-                    
                     // -----------------------------
                     // SimLink AND TP MATCHING
                     // -----------------------------
@@ -537,8 +547,12 @@ int RPC_eff_SimLinks() {
                         // TODO: Check if we will apply a t0 cut
                         // if ( trigAMt0  < 500) continue;
 
-                        trigAMt0 = (trigAMt0 * 25 / 32); // DCS to ns
-                        trigAMt0 = trigAMt0 - 390; // Shift to zero (RPC only)
+                        // TODO: No need to apply this change for now because Flag 2 TPs are already in ns
+                        // But if they change this in the future, we need to aplly it.
+                        // trigAMt0 = (trigAMt0 * 25 / 32); // DCS to ns
+                        // trigAMt0 = trigAMt0 - 390; // Shift to zero (RPC only)
+
+                        trigAMt0 = trigAMt0 - 500.; // Shift to zero (RPC only)
 
                         if (fdebug) std::cout << "  iTrigAM " << iTrigAM << " | trigAMWh: "<< trigAMWh  << " | trigAMSec: "
                                               << trigAMSec  << " | trigAMSt: "<< trigAMSt << " | phi: "<< trigGlbPhi 
@@ -575,8 +589,12 @@ int RPC_eff_SimLinks() {
                         m_plots["hPh2TpgPhiEmuAmBX"+whTag+chambTag+"_matched"]->Fill(trigAMBX);
                         
                         Double_t trigAMt0 = ph2TpgPhiEmuAm_t0->at(bestTPAM);
-                        trigAMt0 = (trigAMt0 * 25 / 32); // DCS to ns
-                        trigAMt0 = trigAMt0 - 390; // Shift to zero (RPC only)
+                        // TODO: No need to apply this change for now because Flag 2 TPs are already in ns
+                        // But if they change this in the future, we need to aplly it.
+                        // trigAMt0 = (trigAMt0 * 25 / 32); // DCS to ns
+                        // trigAMt0 = trigAMt0 - 390; // Shift to zero (RPC only)
+
+                        trigAMt0 = trigAMt0 - 500.; // Shift to zero (RPC only)
 
                         m_plots["hPh2TpgPhiEmuAmT0"+whTag+chambTag+"_matched"]->Fill(trigAMt0);
                 }
