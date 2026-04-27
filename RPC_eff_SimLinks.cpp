@@ -23,7 +23,7 @@ int RPC_eff_SimLinks() {
     
     m_files["RPCOnlyv2.3"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPC_correctedFlag1Timing.root";
 
-    m_files["RPCOnlyUpdatedv2.3"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPCphase2_correctedFlag1Timing.root";
+    // m_files["RPCOnlyUpdatedv2.3"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPCphase2_correctedFlag1Timing.root";
     // m_files["RPCOnlyUpdatedv2.3"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPCphase2_correctedFlag1Timing_2.root";
 
     m_files["test"]            = "test.root"; // It is a copy of m_files["RPC"]
@@ -359,7 +359,7 @@ int RPC_eff_SimLinks() {
                 selectedTP.push_back(iTrigAM);
 
             }
-            if (fdebug) std::cout << "selectedTP.size() " << selectedTP.size() << std::endl;
+            if (fdebug) std::cout << "Number of TPs Flag 2 (RPC Only) and BX 0: " << selectedTP.size() << std::endl;
 
             m_plots["hNTrigs"] -> Fill( coutNTrigs );
             
@@ -479,7 +479,7 @@ int RPC_eff_SimLinks() {
                                     << " | " << "ProType: "<< SimProType << std::endl;
             }
             vSimLink = vTemp;
-            if (fdebug) std::cout << "vTemp.size(): "<< vTemp.size() << std::endl;
+            if (fdebug) std::cout << "TPs with two layers hit (): "<< vTemp.size() << std::endl;
             vTemp.clear();
       
             for (int iSimLink = 0; iSimLink < vSimLink.size(); ++iSimLink) {
@@ -491,6 +491,15 @@ int RPC_eff_SimLinks() {
                 Int_t SimLinkBx      = rpcSimLink_bx->at(vSimLink[iSimLink]);
 
                 if (SimLinkBx != 0) continue;
+
+                // if ( name == "RPCOnlyUpdatedv2.3" ) {
+                //     if ( SimLinkBx < -1 ) continue;
+                //     if ( SimLinkBx > 0 ) continue;
+                // }
+                // else{
+                //     if (SimLinkBx != 0) continue;
+                // }
+
 
                 std::vector<int> tempVec; // tempVec = [Seg Wheel][Seg Station][Seg Sector] 
                 tempVec.push_back(SimLinkRing);
@@ -532,12 +541,22 @@ int RPC_eff_SimLinks() {
 
                         if ( trigAMrpc != 2 ) continue;
                     }
+
                     // -----------------------------
                     // SimLink AND TP MATCHING
                     // -----------------------------
                     if (SimLinkRing == trigAMWh && SimLinkSector == trigAMSec && SimLinkStation  == trigAMSt ) {
 
                         if ( trigAMBX != 20 ) continue;
+                        
+                        // if ( name == "RPCOnlyUpdatedv2.3" ) {
+                        //     if ( trigAMBX < 19 ) continue;
+                        //     if ( trigAMBX > 20 ) continue;
+                        // }
+                        // else{
+                        //     if ( trigAMBX != 20 ) continue;
+                        // }
+
 
                         Double_t trigGlbPhi  = trigPhiInRad(ph2TpgPhiEmuAm_phi->at(iTrigAM),trigAMSec);
                         Double_t finalDPhi   = rpcSimLink_global_phi->at(vSimLink[iSimLink]) - trigGlbPhi;
@@ -554,8 +573,8 @@ int RPC_eff_SimLinks() {
 
                         trigAMt0 = trigAMt0 - 500.; // Shift to zero (RPC only)
 
-                        if (fdebug) std::cout << "  iTrigAM " << iTrigAM << " | trigAMWh: "<< trigAMWh  << " | trigAMSec: "
-                                              << trigAMSec  << " | trigAMSt: "<< trigAMSt << " | phi: "<< trigGlbPhi 
+                        if (fdebug) std::cout << "  iTrigAM " << iTrigAM << " | Wh: "<< trigAMWh  << " | Sec: "
+                                              << trigAMSec  << " | St: "<< trigAMSt << " | phi: "<< trigGlbPhi 
                                               << " | trigSimDPhi: "<< trigSimDPhi << " | BX: "<< trigAMBX << " | t0: "<< trigAMt0  
                                               << std::endl;
 

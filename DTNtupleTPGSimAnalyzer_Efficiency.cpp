@@ -8,7 +8,7 @@
 int DTNtupleTPGSimAnalyzer_Efficiency() { // 
 
     bool testFlag = false;   // false - true
-    bool fdebug = true;
+    bool fdebug = false;
 
     bool plotHistograms = true; // false - true
 
