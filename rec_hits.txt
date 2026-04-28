@@ -1,0 +1,7756 @@
+
+=====================================
+Event 14 | Run 1 | Lumi 1
+Total RPC RecHits: 42
+=====================================
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [70,71] size=2
+ BX: 6
+ Time: 157.812 ns
+ Local position: (57.2222, 0, 0)
+-------------------------------------
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [70,71] size=2
+ BX: -10
+ Time: -243.75 ns
+ Local position: (57.2222, 0, 0)
+-------------------------------------
+DetId: 637567261
+ Region: 0 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 1
+ Cluster strips [59,61] size=3
+ BX: 0
+ Time: 0 ns
+ Local position: (33.1889, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [11,11] size=1
+ BX: 7
+ Time: 182.812 ns
+ Local position: (-78.9667, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [11,11] size=1
+ BX: -10
+ Time: -242.188 ns
+ Local position: (-78.9667, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [2,4] size=3
+ BX: 5
+ Time: 135.938 ns
+ Local position: (-28.2572, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [2,3] size=2
+ BX: -12
+ Time: -290.625 ns
+ Local position: (-29.3037, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [11,13] size=3
+ BX: 6
+ Time: 157.812 ns
+ Local position: (-9.41906, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [12,12] size=1
+ BX: -11
+ Time: -268.75 ns
+ Local position: (-9.41906, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [50,50] size=1
+ BX: 7
+ Time: 187.5 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [48,51] size=4
+ BX: -10
+ Time: -239.062 ns
+ Local position: (9.15556, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [11,11] size=1
+ BX: -1
+ Time: -25 ns
+ Local position: (-9.55195, 0, 0)
+-------------------------------------
+DetId: 637632797
+ Region: 0 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [54,54] size=1
+ BX: -1
+ Time: -3.125 ns
+ Local position: (19.4556, 0, 0)
+-------------------------------------
+DetId: 637633549
+ Region: 0 Ring: -2 Station: 1
+ Sector: 9 Layer: 1 Roll: 3
+ Cluster strips [42,43] size=2
+ BX: 0
+ Time: 3.125 ns
+ Local position: (-6.86666, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [14,15] size=2
+ BX: 0
+ Time: 3.125 ns
+ Local position: (-70.9556, 0, 0)
+-------------------------------------
+DetId: 637636746
+ Region: 1 Ring: 3 Station: 1
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [9,10] size=2
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-20.4888, 0, 0)
+-------------------------------------
+DetId: 637637128
+ Region: -1 Ring: 3 Station: 1
+ Sector: 5 Layer: 1 Roll: 3
+ Cluster strips [29,29] size=1
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (36.5871, 0, 0)
+-------------------------------------
+DetId: 637634845
+ Region: 0 Ring: 2 Station: 1
+ Sector: 3 Layer: 2 Roll: 3
+ Cluster strips [31,31] size=1
+ BX: -1
+ Time: -3.125 ns
+ Local position: (-28.2024, 0, 0)
+-------------------------------------
+DetId: 637635597
+ Region: 0 Ring: -2 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [49,49] size=1
+ BX: -1
+ Time: -3.125 ns
+ Local position: (15.9405, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [68,68] size=1
+ BX: 13
+ Time: 343.75 ns
+ Local position: (62.5357, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [60,60] size=1
+ BX: 12
+ Time: 317.188 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [48,50] size=3
+ BX: 10
+ Time: 257.812 ns
+ Local position: (15.9405, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [49,49] size=1
+ BX: -7
+ Time: -170.312 ns
+ Local position: (15.9405, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [38,38] size=1
+ BX: 8
+ Time: 210.938 ns
+ Local position: (-20.6667, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [37,39] size=3
+ BX: -9
+ Time: -214.062 ns
+ Local position: (-20.6667, 0, 0)
+-------------------------------------
+DetId: 637604010
+ Region: 1 Ring: 3 Station: 2
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [22,25] size=4
+ BX: 0
+ Time: 1.17188 ns
+ Local position: (23.0707, 0, 0)
+-------------------------------------
+DetId: 637604392
+ Region: -1 Ring: 3 Station: 2
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [4,5] size=2
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-39.5498, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [26,28] size=3
+ BX: 14
+ Time: 368.75 ns
+ Local position: (-50.9778, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [70,70] size=1
+ BX: 10
+ Time: 260.938 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [65,65] size=1
+ BX: 10
+ Time: 256.25 ns
+ Local position: (53.7333, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [69,71] size=3
+ BX: -7
+ Time: -162.5 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [64,66] size=3
+ BX: -7
+ Time: -167.188 ns
+ Local position: (53.7333, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [19,19] size=1
+ BX: 12
+ Time: 309.375 ns
+ Local position: (4.8643, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [19,19] size=1
+ BX: -5
+ Time: -115.625 ns
+ Local position: (4.8643, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [2,4] size=3
+ BX: 6
+ Time: 167.188 ns
+ Local position: (-26.2672, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [3,3] size=1
+ BX: -11
+ Time: -257.812 ns
+ Local position: (-26.2672, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [27,28] size=2
+ BX: 10
+ Time: 253.125 ns
+ Local position: (21.4029, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [27,28] size=2
+ BX: -7
+ Time: -173.438 ns
+ Local position: (21.4029, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [42,42] size=1
+ BX: 8
+ Time: 210.938 ns
+ Local position: (-1.47619, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [42,42] size=1
+ BX: -9
+ Time: -214.062 ns
+ Local position: (-1.47619, 0, 0)
+-------------------------------------
+DetId: 637616580
+ Region: -1 Ring: 2 Station: 3
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [25,25] size=1
+ BX: -7
+ Time: -173.438 ns
+ Local position: (18.951, 0, 0)
+-------------------------------------
+DetId: 637616612
+ Region: -1 Ring: 2 Station: 4
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [25,27] size=3
+ BX: 10
+ Time: 251.562 ns
+ Local position: (21.1805, 0, 0)
+-------------------------------------
+
+
+========== MATCHED LAYER PAIRS ==========
+
+=====================================
+Matched chamber:
+ Region=0 Ring=-2 Station=1 Sector=9
+=====================================
+
+Layer 1 hit:
+ strips [42,43] size=2
+ BX=0
+ time=3.125 ns
+   paired with Layer 2 hit:
+     strips [49,49] size=1
+     BX=-1
+     time=-3.125 ns
+     Delta t = 6.25 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=-2 Station=2 Sector=7
+=====================================
+
+Layer 1 hit:
+ strips [38,38] size=1
+ BX=8
+ time=210.938 ns
+   paired with Layer 2 hit:
+     strips [42,42] size=1
+     BX=8
+     time=210.938 ns
+     Delta t = 0 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [42,42] size=1
+     BX=-9
+     time=-214.062 ns
+     Delta t = 425 ns
+--------------------------------
+Layer 1 hit:
+ strips [37,39] size=3
+ BX=-9
+ time=-214.062 ns
+   paired with Layer 2 hit:
+     strips [42,42] size=1
+     BX=8
+     time=210.938 ns
+     Delta t = -425 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [42,42] size=1
+     BX=-9
+     time=-214.062 ns
+     Delta t = 0 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=2 Station=1 Sector=3
+=====================================
+
+Layer 1 hit:
+ strips [59,61] size=3
+ BX=0
+ time=0 ns
+   paired with Layer 2 hit:
+     strips [31,31] size=1
+     BX=-1
+     time=-3.125 ns
+     Delta t = 3.125 ns
+--------------------------------
+Layer 1 hit:
+ strips [54,54] size=1
+ BX=-1
+ time=-3.125 ns
+   paired with Layer 2 hit:
+     strips [31,31] size=1
+     BX=-1
+     time=-3.125 ns
+     Delta t = 0 ns
+--------------------------------
+=====================================
+
+=====================================
+Event 12 | Run 1 | Lumi 1
+Total RPC RecHits: 42
+=====================================
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [69,71] size=3
+ BX: 2
+ Time: 57.8125 ns
+ Local position: (56.0778, 0, 0)
+-------------------------------------
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [69,71] size=3
+ BX: 0
+ Time: 7.8125 ns
+ Local position: (56.0778, 0, 0)
+-------------------------------------
+DetId: 637568157
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 1 Roll: 1
+ Cluster strips [84,90] size=7
+ BX: -1
+ Time: -3.125 ns
+ Local position: (94.9889, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [11,11] size=1
+ BX: 3
+ Time: 82.8125 ns
+ Local position: (-78.9667, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [10,12] size=3
+ BX: 1
+ Time: 29.6875 ns
+ Local position: (-78.9667, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [3,3] size=1
+ BX: -1
+ Time: -18.75 ns
+ Local position: (-28.2572, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [11,13] size=3
+ BX: 2
+ Time: 56.25 ns
+ Local position: (-9.41906, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [12,12] size=1
+ BX: 0
+ Time: 6.25 ns
+ Local position: (-9.41906, 0, 0)
+-------------------------------------
+DetId: 637620360
+ Region: -1 Ring: 3 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [14,17] size=4
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-3.29306, 0, 0)
+-------------------------------------
+DetId: 637620746
+ Region: 1 Ring: 3 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [9,11] size=3
+ BX: -1
+ Time: -3.125 ns
+ Local position: (-21.4049, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [50,50] size=1
+ BX: 3
+ Time: 85.9375 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [11,11] size=1
+ BX: 15
+ Time: 396.875 ns
+ Local position: (-9.55195, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [11,12] size=2
+ BX: -8
+ Time: -176.562 ns
+ Local position: (-8.68359, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [14,16] size=3
+ BX: 16
+ Time: 404.688 ns
+ Local position: (-69.8111, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [15,15] size=1
+ BX: -6
+ Time: -146.875 ns
+ Local position: (-69.8111, 0, 0)
+-------------------------------------
+DetId: 637569549
+ Region: 0 Ring: -2 Station: 1
+ Sector: 5 Layer: 2 Roll: 1
+ Cluster strips [4,5] size=2
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (-93.1905, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [68,68] size=1
+ BX: 9
+ Time: 242.188 ns
+ Local position: (62.5357, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [68,68] size=1
+ BX: -13
+ Time: -307.812 ns
+ Local position: (62.5357, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [60,60] size=1
+ BX: 8
+ Time: 217.188 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [48,50] size=3
+ BX: 6
+ Time: 157.812 ns
+ Local position: (15.9405, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [59,61] size=3
+ BX: -15
+ Time: -357.812 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [37,38] size=2
+ BX: 4
+ Time: 110.938 ns
+ Local position: (-22.0444, 0, 0)
+-------------------------------------
+DetId: 637588010
+ Region: 1 Ring: 3 Station: 2
+ Sector: 5 Layer: 1 Roll: 1
+ Cluster strips [23,24] size=2
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (25.5546, 0, 0)
+-------------------------------------
+DetId: 637588010
+ Region: 1 Ring: 3 Station: 2
+ Sector: 5 Layer: 1 Roll: 1
+ Cluster strips [23,24] size=2
+ BX: -1
+ Time: -3.125 ns
+ Local position: (25.5546, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [26,28] size=3
+ BX: 10
+ Time: 268.75 ns
+ Local position: (-50.9778, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [27,27] size=1
+ BX: -12
+ Time: -284.375 ns
+ Local position: (-50.9778, 0, 0)
+-------------------------------------
+DetId: 637633069
+ Region: 0 Ring: -2 Station: 2
+ Sector: 5 Layer: 1 Roll: 3
+ Cluster strips [69,71] size=3
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [70,70] size=1
+ BX: 6
+ Time: 164.062 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [64,66] size=3
+ BX: 6
+ Time: 156.25 ns
+ Local position: (53.7333, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [14,15] size=2
+ BX: 0
+ Time: 0 ns
+ Local position: (-85.4222, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [19,19] size=1
+ BX: 8
+ Time: 212.5 ns
+ Local position: (4.8643, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [2,4] size=3
+ BX: 2
+ Time: 67.1875 ns
+ Local position: (-26.2672, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [2,4] size=3
+ BX: 0
+ Time: 17.1875 ns
+ Local position: (-26.2672, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [28,28] size=1
+ BX: 6
+ Time: 150 ns
+ Local position: (22.3758, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [27,28] size=2
+ BX: -16
+ Time: -395.312 ns
+ Local position: (21.4029, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [42,42] size=1
+ BX: 4
+ Time: 112.5 ns
+ Local position: (-1.47619, 0, 0)
+-------------------------------------
+DetId: 637635117
+ Region: 0 Ring: -2 Station: 2
+ Sector: 5 Layer: 2 Roll: 3
+ Cluster strips [17,19] size=3
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-72.3333, 0, 0)
+-------------------------------------
+DetId: 637635901
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 2 Roll: 3
+ Cluster strips [74,74] size=1
+ BX: -1
+ Time: -3.125 ns
+ Local position: (93, 0, 0)
+-------------------------------------
+DetId: 637635901
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 2 Roll: 3
+ Cluster strips [66,67] size=2
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (70.8571, 0, 0)
+-------------------------------------
+DetId: 637616580
+ Region: -1 Ring: 2 Station: 3
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [24,25] size=2
+ BX: 6
+ Time: 150 ns
+ Local position: (17.8363, 0, 0)
+-------------------------------------
+DetId: 637616580
+ Region: -1 Ring: 2 Station: 3
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [23,27] size=5
+ BX: -16
+ Time: -396.875 ns
+ Local position: (18.951, 0, 0)
+-------------------------------------
+DetId: 637616612
+ Region: -1 Ring: 2 Station: 4
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [26,27] size=2
+ BX: 6
+ Time: 150 ns
+ Local position: (22.2953, 0, 0)
+-------------------------------------
+
+
+========== MATCHED LAYER PAIRS ==========
+
+=====================================
+Matched chamber:
+ Region=0 Ring=-2 Station=2 Sector=5
+=====================================
+
+Layer 1 hit:
+ strips [69,71] size=3
+ BX=0
+ time=1.5625 ns
+   paired with Layer 2 hit:
+     strips [17,19] size=3
+     BX=-1
+     time=-1.5625 ns
+     Delta t = 3.125 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=-2 Station=2 Sector=7
+=====================================
+
+Layer 1 hit:
+ strips [37,38] size=2
+ BX=4
+ time=110.938 ns
+   paired with Layer 2 hit:
+     strips [42,42] size=1
+     BX=4
+     time=112.5 ns
+     Delta t = -1.5625 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=2 Station=1 Sector=10
+=====================================
+
+Layer 1 hit:
+ strips [84,90] size=7
+ BX=-1
+ time=-3.125 ns
+   paired with Layer 2 hit:
+     strips [60,60] size=1
+     BX=8
+     time=217.188 ns
+     Delta t = -220.312 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [48,50] size=3
+     BX=6
+     time=157.812 ns
+     Delta t = -160.938 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [59,61] size=3
+     BX=-15
+     time=-357.812 ns
+     Delta t = 354.688 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=2 Station=2 Sector=11
+=====================================
+
+Layer 1 hit:
+ strips [70,70] size=1
+ BX=6
+ time=164.062 ns
+   paired with Layer 2 hit:
+     strips [74,74] size=1
+     BX=-1
+     time=-3.125 ns
+     Delta t = 167.188 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [66,67] size=2
+     BX=-1
+     time=-1.5625 ns
+     Delta t = 165.625 ns
+--------------------------------
+Layer 1 hit:
+ strips [64,66] size=3
+ BX=6
+ time=156.25 ns
+   paired with Layer 2 hit:
+     strips [74,74] size=1
+     BX=-1
+     time=-3.125 ns
+     Delta t = 159.375 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [66,67] size=2
+     BX=-1
+     time=-1.5625 ns
+     Delta t = 157.812 ns
+--------------------------------
+Layer 1 hit:
+ strips [14,15] size=2
+ BX=0
+ time=0 ns
+   paired with Layer 2 hit:
+     strips [74,74] size=1
+     BX=-1
+     time=-3.125 ns
+     Delta t = 3.125 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [66,67] size=2
+     BX=-1
+     time=-1.5625 ns
+     Delta t = 1.5625 ns
+--------------------------------
+=====================================
+
+=====================================
+Event 2 | Run 1 | Lumi 1
+Total RPC RecHits: 37
+=====================================
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [69,71] size=3
+ BX: 15
+ Time: 379.688 ns
+ Local position: (56.0778, 0, 0)
+-------------------------------------
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [70,71] size=2
+ BX: 5
+ Time: 129.688 ns
+ Local position: (57.2222, 0, 0)
+-------------------------------------
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [69,71] size=3
+ BX: -11
+ Time: -268.75 ns
+ Local position: (56.0778, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [10,12] size=3
+ BX: 16
+ Time: 407.812 ns
+ Local position: (-78.9667, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [10,12] size=3
+ BX: 5
+ Time: 131.25 ns
+ Local position: (-78.9667, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [11,12] size=2
+ BX: -11
+ Time: -270.312 ns
+ Local position: (-77.8222, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [3,3] size=1
+ BX: 14
+ Time: 356.25 ns
+ Local position: (-28.2572, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [2,3] size=2
+ BX: 4
+ Time: 110.938 ns
+ Local position: (-29.3037, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [2,3] size=2
+ BX: -13
+ Time: -314.062 ns
+ Local position: (-29.3037, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [11,12] size=2
+ BX: 15
+ Time: 382.812 ns
+ Local position: (-10.4656, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [12,12] size=1
+ BX: 5
+ Time: 131.25 ns
+ Local position: (-9.41906, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [8,16] size=9
+ BX: -12
+ Time: -293.75 ns
+ Local position: (-9.41906, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [49,51] size=3
+ BX: 16
+ Time: 412.5 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [49,51] size=3
+ BX: 6
+ Time: 164.062 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [49,51] size=3
+ BX: -11
+ Time: -264.062 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [15,15] size=1
+ BX: -1
+ Time: -18.75 ns
+ Local position: (-69.8111, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [68,69] size=2
+ BX: -8
+ Time: -181.25 ns
+ Local position: (63.7619, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [40,58] size=19
+ BX: 9
+ Time: 232.812 ns
+ Local position: (15.9405, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [60,60] size=1
+ BX: -9
+ Time: -209.375 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637567409
+ Region: 0 Ring: -1 Station: 2
+ Sector: 4 Layer: 1 Roll: 1
+ Cluster strips [17,18] size=2
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-77.1556, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [38,38] size=1
+ BX: 7
+ Time: 185.938 ns
+ Local position: (-20.6667, 0, 0)
+-------------------------------------
+DetId: 637568313
+ Region: 0 Ring: 1 Station: 2
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [26,27] size=2
+ BX: 0
+ Time: 0 ns
+ Local position: (-52.3556, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [26,27] size=2
+ BX: -7
+ Time: -159.375 ns
+ Local position: (-52.3556, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [69,71] size=3
+ BX: 9
+ Time: 237.5 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [65,65] size=1
+ BX: 9
+ Time: 231.25 ns
+ Local position: (53.7333, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [19,19] size=1
+ BX: 10
+ Time: 264.062 ns
+ Local position: (4.8643, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [3,4] size=2
+ BX: 15
+ Time: 390.625 ns
+ Local position: (-25.2943, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [2,5] size=4
+ BX: 5
+ Time: 139.062 ns
+ Local position: (-25.2943, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [3,3] size=1
+ BX: -12
+ Time: -279.688 ns
+ Local position: (-26.2672, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [28,28] size=1
+ BX: 9
+ Time: 225 ns
+ Local position: (22.3758, 0, 0)
+-------------------------------------
+DetId: 637569457
+ Region: 0 Ring: -1 Station: 2
+ Sector: 4 Layer: 2 Roll: 1
+ Cluster strips [70,70] size=1
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (81.1905, 0, 0)
+-------------------------------------
+DetId: 637570361
+ Region: 0 Ring: 1 Station: 2
+ Sector: 11 Layer: 2 Roll: 1
+ Cluster strips [60,62] size=3
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (54.619, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [42,42] size=1
+ BX: 7
+ Time: 187.5 ns
+ Local position: (-1.47619, 0, 0)
+-------------------------------------
+DetId: 637568345
+ Region: 0 Ring: 1 Station: 3
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [14,15] size=2
+ BX: 0
+ Time: 0 ns
+ Local position: (-24.6667, 0, 0)
+-------------------------------------
+DetId: 637571537
+ Region: 0 Ring: -1 Station: 3
+ Sector: 4 Layer: 1 Roll: 1
+ Cluster strips [29,30] size=2
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (28.1905, 0, 0)
+-------------------------------------
+DetId: 637616580
+ Region: -1 Ring: 2 Station: 3
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [24,25] size=2
+ BX: 9
+ Time: 226.562 ns
+ Local position: (17.8363, 0, 0)
+-------------------------------------
+DetId: 637575665
+ Region: 0 Ring: -1 Station: 4
+ Sector: 4 Layer: 1 Roll: 1
+ Cluster strips [21,22] size=2
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (12.3333, 0, 0)
+-------------------------------------
+
+
+========== MATCHED LAYER PAIRS ==========
+
+=====================================
+Matched chamber:
+ Region=0 Ring=-2 Station=2 Sector=7
+=====================================
+
+Layer 1 hit:
+ strips [38,38] size=1
+ BX=7
+ time=185.938 ns
+   paired with Layer 2 hit:
+     strips [42,42] size=1
+     BX=7
+     time=187.5 ns
+     Delta t = -1.5625 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=-1 Station=2 Sector=4
+=====================================
+
+Layer 1 hit:
+ strips [17,18] size=2
+ BX=-1
+ time=-1.5625 ns
+   paired with Layer 2 hit:
+     strips [70,70] size=1
+     BX=0
+     time=1.5625 ns
+     Delta t = -3.125 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=1 Station=2 Sector=11
+=====================================
+
+Layer 1 hit:
+ strips [26,27] size=2
+ BX=0
+ time=0 ns
+   paired with Layer 2 hit:
+     strips [60,62] size=3
+     BX=0
+     time=1.5625 ns
+     Delta t = -1.5625 ns
+--------------------------------
+=====================================
+
+=====================================
+Event 9 | Run 1 | Lumi 1
+Total RPC RecHits: 33
+=====================================
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [70,70] size=1
+ BX: 5
+ Time: 129.688 ns
+ Local position: (56.0778, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [11,12] size=2
+ BX: 5
+ Time: 131.25 ns
+ Local position: (-77.8222, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [3,3] size=1
+ BX: 4
+ Time: 110.938 ns
+ Local position: (-28.2572, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [2,3] size=2
+ BX: -1
+ Time: -18.75 ns
+ Local position: (-29.3037, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [12,12] size=1
+ BX: 5
+ Time: 131.25 ns
+ Local position: (-9.41906, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [50,50] size=1
+ BX: 6
+ Time: 162.5 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [11,12] size=2
+ BX: -6
+ Time: -146.875 ns
+ Local position: (-8.68359, 0, 0)
+-------------------------------------
+DetId: 637633181
+ Region: 0 Ring: 2 Station: 1
+ Sector: 6 Layer: 1 Roll: 3
+ Cluster strips [55,56] size=2
+ BX: 0
+ Time: 0 ns
+ Local position: (22.8889, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [14,15] size=2
+ BX: -5
+ Time: -120.312 ns
+ Local position: (-70.9556, 0, 0)
+-------------------------------------
+DetId: 637633933
+ Region: 0 Ring: -2 Station: 1
+ Sector: 12 Layer: 1 Roll: 3
+ Cluster strips [29,29] size=1
+ BX: -1
+ Time: -3.125 ns
+ Local position: (-37.7667, 0, 0)
+-------------------------------------
+DetId: 637635229
+ Region: 0 Ring: 2 Station: 1
+ Sector: 6 Layer: 2 Roll: 3
+ Cluster strips [29,29] size=1
+ BX: 0
+ Time: 0 ns
+ Local position: (-33.1071, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [68,68] size=1
+ BX: 12
+ Time: 315.625 ns
+ Local position: (62.5357, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [68,68] size=1
+ BX: -12
+ Time: -284.375 ns
+ Local position: (62.5357, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [60,60] size=1
+ BX: 11
+ Time: 293.75 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [48,50] size=3
+ BX: 9
+ Time: 232.812 ns
+ Local position: (15.9405, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [60,60] size=1
+ BX: -14
+ Time: -331.25 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [37,38] size=2
+ BX: 6
+ Time: 159.375 ns
+ Local position: (-22.0444, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [26,27] size=2
+ BX: 13
+ Time: 342.188 ns
+ Local position: (-52.3556, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [26,27] size=2
+ BX: -11
+ Time: -259.375 ns
+ Local position: (-52.3556, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [70,71] size=2
+ BX: 9
+ Time: 239.062 ns
+ Local position: (68.8889, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [65,65] size=1
+ BX: 9
+ Time: 228.125 ns
+ Local position: (53.7333, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [70,71] size=2
+ BX: -16
+ Time: -389.062 ns
+ Local position: (68.8889, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [64,65] size=2
+ BX: -16
+ Time: -393.75 ns
+ Local position: (52.3556, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [18,20] size=3
+ BX: 11
+ Time: 285.938 ns
+ Local position: (4.8643, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [19,19] size=1
+ BX: -14
+ Time: -339.062 ns
+ Local position: (4.8643, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [3,4] size=2
+ BX: 5
+ Time: 139.062 ns
+ Local position: (-25.2943, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [28,28] size=1
+ BX: 9
+ Time: 226.562 ns
+ Local position: (22.3758, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [28,28] size=1
+ BX: -16
+ Time: -398.438 ns
+ Local position: (22.3758, 0, 0)
+-------------------------------------
+DetId: 637649194
+ Region: 1 Ring: 3 Station: 2
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [22,23] size=2
+ BX: 0
+ Time: 3.125 ns
+ Local position: (17.5061, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [42,43] size=2
+ BX: 6
+ Time: 162.5 ns
+ Local position: (-2.38419e-06, 0, 0)
+-------------------------------------
+DetId: 637584072
+ Region: -1 Ring: 3 Station: 3
+ Sector: 6 Layer: 1 Roll: 1
+ Cluster strips [15,16] size=2
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (-3.65066, 0, 0)
+-------------------------------------
+DetId: 637616580
+ Region: -1 Ring: 2 Station: 3
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [25,25] size=1
+ BX: 9
+ Time: 228.125 ns
+ Local position: (18.951, 0, 0)
+-------------------------------------
+DetId: 637616612
+ Region: -1 Ring: 2 Station: 4
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [26,26] size=1
+ BX: -17
+ Time: -401.562 ns
+ Local position: (21.1805, 0, 0)
+-------------------------------------
+
+
+========== MATCHED LAYER PAIRS ==========
+
+=====================================
+Matched chamber:
+ Region=0 Ring=-2 Station=2 Sector=7
+=====================================
+
+Layer 1 hit:
+ strips [37,38] size=2
+ BX=6
+ time=159.375 ns
+   paired with Layer 2 hit:
+     strips [42,43] size=2
+     BX=6
+     time=162.5 ns
+     Delta t = -3.125 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=2 Station=1 Sector=6
+=====================================
+
+Layer 1 hit:
+ strips [55,56] size=2
+ BX=0
+ time=0 ns
+   paired with Layer 2 hit:
+     strips [29,29] size=1
+     BX=0
+     time=0 ns
+     Delta t = 0 ns
+--------------------------------
+=====================================
+
+=====================================
+Event 6 | Run 1 | Lumi 1
+Total RPC RecHits: 49
+=====================================
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [70,70] size=1
+ BX: -9
+ Time: -217.188 ns
+ Local position: (56.0778, 0, 0)
+-------------------------------------
+DetId: 637567633
+ Region: 0 Ring: -1 Station: 1
+ Sector: 6 Layer: 1 Roll: 1
+ Cluster strips [85,87] size=3
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (92.7, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [11,11] size=1
+ BX: -1
+ Time: -17.1875 ns
+ Local position: (-78.9667, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [10,12] size=3
+ BX: -9
+ Time: -217.188 ns
+ Local position: (-78.9667, 0, 0)
+-------------------------------------
+DetId: 637568409
+ Region: 0 Ring: 1 Station: 1
+ Sector: 12 Layer: 1 Roll: 1
+ Cluster strips [18,18] size=1
+ BX: 0
+ Time: 0 ns
+ Local position: (-62.9444, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [1,5] size=5
+ BX: -11
+ Time: -270.312 ns
+ Local position: (-28.2572, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [12,12] size=1
+ BX: -1
+ Time: -18.75 ns
+ Local position: (-9.41906, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [12,12] size=1
+ BX: -10
+ Time: -242.188 ns
+ Local position: (-9.41906, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [50,50] size=1
+ BX: 0
+ Time: 9.375 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [49,51] size=3
+ BX: -9
+ Time: -214.062 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [11,11] size=1
+ BX: 12
+ Time: 301.562 ns
+ Local position: (-9.55195, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [11,11] size=1
+ BX: -16
+ Time: -400 ns
+ Local position: (-9.55195, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [10,19] size=10
+ BX: 13
+ Time: 329.688 ns
+ Local position: (-70.9556, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [14,16] size=3
+ BX: -16
+ Time: -395.312 ns
+ Local position: (-69.8111, 0, 0)
+-------------------------------------
+DetId: 637635217
+ Region: 0 Ring: -1 Station: 1
+ Sector: 6 Layer: 2 Roll: 3
+ Cluster strips [2,6] size=5
+ BX: 0
+ Time: 0 ns
+ Local position: (-94.4167, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [68,68] size=1
+ BX: 6
+ Time: 164.062 ns
+ Local position: (62.5357, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [68,68] size=1
+ BX: -3
+ Time: -59.375 ns
+ Local position: (62.5357, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [59,60] size=2
+ BX: 4
+ Time: 118.75 ns
+ Local position: (41.6905, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [49,49] size=1
+ BX: 3
+ Time: 84.375 ns
+ Local position: (15.9405, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [59,60] size=2
+ BX: -4
+ Time: -81.25 ns
+ Local position: (41.6905, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [49,49] size=1
+ BX: -6
+ Time: -142.188 ns
+ Local position: (15.9405, 0, 0)
+-------------------------------------
+DetId: 637635993
+ Region: 0 Ring: 1 Station: 1
+ Sector: 12 Layer: 2 Roll: 3
+ Cluster strips [67,67] size=1
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (60.0833, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [38,38] size=1
+ BX: 1
+ Time: 32.8125 ns
+ Local position: (-20.6667, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [38,38] size=1
+ BX: -8
+ Time: -190.625 ns
+ Local position: (-20.6667, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [27,27] size=1
+ BX: 7
+ Time: 193.75 ns
+ Local position: (-50.9778, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [27,27] size=1
+ BX: -2
+ Time: -34.375 ns
+ Local position: (-50.9778, 0, 0)
+-------------------------------------
+DetId: 637633201
+ Region: 0 Ring: -1 Station: 2
+ Sector: 6 Layer: 1 Roll: 3
+ Cluster strips [64,64] size=1
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (50.9778, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [70,70] size=1
+ BX: 3
+ Time: 85.9375 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [64,66] size=3
+ BX: 3
+ Time: 79.6875 ns
+ Local position: (53.7333, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [70,70] size=1
+ BX: -6
+ Time: -139.062 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [65,65] size=1
+ BX: -6
+ Time: -145.312 ns
+ Local position: (53.7333, 0, 0)
+-------------------------------------
+DetId: 637633977
+ Region: 0 Ring: 1 Station: 2
+ Sector: 12 Layer: 1 Roll: 3
+ Cluster strips [41,41] size=1
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-12.4, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [18,20] size=3
+ BX: 5
+ Time: 134.375 ns
+ Local position: (4.8643, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [18,20] size=3
+ BX: -4
+ Time: -90.625 ns
+ Local position: (4.8643, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [2,4] size=3
+ BX: -10
+ Time: -232.812 ns
+ Local position: (-26.2672, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [26,29] size=4
+ BX: 3
+ Time: 75 ns
+ Local position: (21.4029, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [28,28] size=1
+ BX: -6
+ Time: -146.875 ns
+ Local position: (22.3758, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [42,43] size=2
+ BX: 1
+ Time: 35.9375 ns
+ Local position: (-2.38419e-06, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [42,42] size=1
+ BX: -8
+ Time: -185.938 ns
+ Local position: (-1.47619, 0, 0)
+-------------------------------------
+DetId: 637635249
+ Region: 0 Ring: -1 Station: 2
+ Sector: 6 Layer: 2 Roll: 3
+ Cluster strips [23,25] size=3
+ BX: 0
+ Time: 0 ns
+ Local position: (-54.619, 0, 0)
+-------------------------------------
+DetId: 637636025
+ Region: 0 Ring: 1 Station: 2
+ Sector: 12 Layer: 2 Roll: 3
+ Cluster strips [47,47] size=1
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (13.2857, 0, 0)
+-------------------------------------
+DetId: 637616580
+ Region: -1 Ring: 2 Station: 3
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [24,26] size=3
+ BX: -6
+ Time: -146.875 ns
+ Local position: (18.951, 0, 0)
+-------------------------------------
+DetId: 637633233
+ Region: 0 Ring: -1 Station: 3
+ Sector: 6 Layer: 1 Roll: 3
+ Cluster strips [29,29] size=1
+ BX: -1
+ Time: -3.125 ns
+ Local position: (26.4286, 0, 0)
+-------------------------------------
+DetId: 637634009
+ Region: 0 Ring: 1 Station: 3
+ Sector: 12 Layer: 1 Roll: 3
+ Cluster strips [27,29] size=3
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (22.9048, 0, 0)
+-------------------------------------
+DetId: 637567725
+ Region: 0 Ring: -2 Station: 4
+ Sector: 6 Layer: 1 Roll: 1
+ Cluster strips [46,47] size=2
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (90.75, 0, 0)
+-------------------------------------
+DetId: 637571693
+ Region: 0 Ring: -2 Station: 4
+ Sector: 5 Layer: 1 Roll: 1
+ Cluster strips [2,3] size=2
+ BX: 0
+ Time: 0 ns
+ Local position: (-90.75, 0, 0)
+-------------------------------------
+DetId: 637572605
+ Region: 0 Ring: 2 Station: 4
+ Sector: 12 Layer: 1 Roll: 1
+ Cluster strips [12,14] size=3
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (-47.4375, 0, 0)
+-------------------------------------
+DetId: 637616612
+ Region: -1 Ring: 2 Station: 4
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [26,27] size=2
+ BX: 3
+ Time: 75 ns
+ Local position: (22.2953, 0, 0)
+-------------------------------------
+DetId: 637616612
+ Region: -1 Ring: 2 Station: 4
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [25,27] size=3
+ BX: -6
+ Time: -150 ns
+ Local position: (21.1805, 0, 0)
+-------------------------------------
+
+
+========== MATCHED LAYER PAIRS ==========
+
+=====================================
+Matched chamber:
+ Region=0 Ring=-2 Station=2 Sector=7
+=====================================
+
+Layer 1 hit:
+ strips [38,38] size=1
+ BX=1
+ time=32.8125 ns
+   paired with Layer 2 hit:
+     strips [42,43] size=2
+     BX=1
+     time=35.9375 ns
+     Delta t = -3.125 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [42,42] size=1
+     BX=-8
+     time=-185.938 ns
+     Delta t = 218.75 ns
+--------------------------------
+Layer 1 hit:
+ strips [38,38] size=1
+ BX=-8
+ time=-190.625 ns
+   paired with Layer 2 hit:
+     strips [42,43] size=2
+     BX=1
+     time=35.9375 ns
+     Delta t = -226.562 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [42,42] size=1
+     BX=-8
+     time=-185.938 ns
+     Delta t = -4.6875 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=-1 Station=1 Sector=6
+=====================================
+
+Layer 1 hit:
+ strips [85,87] size=3
+ BX=-1
+ time=-1.5625 ns
+   paired with Layer 2 hit:
+     strips [2,6] size=5
+     BX=0
+     time=0 ns
+     Delta t = -1.5625 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=-1 Station=2 Sector=6
+=====================================
+
+Layer 1 hit:
+ strips [64,64] size=1
+ BX=0
+ time=1.5625 ns
+   paired with Layer 2 hit:
+     strips [23,25] size=3
+     BX=0
+     time=0 ns
+     Delta t = 1.5625 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=1 Station=1 Sector=12
+=====================================
+
+Layer 1 hit:
+ strips [18,18] size=1
+ BX=0
+ time=0 ns
+   paired with Layer 2 hit:
+     strips [67,67] size=1
+     BX=-1
+     time=-1.5625 ns
+     Delta t = 1.5625 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=1 Station=2 Sector=12
+=====================================
+
+Layer 1 hit:
+ strips [41,41] size=1
+ BX=-1
+ time=-1.5625 ns
+   paired with Layer 2 hit:
+     strips [47,47] size=1
+     BX=0
+     time=1.5625 ns
+     Delta t = -3.125 ns
+--------------------------------
+=====================================
+
+=====================================
+Event 7 | Run 1 | Lumi 1
+Total RPC RecHits: 46
+=====================================
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [70,71] size=2
+ BX: 12
+ Time: 307.812 ns
+ Local position: (57.2222, 0, 0)
+-------------------------------------
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [70,70] size=1
+ BX: -1
+ Time: -17.1875 ns
+ Local position: (56.0778, 0, 0)
+-------------------------------------
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [70,71] size=2
+ BX: -14
+ Time: -342.188 ns
+ Local position: (57.2222, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [11,12] size=2
+ BX: 12
+ Time: 306.25 ns
+ Local position: (-77.8222, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [11,11] size=1
+ BX: -1
+ Time: -17.1875 ns
+ Local position: (-78.9667, 0, 0)
+-------------------------------------
+DetId: 637568413
+ Region: 0 Ring: 2 Station: 1
+ Sector: 12 Layer: 1 Roll: 1
+ Cluster strips [29,30] size=2
+ BX: -1
+ Time: -3.125 ns
+ Local position: (-36.6222, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [3,3] size=1
+ BX: 10
+ Time: 259.375 ns
+ Local position: (-28.2572, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [3,3] size=1
+ BX: -3
+ Time: -68.75 ns
+ Local position: (-28.2572, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [3,3] size=1
+ BX: -15
+ Time: -367.188 ns
+ Local position: (-28.2572, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [11,12] size=2
+ BX: 11
+ Time: 282.812 ns
+ Local position: (-10.4656, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [12,12] size=1
+ BX: -1
+ Time: -17.1875 ns
+ Local position: (-9.41906, 0, 0)
+-------------------------------------
+DetId: 637612296
+ Region: -1 Ring: 3 Station: 1
+ Sector: 3 Layer: 1 Roll: 2
+ Cluster strips [7,7] size=1
+ BX: -1
+ Time: -3.125 ns
+ Local position: (-31.2841, 0, 0)
+-------------------------------------
+DetId: 637612682
+ Region: 1 Ring: 3 Station: 1
+ Sector: 6 Layer: 1 Roll: 2
+ Cluster strips [16,18] size=3
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (1.64653, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [50,50] size=1
+ BX: 12
+ Time: 309.375 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [49,51] size=3
+ BX: 0
+ Time: 10.9375 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [10,12] size=3
+ BX: -8
+ Time: -200 ns
+ Local position: (-9.55195, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [15,15] size=1
+ BX: -7
+ Time: -167.188 ns
+ Local position: (-69.8111, 0, 0)
+-------------------------------------
+DetId: 637569677
+ Region: 0 Ring: -2 Station: 1
+ Sector: 6 Layer: 2 Roll: 1
+ Cluster strips [37,39] size=3
+ BX: -1
+ Time: -3.125 ns
+ Local position: (-11.0357, 0, 0)
+-------------------------------------
+DetId: 637570461
+ Region: 0 Ring: 2 Station: 1
+ Sector: 12 Layer: 2 Roll: 1
+ Cluster strips [54,56] size=3
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (30.6548, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [68,69] size=2
+ BX: -14
+ Time: -332.812 ns
+ Local position: (63.7619, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [49,49] size=1
+ BX: 16
+ Time: 410.938 ns
+ Local position: (15.9405, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [59,60] size=2
+ BX: 4
+ Time: 115.625 ns
+ Local position: (41.6905, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [48,49] size=2
+ BX: 3
+ Time: 79.6875 ns
+ Local position: (14.7143, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [37,39] size=3
+ BX: 13
+ Time: 334.375 ns
+ Local position: (-20.6667, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [37,39] size=3
+ BX: 0
+ Time: 9.375 ns
+ Local position: (-20.6667, 0, 0)
+-------------------------------------
+DetId: 637579560
+ Region: -1 Ring: 3 Station: 2
+ Sector: 3 Layer: 1 Roll: 1
+ Cluster strips [26,26] size=1
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (34.6812, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [27,27] size=1
+ BX: -13
+ Time: -309.375 ns
+ Local position: (-50.9778, 0, 0)
+-------------------------------------
+DetId: 637633197
+ Region: 0 Ring: -2 Station: 2
+ Sector: 6 Layer: 1 Roll: 3
+ Cluster strips [29,31] size=3
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-42.7111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [70,70] size=1
+ BX: 15
+ Time: 387.5 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [70,70] size=1
+ BX: 3
+ Time: 85.9375 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [64,66] size=3
+ BX: 3
+ Time: 81.25 ns
+ Local position: (53.7333, 0, 0)
+-------------------------------------
+DetId: 637633981
+ Region: 0 Ring: 2 Station: 2
+ Sector: 12 Layer: 1 Roll: 3
+ Cluster strips [52,53] size=2
+ BX: 0
+ Time: 0 ns
+ Local position: (19.2889, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [18,19] size=2
+ BX: 17
+ Time: 432.812 ns
+ Local position: (3.89144, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [18,20] size=3
+ BX: 4
+ Time: 109.375 ns
+ Local position: (4.8643, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [3,4] size=2
+ BX: 11
+ Time: 292.188 ns
+ Local position: (-25.2943, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [3,3] size=1
+ BX: -2
+ Time: -31.25 ns
+ Local position: (-26.2672, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [3,3] size=1
+ BX: -15
+ Time: -360.938 ns
+ Local position: (-26.2672, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [27,29] size=3
+ BX: 16
+ Time: 400 ns
+ Local position: (22.3758, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [28,28] size=1
+ BX: 3
+ Time: 76.5625 ns
+ Local position: (22.3758, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [42,42] size=1
+ BX: 13
+ Time: 337.5 ns
+ Local position: (-1.47619, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [42,42] size=1
+ BX: 0
+ Time: 14.0625 ns
+ Local position: (-1.47619, 0, 0)
+-------------------------------------
+DetId: 637635245
+ Region: 0 Ring: -2 Station: 2
+ Sector: 6 Layer: 2 Roll: 3
+ Cluster strips [58,59] size=2
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (47.2381, 0, 0)
+-------------------------------------
+DetId: 637636029
+ Region: 0 Ring: 2 Station: 2
+ Sector: 12 Layer: 2 Roll: 3
+ Cluster strips [36,36] size=1
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-19.1905, 0, 0)
+-------------------------------------
+DetId: 637616580
+ Region: -1 Ring: 2 Station: 3
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [25,25] size=1
+ BX: 16
+ Time: 401.562 ns
+ Local position: (18.951, 0, 0)
+-------------------------------------
+DetId: 637616580
+ Region: -1 Ring: 2 Station: 3
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [25,25] size=1
+ BX: 3
+ Time: 79.6875 ns
+ Local position: (18.951, 0, 0)
+-------------------------------------
+DetId: 637616612
+ Region: -1 Ring: 2 Station: 4
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [26,26] size=1
+ BX: 16
+ Time: 400 ns
+ Local position: (21.1805, 0, 0)
+-------------------------------------
+
+
+========== MATCHED LAYER PAIRS ==========
+
+=====================================
+Matched chamber:
+ Region=0 Ring=-2 Station=2 Sector=6
+=====================================
+
+Layer 1 hit:
+ strips [29,31] size=3
+ BX=-1
+ time=-1.5625 ns
+   paired with Layer 2 hit:
+     strips [58,59] size=2
+     BX=0
+     time=1.5625 ns
+     Delta t = -3.125 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=-2 Station=2 Sector=7
+=====================================
+
+Layer 1 hit:
+ strips [37,39] size=3
+ BX=13
+ time=334.375 ns
+   paired with Layer 2 hit:
+     strips [42,42] size=1
+     BX=13
+     time=337.5 ns
+     Delta t = -3.125 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [42,42] size=1
+     BX=0
+     time=14.0625 ns
+     Delta t = 320.312 ns
+--------------------------------
+Layer 1 hit:
+ strips [37,39] size=3
+ BX=0
+ time=9.375 ns
+   paired with Layer 2 hit:
+     strips [42,42] size=1
+     BX=13
+     time=337.5 ns
+     Delta t = -328.125 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [42,42] size=1
+     BX=0
+     time=14.0625 ns
+     Delta t = -4.6875 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=2 Station=1 Sector=12
+=====================================
+
+Layer 1 hit:
+ strips [29,30] size=2
+ BX=-1
+ time=-3.125 ns
+   paired with Layer 2 hit:
+     strips [54,56] size=3
+     BX=-1
+     time=-1.5625 ns
+     Delta t = -1.5625 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=2 Station=2 Sector=12
+=====================================
+
+Layer 1 hit:
+ strips [52,53] size=2
+ BX=0
+ time=0 ns
+   paired with Layer 2 hit:
+     strips [36,36] size=1
+     BX=-1
+     time=-1.5625 ns
+     Delta t = 1.5625 ns
+--------------------------------
+=====================================
+
+=====================================
+Event 1 | Run 1 | Lumi 1
+Total RPC RecHits: 45
+=====================================
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [70,70] size=1
+ BX: -7
+ Time: -173.438 ns
+ Local position: (56.0778, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [7,16] size=10
+ BX: -7
+ Time: -165.625 ns
+ Local position: (-77.8222, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [2,3] size=2
+ BX: -9
+ Time: -215.625 ns
+ Local position: (-29.3037, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [12,12] size=1
+ BX: -7
+ Time: -168.75 ns
+ Local position: (-9.41906, 0, 0)
+-------------------------------------
+DetId: 637632520
+ Region: -1 Ring: 3 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [29,30] size=2
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (38.0506, 0, 0)
+-------------------------------------
+DetId: 637632520
+ Region: -1 Ring: 3 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [31,31] size=1
+ BX: -1
+ Time: -3.125 ns
+ Local position: (42.441, 0, 0)
+-------------------------------------
+DetId: 637632520
+ Region: -1 Ring: 3 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [27,28] size=2
+ BX: -1
+ Time: -4.6875 ns
+ Local position: (32.1967, 0, 0)
+-------------------------------------
+DetId: 637632525
+ Region: 0 Ring: -2 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [77,79] size=3
+ BX: 0
+ Time: 0 ns
+ Local position: (74.3889, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [50,50] size=1
+ BX: -7
+ Time: -160.938 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [11,12] size=2
+ BX: 14
+ Time: 373.438 ns
+ Local position: (-8.68359, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [11,12] size=2
+ BX: -15
+ Time: -351.562 ns
+ Local position: (-8.68359, 0, 0)
+-------------------------------------
+DetId: 637633181
+ Region: 0 Ring: 2 Station: 1
+ Sector: 6 Layer: 1 Roll: 3
+ Cluster strips [75,75] size=1
+ BX: 0
+ Time: 0 ns
+ Local position: (67.5222, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [15,15] size=1
+ BX: 16
+ Time: 403.125 ns
+ Local position: (-69.8111, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [15,15] size=1
+ BX: -13
+ Time: -320.312 ns
+ Local position: (-69.8111, 0, 0)
+-------------------------------------
+DetId: 637649162
+ Region: 1 Ring: 3 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [29,29] size=1
+ BX: 0
+ Time: 3.125 ns
+ Local position: (36.5871, 0, 0)
+-------------------------------------
+DetId: 637653640
+ Region: -1 Ring: 3 Station: 1
+ Sector: 6 Layer: 1 Roll: 3
+ Cluster strips [1,3] size=3
+ BX: 0
+ Time: 0 ns
+ Local position: (-42.441, 0, 0)
+-------------------------------------
+DetId: 637634573
+ Region: 0 Ring: -2 Station: 1
+ Sector: 1 Layer: 2 Roll: 3
+ Cluster strips [13,14] size=2
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-71.119, 0, 0)
+-------------------------------------
+DetId: 637635229
+ Region: 0 Ring: 2 Station: 1
+ Sector: 6 Layer: 2 Roll: 3
+ Cluster strips [10,10] size=1
+ BX: -1
+ Time: -4.6875 ns
+ Local position: (-79.7024, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [67,69] size=3
+ BX: 9
+ Time: 240.625 ns
+ Local position: (62.5357, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [68,68] size=1
+ BX: 0
+ Time: 17.1875 ns
+ Local position: (62.5357, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [59,61] size=3
+ BX: 7
+ Time: 192.188 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [48,49] size=2
+ BX: 6
+ Time: 156.25 ns
+ Local position: (14.7143, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [60,60] size=1
+ BX: -2
+ Time: -31.25 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [48,49] size=2
+ BX: -3
+ Time: -71.875 ns
+ Local position: (14.7143, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [37,39] size=3
+ BX: 4
+ Time: 107.812 ns
+ Local position: (-20.6667, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [37,38] size=2
+ BX: -6
+ Time: -139.062 ns
+ Local position: (-22.0444, 0, 0)
+-------------------------------------
+DetId: 637616426
+ Region: 1 Ring: 3 Station: 2
+ Sector: 3 Layer: 1 Roll: 2
+ Cluster strips [3,5] size=3
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (-41.1977, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [27,27] size=1
+ BX: 10
+ Time: 267.188 ns
+ Local position: (-50.9778, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [26,27] size=2
+ BX: 0
+ Time: 17.1875 ns
+ Local position: (-52.3556, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [70,70] size=1
+ BX: 6
+ Time: 160.938 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [65,65] size=1
+ BX: 6
+ Time: 156.25 ns
+ Local position: (53.7333, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [70,70] size=1
+ BX: -4
+ Time: -87.5 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [64,65] size=2
+ BX: -4
+ Time: -95.3125 ns
+ Local position: (52.3556, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [18,19] size=2
+ BX: 8
+ Time: 209.375 ns
+ Local position: (3.89144, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [18,19] size=2
+ BX: -2
+ Time: -35.9375 ns
+ Local position: (3.89144, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [2,4] size=3
+ BX: -8
+ Time: -181.25 ns
+ Local position: (-26.2672, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [28,28] size=1
+ BX: 6
+ Time: 150 ns
+ Local position: (22.3758, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [27,29] size=3
+ BX: -4
+ Time: -98.4375 ns
+ Local position: (22.3758, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [42,43] size=2
+ BX: 4
+ Time: 110.938 ns
+ Local position: (-2.38419e-06, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [41,43] size=3
+ BX: -6
+ Time: -140.625 ns
+ Local position: (-1.47619, 0, 0)
+-------------------------------------
+DetId: 637583690
+ Region: 1 Ring: 3 Station: 3
+ Sector: 3 Layer: 1 Roll: 1
+ Cluster strips [30,31] size=2
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (51.1092, 0, 0)
+-------------------------------------
+DetId: 637616580
+ Region: -1 Ring: 2 Station: 3
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [24,26] size=3
+ BX: 6
+ Time: 153.125 ns
+ Local position: (18.951, 0, 0)
+-------------------------------------
+DetId: 637616580
+ Region: -1 Ring: 2 Station: 3
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [25,25] size=1
+ BX: -4
+ Time: -100 ns
+ Local position: (18.951, 0, 0)
+-------------------------------------
+DetId: 637616612
+ Region: -1 Ring: 2 Station: 4
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [26,27] size=2
+ BX: 6
+ Time: 151.562 ns
+ Local position: (22.2953, 0, 0)
+-------------------------------------
+DetId: 637616612
+ Region: -1 Ring: 2 Station: 4
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [26,26] size=1
+ BX: -4
+ Time: -100 ns
+ Local position: (21.1805, 0, 0)
+-------------------------------------
+
+
+========== MATCHED LAYER PAIRS ==========
+
+=====================================
+Matched chamber:
+ Region=0 Ring=-2 Station=1 Sector=1
+=====================================
+
+Layer 1 hit:
+ strips [77,79] size=3
+ BX=0
+ time=0 ns
+   paired with Layer 2 hit:
+     strips [13,14] size=2
+     BX=-1
+     time=-1.5625 ns
+     Delta t = 1.5625 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=-2 Station=2 Sector=7
+=====================================
+
+Layer 1 hit:
+ strips [37,39] size=3
+ BX=4
+ time=107.812 ns
+   paired with Layer 2 hit:
+     strips [42,43] size=2
+     BX=4
+     time=110.938 ns
+     Delta t = -3.125 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [41,43] size=3
+     BX=-6
+     time=-140.625 ns
+     Delta t = 248.438 ns
+--------------------------------
+Layer 1 hit:
+ strips [37,38] size=2
+ BX=-6
+ time=-139.062 ns
+   paired with Layer 2 hit:
+     strips [42,43] size=2
+     BX=4
+     time=110.938 ns
+     Delta t = -250 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [41,43] size=3
+     BX=-6
+     time=-140.625 ns
+     Delta t = 1.5625 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=2 Station=1 Sector=6
+=====================================
+
+Layer 1 hit:
+ strips [75,75] size=1
+ BX=0
+ time=0 ns
+   paired with Layer 2 hit:
+     strips [10,10] size=1
+     BX=-1
+     time=-4.6875 ns
+     Delta t = 4.6875 ns
+--------------------------------
+=====================================
+
+=====================================
+Event 10 | Run 1 | Lumi 1
+Total RPC RecHits: 35
+=====================================
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [69,71] size=3
+ BX: 3
+ Time: 81.25 ns
+ Local position: (56.0778, 0, 0)
+-------------------------------------
+DetId: 637567641
+ Region: 0 Ring: 1 Station: 1
+ Sector: 6 Layer: 1 Roll: 1
+ Cluster strips [55,57] size=3
+ BX: -1
+ Time: -3.125 ns
+ Local position: (24.0333, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [10,12] size=3
+ BX: 3
+ Time: 81.25 ns
+ Local position: (-78.9667, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [2,3] size=2
+ BX: 2
+ Time: 57.8125 ns
+ Local position: (-29.3037, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [12,12] size=1
+ BX: 3
+ Time: 82.8125 ns
+ Local position: (-9.41906, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [50,50] size=1
+ BX: 4
+ Time: 109.375 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [10,12] size=3
+ BX: 13
+ Time: 325 ns
+ Local position: (-9.55195, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [10,12] size=3
+ BX: -4
+ Time: -100 ns
+ Local position: (-9.55195, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [10,12] size=3
+ BX: -15
+ Time: -351.562 ns
+ Local position: (-9.55195, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [15,15] size=1
+ BX: 14
+ Time: 354.688 ns
+ Local position: (-69.8111, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [13,16] size=4
+ BX: -3
+ Time: -71.875 ns
+ Local position: (-70.9556, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [14,16] size=3
+ BX: -14
+ Time: -345.312 ns
+ Local position: (-69.8111, 0, 0)
+-------------------------------------
+DetId: 637569689
+ Region: 0 Ring: 1 Station: 1
+ Sector: 6 Layer: 2 Roll: 1
+ Cluster strips [29,29] size=1
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-33.1071, 0, 0)
+-------------------------------------
+DetId: 637570449
+ Region: 0 Ring: -1 Station: 1
+ Sector: 12 Layer: 2 Roll: 1
+ Cluster strips [61,62] size=2
+ BX: -1
+ Time: -3.125 ns
+ Local position: (46.5952, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [68,68] size=1
+ BX: 7
+ Time: 192.188 ns
+ Local position: (62.5357, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [67,69] size=3
+ BX: -10
+ Time: -235.938 ns
+ Local position: (62.5357, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [49,49] size=1
+ BX: 7
+ Time: 182.812 ns
+ Local position: (15.9405, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [59,61] size=3
+ BX: -12
+ Time: -281.25 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637567673
+ Region: 0 Ring: 1 Station: 2
+ Sector: 6 Layer: 1 Roll: 1
+ Cluster strips [78,79] size=2
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (90.9333, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [37,38] size=2
+ BX: 5
+ Time: 134.375 ns
+ Local position: (-22.0444, 0, 0)
+-------------------------------------
+DetId: 637568433
+ Region: 0 Ring: -1 Station: 2
+ Sector: 12 Layer: 1 Roll: 1
+ Cluster strips [6,8] size=3
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-106.089, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [26,27] size=2
+ BX: 8
+ Time: 217.188 ns
+ Local position: (-52.3556, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [26,27] size=2
+ BX: -10
+ Time: -232.812 ns
+ Local position: (-52.3556, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [70,71] size=2
+ BX: 7
+ Time: 189.062 ns
+ Local position: (68.8889, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [64,66] size=3
+ BX: 7
+ Time: 181.25 ns
+ Local position: (53.7333, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [17,20] size=4
+ BX: 8
+ Time: 210.938 ns
+ Local position: (3.89144, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [2,4] size=3
+ BX: 3
+ Time: 90.625 ns
+ Local position: (-26.2672, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [27,28] size=2
+ BX: -14
+ Time: -326.562 ns
+ Local position: (21.4029, 0, 0)
+-------------------------------------
+DetId: 637569721
+ Region: 0 Ring: 1 Station: 2
+ Sector: 6 Layer: 2 Roll: 1
+ Cluster strips [9,9] size=1
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-98.9048, 0, 0)
+-------------------------------------
+DetId: 637570481
+ Region: 0 Ring: -1 Station: 2
+ Sector: 12 Layer: 2 Roll: 1
+ Cluster strips [81,81] size=1
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (113.667, 0, 0)
+-------------------------------------
+DetId: 637571801
+ Region: 0 Ring: 1 Station: 3
+ Sector: 6 Layer: 1 Roll: 1
+ Cluster strips [20,20] size=1
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-5.28572, 0, 0)
+-------------------------------------
+DetId: 637616580
+ Region: -1 Ring: 2 Station: 3
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [24,25] size=2
+ BX: -13
+ Time: -323.438 ns
+ Local position: (17.8363, 0, 0)
+-------------------------------------
+DetId: 637616612
+ Region: -1 Ring: 2 Station: 4
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [26,27] size=2
+ BX: -13
+ Time: -325 ns
+ Local position: (22.2953, 0, 0)
+-------------------------------------
+DetId: 637632625
+ Region: 0 Ring: -1 Station: 4
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [39,39] size=1
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (59.8125, 0, 0)
+-------------------------------------
+DetId: 637637369
+ Region: 0 Ring: 1 Station: 4
+ Sector: 6 Layer: 1 Roll: 3
+ Cluster strips [3,4] size=2
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (-86.625, 0, 0)
+-------------------------------------
+
+
+========== MATCHED LAYER PAIRS ==========
+
+=====================================
+Matched chamber:
+ Region=0 Ring=-1 Station=2 Sector=12
+=====================================
+
+Layer 1 hit:
+ strips [6,8] size=3
+ BX=-1
+ time=-1.5625 ns
+   paired with Layer 2 hit:
+     strips [81,81] size=1
+     BX=-1
+     time=-1.5625 ns
+     Delta t = 0 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=1 Station=1 Sector=6
+=====================================
+
+Layer 1 hit:
+ strips [55,57] size=3
+ BX=-1
+ time=-3.125 ns
+   paired with Layer 2 hit:
+     strips [29,29] size=1
+     BX=-1
+     time=-1.5625 ns
+     Delta t = -1.5625 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=1 Station=2 Sector=6
+=====================================
+
+Layer 1 hit:
+ strips [78,79] size=2
+ BX=-1
+ time=-1.5625 ns
+   paired with Layer 2 hit:
+     strips [9,9] size=1
+     BX=-1
+     time=-1.5625 ns
+     Delta t = 0 ns
+--------------------------------
+=====================================
+
+=====================================
+Event 3 | Run 1 | Lumi 1
+Total RPC RecHits: 40
+=====================================
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [70,71] size=2
+ BX: 13
+ Time: 331.25 ns
+ Local position: (57.2222, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [11,11] size=1
+ BX: 13
+ Time: 331.25 ns
+ Local position: (-78.9667, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [3,3] size=1
+ BX: 11
+ Time: 282.812 ns
+ Local position: (-28.2572, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [11,13] size=3
+ BX: 12
+ Time: 306.25 ns
+ Local position: (-9.41906, 0, 0)
+-------------------------------------
+DetId: 637632533
+ Region: 0 Ring: 0 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [6,8] size=3
+ BX: 0
+ Time: 3.125 ns
+ Local position: (-88.1222, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [49,51] size=3
+ BX: 13
+ Time: 335.938 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [11,11] size=1
+ BX: 6
+ Time: 150 ns
+ Local position: (-9.55195, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [11,11] size=1
+ BX: -4
+ Time: -100 ns
+ Local position: (-9.55195, 0, 0)
+-------------------------------------
+DetId: 637633301
+ Region: 0 Ring: 0 Station: 1
+ Sector: 7 Layer: 1 Roll: 3
+ Cluster strips [89,89] size=1
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (99.5667, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [14,15] size=2
+ BX: -4
+ Time: -95.3125 ns
+ Local position: (-70.9556, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [64,72] size=9
+ BX: 0
+ Time: 15.625 ns
+ Local position: (62.5357, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [67,69] size=3
+ BX: -11
+ Time: -257.812 ns
+ Local position: (62.5357, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [47,50] size=4
+ BX: 16
+ Time: 406.25 ns
+ Local position: (14.7143, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [60,60] size=1
+ BX: -12
+ Time: -281.25 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [48,50] size=3
+ BX: -14
+ Time: -343.75 ns
+ Local position: (15.9405, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [37,38] size=2
+ BX: 14
+ Time: 356.25 ns
+ Local position: (-22.0444, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [37,39] size=3
+ BX: -16
+ Time: -387.5 ns
+ Local position: (-20.6667, 0, 0)
+-------------------------------------
+DetId: 637599925
+ Region: 0 Ring: 0 Station: 2
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [10,11] size=2
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (-96.4444, 0, 0)
+-------------------------------------
+DetId: 637600693
+ Region: 0 Ring: 0 Station: 2
+ Sector: 8 Layer: 1 Roll: 2
+ Cluster strips [76,76] size=1
+ BX: -1
+ Time: -3.125 ns
+ Local position: (84.0444, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [27,27] size=1
+ BX: 0
+ Time: 18.75 ns
+ Local position: (-50.9778, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [26,27] size=2
+ BX: -10
+ Time: -231.25 ns
+ Local position: (-52.3556, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [69,71] size=3
+ BX: 16
+ Time: 412.5 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [64,65] size=2
+ BX: 16
+ Time: 406.25 ns
+ Local position: (52.3556, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [70,70] size=1
+ BX: -14
+ Time: -339.062 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [64,65] size=2
+ BX: -14
+ Time: -343.75 ns
+ Local position: (52.3556, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [18,19] size=2
+ BX: 18
+ Time: 462.5 ns
+ Local position: (3.89144, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [19,19] size=1
+ BX: -12
+ Time: -289.062 ns
+ Local position: (4.8643, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [3,3] size=1
+ BX: 12
+ Time: 320.312 ns
+ Local position: (-26.2672, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [27,28] size=2
+ BX: 15
+ Time: 398.438 ns
+ Local position: (21.4029, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [28,28] size=1
+ BX: -14
+ Time: -350 ns
+ Local position: (22.3758, 0, 0)
+-------------------------------------
+DetId: 637569205
+ Region: 0 Ring: 0 Station: 2
+ Sector: 2 Layer: 2 Roll: 1
+ Cluster strips [78,79] size=2
+ BX: -1
+ Time: -3.125 ns
+ Local position: (106.286, 0, 0)
+-------------------------------------
+DetId: 637569973
+ Region: 0 Ring: 0 Station: 2
+ Sector: 8 Layer: 2 Roll: 1
+ Cluster strips [11,14] size=4
+ BX: -1
+ Time: -3.125 ns
+ Local position: (-88.5714, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [41,43] size=3
+ BX: 14
+ Time: 360.938 ns
+ Local position: (-1.47619, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [42,42] size=1
+ BX: -16
+ Time: -389.062 ns
+ Local position: (-1.47619, 0, 0)
+-------------------------------------
+DetId: 637567957
+ Region: 0 Ring: 0 Station: 3
+ Sector: 8 Layer: 1 Roll: 1
+ Cluster strips [40,41] size=2
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (66.9524, 0, 0)
+-------------------------------------
+DetId: 637616580
+ Region: -1 Ring: 2 Station: 3
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [23,26] size=4
+ BX: 16
+ Time: 401.562 ns
+ Local position: (17.8363, 0, 0)
+-------------------------------------
+DetId: 637616580
+ Region: -1 Ring: 2 Station: 3
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [24,25] size=2
+ BX: -14
+ Time: -348.438 ns
+ Local position: (17.8363, 0, 0)
+-------------------------------------
+DetId: 637567221
+ Region: 0 Ring: 0 Station: 4
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [30,32] size=3
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (26.8125, 0, 0)
+-------------------------------------
+DetId: 637616612
+ Region: -1 Ring: 2 Station: 4
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [25,27] size=3
+ BX: 16
+ Time: 400 ns
+ Local position: (21.1805, 0, 0)
+-------------------------------------
+DetId: 637637493
+ Region: 0 Ring: 0 Station: 4
+ Sector: 7 Layer: 1 Roll: 3
+ Cluster strips [35,36] size=2
+ BX: 0
+ Time: 3.125 ns
+ Local position: (45.375, 0, 0)
+-------------------------------------
+
+
+========== MATCHED LAYER PAIRS ==========
+
+=====================================
+Matched chamber:
+ Region=0 Ring=-2 Station=2 Sector=7
+=====================================
+
+Layer 1 hit:
+ strips [37,38] size=2
+ BX=14
+ time=356.25 ns
+   paired with Layer 2 hit:
+     strips [41,43] size=3
+     BX=14
+     time=360.938 ns
+     Delta t = -4.6875 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [42,42] size=1
+     BX=-16
+     time=-389.062 ns
+     Delta t = 745.312 ns
+--------------------------------
+Layer 1 hit:
+ strips [37,39] size=3
+ BX=-16
+ time=-387.5 ns
+   paired with Layer 2 hit:
+     strips [41,43] size=3
+     BX=14
+     time=360.938 ns
+     Delta t = -748.438 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [42,42] size=1
+     BX=-16
+     time=-389.062 ns
+     Delta t = 1.5625 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=0 Station=2 Sector=2
+=====================================
+
+Layer 1 hit:
+ strips [10,11] size=2
+ BX=0
+ time=1.5625 ns
+   paired with Layer 2 hit:
+     strips [78,79] size=2
+     BX=-1
+     time=-3.125 ns
+     Delta t = 4.6875 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=0 Station=2 Sector=8
+=====================================
+
+Layer 1 hit:
+ strips [76,76] size=1
+ BX=-1
+ time=-3.125 ns
+   paired with Layer 2 hit:
+     strips [11,14] size=4
+     BX=-1
+     time=-3.125 ns
+     Delta t = 0 ns
+--------------------------------
+=====================================
+
+=====================================
+Event 15 | Run 1 | Lumi 1
+Total RPC RecHits: 41
+=====================================
+DetId: 637567001
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 1
+ Cluster strips [3,4] size=2
+ BX: 0
+ Time: 0 ns
+ Local position: (-96.1333, 0, 0)
+-------------------------------------
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [70,70] size=1
+ BX: 0
+ Time: 6.25 ns
+ Local position: (56.0778, 0, 0)
+-------------------------------------
+DetId: 637567761
+ Region: 0 Ring: -1 Station: 1
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [70,71] size=2
+ BX: -1
+ Time: -4.6875 ns
+ Local position: (57.2222, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [11,11] size=1
+ BX: 0
+ Time: 7.8125 ns
+ Local position: (-78.9667, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [2,4] size=3
+ BX: -1
+ Time: -12.5 ns
+ Local position: (-28.2572, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [12,12] size=1
+ BX: 4
+ Time: 104.688 ns
+ Local position: (-9.41906, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [12,12] size=1
+ BX: 0
+ Time: 10.9375 ns
+ Local position: (-9.41906, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [49,51] size=3
+ BX: 5
+ Time: 137.5 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [50,50] size=1
+ BX: 1
+ Time: 34.375 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [11,11] size=1
+ BX: -7
+ Time: -173.438 ns
+ Local position: (-9.55195, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [14,16] size=3
+ BX: -6
+ Time: -145.312 ns
+ Local position: (-69.8111, 0, 0)
+-------------------------------------
+DetId: 637569049
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 2 Roll: 1
+ Cluster strips [82,82] size=1
+ BX: -1
+ Time: -3.125 ns
+ Local position: (96.869, 0, 0)
+-------------------------------------
+DetId: 637569809
+ Region: 0 Ring: -1 Station: 1
+ Sector: 7 Layer: 2 Roll: 1
+ Cluster strips [21,21] size=1
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-52.7262, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [68,68] size=1
+ BX: 11
+ Time: 292.188 ns
+ Local position: (62.5357, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [68,68] size=1
+ BX: -13
+ Time: -307.812 ns
+ Local position: (62.5357, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [60,60] size=1
+ BX: 9
+ Time: 245.312 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [49,49] size=1
+ BX: 8
+ Time: 204.688 ns
+ Local position: (15.9405, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [49,49] size=1
+ BX: 4
+ Time: 110.938 ns
+ Local position: (15.9405, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [59,61] size=3
+ BX: -14
+ Time: -329.688 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [37,39] size=3
+ BX: 2
+ Time: 57.8125 ns
+ Local position: (-20.6667, 0, 0)
+-------------------------------------
+DetId: 637600561
+ Region: 0 Ring: -1 Station: 2
+ Sector: 7 Layer: 1 Roll: 2
+ Cluster strips [46,48] size=3
+ BX: 0
+ Time: 0 ns
+ Local position: (4.13334, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [24,30] size=7
+ BX: 11
+ Time: 289.062 ns
+ Local position: (-50.9778, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [27,27] size=1
+ BX: -12
+ Time: -285.938 ns
+ Local position: (-50.9778, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [70,70] size=1
+ BX: 7
+ Time: 189.062 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [64,65] size=2
+ BX: 7
+ Time: 182.812 ns
+ Local position: (52.3556, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [70,71] size=2
+ BX: -16
+ Time: -387.5 ns
+ Local position: (68.8889, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [65,65] size=1
+ BX: -16
+ Time: -392.188 ns
+ Local position: (53.7333, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [18,19] size=2
+ BX: 9
+ Time: 234.375 ns
+ Local position: (3.89144, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [18,20] size=3
+ BX: -14
+ Time: -340.625 ns
+ Local position: (4.8643, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [1,6] size=6
+ BX: 4
+ Time: 115.625 ns
+ Local position: (-25.2943, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [3,4] size=2
+ BX: -1
+ Time: -6.25 ns
+ Local position: (-25.2943, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [42,42] size=1
+ BX: 5
+ Time: 139.062 ns
+ Local position: (-1.47619, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [42,42] size=1
+ BX: 2
+ Time: 62.5 ns
+ Local position: (-1.47619, 0, 0)
+-------------------------------------
+DetId: 637634617
+ Region: 0 Ring: 1 Station: 2
+ Sector: 1 Layer: 2 Roll: 3
+ Cluster strips [61,63] size=3
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (57.5714, 0, 0)
+-------------------------------------
+DetId: 637635377
+ Region: 0 Ring: -1 Station: 2
+ Sector: 7 Layer: 2 Roll: 3
+ Cluster strips [42,42] size=1
+ BX: 0
+ Time: 0 ns
+ Local position: (-1.47619, 0, 0)
+-------------------------------------
+DetId: 637616580
+ Region: -1 Ring: 2 Station: 3
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [25,25] size=1
+ BX: 8
+ Time: 200 ns
+ Local position: (18.951, 0, 0)
+-------------------------------------
+DetId: 637616580
+ Region: -1 Ring: 2 Station: 3
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [24,26] size=3
+ BX: -16
+ Time: -398.438 ns
+ Local position: (18.951, 0, 0)
+-------------------------------------
+DetId: 637632601
+ Region: 0 Ring: 1 Station: 3
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [12,12] size=1
+ BX: 0
+ Time: 0 ns
+ Local position: (-33.4762, 0, 0)
+-------------------------------------
+DetId: 637633361
+ Region: 0 Ring: -1 Station: 3
+ Sector: 7 Layer: 1 Roll: 3
+ Cluster strips [12,13] size=2
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-31.7143, 0, 0)
+-------------------------------------
+DetId: 637616612
+ Region: -1 Ring: 2 Station: 4
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [26,26] size=1
+ BX: 8
+ Time: 200 ns
+ Local position: (21.1805, 0, 0)
+-------------------------------------
+DetId: 637616612
+ Region: -1 Ring: 2 Station: 4
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [26,26] size=1
+ BX: -16
+ Time: -398.438 ns
+ Local position: (21.1805, 0, 0)
+-------------------------------------
+
+
+========== MATCHED LAYER PAIRS ==========
+
+=====================================
+Matched chamber:
+ Region=0 Ring=-2 Station=2 Sector=7
+=====================================
+
+Layer 1 hit:
+ strips [37,39] size=3
+ BX=2
+ time=57.8125 ns
+   paired with Layer 2 hit:
+     strips [42,42] size=1
+     BX=5
+     time=139.062 ns
+     Delta t = -81.25 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [42,42] size=1
+     BX=2
+     time=62.5 ns
+     Delta t = -4.6875 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=-1 Station=1 Sector=7
+=====================================
+
+Layer 1 hit:
+ strips [70,71] size=2
+ BX=-1
+ time=-4.6875 ns
+   paired with Layer 2 hit:
+     strips [21,21] size=1
+     BX=-1
+     time=-1.5625 ns
+     Delta t = -3.125 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=-1 Station=2 Sector=7
+=====================================
+
+Layer 1 hit:
+ strips [46,48] size=3
+ BX=0
+ time=0 ns
+   paired with Layer 2 hit:
+     strips [42,42] size=1
+     BX=0
+     time=0 ns
+     Delta t = 0 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=1 Station=1 Sector=1
+=====================================
+
+Layer 1 hit:
+ strips [3,4] size=2
+ BX=0
+ time=0 ns
+   paired with Layer 2 hit:
+     strips [82,82] size=1
+     BX=-1
+     time=-3.125 ns
+     Delta t = 3.125 ns
+--------------------------------
+Layer 1 hit:
+ strips [49,51] size=3
+ BX=5
+ time=137.5 ns
+   paired with Layer 2 hit:
+     strips [82,82] size=1
+     BX=-1
+     time=-3.125 ns
+     Delta t = 140.625 ns
+--------------------------------
+Layer 1 hit:
+ strips [50,50] size=1
+ BX=1
+ time=34.375 ns
+   paired with Layer 2 hit:
+     strips [82,82] size=1
+     BX=-1
+     time=-3.125 ns
+     Delta t = 37.5 ns
+--------------------------------
+=====================================
+
+=====================================
+Event 5 | Run 1 | Lumi 1
+Total RPC RecHits: 37
+=====================================
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [70,71] size=2
+ BX: 5
+ Time: 131.25 ns
+ Local position: (57.2222, 0, 0)
+-------------------------------------
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [70,70] size=1
+ BX: -10
+ Time: -245.312 ns
+ Local position: (56.0778, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [10,12] size=3
+ BX: 5
+ Time: 131.25 ns
+ Local position: (-78.9667, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [11,11] size=1
+ BX: -10
+ Time: -243.75 ns
+ Local position: (-78.9667, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [2,3] size=2
+ BX: 3
+ Time: 84.375 ns
+ Local position: (-29.3037, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [3,3] size=1
+ BX: -12
+ Time: -290.625 ns
+ Local position: (-28.2572, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [11,13] size=3
+ BX: 4
+ Time: 107.812 ns
+ Local position: (-9.41906, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [12,12] size=1
+ BX: -10
+ Time: -242.188 ns
+ Local position: (-9.41906, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [49,50] size=2
+ BX: 5
+ Time: 132.812 ns
+ Local position: (9.15556, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [49,51] size=3
+ BX: -10
+ Time: -237.5 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [11,11] size=1
+ BX: -2
+ Time: -50 ns
+ Local position: (-9.55195, 0, 0)
+-------------------------------------
+DetId: 637632793
+ Region: 0 Ring: 1 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [80,80] size=1
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (78.9667, 0, 0)
+-------------------------------------
+DetId: 637633553
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 1 Roll: 3
+ Cluster strips [76,77] size=2
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (70.9556, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [14,15] size=2
+ BX: -2
+ Time: -43.75 ns
+ Local position: (-70.9556, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [14,15] size=2
+ BX: -16
+ Time: -395.312 ns
+ Local position: (-70.9556, 0, 0)
+-------------------------------------
+DetId: 637634841
+ Region: 0 Ring: 1 Station: 1
+ Sector: 3 Layer: 2 Roll: 3
+ Cluster strips [2,4] size=3
+ BX: 0
+ Time: 0 ns
+ Local position: (-96.869, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [67,69] size=3
+ BX: 11
+ Time: 292.188 ns
+ Local position: (62.5357, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [12,14] size=3
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-72.3452, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [60,60] size=1
+ BX: 9
+ Time: 242.188 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [48,49] size=2
+ BX: 8
+ Time: 207.812 ns
+ Local position: (14.7143, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [37,38] size=2
+ BX: 6
+ Time: 157.812 ns
+ Local position: (-22.0444, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [37,38] size=2
+ BX: -9
+ Time: -217.188 ns
+ Local position: (-22.0444, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [26,27] size=2
+ BX: -9
+ Time: -206.25 ns
+ Local position: (-52.3556, 0, 0)
+-------------------------------------
+DetId: 637632953
+ Region: 0 Ring: 1 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [9,9] size=1
+ BX: 0
+ Time: 0 ns
+ Local position: (-100.578, 0, 0)
+-------------------------------------
+DetId: 637633585
+ Region: 0 Ring: -1 Station: 2
+ Sector: 9 Layer: 1 Roll: 3
+ Cluster strips [54,59] size=6
+ BX: 0
+ Time: 0 ns
+ Local position: (30.3111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [69,71] size=3
+ BX: 8
+ Time: 209.375 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [64,66] size=3
+ BX: 8
+ Time: 206.25 ns
+ Local position: (53.7333, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [18,20] size=3
+ BX: 10
+ Time: 259.375 ns
+ Local position: (4.8643, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [3,4] size=2
+ BX: 4
+ Time: 117.188 ns
+ Local position: (-25.2943, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [3,4] size=2
+ BX: -11
+ Time: -256.25 ns
+ Local position: (-25.2943, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [27,29] size=3
+ BX: 8
+ Time: 200 ns
+ Local position: (22.3758, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [42,43] size=2
+ BX: 6
+ Time: 162.5 ns
+ Local position: (-2.38419e-06, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [42,42] size=1
+ BX: -9
+ Time: -209.375 ns
+ Local position: (-1.47619, 0, 0)
+-------------------------------------
+DetId: 637635633
+ Region: 0 Ring: -1 Station: 2
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [30,31] size=2
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-35.4286, 0, 0)
+-------------------------------------
+DetId: 637568077
+ Region: 0 Ring: -2 Station: 3
+ Sector: 9 Layer: 1 Roll: 1
+ Cluster strips [23,25] size=3
+ BX: 0
+ Time: 0 ns
+ Local position: (8.80952, 0, 0)
+-------------------------------------
+DetId: 637568109
+ Region: 0 Ring: -2 Station: 4
+ Sector: 9 Layer: 1 Roll: 1
+ Cluster strips [45,46] size=2
+ BX: -1
+ Time: -3.125 ns
+ Local position: (86.625, 0, 0)
+-------------------------------------
+DetId: 637616612
+ Region: -1 Ring: 2 Station: 4
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [25,27] size=3
+ BX: 8
+ Time: 200 ns
+ Local position: (21.1805, 0, 0)
+-------------------------------------
+
+
+========== MATCHED LAYER PAIRS ==========
+
+=====================================
+Matched chamber:
+ Region=0 Ring=-2 Station=2 Sector=7
+=====================================
+
+Layer 1 hit:
+ strips [37,38] size=2
+ BX=6
+ time=157.812 ns
+   paired with Layer 2 hit:
+     strips [42,43] size=2
+     BX=6
+     time=162.5 ns
+     Delta t = -4.6875 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [42,42] size=1
+     BX=-9
+     time=-209.375 ns
+     Delta t = 367.188 ns
+--------------------------------
+Layer 1 hit:
+ strips [37,38] size=2
+ BX=-9
+ time=-217.188 ns
+   paired with Layer 2 hit:
+     strips [42,43] size=2
+     BX=6
+     time=162.5 ns
+     Delta t = -379.688 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [42,42] size=1
+     BX=-9
+     time=-209.375 ns
+     Delta t = -7.8125 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=-1 Station=1 Sector=9
+=====================================
+
+Layer 1 hit:
+ strips [76,77] size=2
+ BX=0
+ time=1.5625 ns
+   paired with Layer 2 hit:
+     strips [67,69] size=3
+     BX=11
+     time=292.188 ns
+     Delta t = -290.625 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [12,14] size=3
+     BX=-1
+     time=-1.5625 ns
+     Delta t = 3.125 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=-1 Station=2 Sector=9
+=====================================
+
+Layer 1 hit:
+ strips [54,59] size=6
+ BX=0
+ time=0 ns
+   paired with Layer 2 hit:
+     strips [30,31] size=2
+     BX=-1
+     time=-1.5625 ns
+     Delta t = 1.5625 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=1 Station=1 Sector=3
+=====================================
+
+Layer 1 hit:
+ strips [80,80] size=1
+ BX=-1
+ time=-1.5625 ns
+   paired with Layer 2 hit:
+     strips [2,4] size=3
+     BX=0
+     time=0 ns
+     Delta t = -1.5625 ns
+--------------------------------
+=====================================
+
+=====================================
+Event 8 | Run 1 | Lumi 1
+Total RPC RecHits: 41
+=====================================
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [70,71] size=2
+ BX: 14
+ Time: 359.375 ns
+ Local position: (57.2222, 0, 0)
+-------------------------------------
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [69,71] size=3
+ BX: 10
+ Time: 254.688 ns
+ Local position: (56.0778, 0, 0)
+-------------------------------------
+DetId: 637568145
+ Region: 0 Ring: -1 Station: 1
+ Sector: 10 Layer: 1 Roll: 1
+ Cluster strips [89,90] size=2
+ BX: 0
+ Time: 0 ns
+ Local position: (100.711, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [11,11] size=1
+ BX: 14
+ Time: 359.375 ns
+ Local position: (-78.9667, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [10,12] size=3
+ BX: 10
+ Time: 257.812 ns
+ Local position: (-78.9667, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [2,3] size=2
+ BX: 8
+ Time: 209.375 ns
+ Local position: (-29.3037, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [12,12] size=1
+ BX: 14
+ Time: 360.938 ns
+ Local position: (-9.41906, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [11,13] size=3
+ BX: 9
+ Time: 232.812 ns
+ Local position: (-9.41906, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [49,51] size=3
+ BX: 14
+ Time: 357.812 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [49,51] size=3
+ BX: 10
+ Time: 264.062 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [10,13] size=4
+ BX: 3
+ Time: 75 ns
+ Local position: (-8.68359, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [11,11] size=1
+ BX: -8
+ Time: -200 ns
+ Local position: (-9.55195, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [14,15] size=2
+ BX: 3
+ Time: 76.5625 ns
+ Local position: (-70.9556, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [15,15] size=1
+ BX: -8
+ Time: -196.875 ns
+ Local position: (-69.8111, 0, 0)
+-------------------------------------
+DetId: 637570193
+ Region: 0 Ring: -1 Station: 1
+ Sector: 10 Layer: 2 Roll: 1
+ Cluster strips [1,2] size=2
+ BX: 0
+ Time: 0 ns
+ Local position: (-100.548, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [65,72] size=8
+ BX: -3
+ Time: -57.8125 ns
+ Local position: (63.7619, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [68,69] size=2
+ BX: -14
+ Time: -332.812 ns
+ Local position: (63.7619, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [49,49] size=1
+ BX: 18
+ Time: 454.688 ns
+ Local position: (15.9405, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [48,50] size=3
+ BX: 13
+ Time: 331.25 ns
+ Local position: (15.9405, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [60,60] size=1
+ BX: -5
+ Time: -104.688 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [60,60] size=1
+ BX: -16
+ Time: -381.25 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637567417
+ Region: 0 Ring: 1 Station: 2
+ Sector: 4 Layer: 1 Roll: 1
+ Cluster strips [35,35] size=1
+ BX: 0
+ Time: 0 ns
+ Local position: (-28.9333, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [38,38] size=1
+ BX: 15
+ Time: 387.5 ns
+ Local position: (-20.6667, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [37,38] size=2
+ BX: 11
+ Time: 287.5 ns
+ Local position: (-22.0444, 0, 0)
+-------------------------------------
+DetId: 637568177
+ Region: 0 Ring: -1 Station: 2
+ Sector: 10 Layer: 1 Roll: 1
+ Cluster strips [66,67] size=2
+ BX: -1
+ Time: -3.125 ns
+ Local position: (57.8667, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [26,27] size=2
+ BX: -3
+ Time: -57.8125 ns
+ Local position: (-52.3556, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [26,27] size=2
+ BX: -14
+ Time: -329.688 ns
+ Local position: (-52.3556, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [70,70] size=1
+ BX: -7
+ Time: -160.938 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [64,65] size=2
+ BX: -7
+ Time: -168.75 ns
+ Local position: (52.3556, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [19,19] size=1
+ BX: -5
+ Time: -115.625 ns
+ Local position: (4.8643, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [3,3] size=1
+ BX: 13
+ Time: 340.625 ns
+ Local position: (-26.2672, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [3,3] size=1
+ BX: 9
+ Time: 242.188 ns
+ Local position: (-26.2672, 0, 0)
+-------------------------------------
+DetId: 637569465
+ Region: 0 Ring: 1 Station: 2
+ Sector: 4 Layer: 2 Roll: 1
+ Cluster strips [53,53] size=1
+ BX: 0
+ Time: 0 ns
+ Local position: (31, 0, 0)
+-------------------------------------
+DetId: 637570225
+ Region: 0 Ring: -1 Station: 2
+ Sector: 10 Layer: 2 Roll: 1
+ Cluster strips [20,22] size=3
+ BX: -1
+ Time: -3.125 ns
+ Local position: (-63.4762, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [42,43] size=2
+ BX: 15
+ Time: 387.5 ns
+ Local position: (-2.38419e-06, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [42,43] size=2
+ BX: 11
+ Time: 285.938 ns
+ Local position: (-2.38419e-06, 0, 0)
+-------------------------------------
+DetId: 637568209
+ Region: 0 Ring: -1 Station: 3
+ Sector: 10 Layer: 1 Roll: 1
+ Cluster strips [32,32] size=1
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (37, 0, 0)
+-------------------------------------
+DetId: 637616580
+ Region: -1 Ring: 2 Station: 3
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [25,25] size=1
+ BX: -7
+ Time: -171.875 ns
+ Local position: (18.951, 0, 0)
+-------------------------------------
+DetId: 637571577
+ Region: 0 Ring: 1 Station: 4
+ Sector: 4 Layer: 1 Roll: 1
+ Cluster strips [23,24] size=2
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (20.2778, 0, 0)
+-------------------------------------
+DetId: 637616612
+ Region: -1 Ring: 2 Station: 4
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [25,27] size=3
+ BX: -7
+ Time: -173.438 ns
+ Local position: (21.1805, 0, 0)
+-------------------------------------
+DetId: 637633777
+ Region: 0 Ring: -1 Station: 4
+ Sector: 10 Layer: 1 Roll: 3
+ Cluster strips [24,25] size=2
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (-24.8, 0, 0)
+-------------------------------------
+
+
+========== MATCHED LAYER PAIRS ==========
+
+=====================================
+Matched chamber:
+ Region=0 Ring=-2 Station=2 Sector=7
+=====================================
+
+Layer 1 hit:
+ strips [38,38] size=1
+ BX=15
+ time=387.5 ns
+   paired with Layer 2 hit:
+     strips [42,43] size=2
+     BX=15
+     time=387.5 ns
+     Delta t = 0 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [42,43] size=2
+     BX=11
+     time=285.938 ns
+     Delta t = 101.562 ns
+--------------------------------
+Layer 1 hit:
+ strips [37,38] size=2
+ BX=11
+ time=287.5 ns
+   paired with Layer 2 hit:
+     strips [42,43] size=2
+     BX=15
+     time=387.5 ns
+     Delta t = -100 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [42,43] size=2
+     BX=11
+     time=285.938 ns
+     Delta t = 1.5625 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=-1 Station=1 Sector=10
+=====================================
+
+Layer 1 hit:
+ strips [89,90] size=2
+ BX=0
+ time=0 ns
+   paired with Layer 2 hit:
+     strips [1,2] size=2
+     BX=0
+     time=0 ns
+     Delta t = 0 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=-1 Station=2 Sector=10
+=====================================
+
+Layer 1 hit:
+ strips [66,67] size=2
+ BX=-1
+ time=-3.125 ns
+   paired with Layer 2 hit:
+     strips [20,22] size=3
+     BX=-1
+     time=-3.125 ns
+     Delta t = 0 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=1 Station=2 Sector=4
+=====================================
+
+Layer 1 hit:
+ strips [35,35] size=1
+ BX=0
+ time=0 ns
+   paired with Layer 2 hit:
+     strips [53,53] size=1
+     BX=0
+     time=0 ns
+     Delta t = 0 ns
+--------------------------------
+=====================================
+
+=====================================
+Event 13 | Run 1 | Lumi 1
+Total RPC RecHits: 35
+=====================================
+DetId: 637566997
+ Region: 0 Ring: 0 Station: 1
+ Sector: 1 Layer: 1 Roll: 1
+ Cluster strips [34,36] size=3
+ BX: -1
+ Time: -3.125 ns
+ Local position: (-24.0333, 0, 0)
+-------------------------------------
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [70,70] size=1
+ BX: -8
+ Time: -195.312 ns
+ Local position: (56.0778, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [10,12] size=3
+ BX: -8
+ Time: -195.312 ns
+ Local position: (-78.9667, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [2,4] size=3
+ BX: -9
+ Time: -217.188 ns
+ Local position: (-28.2572, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [2,3] size=2
+ BX: -12
+ Time: -292.188 ns
+ Local position: (-29.3037, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [11,13] size=3
+ BX: -8
+ Time: -189.062 ns
+ Local position: (-9.41906, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [50,50] size=1
+ BX: -7
+ Time: -164.062 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [10,12] size=3
+ BX: 16
+ Time: 403.125 ns
+ Local position: (-9.55195, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [11,12] size=2
+ BX: 4
+ Time: 123.438 ns
+ Local position: (-8.68359, 0, 0)
+-------------------------------------
+DetId: 637633301
+ Region: 0 Ring: 0 Station: 1
+ Sector: 7 Layer: 1 Roll: 3
+ Cluster strips [51,51] size=1
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (12.5889, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [14,15] size=2
+ BX: 16
+ Time: 403.125 ns
+ Local position: (-70.9556, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [8,21] size=14
+ BX: 6
+ Time: 156.25 ns
+ Local position: (-70.9556, 0, 0)
+-------------------------------------
+DetId: 637569045
+ Region: 0 Ring: 0 Station: 1
+ Sector: 1 Layer: 2 Roll: 1
+ Cluster strips [55,57] size=3
+ BX: -1
+ Time: -3.125 ns
+ Local position: (33.1071, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [68,68] size=1
+ BX: 9
+ Time: 239.062 ns
+ Local position: (62.5357, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [67,70] size=4
+ BX: -1
+ Time: -9.375 ns
+ Local position: (63.7619, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [60,60] size=1
+ BX: -3
+ Time: -56.25 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [48,49] size=2
+ BX: -4
+ Time: -93.75 ns
+ Local position: (14.7143, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [36,39] size=4
+ BX: -7
+ Time: -164.062 ns
+ Local position: (-22.0444, 0, 0)
+-------------------------------------
+DetId: 637599797
+ Region: 0 Ring: 0 Station: 2
+ Sector: 1 Layer: 1 Roll: 2
+ Cluster strips [12,12] size=1
+ BX: 0
+ Time: 3.125 ns
+ Local position: (-92.3111, 0, 0)
+-------------------------------------
+DetId: 637600565
+ Region: 0 Ring: 0 Station: 2
+ Sector: 7 Layer: 1 Roll: 2
+ Cluster strips [74,74] size=1
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (78.5333, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [26,27] size=2
+ BX: 10
+ Time: 267.188 ns
+ Local position: (-52.3556, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [26,27] size=2
+ BX: -1
+ Time: -7.8125 ns
+ Local position: (-52.3556, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [60,70] size=11
+ BX: -5
+ Time: -119.46 ns
+ Local position: (53.7333, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [18,20] size=3
+ BX: -3
+ Time: -64.0625 ns
+ Local position: (4.8643, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [3,3] size=1
+ BX: -9
+ Time: -207.812 ns
+ Local position: (-26.2672, 0, 0)
+-------------------------------------
+DetId: 637569077
+ Region: 0 Ring: 0 Station: 2
+ Sector: 1 Layer: 2 Roll: 1
+ Cluster strips [76,76] size=1
+ BX: -1
+ Time: -3.125 ns
+ Local position: (98.9048, 0, 0)
+-------------------------------------
+DetId: 637569845
+ Region: 0 Ring: 0 Station: 2
+ Sector: 7 Layer: 2 Roll: 1
+ Cluster strips [14,14] size=1
+ BX: -1
+ Time: -6.25 ns
+ Local position: (-84.1429, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [42,42] size=1
+ BX: -7
+ Time: -162.5 ns
+ Local position: (-1.47619, 0, 0)
+-------------------------------------
+DetId: 637571157
+ Region: 0 Ring: 0 Station: 3
+ Sector: 1 Layer: 1 Roll: 1
+ Cluster strips [22,23] size=2
+ BX: -1
+ Time: -3.125 ns
+ Local position: (3.52381, 0, 0)
+-------------------------------------
+DetId: 637571925
+ Region: 0 Ring: 0 Station: 3
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [14,18] size=5
+ BX: -1
+ Time: -3.125 ns
+ Local position: (-19.381, 0, 0)
+-------------------------------------
+DetId: 637616580
+ Region: -1 Ring: 2 Station: 3
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [25,25] size=1
+ BX: -5
+ Time: -123.438 ns
+ Local position: (18.951, 0, 0)
+-------------------------------------
+DetId: 637567861
+ Region: 0 Ring: 0 Station: 4
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [46,48] size=3
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (92.8125, 0, 0)
+-------------------------------------
+DetId: 637571189
+ Region: 0 Ring: 0 Station: 4
+ Sector: 1 Layer: 1 Roll: 1
+ Cluster strips [1,1] size=1
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-96.9375, 0, 0)
+-------------------------------------
+DetId: 637616612
+ Region: -1 Ring: 2 Station: 4
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [25,27] size=3
+ BX: -5
+ Time: -125 ns
+ Local position: (21.1805, 0, 0)
+-------------------------------------
+DetId: 637632757
+ Region: 0 Ring: 0 Station: 4
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [4,5] size=2
+ BX: 0
+ Time: 3.125 ns
+ Local position: (-82.5, 0, 0)
+-------------------------------------
+
+
+========== MATCHED LAYER PAIRS ==========
+
+=====================================
+Matched chamber:
+ Region=0 Ring=-2 Station=2 Sector=7
+=====================================
+
+Layer 1 hit:
+ strips [36,39] size=4
+ BX=-7
+ time=-164.062 ns
+   paired with Layer 2 hit:
+     strips [42,42] size=1
+     BX=-7
+     time=-162.5 ns
+     Delta t = -1.5625 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=0 Station=1 Sector=1
+=====================================
+
+Layer 1 hit:
+ strips [34,36] size=3
+ BX=-1
+ time=-3.125 ns
+   paired with Layer 2 hit:
+     strips [55,57] size=3
+     BX=-1
+     time=-3.125 ns
+     Delta t = 0 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=0 Station=2 Sector=1
+=====================================
+
+Layer 1 hit:
+ strips [12,12] size=1
+ BX=0
+ time=3.125 ns
+   paired with Layer 2 hit:
+     strips [76,76] size=1
+     BX=-1
+     time=-3.125 ns
+     Delta t = 6.25 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=0 Station=2 Sector=7
+=====================================
+
+Layer 1 hit:
+ strips [74,74] size=1
+ BX=-1
+ time=-1.5625 ns
+   paired with Layer 2 hit:
+     strips [14,14] size=1
+     BX=-1
+     time=-6.25 ns
+     Delta t = 4.6875 ns
+--------------------------------
+=====================================
+
+=====================================
+Event 11 | Run 1 | Lumi 1
+Total RPC RecHits: 49
+=====================================
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [70,70] size=1
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (56.0778, 0, 0)
+-------------------------------------
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [69,71] size=3
+ BX: -13
+ Time: -318.75 ns
+ Local position: (56.0778, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [11,11] size=1
+ BX: 0
+ Time: 6.25 ns
+ Local position: (-78.9667, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [10,12] size=3
+ BX: -13
+ Time: -321.875 ns
+ Local position: (-78.9667, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [2,4] size=3
+ BX: -2
+ Time: -42.1875 ns
+ Local position: (-28.2572, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [3,3] size=1
+ BX: -15
+ Time: -364.062 ns
+ Local position: (-28.2572, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [11,13] size=3
+ BX: -1
+ Time: -20.3125 ns
+ Local position: (-9.41906, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [11,13] size=3
+ BX: -14
+ Time: -345.312 ns
+ Local position: (-9.41906, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [50,50] size=1
+ BX: 14
+ Time: 360.938 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [48,51] size=4
+ BX: 0
+ Time: 14.0625 ns
+ Local position: (9.15556, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [50,50] size=1
+ BX: -13
+ Time: -310.938 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [11,11] size=1
+ BX: 13
+ Time: 325 ns
+ Local position: (-9.55195, 0, 0)
+-------------------------------------
+DetId: 637633165
+ Region: 0 Ring: -2 Station: 1
+ Sector: 6 Layer: 1 Roll: 3
+ Cluster strips [40,41] size=2
+ BX: 0
+ Time: 0 ns
+ Local position: (-11.4444, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [14,16] size=3
+ BX: -7
+ Time: -170.312 ns
+ Local position: (-69.8111, 0, 0)
+-------------------------------------
+DetId: 637633949
+ Region: 0 Ring: 2 Station: 1
+ Sector: 12 Layer: 1 Roll: 3
+ Cluster strips [44,46] size=3
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (-1.14444, 0, 0)
+-------------------------------------
+DetId: 637649160
+ Region: -1 Ring: 3 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [25,27] size=3
+ BX: -1
+ Time: -3.125 ns
+ Local position: (27.8062, 0, 0)
+-------------------------------------
+DetId: 637649546
+ Region: 1 Ring: 3 Station: 1
+ Sector: 6 Layer: 1 Roll: 3
+ Cluster strips [1,1] size=1
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-45.368, 0, 0)
+-------------------------------------
+DetId: 637635213
+ Region: 0 Ring: -2 Station: 1
+ Sector: 6 Layer: 2 Roll: 3
+ Cluster strips [51,51] size=1
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (20.8452, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [68,68] size=1
+ BX: 6
+ Time: 167.188 ns
+ Local position: (62.5357, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [48,50] size=3
+ BX: 17
+ Time: 434.375 ns
+ Local position: (15.9405, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [60,60] size=1
+ BX: 5
+ Time: 143.75 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [48,50] size=3
+ BX: 4
+ Time: 106.25 ns
+ Local position: (15.9405, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [60,60] size=1
+ BX: -8
+ Time: -182.812 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [48,49] size=2
+ BX: -10
+ Time: -243.75 ns
+ Local position: (14.7143, 0, 0)
+-------------------------------------
+DetId: 637635997
+ Region: 0 Ring: 2 Station: 1
+ Sector: 12 Layer: 2 Roll: 3
+ Cluster strips [40,40] size=1
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (-6.13095, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [37,38] size=2
+ BX: 14
+ Time: 359.375 ns
+ Local position: (-22.0444, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [37,38] size=2
+ BX: 1
+ Time: 35.9375 ns
+ Local position: (-22.0444, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [37,39] size=3
+ BX: -12
+ Time: -290.625 ns
+ Local position: (-20.6667, 0, 0)
+-------------------------------------
+DetId: 637616424
+ Region: -1 Ring: 3 Station: 2
+ Sector: 3 Layer: 1 Roll: 2
+ Cluster strips [6,8] size=3
+ BX: 0
+ Time: 0 ns
+ Local position: (-31.3102, 0, 0)
+-------------------------------------
+DetId: 637616810
+ Region: 1 Ring: 3 Station: 2
+ Sector: 6 Layer: 1 Roll: 2
+ Cluster strips [31,32] size=2
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (49.4372, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [27,27] size=1
+ BX: 7
+ Time: 192.188 ns
+ Local position: (-50.9778, 0, 0)
+-------------------------------------
+DetId: 637633197
+ Region: 0 Ring: -2 Station: 2
+ Sector: 6 Layer: 1 Roll: 3
+ Cluster strips [17,18] size=2
+ BX: -1
+ Time: -3.125 ns
+ Local position: (-77.1556, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [65,65] size=1
+ BX: 16
+ Time: 404.688 ns
+ Local position: (53.7333, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [62,76] size=15
+ BX: 3
+ Time: 82.2917 ns
+ Local position: (64.7556, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [70,70] size=1
+ BX: -10
+ Time: -237.5 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [64,66] size=3
+ BX: -10
+ Time: -245.312 ns
+ Local position: (53.7333, 0, 0)
+-------------------------------------
+DetId: 637633981
+ Region: 0 Ring: 2 Station: 2
+ Sector: 12 Layer: 1 Roll: 3
+ Cluster strips [68,68] size=1
+ BX: 0
+ Time: 0 ns
+ Local position: (62, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [18,20] size=3
+ BX: 18
+ Time: 459.375 ns
+ Local position: (4.8643, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [18,19] size=2
+ BX: 5
+ Time: 137.5 ns
+ Local position: (3.89144, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [19,19] size=1
+ BX: -8
+ Time: -190.625 ns
+ Local position: (4.8643, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [1,12] size=12
+ BX: -1
+ Time: -10.9375 ns
+ Local position: (-19.4572, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [3,3] size=1
+ BX: -14
+ Time: -334.375 ns
+ Local position: (-26.2672, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [27,28] size=2
+ BX: 3
+ Time: 76.5625 ns
+ Local position: (21.4029, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [28,28] size=1
+ BX: -10
+ Time: -250 ns
+ Local position: (22.3758, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [42,43] size=2
+ BX: 14
+ Time: 362.5 ns
+ Local position: (-2.38419e-06, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [42,43] size=2
+ BX: 1
+ Time: 32.8125 ns
+ Local position: (-2.38419e-06, 0, 0)
+-------------------------------------
+DetId: 637616580
+ Region: -1 Ring: 2 Station: 3
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [24,25] size=2
+ BX: 3
+ Time: 75 ns
+ Local position: (17.8363, 0, 0)
+-------------------------------------
+DetId: 637616612
+ Region: -1 Ring: 2 Station: 4
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [26,27] size=2
+ BX: 3
+ Time: 76.5625 ns
+ Local position: (22.2953, 0, 0)
+-------------------------------------
+DetId: 637616612
+ Region: -1 Ring: 2 Station: 4
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [25,27] size=3
+ BX: -11
+ Time: -253.125 ns
+ Local position: (21.1805, 0, 0)
+-------------------------------------
+
+
+========== MATCHED LAYER PAIRS ==========
+
+=====================================
+Matched chamber:
+ Region=0 Ring=-2 Station=1 Sector=6
+=====================================
+
+Layer 1 hit:
+ strips [40,41] size=2
+ BX=0
+ time=0 ns
+   paired with Layer 2 hit:
+     strips [51,51] size=1
+     BX=-1
+     time=-1.5625 ns
+     Delta t = 1.5625 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=-2 Station=2 Sector=7
+=====================================
+
+Layer 1 hit:
+ strips [37,38] size=2
+ BX=14
+ time=359.375 ns
+   paired with Layer 2 hit:
+     strips [42,43] size=2
+     BX=14
+     time=362.5 ns
+     Delta t = -3.125 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [42,43] size=2
+     BX=1
+     time=32.8125 ns
+     Delta t = 326.562 ns
+--------------------------------
+Layer 1 hit:
+ strips [37,38] size=2
+ BX=1
+ time=35.9375 ns
+   paired with Layer 2 hit:
+     strips [42,43] size=2
+     BX=14
+     time=362.5 ns
+     Delta t = -326.562 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [42,43] size=2
+     BX=1
+     time=32.8125 ns
+     Delta t = 3.125 ns
+--------------------------------
+Layer 1 hit:
+ strips [37,39] size=3
+ BX=-12
+ time=-290.625 ns
+   paired with Layer 2 hit:
+     strips [42,43] size=2
+     BX=14
+     time=362.5 ns
+     Delta t = -653.125 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [42,43] size=2
+     BX=1
+     time=32.8125 ns
+     Delta t = -323.438 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=2 Station=1 Sector=12
+=====================================
+
+Layer 1 hit:
+ strips [44,46] size=3
+ BX=0
+ time=1.5625 ns
+   paired with Layer 2 hit:
+     strips [40,40] size=1
+     BX=0
+     time=1.5625 ns
+     Delta t = 0 ns
+--------------------------------
+=====================================
+
+=====================================
+Event 16 | Run 1 | Lumi 1
+Total RPC RecHits: 35
+=====================================
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [70,71] size=2
+ BX: -1
+ Time: -20.3125 ns
+ Local position: (57.2222, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [11,11] size=1
+ BX: -1
+ Time: -18.75 ns
+ Local position: (-78.9667, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [3,3] size=1
+ BX: -3
+ Time: -67.1875 ns
+ Local position: (-28.2572, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [12,12] size=1
+ BX: -2
+ Time: -43.75 ns
+ Local position: (-9.41906, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [49,50] size=2
+ BX: -1
+ Time: -14.0625 ns
+ Local position: (9.15556, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [11,12] size=2
+ BX: 16
+ Time: 400 ns
+ Local position: (-8.68359, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [11,11] size=1
+ BX: -10
+ Time: -226.562 ns
+ Local position: (-9.55195, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [11,12] size=2
+ BX: -17
+ Time: -401.562 ns
+ Local position: (-8.68359, 0, 0)
+-------------------------------------
+DetId: 637633041
+ Region: 0 Ring: -1 Station: 1
+ Sector: 5 Layer: 1 Roll: 3
+ Cluster strips [61,63] size=3
+ BX: 0
+ Time: 0 ns
+ Local position: (37.7667, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [14,16] size=3
+ BX: 16
+ Time: 406.25 ns
+ Local position: (-69.8111, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [15,15] size=1
+ BX: -8
+ Time: -198.438 ns
+ Local position: (-69.8111, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [15,15] size=1
+ BX: -16
+ Time: -393.75 ns
+ Local position: (-69.8111, 0, 0)
+-------------------------------------
+DetId: 637633817
+ Region: 0 Ring: 1 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [42,45] size=4
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-4.57778, 0, 0)
+-------------------------------------
+DetId: 637635089
+ Region: 0 Ring: -1 Station: 1
+ Sector: 5 Layer: 2 Roll: 3
+ Cluster strips [28,29] size=2
+ BX: 0
+ Time: 0 ns
+ Local position: (-34.3333, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [67,69] size=3
+ BX: 5
+ Time: 142.188 ns
+ Local position: (62.5357, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [59,60] size=2
+ BX: 4
+ Time: 120.312 ns
+ Local position: (41.6905, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [49,49] size=1
+ BX: 2
+ Time: 57.8125 ns
+ Local position: (15.9405, 0, 0)
+-------------------------------------
+DetId: 637635865
+ Region: 0 Ring: 1 Station: 1
+ Sector: 11 Layer: 2 Roll: 3
+ Cluster strips [41,42] size=2
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (-2.45238, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [38,38] size=1
+ BX: 0
+ Time: 7.8125 ns
+ Local position: (-20.6667, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [26,27] size=2
+ BX: 10
+ Time: 268.75 ns
+ Local position: (-52.3556, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [26,27] size=2
+ BX: 6
+ Time: 168.75 ns
+ Local position: (-52.3556, 0, 0)
+-------------------------------------
+DetId: 637633073
+ Region: 0 Ring: -1 Station: 2
+ Sector: 5 Layer: 1 Roll: 3
+ Cluster strips [40,40] size=1
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-15.1556, 0, 0)
+-------------------------------------
+DetId: 637633849
+ Region: 0 Ring: 1 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [67,67] size=1
+ BX: 0
+ Time: 0 ns
+ Local position: (59.2444, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [70,70] size=1
+ BX: 2
+ Time: 60.9375 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [65,65] size=1
+ BX: 2
+ Time: 56.25 ns
+ Local position: (53.7333, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [18,20] size=3
+ BX: 4
+ Time: 112.5 ns
+ Local position: (4.8643, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [3,4] size=2
+ BX: -2
+ Time: -34.375 ns
+ Local position: (-25.2943, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [28,28] size=1
+ BX: 2
+ Time: 50 ns
+ Local position: (22.3758, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [42,43] size=2
+ BX: 0
+ Time: 12.5 ns
+ Local position: (-2.38419e-06, 0, 0)
+-------------------------------------
+DetId: 637635121
+ Region: 0 Ring: -1 Station: 2
+ Sector: 5 Layer: 2 Roll: 3
+ Cluster strips [47,49] size=3
+ BX: -1
+ Time: -3.125 ns
+ Local position: (16.2381, 0, 0)
+-------------------------------------
+DetId: 637635897
+ Region: 0 Ring: 1 Station: 2
+ Sector: 11 Layer: 2 Roll: 3
+ Cluster strips [21,22] size=2
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-62, 0, 0)
+-------------------------------------
+DetId: 637572445
+ Region: 0 Ring: 2 Station: 3
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [9,10] size=2
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (-42.2857, 0, 0)
+-------------------------------------
+DetId: 637567597
+ Region: 0 Ring: -2 Station: 4
+ Sector: 5 Layer: 1 Roll: 1
+ Cluster strips [24,24] size=1
+ BX: -1
+ Time: -3.125 ns
+ Local position: (-2.0625, 0, 0)
+-------------------------------------
+DetId: 637568381
+ Region: 0 Ring: 2 Station: 4
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [40,41] size=2
+ BX: -1
+ Time: -3.125 ns
+ Local position: (66, 0, 0)
+-------------------------------------
+DetId: 637616612
+ Region: -1 Ring: 2 Station: 4
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [26,27] size=2
+ BX: 2
+ Time: 50 ns
+ Local position: (22.2953, 0, 0)
+-------------------------------------
+
+
+========== MATCHED LAYER PAIRS ==========
+
+=====================================
+Matched chamber:
+ Region=0 Ring=-2 Station=2 Sector=7
+=====================================
+
+Layer 1 hit:
+ strips [38,38] size=1
+ BX=0
+ time=7.8125 ns
+   paired with Layer 2 hit:
+     strips [42,43] size=2
+     BX=0
+     time=12.5 ns
+     Delta t = -4.6875 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=-1 Station=1 Sector=5
+=====================================
+
+Layer 1 hit:
+ strips [61,63] size=3
+ BX=0
+ time=0 ns
+   paired with Layer 2 hit:
+     strips [28,29] size=2
+     BX=0
+     time=0 ns
+     Delta t = 0 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=-1 Station=2 Sector=5
+=====================================
+
+Layer 1 hit:
+ strips [40,40] size=1
+ BX=-1
+ time=-1.5625 ns
+   paired with Layer 2 hit:
+     strips [47,49] size=3
+     BX=-1
+     time=-3.125 ns
+     Delta t = 1.5625 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=1 Station=1 Sector=11
+=====================================
+
+Layer 1 hit:
+ strips [42,45] size=4
+ BX=-1
+ time=-1.5625 ns
+   paired with Layer 2 hit:
+     strips [41,42] size=2
+     BX=0
+     time=1.5625 ns
+     Delta t = -3.125 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=1 Station=2 Sector=11
+=====================================
+
+Layer 1 hit:
+ strips [67,67] size=1
+ BX=0
+ time=0 ns
+   paired with Layer 2 hit:
+     strips [21,22] size=2
+     BX=-1
+     time=-1.5625 ns
+     Delta t = 1.5625 ns
+--------------------------------
+=====================================
+
+=====================================
+Event 4 | Run 1 | Lumi 1
+Total RPC RecHits: 33
+=====================================
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [69,71] size=3
+ BX: -7
+ Time: -168.75 ns
+ Local position: (56.0778, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [10,12] size=3
+ BX: -7
+ Time: -168.75 ns
+ Local position: (-78.9667, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [2,3] size=2
+ BX: -9
+ Time: -215.625 ns
+ Local position: (-29.3037, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [11,12] size=2
+ BX: -8
+ Time: -192.188 ns
+ Local position: (-10.4656, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [50,50] size=1
+ BX: -7
+ Time: -162.5 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [11,11] size=1
+ BX: 16
+ Time: 400 ns
+ Local position: (-9.55195, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [11,11] size=1
+ BX: -15
+ Time: -375 ns
+ Local position: (-9.55195, 0, 0)
+-------------------------------------
+DetId: 637632925
+ Region: 0 Ring: 2 Station: 1
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [21,21] size=1
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-56.0778, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [13,17] size=5
+ BX: -14
+ Time: -346.875 ns
+ Local position: (-69.8111, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [67,69] size=3
+ BX: -1
+ Time: -9.375 ns
+ Local position: (62.5357, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [59,61] size=3
+ BX: 8
+ Time: 215.625 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [49,49] size=1
+ BX: 7
+ Time: 184.375 ns
+ Local position: (15.9405, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [60,60] size=1
+ BX: -2
+ Time: -32.8125 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [48,50] size=3
+ BX: -4
+ Time: -95.3125 ns
+ Local position: (15.9405, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [37,38] size=2
+ BX: -6
+ Time: -140.625 ns
+ Local position: (-22.0444, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [27,27] size=1
+ BX: 11
+ Time: 292.188 ns
+ Local position: (-50.9778, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [26,28] size=3
+ BX: 0
+ Time: 17.1875 ns
+ Local position: (-50.9778, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [70,70] size=1
+ BX: 6
+ Time: 162.5 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [65,65] size=1
+ BX: 6
+ Time: 156.25 ns
+ Local position: (53.7333, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [70,70] size=1
+ BX: -4
+ Time: -87.5 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [64,66] size=3
+ BX: -4
+ Time: -92.1875 ns
+ Local position: (53.7333, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [18,19] size=2
+ BX: 8
+ Time: 210.938 ns
+ Local position: (3.89144, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [19,19] size=1
+ BX: -2
+ Time: -37.5 ns
+ Local position: (4.8643, 0, 0)
+-------------------------------------
+DetId: 637640874
+ Region: 1 Ring: 3 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [15,15] size=1
+ BX: -1
+ Time: -3.125 ns
+ Local position: (-4.37653, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [3,3] size=1
+ BX: -8
+ Time: -182.812 ns
+ Local position: (-26.2672, 0, 0)
+-------------------------------------
+DetId: 637641256
+ Region: -1 Ring: 3 Station: 2
+ Sector: 5 Layer: 1 Roll: 3
+ Cluster strips [12,14] size=3
+ BX: 0
+ Time: 0 ns
+ Local position: (-10.2119, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [27,28] size=2
+ BX: 7
+ Time: 176.562 ns
+ Local position: (21.4029, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [28,28] size=1
+ BX: -4
+ Time: -100 ns
+ Local position: (22.3758, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [42,42] size=1
+ BX: -6
+ Time: -139.062 ns
+ Local position: (-1.47619, 0, 0)
+-------------------------------------
+DetId: 637575370
+ Region: 1 Ring: 3 Station: 3
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [17,19] size=3
+ BX: -1
+ Time: -4.6875 ns
+ Local position: (5.47598, 0, 0)
+-------------------------------------
+DetId: 637575752
+ Region: -1 Ring: 3 Station: 3
+ Sector: 5 Layer: 1 Roll: 1
+ Cluster strips [20,20] size=1
+ BX: -1
+ Time: -3.125 ns
+ Local position: (12.7773, 0, 0)
+-------------------------------------
+DetId: 637616580
+ Region: -1 Ring: 2 Station: 3
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [25,25] size=1
+ BX: -4
+ Time: -98.4375 ns
+ Local position: (18.951, 0, 0)
+-------------------------------------
+DetId: 637616612
+ Region: -1 Ring: 2 Station: 4
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [26,27] size=2
+ BX: -4
+ Time: -100 ns
+ Local position: (22.2953, 0, 0)
+-------------------------------------
+
+
+========== MATCHED LAYER PAIRS ==========
+
+=====================================
+Matched chamber:
+ Region=0 Ring=-2 Station=2 Sector=7
+=====================================
+
+Layer 1 hit:
+ strips [37,38] size=2
+ BX=-6
+ time=-140.625 ns
+   paired with Layer 2 hit:
+     strips [42,42] size=1
+     BX=-6
+     time=-139.062 ns
+     Delta t = -1.5625 ns
+--------------------------------
+=====================================
+
+=====================================
+Event 18 | Run 1 | Lumi 1
+Total RPC RecHits: 35
+=====================================
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [70,70] size=1
+ BX: 14
+ Time: 357.812 ns
+ Local position: (56.0778, 0, 0)
+-------------------------------------
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [70,70] size=1
+ BX: -4
+ Time: -90.625 ns
+ Local position: (56.0778, 0, 0)
+-------------------------------------
+DetId: 637567509
+ Region: 0 Ring: 0 Station: 1
+ Sector: 5 Layer: 1 Roll: 1
+ Cluster strips [7,7] size=1
+ BX: 0
+ Time: 3.125 ns
+ Local position: (-88.1222, 0, 0)
+-------------------------------------
+DetId: 637568277
+ Region: 0 Ring: 0 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [71,71] size=1
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (58.3667, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [10,12] size=3
+ BX: 14
+ Time: 357.812 ns
+ Local position: (-78.9667, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [11,12] size=2
+ BX: -4
+ Time: -92.1875 ns
+ Local position: (-77.8222, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [3,3] size=1
+ BX: 12
+ Time: 307.812 ns
+ Local position: (-28.2572, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [2,3] size=2
+ BX: -6
+ Time: -143.75 ns
+ Local position: (-29.3037, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [11,12] size=2
+ BX: 14
+ Time: 359.375 ns
+ Local position: (-10.4656, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [49,50] size=2
+ BX: 14
+ Time: 360.938 ns
+ Local position: (9.15556, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [49,50] size=2
+ BX: -4
+ Time: -89.0625 ns
+ Local position: (9.15556, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [11,11] size=1
+ BX: 6
+ Time: 173.438 ns
+ Local position: (-9.55195, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [11,12] size=2
+ BX: -11
+ Time: -275 ns
+ Local position: (-8.68359, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [14,15] size=2
+ BX: 7
+ Time: 181.25 ns
+ Local position: (-70.9556, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [14,15] size=2
+ BX: -11
+ Time: -270.312 ns
+ Local position: (-70.9556, 0, 0)
+-------------------------------------
+DetId: 637570325
+ Region: 0 Ring: 0 Station: 1
+ Sector: 11 Layer: 2 Roll: 1
+ Cluster strips [13,15] size=3
+ BX: 0
+ Time: 3.125 ns
+ Local position: (-69.8929, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [68,68] size=1
+ BX: 2
+ Time: 65.625 ns
+ Local position: (62.5357, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [48,49] size=2
+ BX: 18
+ Time: 456.25 ns
+ Local position: (14.7143, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [60,60] size=1
+ BX: 1
+ Time: 45.3125 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [49,49] size=1
+ BX: 0
+ Time: 4.6875 ns
+ Local position: (15.9405, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [37,38] size=2
+ BX: 15
+ Time: 382.812 ns
+ Local position: (-22.0444, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [37,38] size=2
+ BX: -3
+ Time: -67.1875 ns
+ Local position: (-22.0444, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [26,28] size=3
+ BX: 3
+ Time: 92.1875 ns
+ Local position: (-50.9778, 0, 0)
+-------------------------------------
+DetId: 637633205
+ Region: 0 Ring: 0 Station: 2
+ Sector: 6 Layer: 1 Roll: 3
+ Cluster strips [11,11] size=1
+ BX: 0
+ Time: 0 ns
+ Local position: (-95.0667, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [70,70] size=1
+ BX: -1
+ Time: -14.0625 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [65,65] size=1
+ BX: -1
+ Time: -18.75 ns
+ Local position: (53.7333, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [17,20] size=4
+ BX: 1
+ Time: 35.9375 ns
+ Local position: (3.89144, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [3,3] size=1
+ BX: 13
+ Time: 342.188 ns
+ Local position: (-26.2672, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [3,4] size=2
+ BX: -5
+ Time: -107.812 ns
+ Local position: (-25.2943, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [27,29] size=3
+ BX: -1
+ Time: -23.4375 ns
+ Local position: (22.3758, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [41,43] size=3
+ BX: 15
+ Time: 387.5 ns
+ Local position: (-1.47619, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [41,43] size=3
+ BX: -3
+ Time: -64.0625 ns
+ Local position: (-1.47619, 0, 0)
+-------------------------------------
+DetId: 637616580
+ Region: -1 Ring: 2 Station: 3
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [24,25] size=2
+ BX: -2
+ Time: -26.5625 ns
+ Local position: (17.8363, 0, 0)
+-------------------------------------
+DetId: 637568497
+ Region: 0 Ring: -1 Station: 4
+ Sector: 12 Layer: 1 Roll: 1
+ Cluster strips [31,33] size=3
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (55.5, 0, 0)
+-------------------------------------
+DetId: 637571705
+ Region: 0 Ring: 1 Station: 4
+ Sector: 5 Layer: 1 Roll: 1
+ Cluster strips [30,32] size=3
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (26.8125, 0, 0)
+-------------------------------------
+
+
+========== MATCHED LAYER PAIRS ==========
+
+=====================================
+Matched chamber:
+ Region=0 Ring=-2 Station=2 Sector=7
+=====================================
+
+Layer 1 hit:
+ strips [37,38] size=2
+ BX=15
+ time=382.812 ns
+   paired with Layer 2 hit:
+     strips [41,43] size=3
+     BX=15
+     time=387.5 ns
+     Delta t = -4.6875 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [41,43] size=3
+     BX=-3
+     time=-64.0625 ns
+     Delta t = 446.875 ns
+--------------------------------
+Layer 1 hit:
+ strips [37,38] size=2
+ BX=-3
+ time=-67.1875 ns
+   paired with Layer 2 hit:
+     strips [41,43] size=3
+     BX=15
+     time=387.5 ns
+     Delta t = -454.688 ns
+--------------------------------
+   paired with Layer 2 hit:
+     strips [41,43] size=3
+     BX=-3
+     time=-64.0625 ns
+     Delta t = -3.125 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=0 Station=1 Sector=11
+=====================================
+
+Layer 1 hit:
+ strips [71,71] size=1
+ BX=0
+ time=1.5625 ns
+   paired with Layer 2 hit:
+     strips [13,15] size=3
+     BX=0
+     time=3.125 ns
+     Delta t = -1.5625 ns
+--------------------------------
+=====================================
+
+=====================================
+Event 20 | Run 1 | Lumi 1
+Total RPC RecHits: 35
+=====================================
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [69,71] size=3
+ BX: 17
+ Time: 434.375 ns
+ Local position: (56.0778, 0, 0)
+-------------------------------------
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [70,71] size=2
+ BX: -11
+ Time: -271.875 ns
+ Local position: (57.2222, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [11,11] size=1
+ BX: -11
+ Time: -268.75 ns
+ Local position: (-78.9667, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [3,3] size=1
+ BX: 15
+ Time: 384.375 ns
+ Local position: (-28.2572, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [2,3] size=2
+ BX: -13
+ Time: -314.062 ns
+ Local position: (-29.3037, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [12,12] size=1
+ BX: 16
+ Time: 407.812 ns
+ Local position: (-9.41906, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [10,13] size=4
+ BX: -11
+ Time: -268.75 ns
+ Local position: (-10.4656, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [50,50] size=1
+ BX: -11
+ Time: -262.5 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [11,12] size=2
+ BX: 10
+ Time: 251.562 ns
+ Local position: (-8.68359, 0, 0)
+-------------------------------------
+DetId: 637633165
+ Region: 0 Ring: -2 Station: 1
+ Sector: 6 Layer: 1 Roll: 3
+ Cluster strips [74,74] size=1
+ BX: 0
+ Time: 0 ns
+ Local position: (65.2333, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [14,15] size=2
+ BX: 10
+ Time: 256.25 ns
+ Local position: (-70.9556, 0, 0)
+-------------------------------------
+DetId: 637635213
+ Region: 0 Ring: -2 Station: 1
+ Sector: 6 Layer: 2 Roll: 3
+ Cluster strips [18,18] size=1
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-60.0833, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [68,68] size=1
+ BX: 3
+ Time: 90.625 ns
+ Local position: (62.5357, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [67,69] size=3
+ BX: -4
+ Time: -84.375 ns
+ Local position: (62.5357, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [60,60] size=1
+ BX: 2
+ Time: 68.75 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [48,50] size=3
+ BX: 0
+ Time: 7.8125 ns
+ Local position: (15.9405, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [60,60] size=1
+ BX: -6
+ Time: -131.25 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [48,49] size=2
+ BX: -7
+ Time: -165.625 ns
+ Local position: (14.7143, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [37,39] size=3
+ BX: -10
+ Time: -242.188 ns
+ Local position: (-20.6667, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [26,27] size=2
+ BX: 4
+ Time: 117.188 ns
+ Local position: (-52.3556, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [26,27] size=2
+ BX: -3
+ Time: -56.25 ns
+ Local position: (-52.3556, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [70,71] size=2
+ BX: 0
+ Time: 10.9375 ns
+ Local position: (68.8889, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [64,65] size=2
+ BX: 0
+ Time: 4.6875 ns
+ Local position: (52.3556, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [69,71] size=3
+ BX: -8
+ Time: -189.062 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [64,66] size=3
+ BX: -8
+ Time: -193.75 ns
+ Local position: (53.7333, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [18,20] size=3
+ BX: 2
+ Time: 57.8125 ns
+ Local position: (4.8643, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [18,19] size=2
+ BX: -6
+ Time: -140.625 ns
+ Local position: (3.89144, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [2,5] size=4
+ BX: 16
+ Time: 417.188 ns
+ Local position: (-25.2943, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [3,3] size=1
+ BX: -12
+ Time: -281.25 ns
+ Local position: (-26.2672, 0, 0)
+-------------------------------------
+DetId: 637645096
+ Region: -1 Ring: 3 Station: 2
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [5,6] size=2
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-32.0946, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [27,28] size=2
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (21.4029, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [42,43] size=2
+ BX: -10
+ Time: -235.938 ns
+ Local position: (-2.38419e-06, 0, 0)
+-------------------------------------
+DetId: 637616580
+ Region: -1 Ring: 2 Station: 3
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [23,26] size=4
+ BX: 0
+ Time: 0 ns
+ Local position: (17.8363, 0, 0)
+-------------------------------------
+DetId: 637616580
+ Region: -1 Ring: 2 Station: 3
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [21,28] size=8
+ BX: -7
+ Time: -173.438 ns
+ Local position: (17.8363, 0, 0)
+-------------------------------------
+DetId: 637616612
+ Region: -1 Ring: 2 Station: 4
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [26,26] size=1
+ BX: -7
+ Time: -173.438 ns
+ Local position: (21.1805, 0, 0)
+-------------------------------------
+
+
+========== MATCHED LAYER PAIRS ==========
+
+=====================================
+Matched chamber:
+ Region=0 Ring=-2 Station=1 Sector=6
+=====================================
+
+Layer 1 hit:
+ strips [74,74] size=1
+ BX=0
+ time=0 ns
+   paired with Layer 2 hit:
+     strips [18,18] size=1
+     BX=-1
+     time=-1.5625 ns
+     Delta t = 1.5625 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=-2 Station=2 Sector=7
+=====================================
+
+Layer 1 hit:
+ strips [37,39] size=3
+ BX=-10
+ time=-242.188 ns
+   paired with Layer 2 hit:
+     strips [42,43] size=2
+     BX=-10
+     time=-235.938 ns
+     Delta t = -6.25 ns
+--------------------------------
+=====================================
+
+=====================================
+Event 17 | Run 1 | Lumi 1
+Total RPC RecHits: 42
+=====================================
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [70,71] size=2
+ BX: 13
+ Time: 329.688 ns
+ Local position: (57.2222, 0, 0)
+-------------------------------------
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [70,71] size=2
+ BX: -10
+ Time: -242.188 ns
+ Local position: (57.2222, 0, 0)
+-------------------------------------
+DetId: 637567249
+ Region: 0 Ring: -1 Station: 1
+ Sector: 3 Layer: 1 Roll: 1
+ Cluster strips [61,61] size=1
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (35.4778, 0, 0)
+-------------------------------------
+DetId: 637568025
+ Region: 0 Ring: 1 Station: 1
+ Sector: 9 Layer: 1 Roll: 1
+ Cluster strips [37,38] size=2
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (-18.3111, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [10,12] size=3
+ BX: 13
+ Time: 332.812 ns
+ Local position: (-78.9667, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [11,11] size=1
+ BX: -10
+ Time: -240.625 ns
+ Local position: (-78.9667, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [3,3] size=1
+ BX: 11
+ Time: 287.5 ns
+ Local position: (-28.2572, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [2,3] size=2
+ BX: -12
+ Time: -290.625 ns
+ Local position: (-29.3037, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [11,12] size=2
+ BX: 13
+ Time: 329.688 ns
+ Local position: (-10.4656, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [11,12] size=2
+ BX: -11
+ Time: -270.312 ns
+ Local position: (-10.4656, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [50,50] size=1
+ BX: 13
+ Time: 337.5 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [49,51] size=3
+ BX: -10
+ Time: -237.5 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [10,12] size=3
+ BX: 5
+ Time: 126.562 ns
+ Local position: (-9.55195, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [14,16] size=3
+ BX: 6
+ Time: 154.688 ns
+ Local position: (-69.8111, 0, 0)
+-------------------------------------
+DetId: 637569297
+ Region: 0 Ring: -1 Station: 1
+ Sector: 3 Layer: 2 Roll: 1
+ Cluster strips [29,29] size=1
+ BX: 0
+ Time: 0 ns
+ Local position: (-33.1071, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [48,50] size=3
+ BX: 17
+ Time: 431.25 ns
+ Local position: (15.9405, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [58,62] size=5
+ BX: -2
+ Time: -29.6875 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [60,60] size=1
+ BX: -5
+ Time: -107.812 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [48,49] size=2
+ BX: -7
+ Time: -170.312 ns
+ Local position: (14.7143, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [37,38] size=2
+ BX: 14
+ Time: 359.375 ns
+ Local position: (-22.0444, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [38,38] size=1
+ BX: -9
+ Time: -217.188 ns
+ Local position: (-20.6667, 0, 0)
+-------------------------------------
+DetId: 637600049
+ Region: 0 Ring: -1 Station: 2
+ Sector: 3 Layer: 1 Roll: 2
+ Cluster strips [39,39] size=1
+ BX: 0
+ Time: 0 ns
+ Local position: (-17.9111, 0, 0)
+-------------------------------------
+DetId: 637600825
+ Region: 0 Ring: 1 Station: 2
+ Sector: 9 Layer: 1 Roll: 2
+ Cluster strips [60,62] size=3
+ BX: -1
+ Time: -3.125 ns
+ Local position: (42.7111, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [27,27] size=1
+ BX: 0
+ Time: 14.0625 ns
+ Local position: (-50.9778, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [70,70] size=1
+ BX: 16
+ Time: 414.062 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [65,65] size=1
+ BX: 16
+ Time: 406.25 ns
+ Local position: (53.7333, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [70,70] size=1
+ BX: -7
+ Time: -160.938 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [64,65] size=2
+ BX: -7
+ Time: -167.188 ns
+ Local position: (52.3556, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [18,19] size=2
+ BX: 18
+ Time: 456.25 ns
+ Local position: (3.89144, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [19,19] size=1
+ BX: -5
+ Time: -114.062 ns
+ Local position: (4.8643, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [2,4] size=3
+ BX: 12
+ Time: 315.625 ns
+ Local position: (-26.2672, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [3,4] size=2
+ BX: -11
+ Time: -262.5 ns
+ Local position: (-25.2943, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [27,29] size=3
+ BX: 16
+ Time: 401.562 ns
+ Local position: (22.3758, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [27,28] size=2
+ BX: -7
+ Time: -171.875 ns
+ Local position: (21.4029, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [42,42] size=1
+ BX: 14
+ Time: 362.5 ns
+ Local position: (-1.47619, 0, 0)
+-------------------------------------
+DetId: 637634865
+ Region: 0 Ring: -1 Station: 2
+ Sector: 3 Layer: 2 Roll: 3
+ Cluster strips [49,49] size=1
+ BX: 0
+ Time: 3.125 ns
+ Local position: (19.1905, 0, 0)
+-------------------------------------
+DetId: 637635641
+ Region: 0 Ring: 1 Station: 2
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [27,29] size=3
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (-42.8095, 0, 0)
+-------------------------------------
+DetId: 637616580
+ Region: -1 Ring: 2 Station: 3
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [25,25] size=1
+ BX: 16
+ Time: 403.125 ns
+ Local position: (18.951, 0, 0)
+-------------------------------------
+DetId: 637632849
+ Region: 0 Ring: -1 Station: 3
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [5,6] size=2
+ BX: 0
+ Time: 0 ns
+ Local position: (-56.381, 0, 0)
+-------------------------------------
+DetId: 637637721
+ Region: 0 Ring: 1 Station: 3
+ Sector: 9 Layer: 1 Roll: 3
+ Cluster strips [3,4] size=2
+ BX: -1
+ Time: -3.125 ns
+ Local position: (-63.4286, 0, 0)
+-------------------------------------
+DetId: 637616612
+ Region: -1 Ring: 2 Station: 4
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [26,26] size=1
+ BX: -7
+ Time: -171.875 ns
+ Local position: (21.1805, 0, 0)
+-------------------------------------
+DetId: 637636977
+ Region: 0 Ring: -1 Station: 4
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [26,28] size=3
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (10.3125, 0, 0)
+-------------------------------------
+
+
+========== MATCHED LAYER PAIRS ==========
+
+=====================================
+Matched chamber:
+ Region=0 Ring=-2 Station=2 Sector=7
+=====================================
+
+Layer 1 hit:
+ strips [37,38] size=2
+ BX=14
+ time=359.375 ns
+   paired with Layer 2 hit:
+     strips [42,42] size=1
+     BX=14
+     time=362.5 ns
+     Delta t = -3.125 ns
+--------------------------------
+Layer 1 hit:
+ strips [38,38] size=1
+ BX=-9
+ time=-217.188 ns
+   paired with Layer 2 hit:
+     strips [42,42] size=1
+     BX=14
+     time=362.5 ns
+     Delta t = -579.688 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=-1 Station=1 Sector=3
+=====================================
+
+Layer 1 hit:
+ strips [61,61] size=1
+ BX=-1
+ time=-1.5625 ns
+   paired with Layer 2 hit:
+     strips [29,29] size=1
+     BX=0
+     time=0 ns
+     Delta t = -1.5625 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=-1 Station=2 Sector=3
+=====================================
+
+Layer 1 hit:
+ strips [39,39] size=1
+ BX=0
+ time=0 ns
+   paired with Layer 2 hit:
+     strips [49,49] size=1
+     BX=0
+     time=3.125 ns
+     Delta t = -3.125 ns
+--------------------------------
+=====================================
+Matched chamber:
+ Region=0 Ring=1 Station=2 Sector=9
+=====================================
+
+Layer 1 hit:
+ strips [60,62] size=3
+ BX=-1
+ time=-3.125 ns
+   paired with Layer 2 hit:
+     strips [27,29] size=3
+     BX=0
+     time=1.5625 ns
+     Delta t = -4.6875 ns
+--------------------------------
+=====================================
+
+=====================================
+Event 19 | Run 1 | Lumi 1
+Total RPC RecHits: 33
+=====================================
+DetId: 637567133
+ Region: 0 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 1
+ Cluster strips [70,70] size=1
+ BX: -7
+ Time: -168.75 ns
+ Local position: (56.0778, 0, 0)
+-------------------------------------
+DetId: 637568149
+ Region: 0 Ring: 0 Station: 1
+ Sector: 10 Layer: 1 Roll: 1
+ Cluster strips [52,55] size=4
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (18.3111, 0, 0)
+-------------------------------------
+DetId: 637568285
+ Region: 0 Ring: 2 Station: 1
+ Sector: 11 Layer: 1 Roll: 1
+ Cluster strips [10,13] size=4
+ BX: -7
+ Time: -168.75 ns
+ Local position: (-77.8222, 0, 0)
+-------------------------------------
+DetId: 637600262
+ Region: 1 Ring: 2 Station: 1
+ Sector: 5 Layer: 1 Roll: 2
+ Cluster strips [2,3] size=2
+ BX: 11
+ Time: 284.375 ns
+ Local position: (-29.3037, 0, 0)
+-------------------------------------
+DetId: 637612166
+ Region: 1 Ring: 2 Station: 1
+ Sector: 2 Layer: 1 Roll: 2
+ Cluster strips [11,12] size=2
+ BX: -8
+ Time: -190.625 ns
+ Local position: (-10.4656, 0, 0)
+-------------------------------------
+DetId: 637632537
+ Region: 0 Ring: 1 Station: 1
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [50,50] size=1
+ BX: -7
+ Time: -165.625 ns
+ Local position: (10.3, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [11,11] size=1
+ BX: 15
+ Time: 375 ns
+ Local position: (-9.55195, 0, 0)
+-------------------------------------
+DetId: 637632774
+ Region: 1 Ring: 2 Station: 1
+ Sector: 3 Layer: 1 Roll: 3
+ Cluster strips [11,11] size=1
+ BX: 6
+ Time: 150 ns
+ Local position: (-9.55195, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [14,15] size=2
+ BX: 16
+ Time: 401.562 ns
+ Local position: (-70.9556, 0, 0)
+-------------------------------------
+DetId: 637633805
+ Region: 0 Ring: -2 Station: 1
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [14,15] size=2
+ BX: 6
+ Time: 154.688 ns
+ Local position: (-70.9556, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [68,68] size=1
+ BX: -1
+ Time: -7.8125 ns
+ Local position: (62.5357, 0, 0)
+-------------------------------------
+DetId: 637635601
+ Region: 0 Ring: -1 Station: 1
+ Sector: 9 Layer: 2 Roll: 3
+ Cluster strips [68,68] size=1
+ BX: -12
+ Time: -284.375 ns
+ Local position: (62.5357, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [59,60] size=2
+ BX: -2
+ Time: -31.25 ns
+ Local position: (41.6905, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [49,49] size=1
+ BX: -4
+ Time: -90.625 ns
+ Local position: (15.9405, 0, 0)
+-------------------------------------
+DetId: 637635741
+ Region: 0 Ring: 2 Station: 1
+ Sector: 10 Layer: 2 Roll: 3
+ Cluster strips [59,61] size=3
+ BX: -14
+ Time: -332.812 ns
+ Local position: (42.9167, 0, 0)
+-------------------------------------
+DetId: 637567789
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 1 Roll: 1
+ Cluster strips [37,38] size=2
+ BX: -6
+ Time: -142.188 ns
+ Local position: (-22.0444, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [26,28] size=3
+ BX: 0
+ Time: 17.1875 ns
+ Local position: (-50.9778, 0, 0)
+-------------------------------------
+DetId: 637632573
+ Region: 0 Ring: 2 Station: 2
+ Sector: 1 Layer: 1 Roll: 3
+ Cluster strips [26,27] size=2
+ BX: -11
+ Time: -257.812 ns
+ Local position: (-52.3556, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [70,70] size=1
+ BX: -4
+ Time: -87.5 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [65,65] size=1
+ BX: -4
+ Time: -93.75 ns
+ Local position: (53.7333, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [70,70] size=1
+ BX: -16
+ Time: -387.5 ns
+ Local position: (67.5111, 0, 0)
+-------------------------------------
+DetId: 637633853
+ Region: 0 Ring: 2 Station: 2
+ Sector: 11 Layer: 1 Roll: 3
+ Cluster strips [64,65] size=2
+ BX: -16
+ Time: -395.312 ns
+ Local position: (52.3556, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [18,19] size=2
+ BX: -2
+ Time: -39.0625 ns
+ Local position: (3.89144, 0, 0)
+-------------------------------------
+DetId: 637640868
+ Region: -1 Ring: 2 Station: 2
+ Sector: 2 Layer: 1 Roll: 3
+ Cluster strips [18,20] size=3
+ BX: -14
+ Time: -337.5 ns
+ Local position: (4.8643, 0, 0)
+-------------------------------------
+DetId: 637641124
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [3,3] size=1
+ BX: -8
+ Time: -182.812 ns
+ Local position: (-26.2672, 0, 0)
+-------------------------------------
+DetId: 637645220
+ Region: -1 Ring: 2 Station: 2
+ Sector: 4 Layer: 1 Roll: 3
+ Cluster strips [27,29] size=3
+ BX: -4
+ Time: -95.3125 ns
+ Local position: (22.3758, 0, 0)
+-------------------------------------
+DetId: 637570225
+ Region: 0 Ring: -1 Station: 2
+ Sector: 10 Layer: 2 Roll: 1
+ Cluster strips [72,73] size=2
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (88.5714, 0, 0)
+-------------------------------------
+DetId: 637602605
+ Region: 0 Ring: -2 Station: 2
+ Sector: 7 Layer: 2 Roll: 2
+ Cluster strips [42,42] size=1
+ BX: -6
+ Time: -137.5 ns
+ Local position: (-1.47619, 0, 0)
+-------------------------------------
+DetId: 637572305
+ Region: 0 Ring: -1 Station: 3
+ Sector: 10 Layer: 1 Roll: 1
+ Cluster strips [26,26] size=1
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (15.8571, 0, 0)
+-------------------------------------
+DetId: 637616580
+ Region: -1 Ring: 2 Station: 3
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [24,26] size=3
+ BX: -4
+ Time: -98.4375 ns
+ Local position: (18.951, 0, 0)
+-------------------------------------
+DetId: 637616580
+ Region: -1 Ring: 2 Station: 3
+ Sector: 4 Layer: 1 Roll: 2
+ Cluster strips [25,25] size=1
+ BX: -15
+ Time: -373.438 ns
+ Local position: (18.951, 0, 0)
+-------------------------------------
+DetId: 637572337
+ Region: 0 Ring: -1 Station: 4
+ Sector: 10 Layer: 1 Roll: 1
+ Cluster strips [41,41] size=1
+ BX: 0
+ Time: 1.5625 ns
+ Local position: (43.4, 0, 0)
+-------------------------------------
+DetId: 637575673
+ Region: 0 Ring: 1 Station: 4
+ Sector: 4 Layer: 1 Roll: 1
+ Cluster strips [33,35] size=3
+ BX: -1
+ Time: -1.5625 ns
+ Local position: (62.8611, 0, 0)
+-------------------------------------
+
+
+========== MATCHED LAYER PAIRS ==========
+
+=====================================
+Matched chamber:
+ Region=0 Ring=-2 Station=2 Sector=7
+=====================================
+
+Layer 1 hit:
+ strips [37,38] size=2
+ BX=-6
+ time=-142.188 ns
+   paired with Layer 2 hit:
+     strips [42,42] size=1
+     BX=-6
+     time=-137.5 ns
+     Delta t = -4.6875 ns
+--------------------------------
+=====================================
