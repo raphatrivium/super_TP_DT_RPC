@@ -24,7 +24,10 @@ int RPC_eff_SimLinks() {
     m_files["RPCOnlyv2.3"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPC_correctedFlag1Timing.root";
 
     // m_files["RPCOnlyUpdatedv2.3"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPCphase2_correctedFlag1Timing.root";
+    
     // m_files["RPCOnlyUpdatedv2.3"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPCphase2_correctedFlag1Timing_2.root";
+    m_files["RPCOnlyUpdatedv2.3"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPCphase2_correctedFlag1Timing_2_float.root";
+    
 
     m_files["test"]            = "test.root"; // It is a copy of m_files["RPC"]
 
@@ -113,7 +116,10 @@ int RPC_eff_SimLinks() {
                 // "Gen Muon - Segment Delta Eta distribution ; Delta Eta; Entries", 600, 0,  0.5);
 
                 m_plots["hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched"] = new TH1D( ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str(),
-                ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched; Time of the TPs associated with prompt muons [ns]; Entries").c_str(), 27, -10, 10); // 40, 0, 700  // 40, 630, 650
+                ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched; Time of the TPs associated with prompt muons [ns]; Entries").c_str(), 27, -10, 10);
+
+                // m_plots["hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched"] = new TH1D( ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str(),
+                // ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched; Time of the TPs associated with prompt muons [ns]; Entries").c_str(), 20, -10, 10);
 
                 m_plots["hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched"] = new TH1D( ("hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched").c_str(),
                 ("hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched; BXs of the TPs associated with prompt muons [ns]; Entries").c_str(), 20, 10, 30);
@@ -313,7 +319,7 @@ int RPC_eff_SimLinks() {
             if (fdebug) std::cout << "=================================" << std::endl;
             if (fdebug) std::cout << "iEvent " << iEvent << std::endl;
             if (fdebug) std::cout << "=================================" << std::endl;
-            if (fdebug) std::cout << "number of muon in this event " << gen_nGenParts << std::endl;
+            if (fdebug) std::cout << "Number of Muon in this Event: " << gen_nGenParts << std::endl;
             
             int coutNTrigs = 0;
 
@@ -573,6 +579,8 @@ int RPC_eff_SimLinks() {
 
                         trigAMt0 = trigAMt0 - 500.; // Shift to zero (RPC only)
 
+                        // trigAMt0 = trigAMt0 - 500 -12.; // Shift to zero (RPC only)
+
                         if (fdebug) std::cout << "  iTrigAM " << iTrigAM << " | Wh: "<< trigAMWh  << " | Sec: "
                                               << trigAMSec  << " | St: "<< trigAMSt << " | phi: "<< trigGlbPhi 
                                               << " | trigSimDPhi: "<< trigSimDPhi << " | BX: "<< trigAMBX << " | t0: "<< trigAMt0  
@@ -613,7 +621,18 @@ int RPC_eff_SimLinks() {
                         // trigAMt0 = (trigAMt0 * 25 / 32); // DCS to ns
                         // trigAMt0 = trigAMt0 - 390; // Shift to zero (RPC only)
 
-                        trigAMt0 = trigAMt0 - 500.; // Shift to zero (RPC only)
+                        // trigAMt0 = trigAMt0 - 500.; // Shift to zero (RPC only)
+
+                        // trigAMt0 = trigAMt0 - 500 -12.; // Shift to zero (RPC only)
+
+                        // Shift to zero (RPC only)
+                        if ( name == "RPCOnlyUpdatedv2.3") {
+                            trigAMt0 = trigAMt0 - 500 -12.;
+                        }
+                        else{
+                            trigAMt0 = trigAMt0 - 500.;
+                        }
+
 
                         m_plots["hPh2TpgPhiEmuAmT0"+whTag+chambTag+"_matched"]->Fill(trigAMt0);
                 }

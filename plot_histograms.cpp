@@ -312,6 +312,44 @@ void plot_histograms() {
         }
     }
 
+    for (const auto & wheel : wheelTag) {
+        std::string wh = wheel;  
+        wh = wh.erase(1, 2); // Removes "h.": "Wh.-2"→ "W-2"
+        for (const auto & chamb : chambTag) {
+            std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
+            plot_t0_histo(  hName,
+                            {fileRPCOnlyUpdatedv23},
+                            {"RPC Only Phase 2"},
+                            {{kOrange+1, 1}},
+                            (wh+" "+chamb), 
+                            saveDir, 
+                            true);
+            // TODO
+            //plot_BX_histo( hName, fileDTAM, "DT AM", kRed, fileRPC, "DT AM + RPC", kBlue, (wh+" "+chamb), saveDir, true);
+        }
+    }
+
+    // --------------------------------
+    // all
+    // --------------------------------
+    saveDir = "plots/all/time/";
+    for (const auto & wheel : wheelTag) {
+        std::string wh = wheel;  
+        wh = wh.erase(1, 2); // Removes "h.": "Wh.-2"→ "W-2"
+        for (const auto & chamb : chambTag) {
+            std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
+            plot_t0_histo(  hName,
+                            {fileDTAMv23, fileRPCcorrectedv23, fileRPCOnlyv23},
+                            {"DT AM", "DT AM + RPC", "RPC Only"},
+                            {{kRed, 1}, {kBlue, 1}, {kGreen+2, 1}},
+                            (wh+" "+chamb), 
+                            saveDir, 
+                            true);
+            // TODO
+            //plot_BX_histo( hName, fileDTAM, "DT AM", kRed, fileRPC, "DT AM + RPC", kBlue, (wh+" "+chamb), saveDir, true);
+        }
+    }
+
     return;
 
     // --------------------------------
