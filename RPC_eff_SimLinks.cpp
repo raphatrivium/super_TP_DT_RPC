@@ -26,7 +26,7 @@ int RPC_eff_SimLinks() {
     // m_files["RPCOnlyUpdatedv2.3"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPCphase2_correctedFlag1Timing.root";
     
     // m_files["RPCOnlyUpdatedv2.3"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPCphase2_correctedFlag1Timing_2.root";
-    m_files["RPCOnlyUpdatedv2.3"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPCphase2_correctedFlag1Timing_2_float.root";
+    // m_files["RPCOnlyUpdatedv2.3"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPCphase2_correctedFlag1Timing_2_float.root";
     
 
     m_files["test"]            = "test.root"; // It is a copy of m_files["RPC"]
@@ -304,7 +304,7 @@ int RPC_eff_SimLinks() {
         // ------------------------------------------------------------------------------
         // Loop in the events
         // ------------------------------------------------------------------------------
-        // nEntries = 1;   // 100   nEntries
+        nEntries = 1;   // 100   nEntries
         if (testFlag){
             nEntries = 100;
             std::cout << "FOR TESTE:" <<std::endl;

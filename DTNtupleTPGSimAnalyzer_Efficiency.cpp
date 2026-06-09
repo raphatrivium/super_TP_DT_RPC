@@ -8,7 +8,7 @@
 int DTNtupleTPGSimAnalyzer_Efficiency() { // 
 
     bool testFlag = false;   // false - true
-    bool fdebug = true;
+    bool fdebug = false;
 
     bool plotHistograms = true; // false - true
 
@@ -30,9 +30,9 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
     // m_files["DTRPCOnly"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
 
     // m_files["DTAMv2.3"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_DTAM.root";
-    // m_files["RPCv2.3"]           = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_RPC.root";
+    m_files["RPCv2.3"]           = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_RPC.root";
     // m_files["RPCcorrected2.3"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_RPCcorrected.root";
-    m_files["DTRPCOnlyv2.3"]     = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPC_correctedFlag1Timing.root";
+    // m_files["DTRPCOnlyv2.3"]     = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPC_correctedFlag1Timing.root";
 
     m_files["test"]         = "test.root"; // It is a copy of m_files["RPC"]
     
@@ -379,7 +379,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
         // ------------------------------------------------------------------------------
         // Loop in the events
         // ------------------------------------------------------------------------------
-        nEntries = 10;   // 100   nEntries
+        // nEntries = 1;   // 100   nEntries
         if (testFlag){
             nEntries = 100;
             std::cout << "FOR TESTE:" <<std::endl;
