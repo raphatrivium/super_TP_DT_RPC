@@ -494,6 +494,9 @@ void plotEffWheelStationMB1MB2( std::string hName,
         graph->SetMarkerColor(vInfo[iHist][0]);
         graph->SetMarkerStyle(vInfo[iHist][1]);
 
+        graph->GetXaxis()->SetTitle("Wheels");
+        graph->GetYaxis()->SetTitle("Efficiency");
+
         graphs.push_back(graph);
     }
 
@@ -510,7 +513,7 @@ void plotEffWheelStationMB1MB2( std::string hName,
 
     // gPad->Update();
     graphs[0]->GetYaxis()->SetRangeUser(0.0,1.005); // Eff  all
-    // graphs[0]->GetYaxis()->SetRangeUser(0.95,1.005);
+    // graphs[0]->GetYaxis()->SetRangeUser(0.97,1.005);
 
     graphs[0]->GetXaxis()->SetLabelSize(0);  // Remove labels completely
 
@@ -788,9 +791,9 @@ void plot_histo(std::string hName,
             return;
         } 
 
-        hist->SetTitle(" ");
-        hist->GetXaxis()->SetTitle("");
-        hist->GetYaxis()->SetTitle("");
+        // hist->SetTitle(" ");
+        // hist->GetXaxis()->SetTitle("");
+        // hist->GetYaxis()->SetTitle("");
 
         hist->SetLineColor(vInfo[fileIdx][0]); 
         hist->SetLineStyle(vInfo[fileIdx][1]);

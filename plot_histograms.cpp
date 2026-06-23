@@ -21,6 +21,7 @@ void plot_histograms() {
     TFile *fileDTAMv23         = TFile::Open((inputDir+"DTAMv2.3/"+fileName).c_str());
     TFile *fileRPCv23          = TFile::Open((inputDir+"RPCv2.3/"+fileName).c_str());
     TFile *fileRPCcorrectedv23 = TFile::Open((inputDir+"RPCcorrected2.3/"+fileName).c_str());
+    TFile *fileDTRPCOnlyv23 = TFile::Open((inputDir+"DTRPCOnlyv2.3/"+fileName).c_str());
     TFile *fileRPCOnlyv23      = TFile::Open((inputDir+"RPCOnlyv2.3/"+fileName).c_str());
     TFile *fileRPCOnlyUpdatedv23      = TFile::Open((inputDir+"RPCOnlyUpdatedv2.3/"+fileName).c_str());
 
@@ -350,7 +351,117 @@ void plot_histograms() {
         }
     }
 
+    // --------------------------------
+    // CMS Week 2026
+    // --------------------------------
+    saveDir = "plots/CMSWeek2026/efficiency/";
+    // Create the directory if it doesn't exist
+    if (gSystem->AccessPathName(saveDir.c_str())) { 
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
+    plotEffWheelStationMB1MB2("Eff_TPwheels",
+                                {fileDTAMv23, fileRPCv23, fileRPCcorrectedv23},
+                                {"DT AM", "DT AM + RPC", "DT+RPC Corrected"},
+                                {{kRed, 20}, {kBlue, 21}, {kYellow+2, 22}}, 
+                                saveDir ) ;
+
+
+    // --------------------------------
+    saveDir = "plots/CMSWeek2026/time/";
+    // Create the directory if it doesn't exist
+    if (gSystem->AccessPathName(saveDir.c_str())) { 
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
+    for (const auto & wheel : wheelTag) {
+        std::string wh = wheel;  
+        wh = wh.erase(1, 2); // Removes "h.": "Wh.-2"→ "W-2"
+        for (const auto & chamb : chambTag) {
+            std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
+            plot_t0_histo(  hName,
+                            {fileDTAMv23, fileRPCv23, fileRPCcorrectedv23},
+                            {"DT AM", "DT AM + RPC", "DT+RPC Corrected"},
+                            {{kRed, 1}, {kBlue, 1}, {kYellow+2, 1}},
+                            (wh+" "+chamb), 
+                            saveDir, 
+                            true);
+            // TODO
+            //plot_BX_histo( hName, fileDTAM, "DT AM", kRed, fileRPC, "DT AM + RPC", kBlue, (wh+" "+chamb), saveDir, true);
+        }
+    }
+
+
+    // --------------------------------
+    // Delta Phi impact studies
+    // --------------------------------
+    saveDir = "plots/DeltaPhiStudies/efficiency/";
+    // Create the directory if it doesn't exist
+    if (gSystem->AccessPathName(saveDir.c_str())) { 
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
+    plotEffWheelStationMB1MB2("Eff_TPwheels",
+                                {fileDTAMv23, fileRPCv23, fileDTRPCOnlyv23},
+                                {"DT AM", "DT AM + RPC", "RPC Only (DT)"},
+                                {{kRed, 20}, {kBlue, 21}, {kMagenta, 33}}, 
+                                saveDir );
+
+    // --------------------------------
+    saveDir = "plots/DeltaPhiStudies/variables/";
+    if (gSystem->AccessPathName(saveDir.c_str())) { 
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
+    plot_histo("hNTrigs",
+                {fileDTAMv23, fileRPCv23, fileDTRPCOnlyv23},
+                {"DT AM", "DT AM + RPC", "RPC Only (DT)"},
+                {{kRed, 1}, {kBlue, 1}, {kMagenta, 1}},
+                saveDir, 
+                false);
+
+    plot_histo("hDeltaPhi_AM",
+                {fileDTAMv23, fileRPCv23, fileDTRPCOnlyv23},
+                {"DT AM", "DT AM + RPC", "RPC Only (DT)"},
+                {{kRed, 1}, {kBlue, 1}, {kMagenta, 1}},
+                saveDir, 
+                false, // normalization by area
+                true); // logY
+
+    plot_histo("hSimLinkTPdeltaPhi",
+                {fileRPCOnlyv23},
+                {"RPC Only"},
+                {{kGreen, 1}},
+                saveDir, 
+                false, // normalization by area
+                true); // logY
     return;
+    // --------------------------------
+    saveDir = "plots/DeltaPhiStudies/time/";
+    // Create the directory if it doesn't exist
+    if (gSystem->AccessPathName(saveDir.c_str())) { 
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }                   
+                                
+    for (const auto & wheel : wheelTag) {
+        std::string wh = wheel;  
+        wh = wh.erase(1, 2); // Removes "h.": "Wh.-2"→ "W-2"
+        for (const auto & chamb : chambTag) {
+            std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
+            plot_t0_histo(  hName,
+                            {fileDTAMv23, fileRPCv23, fileDTRPCOnlyv23},
+                            {"DT AM", "DT AM + RPC", "RPC Only (DT)"},
+                            {{kRed, 1}, {kBlue, 1}, {kMagenta, 1}},
+                            (wh+" "+chamb), 
+                            saveDir, 
+                            true);
+            // TODO
+            //plot_BX_histo( hName, fileDTAM, "DT AM", kRed, fileRPC, "DT AM + RPC", kBlue, (wh+" "+chamb), saveDir, true);
+        }
+    }
+    
+
+    // return;
 
     // --------------------------------
     // DT AM and DT + RPC time phase2 Studies" 

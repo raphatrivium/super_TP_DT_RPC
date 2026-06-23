@@ -165,7 +165,7 @@ int RPC_eff_SimLinks() {
 
         m_plots["hNSimLinkIdPDG"] = new TH1D("hNSimLinkIdPDG", "RPC SimLinks Particle ID; Particle ID; Entries", 30, 0, 30);
 
-        m_plots["hSimLinkTPdeltaPhi"] = new TH1D("hSimLinkTPdeltaPhi", "Delta Phi between SimLink and TP ; Delta Phi; Entries", 600, 0, 0.5);
+        m_plots["hSimLinkTPdeltaPhi"] = new TH1D("hSimLinkTPdeltaPhi", "Delta Phi between SimLink and TP ; Delta Phi; Entries", 600, 0, 0.25);
 
 
         

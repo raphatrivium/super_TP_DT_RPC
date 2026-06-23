@@ -10,7 +10,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
     bool testFlag = false;   // false - true
     bool fdebug = false;
 
-    bool plotHistograms = true; // false - true
+    bool plotHistograms = true;
 
     // ------------------------------------------------------------------------------
     // INPUT FILES
@@ -18,8 +18,9 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
     std::string inputDir = "input/";
     std::map<std::string,std::string> m_files;
     
-    m_files["DTAM"]              = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
-    m_files["RPC"]               = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
+    // m_files["DTAM"]              = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
+    // m_files["RPC"]               = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
+
     // m_files["RPCcorrected"]      = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCcorrected.root";
     // m_files["RPC_Flag0and1"]     = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
     // m_files["RPC_Flag1"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
@@ -28,9 +29,10 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
     // m_files["RPCUpdated"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root";
     // m_files["DTRPCOnly"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
 
-    m_files["DTAMv2.3"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_DTAM.root";
-    m_files["RPCv2.3"]           = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_RPC.root";
-    m_files["RPCcorrected2.3"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_RPCcorrected.root";
+    // m_files["DTAMv2.3"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_DTAM.root";
+    // m_files["RPCv2.3"]           = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_RPC.root";
+    // m_files["RPCcorrected2.3"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_RPCcorrected.root";
+    m_files["DTRPCOnlyv2.3"]     = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPC_correctedFlag1Timing.root";
 
 
     m_files["test"]         = "test.root"; // It is a copy of m_files["RPC"]
@@ -187,9 +189,9 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
             m_plots2["hBXvsPrimPsi" + algo] = new TH2D(("hBXvsPrimPsi_" + algo).c_str(),
             (algo + " BX vs Primitives Psi distribution ; BX; Psi").c_str(),
             11, -5.5, 5.5, 13 ,-65., 65.);
-            m_plots["hDeltaPhi" + algo] = new TH1D(("hDeltaPhi_" + algo).c_str(),
+            m_plots["hDeltaPhi_" + algo] = new TH1D(("hDeltaPhi_" + algo).c_str(),
             (algo + " Primitive - Segment Delta Phi distribution ; Delta Phi; Entries").c_str(),
-            600, 0, 0.1);
+            600, 0, 0.2);
             m_plots["hEffvsSlope" + algo + "matched"] = new TH1D(("hEff_" + algo + "_matched" ).c_str(),
             ("Efficiency for " + algo + "; Local Direction; Efficiency").c_str(),
             50, -50, 50);
@@ -692,6 +694,9 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
                         else if ( name == "DTRPCOnly" ){
                             if ( trigAMrpc != 2 ) continue; 
                         }
+                        else if ( name == "DTRPCOnlyv2.3" ){
+                            if ( trigAMrpc != 2 ) continue; 
+                        }
 
                         // m_plots["hPh2TpgPhiEmuAmBX"+whTag+chambTag+"_matched"]->Fill(trigAMBX);
 
@@ -707,7 +712,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
                             // if (fdebug) std::cout << "          trigGlbPhi: " << trigGlbPhi << " | finalAMDPhi: " << finalAMDPhi << " | segTrigAMDPhi: " << segTrigAMDPhi <<  std::endl;
 
                             m_plots["hPrimPsiAM"] -> Fill( ph2TpgPhiEmuAm_dirLoc_phi->at(iTrigAM) );
-                            m_plots["hDeltaPhiAM"] -> Fill( segTrigAMDPhi );
+                            m_plots["hDeltaPhi_AM"] -> Fill( segTrigAMDPhi );
                             m_plots2["hBXvsPrimPsiAM"] -> Fill ( trigAMBX - 20 , atan ( (ph2Seg_dirLoc_x->at(iSeg) / ph2Seg_dirLoc_z->at(iSeg)) ) * 360 / (2*TMath::Pi()));
                             if (segNHits == 8) 
                                 m_plots["SegEff_" + chambTag + "_AM_matched"] -> Fill(segWh);
@@ -802,19 +807,29 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
                         m_plots["hEffvsSlopeAMmatched"] -> Fill(atan ( (ph2Seg_dirLoc_x->at(iSeg) / ph2Seg_dirLoc_z->at(iSeg)) ) * 360 / (2*TMath::Pi()) );
                         if (AMRPCflag > 0) m_plots["Eff_" + chambTag + "_AM+RPC_matched"]->Fill(segWh);
 
-                        if (fdebug) std::cout << "            trigAMt0 (DCS)      : "<< trigAMt0 << std::endl;
-                        // trigAMt0 = (trigAMt0 * 25 / 32); // DCS to ns   OBS: Need to change the range in the histogram to [-10,10]
-                        trigAMt0 = (trigAMt0 * 25 / 32);
-                        if (fdebug) std::cout << "            trigAMt0 [ns]      : "<< trigAMt0 << std::endl;
-
-                        if ( name == "RPCOnly" ){
-                            trigAMt0 = trigAMt0 - 390;
-                            if (fdebug) std::cout << "            trigAMt0 [ns](- 390 for onlyRPC): "<< trigAMt0 << std::endl;
+                        
+                        if ( name == "RPCOnly" || name == "DTRPCOnlyv2.3" ){
+                            std::cout << "            trigAMt0 [ns]      : "<< trigAMt0 << std::endl;
+                            trigAMt0 = trigAMt0 - 500;
+                            std::cout << "            trigAMt0 [ns]( - 500 for onlyRPC): "<< trigAMt0 << std::endl;
                         }
                         else{
+                            if (fdebug) std::cout << "            trigAMt0 (DCS)      : "<< trigAMt0 << std::endl;
+                            // trigAMt0 = (trigAMt0 * 25 / 32); // DCS to ns   OBS: Need to change the range in the histogram to [-10,10]
+                            trigAMt0 = (trigAMt0 * 25 / 32);
+                            if (fdebug) std::cout << "            trigAMt0 [ns]      : "<< trigAMt0 << std::endl;
                             trigAMt0 = trigAMt0 - 500;
                             if (fdebug) std::cout << "            trigAMt0 [ns]( - 500): "<< trigAMt0 << std::endl;
                         }
+
+                        // if ( name == "RPCOnly" ){
+                        //     trigAMt0 = trigAMt0 - 390;
+                        //     if (fdebug) std::cout << "            trigAMt0 [ns](- 390 for onlyRPC): "<< trigAMt0 << std::endl;
+                        // }
+                        // else{
+                        //     trigAMt0 = trigAMt0 - 500;
+                        //     if (fdebug) std::cout << "            trigAMt0 [ns]( - 500): "<< trigAMt0 << std::endl;
+                        // }
 
                         m_plots["hPh2TpgPhiEmuAmT0"+whTag+chambTag+"_matched"]->Fill(trigAMt0);
                         m_plots["hPh2TpgPhiEmuAmBX"+whTag+chambTag+"_matched"]->Fill(besttrigAMBX);
@@ -989,6 +1004,9 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
                     if ( trigAMrpc != 2 ) continue;
                 } 
                 else if ( name == "DTRPCOnly" ){
+                    if ( trigAMrpc != 2 ) continue; 
+                }
+                else if ( name == "DTRPCOnlyv2.3" ){
                     if ( trigAMrpc != 2 ) continue; 
                 }
                 
