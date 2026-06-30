@@ -7,10 +7,8 @@
 
 int RPC_eff_SimLinks() { 
 
-    bool testFlag = false;   // false - true
-    bool fdebug = true;
-
-    bool plotHistograms = true; // false - true
+    bool fdebug = true; // false - true
+    bool plotHistograms = true;
 
     // ------------------------------------------------------------------------------
     // INPUT FILES
@@ -26,12 +24,8 @@ int RPC_eff_SimLinks() {
     // m_files["RPCOnlyUpdatedv2.3"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPCphase2_correctedFlag1Timing.root";
     
     // m_files["RPCOnlyUpdatedv2.3"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPCphase2_correctedFlag1Timing_2.root";
-    m_files["RPCOnlyUpdatedv2.3"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPCphase2_correctedFlag1Timing_2_float.root";
+    // m_files["RPCOnlyUpdatedv2.3"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPCphase2_correctedFlag1Timing_2_float.root";
     
-
-    m_files["test"]            = "test.root"; // It is a copy of m_files["RPC"]
-
-
     // ------------------------------------------------------------------------------
     // Check if the files are present.
     // ------------------------------------------------------------------------------
@@ -48,6 +42,7 @@ int RPC_eff_SimLinks() {
         return 1;
     }
     
+    
     // ------------------------------------------------------------------------------
     // Loop in the map of files
     // ------------------------------------------------------------------------------
@@ -56,17 +51,12 @@ int RPC_eff_SimLinks() {
         const std::string& name = pair.first;
         const std::string& file_name = pair.second;
 
-        if (testFlag){ if ( file_name != m_files["test"] ) continue; }
-        else{ if ( file_name == m_files["test"] ) continue; }
-
         std::cout << "-------------------------------------------" <<std::endl;
         std::cout << "["+name+"]: "+inputDir+file_name+"\n" <<std::endl;
         // std::cout << "-------------------------------------------" <<std::endl;
 
-        // BarrelGeo barGeo("barrel_geometry.txt");
-        BarrelGeo barGeo;
-        if ( name == "RPCOnly" || name == "RPCOnlyUpdated" ) barGeo = BarrelGeo("barrel_geometry.txt");
-   
+        
+
         // ---------------------------------------
         // Making Map of Histograms 
         // ---------------------------------------
@@ -159,7 +149,7 @@ int RPC_eff_SimLinks() {
             // ("TPs not Matched for " + secTag + "; Wheel; Fake Rate").c_str(), 22, 0, 22);
 
         }
-
+        
         m_plots["hNSimLinks"] = new TH1D("hNSimLinks", "Number of RPC SimLinks per Event; Number of RPC SimLinks; Entries / Event", 50, 0, 800);
         m_plots["hNSimLinksPDG13"] = new TH1D("hNSimLinksPDG13", "Number of RPC SimLinks related to Muons per Event; Number of RPC SimLinks; Entries / Event", 50, 0, 200);
 
@@ -305,10 +295,6 @@ int RPC_eff_SimLinks() {
         // Loop in the events
         // ------------------------------------------------------------------------------
         // nEntries = 1;   // 100   nEntries
-        if (testFlag){
-            nEntries = 100;
-            std::cout << "FOR TESTE:" <<std::endl;
-        }
         std::cout << "Total entries:" << nEntries <<std::endl;
 
         std::ofstream BXfile("BX_time_distribution.txt");
@@ -807,7 +793,6 @@ int RPC_eff_SimLinks() {
     }
 
     std::cout << "----------------------------------" << std::endl;
-    std::cout << "TEST FLAG: " << testFlag << std::endl;
     std::cout << "plotHistograms FLAG: " << plotHistograms << std::endl;
     std::cout << "----------------------------------" << std::endl;
 

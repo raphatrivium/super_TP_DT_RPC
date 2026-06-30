@@ -7,10 +7,8 @@
 
 int DTNtupleTPGSimAnalyzer_Efficiency() { // 
 
-    bool testFlag = false;   // false - true
-    bool fdebug = false;
-
-    bool plotHistograms = true;
+    bool fdebug = false; // false - true
+    bool plotHistograms = true; 
 
     // ------------------------------------------------------------------------------
     // INPUT FILES
@@ -18,8 +16,8 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
     std::string inputDir = "input/";
     std::map<std::string,std::string> m_files;
     
-    // m_files["DTAM"]              = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
-    // m_files["RPC"]               = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
+    m_files["DTAM"]              = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
+    m_files["RPC"]               = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
 
     // m_files["RPCcorrected"]      = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCcorrected.root";
     // m_files["RPC_Flag0and1"]     = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
@@ -29,13 +27,10 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
     // m_files["RPCUpdated"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root";
     // m_files["DTRPCOnly"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
 
-    // m_files["DTAMv2.3"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_DTAM.root";
-    // m_files["RPCv2.3"]           = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_RPC.root";
-    // m_files["RPCcorrected2.3"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_RPCcorrected.root";
+    m_files["DTAMv2.3"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_DTAM.root";
+    m_files["RPCv2.3"]           = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_RPC.root";
+    m_files["RPCcorrected2.3"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_RPCcorrected.root";
     m_files["DTRPCOnlyv2.3"]     = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPC_correctedFlag1Timing.root";
-
-
-    m_files["test"]         = "test.root"; // It is a copy of m_files["RPC"]
     
     // m_files["RPCOnly"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
     // m_files["RPCOnlyUpdated"] = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCPhase2_RPCOnlyFlag.root";
@@ -62,9 +57,6 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
                                
         const std::string& name = pair.first;
         const std::string& file_name = pair.second;
-
-        if (testFlag){ if ( file_name != m_files["test"] ) continue; }
-        else{ if ( file_name == m_files["test"] ) continue; }
 
         std::cout << "-------------------------------------------" <<std::endl;
         std::cout << "["+name+"]: "+inputDir+file_name+"\n" <<std::endl;
@@ -381,10 +373,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
         // Loop in the events
         // ------------------------------------------------------------------------------
         // nEntries = 1;   // 100   nEntries
-        if (testFlag){
-            nEntries = 100;
-            std::cout << "FOR TESTE:" <<std::endl;
-        }
+
         std::cout << "Total entries:" << nEntries <<std::endl;
 
         int idxGen = 0;
@@ -697,6 +686,8 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
                         else if ( name == "DTRPCOnlyv2.3" ){
                             if ( trigAMrpc != 2 ) continue; 
                         }
+
+                        
 
                         // m_plots["hPh2TpgPhiEmuAmBX"+whTag+chambTag+"_matched"]->Fill(trigAMBX);
 
@@ -1200,7 +1191,6 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
     }
 
     std::cout << "----------------------------------" << std::endl;
-    std::cout << "TEST FLAG: " << testFlag << std::endl;
     std::cout << "plotHistograms FLAG: " << plotHistograms << std::endl;
     std::cout << "----------------------------------" << std::endl;
 
