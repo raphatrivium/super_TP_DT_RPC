@@ -209,6 +209,21 @@ void plot_histograms() {
     }
 
     // --------------------------------
+    // RPC Conference 2026
+    // --------------------------------
+    saveDir = "plots/RPC_Conference_2026/variables/";
+    if (gSystem->AccessPathName(saveDir.c_str())) { 
+        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    }
+
+    plot_histo("hNTrigs",
+                {fileDTAMv23, fileRPCv23},
+                {"DT AM", "DT AM + RPC"},
+                {{kRed, 1}, {kBlue, 1}},
+                saveDir, 
+                false);
+
+    // --------------------------------
     // RPC Efficiency SimLinks
     // --------------------------------
     saveDir = "plots/RPC_Efficiency/efficiency/";
@@ -259,7 +274,7 @@ void plot_histograms() {
             //plot_BX_histo( hName, fileDTAM, "DT AM", kRed, fileRPC, "DT AM + RPC", kBlue, (wh+" "+chamb), saveDir, true);
         }
     }
-
+    return;
     // --------------------------------
     // RPC Phase 2 time
     // --------------------------------
@@ -350,7 +365,7 @@ void plot_histograms() {
         }
     }
 
-    return;
+    // return;
 
     // --------------------------------
     // DT AM and DT + RPC time phase2 Studies" 
