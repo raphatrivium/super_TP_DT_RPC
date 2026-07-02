@@ -224,14 +224,15 @@ void plot_histograms() {
                 saveDir, 
                 false);
     
+    
     plot_histo("hTrigFlag",
-                 {fileDTAM, fileRPC, fileRPCOnly},
+                 {fileDTAMv22, fileRPCv22, fileRPCOnlyv22},
                  {"DT AM", "DT AM + RPC", "RPC Only"},
                  {{kRed, 1}, {kBlue, 1}, {kGreen+2, 1}},
                  saveDir, 
                  false);
 
-    
+    return;
 
     // --------------------------------
     // RPC Efficiency SimLinks
@@ -301,7 +302,7 @@ void plot_histograms() {
             //plot_BX_histo( hName, fileDTAM, "DT AM", kRed, fileRPC, "DT AM + RPC", kBlue, (wh+" "+chamb), saveDir, true);
         }
     }
-    return;
+    // return;
     // --------------------------------
     // RPC Phase 2 time
     // --------------------------------

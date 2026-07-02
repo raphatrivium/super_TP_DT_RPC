@@ -488,7 +488,7 @@ void plotEffWheelStationMB1MB2( std::string hName,
                                                         ex_low.data(), ex_high.data(),
                                                         ey_low.data(), ey_high.data());
 
-        graph->SetTitle(hTotal[0]->GetTitle());
+        graph->SetTitle("");
         graph->SetName( hName.c_str() );
         graph->SetLineColor(vInfo[iHist][0]);
         graph->SetMarkerColor(vInfo[iHist][0]);

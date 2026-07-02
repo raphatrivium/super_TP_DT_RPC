@@ -80,7 +80,11 @@ int RPC_eff_SimLinks() {
         // m_plots["EffEtaGenSeg_total"] = new TH1D("EffEtaGenSeg_total", "Muon Reconstruction Efficiency; #eta; Efficiency", 100, -2, 2);
 
         m_plots["hNTrigs"] = new TH1D("hNTrigs", "Number of Triggers ; Number of Triggers; Entries / Event", 50, 0, 300);
+
         m_plots["hTrigFlag"] = new TH1D("hTrigFlag", "Trigger Primitive RPC Flag; RPC Flag; Entries", 5, 0, 5);
+        m_plots["hTrigFlag"]->GetXaxis()->SetNdivisions(5, kFALSE);  // Don't auto-divide
+        m_plots["hTrigFlag"]->GetXaxis()->CenterLabels();
+
 
         // m_plots["hT0Flag0"] = new TH1D("hT0Flag0", "Number of Triggers ; Number of Triggers; Entries / Event", 100, 440, 560);
         // m_plots["hT0Flag01"] = new TH1D("hT0Flag01", "Number of Triggers ; Number of Triggers; Entries / Event", 100, 440, 560);
@@ -331,6 +335,9 @@ int RPC_eff_SimLinks() {
                 if ( name == "RPCOnly" || name == "RPCOnlyv2.2" || 
                      name == "RPCOnlyUpdated" || name == "RPCOnlyUpdatedv2.2") {
 
+                    // To simulated only RPC primitives
+                    if ( trigAMrpc > 1 ) m_plots["hTrigFlag"] -> Fill( trigAMrpc );
+
                     if ( trigAMrpc != 2 ) continue;
                 }
                 BXfile << trigAMBX << "\t" << ph2TpgPhiEmuAm_t0->at(iTrigAM) << "\n";
@@ -338,11 +345,8 @@ int RPC_eff_SimLinks() {
                 
                 m_plots["hT0Flag2"] -> Fill( ph2TpgPhiEmuAm_t0->at(iTrigAM) );
                 
-                // if ( name == "RPCOnly" || name == "RPCOnlyUpdated" ) {
-                //     if ( trigAMrpc == 0 ) continue;
-                //     if ( trigAMrpc == 1 ) continue;
-                // }
-                m_plots["hTrigFlag"] -> Fill( trigAMrpc );
+
+                // m_plots["hTrigFlag"] -> Fill( trigAMrpc );
                 
                 coutNTrigs++;
                 
