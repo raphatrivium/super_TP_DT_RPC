@@ -27,10 +27,10 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
     // m_files["RPCUpdated"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root";
     // m_files["DTRPCOnly"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
 
-    m_files["DTAMv2.3"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_DTAM.root";
-    m_files["RPCv2.3"]           = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_RPC.root";
-    m_files["RPCcorrected2.3"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.3_RPCcorrected.root";
-    m_files["DTRPCOnlyv2.3"]     = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPC_correctedFlag1Timing.root";
+    m_files["DTAMv2.2"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.2_DTAM.root";
+    m_files["RPCv2.2"]           = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.2_RPC.root";
+    m_files["RPCcorrected2.2"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.2_RPCcorrected.root";
+    m_files["DTRPCOnlyv2.2"]     = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPC_correctedFlag1Timing.root";
     
     // m_files["RPCOnly"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
     // m_files["RPCOnlyUpdated"] = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCPhase2_RPCOnlyFlag.root";
@@ -683,7 +683,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
                         else if ( name == "DTRPCOnly" ){
                             if ( trigAMrpc != 2 ) continue; 
                         }
-                        else if ( name == "DTRPCOnlyv2.3" ){
+                        else if ( name == "DTRPCOnlyv2.2" ){
                             if ( trigAMrpc != 2 ) continue; 
                         }
 
@@ -799,7 +799,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
                         if (AMRPCflag > 0) m_plots["Eff_" + chambTag + "_AM+RPC_matched"]->Fill(segWh);
 
                         
-                        if ( name == "RPCOnly" || name == "DTRPCOnlyv2.3" ){
+                        if ( name == "RPCOnly" || name == "DTRPCOnlyv2.2" ){
                             std::cout << "            trigAMt0 [ns]      : "<< trigAMt0 << std::endl;
                             trigAMt0 = trigAMt0 - 500;
                             std::cout << "            trigAMt0 [ns]( - 500 for onlyRPC): "<< trigAMt0 << std::endl;
@@ -997,7 +997,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
                 else if ( name == "DTRPCOnly" ){
                     if ( trigAMrpc != 2 ) continue; 
                 }
-                else if ( name == "DTRPCOnlyv2.3" ){
+                else if ( name == "DTRPCOnlyv2.2" ){
                     if ( trigAMrpc != 2 ) continue; 
                 }
                 

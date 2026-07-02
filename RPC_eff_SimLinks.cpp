@@ -19,12 +19,12 @@ int RPC_eff_SimLinks() {
     // m_files["RPCOnly"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_OldSample_WithRPCDIGISIM.root";
     // m_files["RPCOnlyUpdated"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCPhase2_RPCOnlyFlag.root";
     
-    m_files["RPCOnlyv2.3"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPC_correctedFlag1Timing.root";
+    m_files["RPCOnlyv2.2"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPC_correctedFlag1Timing.root";
 
-    // m_files["RPCOnlyUpdatedv2.3"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPCphase2_correctedFlag1Timing.root";
+    // m_files["RPCOnlyUpdatedv2.2"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPCphase2_correctedFlag1Timing.root";
     
-    // m_files["RPCOnlyUpdatedv2.3"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPCphase2_correctedFlag1Timing_2.root";
-    // m_files["RPCOnlyUpdatedv2.3"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPCphase2_correctedFlag1Timing_2_float.root";
+    // m_files["RPCOnlyUpdatedv2.2"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPCphase2_correctedFlag1Timing_2.root";
+    // m_files["RPCOnlyUpdatedv2.2"]  = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPCphase2_correctedFlag1Timing_2_float.root";
     
     // ------------------------------------------------------------------------------
     // Check if the files are present.
@@ -328,8 +328,8 @@ int RPC_eff_SimLinks() {
                 // Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(iTrigAM);
                 Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(iTrigAM);
                 
-                if ( name == "RPCOnly" || name == "RPCOnlyv2.3" || 
-                     name == "RPCOnlyUpdated" || name == "RPCOnlyUpdatedv2.3") {
+                if ( name == "RPCOnly" || name == "RPCOnlyv2.2" || 
+                     name == "RPCOnlyUpdated" || name == "RPCOnlyUpdatedv2.2") {
 
                     if ( trigAMrpc != 2 ) continue;
                 }
@@ -484,7 +484,7 @@ int RPC_eff_SimLinks() {
 
                 if (SimLinkBx != 0) continue;
 
-                // if ( name == "RPCOnlyUpdatedv2.3" ) {
+                // if ( name == "RPCOnlyUpdatedv2.2" ) {
                 //     if ( SimLinkBx < -1 ) continue;
                 //     if ( SimLinkBx > 0 ) continue;
                 // }
@@ -528,8 +528,8 @@ int RPC_eff_SimLinks() {
                     // Int_t trigAMqual = ph2TpgPhiEmuAm_quality->at(iTrigAM);
                     Int_t trigAMrpc  = ph2TpgPhiEmuAm_rpcFlag->at(iTrigAM);
 
-                    if ( name == "RPCOnly" || name == "RPCOnlyv2.3" || 
-                         name == "RPCOnlyUpdated" || name == "RPCOnlyUpdatedv2.3") {
+                    if ( name == "RPCOnly" || name == "RPCOnlyv2.2" || 
+                         name == "RPCOnlyUpdated" || name == "RPCOnlyUpdatedv2.2") {
 
                         if ( trigAMrpc != 2 ) continue;
                     }
@@ -541,7 +541,7 @@ int RPC_eff_SimLinks() {
 
                         if ( trigAMBX != 20 ) continue;
                         
-                        // if ( name == "RPCOnlyUpdatedv2.3" ) {
+                        // if ( name == "RPCOnlyUpdatedv2.2" ) {
                         //     if ( trigAMBX < 19 ) continue;
                         //     if ( trigAMBX > 20 ) continue;
                         // }
@@ -612,7 +612,7 @@ int RPC_eff_SimLinks() {
                         // trigAMt0 = trigAMt0 - 500 -12.; // Shift to zero (RPC only)
 
                         // Shift to zero (RPC only)
-                        if ( name == "RPCOnlyUpdatedv2.3") {
+                        if ( name == "RPCOnlyUpdatedv2.2") {
                             trigAMt0 = trigAMt0 - 500 -12.;
                         }
                         else{

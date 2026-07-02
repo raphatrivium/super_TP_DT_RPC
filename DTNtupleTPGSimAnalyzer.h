@@ -333,7 +333,7 @@ void plotEffWheelStation( std::string hName,
     latex.SetTextSize(0.05); // Set text size
     latex.DrawLatex(0.1,0.91, "CMS ");  // (#it{...} makes the text italic)
     latex.SetTextSize(0.035);
-    latex.DrawLatex(0.18,0.91, "#it{Phase-2 Simulation}");  // (#it{...} makes the text italic)
+    latex.DrawLatex(0.18,0.91, "#it{Phase-2 Simulation Preliminary}");  // (#it{...} makes the text italic)
 
     // Draw new label information
     std::vector<std::string> WheelID = {"-2", "-1", " 0", "+1", "+2", "-2", "-1", " 0", "+1", "+2","-2", "-1", " 0", "+1", "+2","-2", "-1", " 0", "+1", "+2"};
@@ -530,7 +530,7 @@ void plotEffWheelStationMB1MB2( std::string hName,
     latex.SetTextSize(0.05); // Set text size
     latex.DrawLatex(0.1,0.91, "CMS ");  // (#it{...} makes the text italic)
     latex.SetTextSize(0.035);
-    latex.DrawLatex(0.18,0.91, "#it{Phase-2 Simulation}");  // (#it{...} makes the text italic)
+    latex.DrawLatex(0.18,0.91, "#it{Phase-2 Simulation Preliminary}");  // (#it{...} makes the text italic)
 
     // Draw new label information
     std::vector<std::string> WheelID = {"-2", "-1", " 0", "+1", "+2", "-2", "-1", " 0", "+1", "+2"};
@@ -711,7 +711,7 @@ void plot_t0_histo( std::string hName,
     // latex.DrawLatex(0.1,0.91, "CMS#it{Phase-2 Simulation Preliminary}");  // (#it{...} makes the text italic)
     latex.DrawLatex(0.1,0.91, "CMS ");  // (#it{...} makes the text italic)
     latex.SetTextSize(0.035);
-    latex.DrawLatex(0.18,0.91, "#it{Phase-2 Simulation}");  // (#it{...} makes the text italic)
+    latex.DrawLatex(0.18,0.91, "#it{Phase-2 Simulation Preliminary}");  // (#it{...} makes the text italic)
     latex.SetTextSize(0.04);
     latex.DrawLatex(0.74,0.8, "p_{T}>20 GeV");  // (#it{...} makes the text italic)
 
@@ -791,7 +791,7 @@ void plot_histo(std::string hName,
             return;
         } 
 
-        // hist->SetTitle(" ");
+        hist->SetTitle(" ");
         // hist->GetXaxis()->SetTitle("");
         // hist->GetYaxis()->SetTitle("");
 
@@ -847,9 +847,9 @@ void plot_histo(std::string hName,
     TLatex latex;
     latex.SetNDC(); // Use NDC (normalized device coordinates)
     latex.SetTextSize(0.05); // Set text size
-    latex.DrawLatex(0.1,0.91, "CMS ");  // (#it{...} makes the text italic)
+    latex.DrawLatex(0.1,0.91, "CMS ");
     latex.SetTextSize(0.035);
-    latex.DrawLatex(0.18,0.91, "#it{Phase-2 Simulation}");  // (#it{...} makes the text italic)
+    latex.DrawLatex(0.18,0.91, "#it{Phase-2 Simulation Preliminary}"); 
     latex.SetTextSize(0.04);
 
     text = new TText(0.04,0.82,"a.u."); // Events
