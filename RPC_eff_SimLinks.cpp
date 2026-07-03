@@ -110,13 +110,13 @@ int RPC_eff_SimLinks() {
                 // "Gen Muon - Segment Delta Eta distribution ; Delta Eta; Entries", 600, 0,  0.5);
 
                 m_plots["hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched"] = new TH1D( ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str(),
-                ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched; Time of the TPs associated with prompt muons [ns]; Entries").c_str(), 27, -10, 10);
+                ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched;Time of the TPs associated with prompt muons [ns]; Entries").c_str(), 20, -10, 10); // 27, -10, 10
 
                 // m_plots["hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched"] = new TH1D( ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str(),
                 // ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched; Time of the TPs associated with prompt muons [ns]; Entries").c_str(), 20, -10, 10);
 
                 m_plots["hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched"] = new TH1D( ("hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched").c_str(),
-                ("hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched; BXs of the TPs associated with prompt muons [ns]; Entries").c_str(), 20, 10, 30);
+                ("hPh2TpgPhiEmuAmBX"+wheel+chamb+"_matched;BXs of the TPs associated with prompt muons [ns]; Entries").c_str(), 20, 10, 30);
 
             }
         }

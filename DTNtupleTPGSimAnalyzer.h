@@ -490,6 +490,12 @@ void plotEffWheelStationMB1MB2( std::string hName,
                                                         ex_low.data(), ex_high.data(),
                                                         ey_low.data(), ey_high.data());
 
+        // Remove the horizontal error bars. 
+        // Make sense remove them since x-axis is just an enumeration of the wheels.
+        for (Int_t k = 0; k < graph->GetN(); ++k) {
+            graph->SetPointError(k, 0.0, 0.0, graph->GetErrorYlow(k), graph->GetErrorYhigh(k));
+        }
+                                            
         graph->SetTitle("");
         graph->SetName( hName.c_str() );
         graph->SetLineColor(vInfo[iHist][0]);
@@ -508,20 +514,16 @@ void plotEffWheelStationMB1MB2( std::string hName,
     cEff.SetGridy();
     // cEff.SetGridx();
 
+   
+
     graphs[0]->Draw("AP"); // "AP" for axis and points
     for (size_t iHist = 1; iHist < graphs.size(); ++iHist) {
         graphs[iHist]->Draw("P SAME");
     }
 
-    // graphs[0]->Draw("AP X"); // "AP" for axis and points
-    // for (size_t iHist = 1; iHist < graphs.size(); ++iHist) {
-    //     graphs[iHist]->Draw("P X SAME");
-    // }
-
     // gPad->Update();
     graphs[0]->GetYaxis()->SetRangeUser(vYMinMax[0],vYMinMax[1]);
-    graphs[0]->GetXaxis()->SetLabelSize(0);  // Remove labels completely
-
+    
     TText *text;
     text = new TText(0.74,0.91,"PU 200 (14 TeV)");
     text->SetNDC(); // To use the canvas coordinates
@@ -537,12 +539,14 @@ void plotEffWheelStationMB1MB2( std::string hName,
     latex.SetTextSize(0.035);
     latex.DrawLatex(0.18,0.91, "#it{Phase-2 Simulation Preliminary}");  // (#it{...} makes the text italic)
 
+    // Remove labels completely
+    graphs[0]->GetXaxis()->SetLabelSize(0);
+
     // Draw new label information
     std::vector<std::string> WheelID = {"-2", "-1", " 0", "+1", "+2", "-2", "-1", " 0", "+1", "+2"};
     std::vector<std::string> StationID = {"MB1", "MB2"};
     latex.SetTextSize(0.03);
-    // double xcoord = 0.13;
-    double xcoord = 0.19;
+    double xcoord = 0.16; // 0.19
     int iMB = 0;
     for (size_t i = 0; i < WheelID.size(); ++i) {
         latex.DrawLatex(xcoord, 0.07, WheelID[i].c_str());
@@ -550,8 +554,7 @@ void plotEffWheelStationMB1MB2( std::string hName,
             latex.DrawLatex(xcoord, 0.04, StationID[iMB].c_str());
             iMB++;
         }
-        // xcoord = xcoord + 0.0356;
-        xcoord = xcoord + 0.0665;
+        xcoord = xcoord + 0.074;  //0.665
     }
 
     // Get coordinates from the points the the plot
@@ -570,7 +573,7 @@ void plotEffWheelStationMB1MB2( std::string hName,
         double x[2] = {pointXcoords[i], pointXcoords[i]};  // Same x coordinate
         double y[2] = {0, hTotal[0]->GetMaximum()};  // From bottom to top
         TGraph *vline = new TGraph(2, x, y);
-        vline->SetLineColor(kBlack);
+        vline->SetLineColor(kGray);
         vline->SetLineWidth(1.);
         vline->SetLineStyle(2);
         vline->Draw("L");  // "L" option for line only
@@ -591,10 +594,11 @@ void plotEffWheelStationMB1MB2( std::string hName,
     }
 
     // Add legend
-    TLegend* leg = new TLegend(0.75, 0.1, 0.9, 0.25);
+    TLegend* leg = new TLegend(0.65, 0.1, 0.9, 0.3);
     for (size_t iHist = 0; iHist < graphs.size(); ++iHist) {
-       leg->AddEntry(graphs[iHist], vLegend[iHist].c_str(), "lp");
+       leg->AddEntry(graphs[iHist], vLegend[iHist].c_str(), "p");
     }
+    leg->SetTextSize(0.029);
     leg->Draw();
     
     // Save the plot in the output directory as "png" or/and "pdf"
@@ -638,7 +642,7 @@ void plot_t0_histo( std::string hName,
         }
 
         hist->SetTitle(" ");
-        hist->GetXaxis()->SetTitle("");
+        hist->GetXaxis()->SetTitle("Time of the TPs associated with prompt muons [ns]");
         hist->GetYaxis()->SetTitle("");
 
         hist->SetLineColor(vInfo[fileIdx][0]); 
@@ -726,10 +730,10 @@ void plot_t0_histo( std::string hName,
     text->SetTextAngle(90);
     if (norm) text->Draw();
 
-    text = new TText(0.10,0.01, "Time of the TPs associated with prompt muons [ns]");
-    text->SetNDC();
-    text->SetTextSize(0.05);
-    text->Draw();
+    // text = new TText(0.10,0.01, "Time of the TPs associated with prompt muons [ns]");
+    // text->SetNDC();
+    // text->SetTextSize(0.05);
+    // text->Draw();
 
     // text = new TText(0.68,0.91,"PU 200 (14 TeV)");
     text = new TText(0.74,0.91,"PU 200 (14 TeV)");

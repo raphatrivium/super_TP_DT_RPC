@@ -169,7 +169,7 @@ void plot_histograms() {
     plotEffWheelStationMB1MB2("Eff_TPwheels",
                                 {fileDTAMv22, fileRPCv22, fileRPCcorrectedv22},
                                 {"DT AM", "DT AM + RPC", "DT+RPC Corrected"},
-                                {{kP6Red, 20}, {kP6Blue, 21}, {kP6Yellow, 33}},
+                                {{kP6Red, 20}, {kP6Blue, 21}, {kP6Yellow, 23}},
                                 saveDir,
                                 {0.95,1.005} ) ;
 
@@ -213,27 +213,25 @@ void plot_histograms() {
     // --------------------------------
     // RPC Conference 2026
     // --------------------------------
-    saveDir = "plots/RPC_Conference_2026/variables/";
-    if (gSystem->AccessPathName(saveDir.c_str())) { 
-        gSystem->mkdir(saveDir.c_str(), true); // true = recursive
-    }
+    // saveDir = "plots/RPC_Conference_2026/variables/";
+    // if (gSystem->AccessPathName(saveDir.c_str())) { 
+    //     gSystem->mkdir(saveDir.c_str(), true); // true = recursive
+    // }
 
-    plot_histo("hNTrigs",
-                {fileDTAMv22, fileRPCv22, fileRPCOnlyv22},
-                {"DT AM", "DT AM + RPC", "RPC Only"},
-                {{kRed, 1}, {kBlue, 1}, {kGreen+2, 1}},
-                saveDir, 
-                false);
+    // plot_histo("hNTrigs",
+    //             {fileDTAMv22, fileRPCv22, fileRPCOnlyv22},
+    //             {"DT AM", "DT AM + RPC", "RPC Only"},
+    //             {{kRed, 1}, {kBlue, 1}, {kGreen+2, 1}},
+    //             saveDir, 
+    //             false);
     
     
-    plot_histo("hTrigFlag",
-                 {fileDTAMv22, fileRPCv22, fileRPCOnlyv22},
-                 {"DT AM", "DT AM + RPC", "RPC Only"},
-                 {{kRed, 1}, {kBlue, 1}, {kGreen+2, 1}},
-                 saveDir, 
-                 false);
-
-    return;
+    // plot_histo("hTrigFlag",
+    //              {fileDTAMv22, fileRPCv22, fileRPCOnlyv22},
+    //              {"DT AM", "DT AM + RPC", "RPC Only"},
+    //              {{kRed, 1}, {kBlue, 1}, {kGreen+2, 1}},
+    //              saveDir, 
+    //              false);
 
     // --------------------------------
     // RPC Efficiency SimLinks
@@ -245,10 +243,11 @@ void plot_histograms() {
     }
 
     plotEffWheelStationMB1MB2("Eff_TPwheels",
-                                {fileDTAMv22, fileRPCv22, fileRPCOnlyv22},
+                                {fileDTAMv22, fileRPCcorrectedv22, fileRPCOnlyv22},
                                 {"DT AM", "DT AM + RPC", "RPC Only"},
-                                {{kRed, 20}, {kBlue, 21}, {kGreen+2, 22}},
-                                saveDir ) ;
+                                {{kP6Red, 20}, {kP6Blue, 21}, {kP6Grape, 22}},
+                                saveDir,
+                                {0.90,1.005} ) ;
 
     // --------------------------------
     saveDir = "plots/RPC_Efficiency/variables/";
@@ -295,7 +294,7 @@ void plot_histograms() {
             plot_t0_histo(  hName,
                             {fileDTAMv22, fileRPCcorrectedv22, fileRPCOnlyv22},
                             {"DT AM", "DT AM + RPC", "RPC Only"},
-                            {{kRed, 1}, {kBlue, 1}, {kGreen+2, 1}},
+                            {{kP6Red, 1}, {kP6Blue, 1}, {kP6Grape, 1}},
                             (wh+" "+chamb), 
                             saveDir, 
                             true);
@@ -303,7 +302,7 @@ void plot_histograms() {
             //plot_BX_histo( hName, fileDTAM, "DT AM", kRed, fileRPC, "DT AM + RPC", kBlue, (wh+" "+chamb), saveDir, true);
         }
     }
-    // return;
+    return;
     // --------------------------------
     // RPC Phase 2 time
     // --------------------------------

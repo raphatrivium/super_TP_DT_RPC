@@ -155,7 +155,7 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
                 "Gen Muon - Segment Delta Eta distribution ; Delta Eta; Entries", 600, 0,  0.5);
 
                 m_plots["hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched"] = new TH1D( ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str(),
-                ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched; Time of the TPs associated with prompt muons [ns]; Entries").c_str(), 27, -10, 10); // 40, 0, 700  // 40, 630, 650
+                ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched;Time of the TPs associated with prompt muons [ns]; Entries").c_str(), 20, -10, 10); // 40, 0, 700  // 40, 630, 650
 
                 // m_plots["hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched"] = new TH1D( ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched").c_str(),
                 // ("hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched; Time of the TPs associated with prompt muons [ns]; Entries").c_str(), 40, -120, -100); 
@@ -803,9 +803,9 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
 
                         
                         if ( name == "RPCOnly" || name == "DTRPCOnlyv2.2" ){
-                            std::cout << "            trigAMt0 [ns]      : "<< trigAMt0 << std::endl;
+                            // std::cout << "            trigAMt0 [ns]      : "<< trigAMt0 << std::endl;
                             trigAMt0 = trigAMt0 - 500;
-                            std::cout << "            trigAMt0 [ns]( - 500 for onlyRPC): "<< trigAMt0 << std::endl;
+                            // std::cout << "            trigAMt0 [ns]( - 500 for onlyRPC): "<< trigAMt0 << std::endl;
                         }
                         else{
                             if (fdebug) std::cout << "            trigAMt0 (DCS)      : "<< trigAMt0 << std::endl;
