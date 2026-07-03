@@ -169,8 +169,9 @@ void plot_histograms() {
     plotEffWheelStationMB1MB2("Eff_TPwheels",
                                 {fileDTAMv22, fileRPCv22, fileRPCcorrectedv22},
                                 {"DT AM", "DT AM + RPC", "DT+RPC Corrected"},
-                                {{kRed, 20}, {kBlue, 21}, {kYellow+2, 33}},
-                                saveDir ) ;
+                                {{kP6Red, 20}, {kP6Blue, 21}, {kP6Yellow, 33}},
+                                saveDir,
+                                {0.95,1.005} ) ;
 
     // --------------------------------
     saveDir = "plots/RPC_Corrected/variables/";
@@ -181,7 +182,7 @@ void plot_histograms() {
     plot_histo("hNTrigs",
                 {fileDTAMv22, fileRPCv22, fileRPCcorrectedv22},
                 {"DT AM", "DT AM + RPC", "DT+RPC Corrected"},
-                {{kRed, 1}, {kBlue, 1}, {kYellow+2, 1}},
+                {{kP6Red, 1}, {kP6Blue, 1}, {kP6Yellow, 1}},
                 saveDir, 
                 false);
 
@@ -200,7 +201,7 @@ void plot_histograms() {
             plot_t0_histo( hName,
                             {fileDTAMv22, fileRPCv22, fileRPCcorrectedv22},
                             {"DT AM", "DT AM + RPC", "DT+RPC Corrected"},
-                            {{kRed, 1}, {kBlue, 1}, {kYellow+2, 1}},
+                            {{kP6Red, 1}, {kP6Blue, 1}, {kP6Yellow, 1}}, // kYellow+2
                             (wh+" "+chamb), 
                             saveDir, 
                             true);

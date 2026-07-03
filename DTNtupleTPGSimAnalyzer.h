@@ -405,11 +405,13 @@ void plotEffWheelStationMB1MB2( std::string hName,
                                 std::initializer_list<TFile *> fileList,
                                 std::initializer_list<std::string> legendList,
                                 std::initializer_list<std::vector<int>> infolist,
-                                std::string saveDir )                         
+                                std::string saveDir,
+                                std::initializer_list<double> yMinMax = {0.0,1.005} )                         
 {
     std::vector<TFile *> vFile = fileList;
     std::vector<std::string> vLegend = legendList;
     std::vector<std::vector<int>> vInfo = infolist;
+    std::vector<double> vYMinMax = yMinMax;
 
     if (vFile.size() != vLegend.size() || 
         vFile.size() != vInfo.size() || 
@@ -496,7 +498,7 @@ void plotEffWheelStationMB1MB2( std::string hName,
 
         graph->GetXaxis()->SetTitle("Wheels");
         graph->GetYaxis()->SetTitle("Efficiency");
-
+        
         graphs.push_back(graph);
     }
 
@@ -511,10 +513,13 @@ void plotEffWheelStationMB1MB2( std::string hName,
         graphs[iHist]->Draw("P SAME");
     }
 
-    // gPad->Update();
-    graphs[0]->GetYaxis()->SetRangeUser(0.0,1.005); // Eff  all
-    // graphs[0]->GetYaxis()->SetRangeUser(0.97,1.005);
+    // graphs[0]->Draw("AP X"); // "AP" for axis and points
+    // for (size_t iHist = 1; iHist < graphs.size(); ++iHist) {
+    //     graphs[iHist]->Draw("P X SAME");
+    // }
 
+    // gPad->Update();
+    graphs[0]->GetYaxis()->SetRangeUser(vYMinMax[0],vYMinMax[1]);
     graphs[0]->GetXaxis()->SetLabelSize(0);  // Remove labels completely
 
     TText *text;
