@@ -302,6 +302,15 @@ void plot_histograms() {
             //plot_BX_histo( hName, fileDTAM, "DT AM", kRed, fileRPC, "DT AM + RPC", kBlue, (wh+" "+chamb), saveDir, true);
         }
     }
+
+
+    plotEffWheelStationSigma("hPh2TpgPhiEmuAmT0",
+                             {fileDTAMv22, fileRPCcorrectedv22, fileRPCOnlyv22},
+                             {"DT AM", "DT AM + RPC", "RPC Only"},
+                             {{kP6Red, 20}, {kP6Blue, 21}, {kP6Grape, 22}},
+                             saveDir,
+                             {0.90,1.005} ) ;
+
     return;
     // --------------------------------
     // RPC Phase 2 time

@@ -606,14 +606,15 @@ int RPC_eff_SimLinks() {
                         m_plots["hPh2TpgPhiEmuAmBX"+whTag+chambTag+"_matched"]->Fill(trigAMBX);
                         
                         Double_t trigAMt0 = ph2TpgPhiEmuAm_t0->at(bestTPAM);
-                        // TODO: No need to apply this change for now because Flag 2 TPs are already in ns
-                        // But if they change this in the future, we need to aplly it.
-                        // trigAMt0 = (trigAMt0 * 25 / 32); // DCS to ns
-                        // trigAMt0 = trigAMt0 - 390; // Shift to zero (RPC only)
 
-                        // trigAMt0 = trigAMt0 - 500.; // Shift to zero (RPC only)
-
-                        // trigAMt0 = trigAMt0 - 500 -12.; // Shift to zero (RPC only)
+                        // // Just a trick to adapt the output time of TP Flag2
+                        // // TPs Flag2 have [ns] unity instead of [TDC] which causes some bin problems in histograms when compared with other TPs Flags
+                        // // TODO: To be removed when DT correct this in AM code (Flag 2 TPs part)
+                        // trigAMt0 = trigAMt0 * ((float)TIME_TO_TDC_COUNTS / (float)LHC_CLK_FREQ);  // ns -> TDC
+                        // // int trigAMt0_TDC = trigAMt0;
+                        // // trigAMt0 = trigAMt0_TDC;
+                        // trigAMt0 = (trigAMt0 * LHC_CLK_FREQ / TIME_TO_TDC_COUNTS); // DCS to ns
+                        // trigAMt0 = trigAMt0 - 500;
 
                         // Shift to zero (RPC only)
                         if ( name == "RPCOnlyUpdatedv2.2") {
