@@ -612,153 +612,124 @@ void plotEffWheelStationMB1MB2( std::string hName,
 } // For multiple histograms Test
 
 void plotEffWheelStationSigma( std::string hName,
-                                std::initializer_list<TFile *> fileList,
-                                std::initializer_list<std::string> legendList,
-                                std::initializer_list<std::vector<int>> infolist,
+                                std::initializer_list<TFile *> fileList, // files
+                                std::initializer_list<std::string> legendList, // legends names 
+                                std::initializer_list<std::vector<int>> infolist, // legends color and markers 
                                 std::string saveDir,
                                 std::initializer_list<double> yMinMax = {0.0,1.005} )                         
 {
-    // std::vector<TFile *> vFile = fileList;
-    // std::vector<std::string> vLegend = legendList;
-    // std::vector<std::vector<int>> vInfo = infolist;
+    std::vector<TFile *> vFile = fileList;
+    std::vector<std::string> vLegend = legendList;
+    std::vector<std::vector<int>> vInfo = infolist;
 
-    // if (vFile.size() != vLegend.size() || 
-    //     vFile.size() != vInfo.size() || 
-    //     vLegend.size() != vInfo.size() ){
-    //     std::cerr << "Error: Input lists with different sizes" << std::endl;
-    //     return;
-    // }
+    if (vFile.size() != vLegend.size() || 
+        vFile.size() != vInfo.size() || 
+        vLegend.size() != vInfo.size() ){
+        std::cerr << "Error: Input lists with different sizes" << std::endl;
+        return;
+    }
 
-    // std::vector<TH1F *> hTotal;
-    // std::vector<TH1F *> hMatched;
-    // for (const auto& file : vFile) {
-    //     TH1F *histMatched = (TH1F*)file->Get((hName+"_matched").c_str());
-    //     TH1F *histTotal   = (TH1F*)file->Get((hName+"_total").c_str());
-    //     if (!histMatched || !histTotal){
-    //         if (!histTotal)   std::cerr << "Error: Required histograms '" << hName+"_total" << "' not found in root file" << std::endl;
-    //         if (!histMatched) std::cerr << "Error: Required histograms '" << hName+"_matched" << "' not found in root file" << std::endl;
-    //         return;
-    //    } 
-    //    hMatched.push_back(histMatched);
-    //    hTotal.push_back(histTotal);
-    // }
+    std::vector<std::string> wheelTag = {"Wh.-2","Wh.-1","Wh.0","Wh.+1","Wh.+2",};
+    std::vector<std::string> chambTag = {"MB1", "MB2", "MB3", "MB4"};
 
-    // // std::cout << "hTotal.size(): " << hTotal.size()<< std::endl;
-    // // std::cout << "hMatched.size(): " << hMatched.size()<< std::endl;
+    std::vector<std::vector<double>> vstddev;
 
-    // // Draw the efficiency plot
-    // TCanvas cEff = new TCanvas("cEff", "Efficiency Plot", 800, 600);
-    // cEff.SetGridy();
-    // // cEff.SetGridx();
 
-    // // Create the efficiency plot
-    // std::vector<TEfficiency *> effPlots;
-    // for (size_t iHist = 0; iHist < hTotal.size(); ++iHist) {
-    //     TEfficiency* effPlot = new TEfficiency(*hMatched[iHist], *hTotal[iHist]);
-    //     if (!effPlot) std::cerr << "Error: TEfficiency* construction problem" << std::endl;
+    std::vector<TH2*> vHists;
+    for (size_t fileIdx = 0; fileIdx < vFile.size(); ++fileIdx) {
 
-    //     effPlot->SetName( hName.c_str() );  // Convert to const char*
-    //     // Style the efficiency plot
-    //     effPlot->SetLineColor(vInfo[iHist][0]);
-    //     effPlot->SetMarkerColor(vInfo[iHist][0]);
-    //     effPlot->SetMarkerStyle(vInfo[iHist][1]);
+        std::cout << "FILE --------------" << std::endl;
+        TH2F* hsigma = new TH2F("hsigma", "sigmas; Wheel; #sigma [ns]", 22, 0, 22, 200, 0, 3.5); 
 
-    //     TString originalTitle = hTotal[iHist]->GetTitle();
-    //     effPlot->SetTitle(originalTitle);
+        for (const auto & wheel : wheelTag) {
+            std::string wh = wheel;  
+            wh = wh.erase(1, 2); // Removes "h.": "Wh.-2"→ "W-2"
+            for (const auto & chamb : chambTag) {
+                std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
 
-    //     effPlots.push_back(effPlot);
-    // }
+                TH1F *hist = (TH1F*)vFile[fileIdx]->Get( hName.c_str() );
+                if (!hist){
+                    std::cerr << "Error: Required histograms '" << hName+"_total" << "' not found in root file" << std::endl;
+                    return;
+                } 
 
-    // // std::cout << "effPlots.size(): " << effPlots.size()<< std::endl;
+                // Get the standard deviation of each histogram
+                double stddev = hist->GetStdDev();
+                std::cout << "stddev --------------:" << stddev << std::endl;
 
-    // effPlots[0]->Draw("AP"); // "AP" for axis and points
-    // for (size_t iHist = 1; iHist < effPlots.size(); ++iHist) {
-    //     effPlots[iHist]->Draw("P SAME");
-    // }
+                int station = 0;
+                if (chamb == "MB1" ) station = 1;
+                else if (chamb == "MB2" ) station = 2;
+                else if (chamb == "MB3" ) station = 3;
+                else if (chamb == "MB4" ) station = 4;
 
-    // gPad->Update(); 
-    // effPlots[0]->GetPaintedGraph()->GetYaxis()->SetRangeUser(0.0,1.005); // Eff  all
-    // effPlots[0]->GetPaintedGraph()->GetXaxis()->SetLabelSize(0);  // Remove labels completely
+                int iwheel = 0;
+                if (wheel == "Wh.-2" ) iwheel = -2;
+                else if (wheel == "Wh.-1" ) iwheel = -1;
+                else if (wheel == "Wh.0" ) iwheel = 0;
+                else if (wheel == "Wh.+1" ) iwheel = 1;
+                else if (wheel == "Wh.+2" ) iwheel = 2;
 
-    // TText *text;
-    // text = new TText(0.74,0.91,"PU 200 (14 TeV)");
-    // text->SetNDC(); // To use the canvas coordinates
-    // // text->SetTextAlign(31);
-    // text->SetTextSize(0.03);
-    // text->Draw();
+                int wheelIdx = WheelStationToBins(station, iwheel);
+                hsigma->Fill(wheelIdx, stddev);
+                // std::cout << "Entries --------------" << std::endl;
 
-    // TLatex latex;
-    // latex.SetNDC(); // Use NDC (normalized device coordinates)
-    // // latex.SetTextAlign(22); // Centered alignment
-    // latex.SetTextSize(0.05); // Set text size
-    // latex.DrawLatex(0.1,0.91, "CMS ");  // (#it{...} makes the text italic)
-    // latex.SetTextSize(0.035);
-    // latex.DrawLatex(0.18,0.91, "#it{Phase-2 Simulation Preliminary}");  // (#it{...} makes the text italic)
+                hsigma->SetStats(0);  // Remove statistic box
+                hsigma->SetMarkerColor(vInfo[fileIdx][0]);
+                hsigma->SetMarkerStyle(21);  // Sets to a solid circle (choose from styles 1 to 30)
 
-    // // Draw new label information
-    // std::vector<std::string> WheelID = {"-2", "-1", " 0", "+1", "+2", "-2", "-1", " 0", "+1", "+2","-2", "-1", " 0", "+1", "+2","-2", "-1", " 0", "+1", "+2"};
-    // std::vector<std::string> StationID = {"MB1", "MB2", "MB3", "MB4"};
-    // latex.SetTextSize(0.03);
-    // double xcoord = 0.13;
-    // int iMB = 0;
-    // for (size_t i = 0; i < WheelID.size(); ++i) {
-    //     latex.DrawLatex(xcoord, 0.07, WheelID[i].c_str());
-
-    //     if ( WheelID[i] == " 0"){
-    //         latex.DrawLatex(xcoord, 0.04, StationID[iMB].c_str());
-    //         iMB++;
-    //     }
-
-    //     xcoord = xcoord + 0.0356;
-    // }
-
-    // // Get coordinates from the points the the plot
-    // std::vector<double> pointXcoords;
-    // for (int bin = 1; bin <= hTotal[0]->GetNbinsX(); bin++) {
-    //     double x = hTotal[0]->GetBinCenter(bin);
-    //     if ( bin == 1 || bin == hTotal[0]->GetNbinsX() ) continue;
-    //     pointXcoords.push_back(x);
-    //     // double y = hTotal1->GetBinContent(bin);
-    //     // std::cout << "Bin " << bin << ": x = " << x << ", y = " << y << std::endl;
-    // }
-
-    // // Draw vertical lines in the canvas
-    // for (size_t i = 0; i < pointXcoords.size(); ++i) {
-    //     double x[2] = {pointXcoords[i], pointXcoords[i]};  // Same x coordinate
-    //     double y[2] = {0, hTotal[0]->GetMaximum()};  // From bottom to top
-    //     TGraph *vline = new TGraph(2, x, y);
-    //     vline->SetLineColor(kBlack);
-    //     vline->SetLineWidth(1.);
-    //     vline->SetLineStyle(2);
-    //     vline->Draw("L");  // "L" option for line only
-    // }
-
-    // // Draw vertical lines in the canvas
-    // std::vector<double> divisors = {6, 11, 16};
-    // for (size_t i = 0; i < divisors.size(); ++i) {
-    //     // double xpos = 6.;
-    //     double x[2] = {divisors[i], divisors[i]};  // Same x coordinate
-    //     double y[2] = {0, hTotal[0]->GetMaximum()};  // From bottom to top
-    //     TGraph *vline = new TGraph(2, x, y);
-    //     vline->SetLineColor(kBlack);
-    //     vline->SetLineWidth(2);
-        
-    //     vline->Draw("L");  // "L" option for line only
-    // }
-
-    // // Add legend
-    // TLegend* leg = new TLegend(0.75, 0.1, 0.9, 0.25);
-    // for (size_t iHist = 0; iHist < effPlots.size(); ++iHist) {
-    //    leg->AddEntry(effPlots[iHist], vLegend[iHist].c_str(), "lp");
-    // }
-    // leg->Draw();
+                
+            }
+        }
+        vHists.push_back(hsigma);
+        // delete hsigma;
+    } //end loop files
     
-    // // Save the plot in the output directory as "png" or/and "pdf"
-    // cEff.SaveAs((saveDir+hName+".png").c_str());
-    // cEff.SaveAs((saveDir+hName+".pdf").c_str());
+    
+    TCanvas cEff = new TCanvas("cEff", "Efficiency Plot", 800, 600);
+    cEff.SetGridy();
+    // cEff.SetGridx();
+
+    vHists[0]->Draw(); // "AP" for axis and points
+    for (size_t iHists = 1; iHists < vHists.size(); ++iHists) {
+        vHists[iHists]->Draw("SAME");
+    }
+
+    // Add legend
+    TLegend* leg = new TLegend(0.65, 0.15, 0.9, 0.35);
+    for (size_t iHist = 0; iHist < vHists.size(); ++iHist) {
+       leg->AddEntry(vHists[iHist], vLegend[iHist].c_str(), "p");
+    }
+    leg->SetTextSize(0.029);
+    leg->Draw();
+
+    // Save the plot in the output directory as "png" or/and "pdf"
+    cEff.SaveAs((saveDir+hName+"sigma.png").c_str());
+    cEff.SaveAs((saveDir+hName+"sigma.pdf").c_str());
     
 }
 
+// std::vector<double> temp_stddev;
+// for (const auto & wheel : wheelTag) {
+//     std::string wh = wheel;  
+//     wh = wh.erase(1, 2); // Removes "h.": "Wh.-2"→ "W-2"
+//     for (const auto & chamb : chambTag) {
+//         std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
+
+//         TH1F *hist = (TH1F*)vFile[fileIdx]->Get( hName.c_str() );
+//         if (!hist){
+//             std::cerr << "Error: Required histograms '" << hName+"_total" << "' not found in root file" << std::endl;
+//             return;
+//         } 
+
+//         // Get the standard deviation of each histogram
+//         double stddev = hist->GetStdDev();
+
+//         temp_stddev.push_back(stddev);
+
+//     }
+// }
+// vstddev.push_back(temp_stddev);
 
 // For multiples Histograms
 void plot_t0_histo( std::string hName,
