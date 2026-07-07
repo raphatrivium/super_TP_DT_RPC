@@ -325,7 +325,7 @@ void plotEffWheelStation( std::string hName,
     effPlots[0]->GetPaintedGraph()->GetXaxis()->SetLabelSize(0);  // Remove labels completely
 
     TText *text;
-    text = new TText(0.74,0.91,"PU 200 (14 TeV)");
+    text = new TText(0.76,0.91,"PU 200 (14 TeV)");
     text->SetNDC(); // To use the canvas coordinates
     // text->SetTextAlign(31);
     text->SetTextSize(0.03);
@@ -529,7 +529,7 @@ void plotEffWheelStationMB1MB2( std::string hName,
     graphs[0]->GetYaxis()->SetRangeUser(vYMinMax[0],vYMinMax[1]);
     
     TText *text;
-    text = new TText(0.74,0.91,"PU 200 (14 TeV)");
+    text = new TText(0.76,0.91,"PU 200 (14 TeV)");
     text->SetNDC(); // To use the canvas coordinates
     // text->SetTextAlign(31);
     text->SetTextSize(0.03);
@@ -634,20 +634,21 @@ void plotEffWheelStationSigma( std::string hName,
     std::vector<std::string> chambTag = {"MB1", "MB2", "MB3", "MB4"};
 
     std::vector<std::vector<double>> vstddev;
+    std::vector<std::vector<double>> vstddev_un;
 
     std::vector<TH2*> vHists;
     // std::vector<TH1F *> hTotal;
     // std::vector<TH1F *> hMatched;
     for (size_t fileIdx = 0; fileIdx < vFile.size(); ++fileIdx) {
 
-        std::cout << "FILE --------------" << std::endl;
         TH2F* hsigma = new TH2F("hsigma", "sigmas; Wheel; #sigma [ns]", 22, 0, 22, 200, 0, 3.5); 
 
         std::vector<double> temp_stddev;
-        for (const auto & wheel : wheelTag) {
-            std::string wh = wheel;  
-            wh = wh.erase(1, 2); // Removes "h.": "Wh.-2"→ "W-2"
-            for (const auto & chamb : chambTag) {
+        std::vector<double> temp_stddev_un;
+        for (const auto & chamb : chambTag) {
+            for (const auto & wheel : wheelTag) {
+                std::string wh = wheel;  
+                wh = wh.erase(1, 2); // Removes "h.": "Wh.-2"→ "W-2"
                 std::string hName = "hPh2TpgPhiEmuAmT0"+wheel+chamb+"_matched";
 
                 TH1F *hist = (TH1F*)vFile[fileIdx]->Get( hName.c_str() );
@@ -658,7 +659,8 @@ void plotEffWheelStationSigma( std::string hName,
 
                 // Get the standard deviation of each histogram
                 double stddev = hist->GetStdDev();
-                // std::cout << "stddev --------------:" << stddev << std::endl;
+                double N = hist->GetEntries(); // Get the number of entries (N)
+                double uncertainty = stddev / std::sqrt(2 * N);  // Calculate the uncertainty of the standard deviation
 
                 int station = 0;
                 if (chamb == "MB1" ) station = 1;
@@ -675,38 +677,17 @@ void plotEffWheelStationSigma( std::string hName,
 
                 int wheelIdx = WheelStationToBins(station, iwheel);
                 hsigma->Fill(wheelIdx, stddev);
-                std::cout << "wheelIdx: " << wheelIdx <<  " | stddev: " << stddev << std::endl;
+                // std::cout << "wheelIdx: " << wheelIdx <<  " | stddev: " << stddev << std::endl;
 
                 temp_stddev.push_back(stddev);
+                temp_stddev_un.push_back(uncertainty);
 
             } // chambTag loop
         } // wheelTag loop
 
         vstddev.push_back(temp_stddev);
-
-        // TCanvas cEff = new TCanvas("cEff", "Efficiency Plot", 800, 600);
-        // cEff.SetGridy();
-        // // cEff.SetGridx();
-        // hsigma->Draw("AP"); // "AP" for axis and points
-        // cEff.SaveAs((saveDir+hName+"sigma.png").c_str());
-        // cEff.SaveAs((saveDir+hName+"sigma.pdf").c_str());
-
-        // hsigma
-        // Double_t content = hsigma->GetBinContent(3,3);
-        // std::cout << "content:" << content << std::endl;
-
-
-        // // ✅ CORRECT: Starting at 1
-        // for (int i = 1; i <= hsigma->GetNbinsX(); i++) {
-        //     for (int j = 1; j <= hsigma->GetNbinsY(); j++) {
-        //         double content = hsigma->GetBinContent(i, j);  // Correct!
-        //         if (content < 0.0000001)continue; 
-        //         std::cout << "content:" << content << std::endl;
-        //     }
-        // }
-
+        vstddev_un.push_back(temp_stddev_un);
         vHists.push_back(hsigma);
-        // delete hsigma;
     } //end loop files
     
 
@@ -716,11 +697,12 @@ void plotEffWheelStationSigma( std::string hName,
         int nBins = vHists[0]->GetNbinsX();
         std::vector<double> x, y, ex_low, ex_high, ey_low, ey_high;
 
+        int N = vHists[iHist]->GetEntries(); // Get the number of entries (N)
+
         // Loop in the bins
         for (int i = 1; i <= 11; ++i) {
             if (i == 1 || i == 22 ) continue;
 
-            // std::cout << "------------------" << std::endl;
             double binCenter = vHists[iHist]->GetXaxis()->GetBinCenter(i);
             // std::cout << "binCenter:" << binCenter << std::endl;
             double binWidth = vHists[iHist]->GetXaxis()->GetBinWidth(i) / 2.0;
@@ -729,10 +711,10 @@ void plotEffWheelStationSigma( std::string hName,
             // std::cout << "total:" << total << std::endl;
             // double total = hTotal[iHist]->GetBinContent(i);
 
-            double total = vstddev[iHist][i];
+            double total = vstddev[iHist][i-2];
+            // std::cout << "total:" << total << std::endl;
 
             if (total == 0) {
-
                 x.push_back(binCenter);
                 ex_low.push_back(0.0); // binWidth
                 ex_high.push_back(0.0); // binWidth
@@ -743,23 +725,16 @@ void plotEffWheelStationSigma( std::string hName,
 
             }
             else {
-                // // Normal efficiency calculation with Clopper-Pearson errors
-                // double efficiency = passed / total;
-                
-                // // Wilson score interval or Clopper-Pearson
-                // // For simplicity, using standard error approximation
-                // double error = (passed > 0 && passed < total) ? 
-                //             sqrt(efficiency * (1 - efficiency) / total) : 0;
+                double stddev_un = vstddev_un[iHist][i-2];
+                // std::cout << "uncertainty:" << stddev_un << std::endl;
                 
                 x.push_back(binCenter);
                 ex_low.push_back(0.0); //error
                 ex_high.push_back(0.0); //error
 
-                // y = vstddev[iHist];
-
                 y.push_back(total);
-                ey_low.push_back(0.0); //error
-                ey_high.push_back(0.0); //error
+                ey_low.push_back(stddev_un); //error
+                ey_high.push_back(stddev_un); //error
             }
 
         }
@@ -804,7 +779,7 @@ void plotEffWheelStationSigma( std::string hName,
     graphs[0]->GetYaxis()->SetRangeUser(vYMinMax[0],vYMinMax[1]);
     
     TText *text;
-    text = new TText(0.74,0.91,"PU 200 (14 TeV)");
+    text = new TText(0.76,0.91,"PU 200 (14 TeV)");
     text->SetNDC(); // To use the canvas coordinates
     // text->SetTextAlign(31);
     text->SetTextSize(0.03);
@@ -836,8 +811,6 @@ void plotEffWheelStationSigma( std::string hName,
         xcoord = xcoord + 0.074;  //0.665
     }
 
-    
-
     // Get coordinates from the points the the plot
     std::vector<double> pointXcoords;
     for (int bin = 1; bin <= vHists[0]->GetNbinsX(); bin++) {
@@ -849,8 +822,6 @@ void plotEffWheelStationSigma( std::string hName,
         // double y = hTotal1->GetBinContent(bin);
         // std::cout << "Bin " << bin << ": x = " << x << ", y = " << y << std::endl;
     }
-
-    // return;
 
     // Draw vertical lines in the canvas for Wheels
     // for (size_t i = 0; i < pointXcoords.size(); ++i) {
@@ -865,7 +836,6 @@ void plotEffWheelStationSigma( std::string hName,
         vline->Draw("L");  // "L" option for line only
     }
 
-    
 
     // Draw vertical lines in the canvas for divide station regions
     // std::vector<double> divisors = {6, 11, 16};
@@ -882,9 +852,6 @@ void plotEffWheelStationSigma( std::string hName,
         vline->Draw("L");  // "L" option for line only
     }
 
-    
-    
-
     // Add legend
     TLegend* leg = new TLegend(0.65, 0.15, 0.9, 0.35);
     for (size_t iHist = 0; iHist < graphs.size(); ++iHist) {
@@ -896,27 +863,6 @@ void plotEffWheelStationSigma( std::string hName,
     // Save the plot in the output directory as "png" or/and "pdf"
     cEff.SaveAs((saveDir+hName+"sigma.png").c_str());
     cEff.SaveAs((saveDir+hName+"sigma.pdf").c_str());
-    
-    // TCanvas cEff = new TCanvas("cEff", "Efficiency Plot", 800, 600);
-    // cEff.SetGridy();
-    // // cEff.SetGridx();
-
-    // vHists[0]->Draw(); // "AP" for axis and points
-    // for (size_t iHists = 1; iHists < vHists.size(); ++iHists) {
-    //     vHists[iHists]->Draw("SAME");
-    // }
-
-    // // Add legend
-    // TLegend* leg = new TLegend(0.65, 0.15, 0.9, 0.35);
-    // for (size_t iHist = 0; iHist < vHists.size(); ++iHist) {
-    //    leg->AddEntry(vHists[iHist], vLegend[iHist].c_str(), "p");
-    // }
-    // leg->SetTextSize(0.029);
-    // leg->Draw();
-
-    // // Save the plot in the output directory as "png" or/and "pdf"
-    // cEff.SaveAs((saveDir+hName+"sigma.png").c_str());
-    // cEff.SaveAs((saveDir+hName+"sigma.pdf").c_str());
     
 }
 
@@ -1070,7 +1016,7 @@ void plot_t0_histo( std::string hName,
     // text->Draw();
 
     // text = new TText(0.68,0.91,"PU 200 (14 TeV)");
-    text = new TText(0.74,0.91,"PU 200 (14 TeV)");
+    text = new TText(0.76,0.91,"PU 200 (14 TeV)");
     text->SetNDC(); // To use the canvas coordinates
     // text->SetTextAlign(31);
     text->SetTextSize(0.03);
@@ -1201,7 +1147,7 @@ void plot_histo(std::string hName,
     text->SetTextAngle(90);
     if (norm) text->Draw();
 
-    text = new TText(0.74,0.91,"PU 200 (14 TeV)");
+    text = new TText(0.76,0.91,"PU 200 (14 TeV)");
     text->SetNDC(); // To use the canvas coordinates
     // text->SetTextAlign(31);
     text->SetTextSize(0.03);
