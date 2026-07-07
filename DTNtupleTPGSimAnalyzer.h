@@ -633,7 +633,7 @@ void plotEffWheelStationSigma( std::string hName,
     std::vector<std::string> wheelTag = {"Wh.-2","Wh.-1","Wh.0","Wh.+1","Wh.+2",};
     std::vector<std::string> chambTag = {"MB1", "MB2", "MB3", "MB4"};
 
-    // std::vector<std::vector<double>> vstddev;
+    std::vector<std::vector<double>> vstddev;
 
     std::vector<TH2*> vHists;
     // std::vector<TH1F *> hTotal;
@@ -643,6 +643,7 @@ void plotEffWheelStationSigma( std::string hName,
         std::cout << "FILE --------------" << std::endl;
         TH2F* hsigma = new TH2F("hsigma", "sigmas; Wheel; #sigma [ns]", 22, 0, 22, 200, 0, 3.5); 
 
+        std::vector<double> temp_stddev;
         for (const auto & wheel : wheelTag) {
             std::string wh = wheel;  
             wh = wh.erase(1, 2); // Removes "h.": "Wh.-2"→ "W-2"
@@ -674,18 +675,35 @@ void plotEffWheelStationSigma( std::string hName,
 
                 int wheelIdx = WheelStationToBins(station, iwheel);
                 hsigma->Fill(wheelIdx, stddev);
-                // std::cout << "Entries --------------" << std::endl;
+                std::cout << "wheelIdx: " << wheelIdx <<  " | stddev: " << stddev << std::endl;
 
-                // hsigma->SetStats(0);  // Remove statistic box
-                // hsigma->SetMarkerColor(vInfo[fileIdx][0]);
-                // hsigma->SetMarkerStyle(21);  // Sets to a solid circle (choose from styles 1 to 30)
+                temp_stddev.push_back(stddev);
 
-            }
-        }
+            } // chambTag loop
+        } // wheelTag loop
+
+        vstddev.push_back(temp_stddev);
+
+        // TCanvas cEff = new TCanvas("cEff", "Efficiency Plot", 800, 600);
+        // cEff.SetGridy();
+        // // cEff.SetGridx();
+        // hsigma->Draw("AP"); // "AP" for axis and points
+        // cEff.SaveAs((saveDir+hName+"sigma.png").c_str());
+        // cEff.SaveAs((saveDir+hName+"sigma.pdf").c_str());
 
         // hsigma
-        Double_t content = hsigma->GetBinContent(3);
-        std::cout << "content:" << content << std::endl;
+        // Double_t content = hsigma->GetBinContent(3,3);
+        // std::cout << "content:" << content << std::endl;
+
+
+        // // ✅ CORRECT: Starting at 1
+        // for (int i = 1; i <= hsigma->GetNbinsX(); i++) {
+        //     for (int j = 1; j <= hsigma->GetNbinsY(); j++) {
+        //         double content = hsigma->GetBinContent(i, j);  // Correct!
+        //         if (content < 0.0000001)continue; 
+        //         std::cout << "content:" << content << std::endl;
+        //     }
+        // }
 
         vHists.push_back(hsigma);
         // delete hsigma;
@@ -702,23 +720,16 @@ void plotEffWheelStationSigma( std::string hName,
         for (int i = 1; i <= 11; ++i) {
             if (i == 1 || i == 22 ) continue;
 
-            std::cout << "------------------" << std::endl;
+            // std::cout << "------------------" << std::endl;
             double binCenter = vHists[iHist]->GetXaxis()->GetBinCenter(i);
-            std::cout << "binCenter:" << binCenter << std::endl;
-
-            double ybinCenter = vHists[iHist]->GetYaxis()->GetBinCenter(i);
-            std::cout << "ybinCenter:" << ybinCenter << std::endl;
-
+            // std::cout << "binCenter:" << binCenter << std::endl;
             double binWidth = vHists[iHist]->GetXaxis()->GetBinWidth(i) / 2.0;
 
-
-            Double_t content = vHists[iHist]->GetBinContent(i, i);
-            std::cout << "content:" << content << std::endl;
-
-            double total = vHists[iHist]->GetBinContent(i);
-            std::cout << "total:" << total << std::endl;
-
+            // double total = vHists[iHist]->GetBinContent(i);
+            // std::cout << "total:" << total << std::endl;
             // double total = hTotal[iHist]->GetBinContent(i);
+
+            double total = vstddev[iHist][i];
 
             if (total == 0) {
 
@@ -740,13 +751,15 @@ void plotEffWheelStationSigma( std::string hName,
                 // double error = (passed > 0 && passed < total) ? 
                 //             sqrt(efficiency * (1 - efficiency) / total) : 0;
                 
-                x.push_back(total);
-                ex_low.push_back(0.0);
-                ex_high.push_back(0.0);
+                x.push_back(binCenter);
+                ex_low.push_back(0.0); //error
+                ex_high.push_back(0.0); //error
 
-                y.push_back(2.); //ybinCenter
+                // y = vstddev[iHist];
+
+                y.push_back(total);
                 ey_low.push_back(0.0); //error
-                ey_high.push_back(0.0);
+                ey_high.push_back(0.0); //error
             }
 
         }
@@ -786,7 +799,7 @@ void plotEffWheelStationSigma( std::string hName,
     for (size_t iHist = 1; iHist < graphs.size(); ++iHist) {
         graphs[iHist]->Draw("P SAME");
     }
-    return;
+    
     // gPad->Update();
     graphs[0]->GetYaxis()->SetRangeUser(vYMinMax[0],vYMinMax[1]);
     
@@ -823,21 +836,28 @@ void plotEffWheelStationSigma( std::string hName,
         xcoord = xcoord + 0.074;  //0.665
     }
 
+    
+
     // Get coordinates from the points the the plot
     std::vector<double> pointXcoords;
     for (int bin = 1; bin <= vHists[0]->GetNbinsX(); bin++) {
-        double x = vHists[0]->GetBinCenter(bin);
+        // double x = vHists[0]->GetBinCenter(bin); // For 1d histograms
+        double x = vHists[0]->GetXaxis()->GetBinCenter(bin); // For 2d histograms
+
         if ( bin == 1 || bin == vHists[0]->GetNbinsX() ) continue;
         pointXcoords.push_back(x);
         // double y = hTotal1->GetBinContent(bin);
         // std::cout << "Bin " << bin << ": x = " << x << ", y = " << y << std::endl;
     }
 
-    // Draw vertical lines in the canvas
+    // return;
+
+    // Draw vertical lines in the canvas for Wheels
     // for (size_t i = 0; i < pointXcoords.size(); ++i) {
     for (size_t i = 0; i < pointXcoords.size()/2; ++i) {
         double x[2] = {pointXcoords[i], pointXcoords[i]};  // Same x coordinate
-        double y[2] = {0, vHists[0]->GetMaximum()};  // From bottom to top
+        // double y[2] = {0, vHists[0]->GetMaximum()};  // From bottom to top
+        double y[2] = {0, vYMinMax[1]};  // From bottom to top
         TGraph *vline = new TGraph(2, x, y);
         vline->SetLineColor(kGray);
         vline->SetLineWidth(1.);
@@ -845,19 +865,25 @@ void plotEffWheelStationSigma( std::string hName,
         vline->Draw("L");  // "L" option for line only
     }
 
-    // Draw vertical lines in the canvas
+    
+
+    // Draw vertical lines in the canvas for divide station regions
     // std::vector<double> divisors = {6, 11, 16};
     std::vector<double> divisors = {6};
     for (size_t i = 0; i < divisors.size(); ++i) {
         // double xpos = 6.;
         double x[2] = {divisors[i], divisors[i]};  // Same x coordinate
-        double y[2] = {0, vHists[0]->GetMaximum()};  // From bottom to top
+        // double y[2] = {0, vHists[0]->GetMaximum()};  // From bottom to top
+        double y[2] = {0, vYMinMax[1]};  // From bottom to top
         TGraph *vline = new TGraph(2, x, y);
         vline->SetLineColor(kBlack);
         vline->SetLineWidth(2);
         
         vline->Draw("L");  // "L" option for line only
     }
+
+    
+    
 
     // Add legend
     TLegend* leg = new TLegend(0.65, 0.15, 0.9, 0.35);
