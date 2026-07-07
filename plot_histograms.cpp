@@ -309,7 +309,7 @@ void plot_histograms() {
                              {"DT AM", "DT AM + RPC", "RPC Only"},
                              {{kP6Red, 20}, {kP6Blue, 21}, {kP6Grape, 22}},
                              saveDir,
-                             {0.90,1.005} ) ;
+                             {0.0,3.5} ) ;
 
     return;
     // --------------------------------

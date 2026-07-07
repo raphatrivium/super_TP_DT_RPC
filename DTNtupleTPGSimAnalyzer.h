@@ -621,6 +621,7 @@ void plotEffWheelStationSigma( std::string hName,
     std::vector<TFile *> vFile = fileList;
     std::vector<std::string> vLegend = legendList;
     std::vector<std::vector<int>> vInfo = infolist;
+    std::vector<double> vYMinMax = yMinMax;
 
     if (vFile.size() != vLegend.size() || 
         vFile.size() != vInfo.size() || 
@@ -632,10 +633,11 @@ void plotEffWheelStationSigma( std::string hName,
     std::vector<std::string> wheelTag = {"Wh.-2","Wh.-1","Wh.0","Wh.+1","Wh.+2",};
     std::vector<std::string> chambTag = {"MB1", "MB2", "MB3", "MB4"};
 
-    std::vector<std::vector<double>> vstddev;
-
+    // std::vector<std::vector<double>> vstddev;
 
     std::vector<TH2*> vHists;
+    // std::vector<TH1F *> hTotal;
+    // std::vector<TH1F *> hMatched;
     for (size_t fileIdx = 0; fileIdx < vFile.size(); ++fileIdx) {
 
         std::cout << "FILE --------------" << std::endl;
@@ -655,7 +657,7 @@ void plotEffWheelStationSigma( std::string hName,
 
                 // Get the standard deviation of each histogram
                 double stddev = hist->GetStdDev();
-                std::cout << "stddev --------------:" << stddev << std::endl;
+                // std::cout << "stddev --------------:" << stddev << std::endl;
 
                 int station = 0;
                 if (chamb == "MB1" ) station = 1;
@@ -674,38 +676,221 @@ void plotEffWheelStationSigma( std::string hName,
                 hsigma->Fill(wheelIdx, stddev);
                 // std::cout << "Entries --------------" << std::endl;
 
-                hsigma->SetStats(0);  // Remove statistic box
-                hsigma->SetMarkerColor(vInfo[fileIdx][0]);
-                hsigma->SetMarkerStyle(21);  // Sets to a solid circle (choose from styles 1 to 30)
+                // hsigma->SetStats(0);  // Remove statistic box
+                // hsigma->SetMarkerColor(vInfo[fileIdx][0]);
+                // hsigma->SetMarkerStyle(21);  // Sets to a solid circle (choose from styles 1 to 30)
 
-                
             }
         }
+
+        // hsigma
+        Double_t content = hsigma->GetBinContent(3);
+        std::cout << "content:" << content << std::endl;
+
         vHists.push_back(hsigma);
         // delete hsigma;
     } //end loop files
     
+
+    std::vector<TGraphAsymmErrors*> graphs;
+    for (size_t iHist = 0; iHist < vHists.size(); ++iHist) {
+
+        int nBins = vHists[0]->GetNbinsX();
+        std::vector<double> x, y, ex_low, ex_high, ey_low, ey_high;
+
+        // Loop in the bins
+        for (int i = 1; i <= 11; ++i) {
+            if (i == 1 || i == 22 ) continue;
+
+            std::cout << "------------------" << std::endl;
+            double binCenter = vHists[iHist]->GetXaxis()->GetBinCenter(i);
+            std::cout << "binCenter:" << binCenter << std::endl;
+
+            double ybinCenter = vHists[iHist]->GetYaxis()->GetBinCenter(i);
+            std::cout << "ybinCenter:" << ybinCenter << std::endl;
+
+            double binWidth = vHists[iHist]->GetXaxis()->GetBinWidth(i) / 2.0;
+
+
+            Double_t content = vHists[iHist]->GetBinContent(i, i);
+            std::cout << "content:" << content << std::endl;
+
+            double total = vHists[iHist]->GetBinContent(i);
+            std::cout << "total:" << total << std::endl;
+
+            // double total = hTotal[iHist]->GetBinContent(i);
+
+            if (total == 0) {
+
+                x.push_back(binCenter);
+                ex_low.push_back(0.0); // binWidth
+                ex_high.push_back(0.0); // binWidth
+
+                y.push_back(0.0);
+                ey_low.push_back(0.0);
+                ey_high.push_back(0.0);
+
+            }
+            else {
+                // // Normal efficiency calculation with Clopper-Pearson errors
+                // double efficiency = passed / total;
+                
+                // // Wilson score interval or Clopper-Pearson
+                // // For simplicity, using standard error approximation
+                // double error = (passed > 0 && passed < total) ? 
+                //             sqrt(efficiency * (1 - efficiency) / total) : 0;
+                
+                x.push_back(total);
+                ex_low.push_back(0.0);
+                ex_high.push_back(0.0);
+
+                y.push_back(2.); //ybinCenter
+                ey_low.push_back(0.0); //error
+                ey_high.push_back(0.0);
+            }
+
+        }
+
+        // Create graph with EXACTLY the points you want
+        TGraphAsymmErrors* graph = new TGraphAsymmErrors(x.size(), x.data(), y.data(),
+                                                        ex_low.data(), ex_high.data(),
+                                                        ey_low.data(), ey_high.data());
+
+        // Remove the horizontal error bars. 
+        // Make sense remove them since x-axis is just an enumeration of the wheels.
+        for (Int_t k = 0; k < graph->GetN(); ++k) {
+            graph->SetPointError(k, 0.0, 0.0, graph->GetErrorYlow(k), graph->GetErrorYhigh(k));
+        }
+                                            
+        graph->SetTitle("");
+        graph->SetName( hName.c_str() );
+        graph->SetLineColor(vInfo[iHist][0]);
+        graph->SetMarkerColor(vInfo[iHist][0]);
+        graph->SetMarkerStyle(vInfo[iHist][1]);
+
+        graph->GetXaxis()->SetTitle("Wheels");
+        graph->GetYaxis()->SetTitle("#sigma [ns]");
+        
+        graphs.push_back(graph);
+    }
+
     
+
+    std::cout << "graphs.size(): " << graphs.size() << std::endl;
+
     TCanvas cEff = new TCanvas("cEff", "Efficiency Plot", 800, 600);
     cEff.SetGridy();
     // cEff.SetGridx();
+    
+    graphs[0]->Draw("AP"); // "AP" for axis and points
+    for (size_t iHist = 1; iHist < graphs.size(); ++iHist) {
+        graphs[iHist]->Draw("P SAME");
+    }
+    return;
+    // gPad->Update();
+    graphs[0]->GetYaxis()->SetRangeUser(vYMinMax[0],vYMinMax[1]);
+    
+    TText *text;
+    text = new TText(0.74,0.91,"PU 200 (14 TeV)");
+    text->SetNDC(); // To use the canvas coordinates
+    // text->SetTextAlign(31);
+    text->SetTextSize(0.03);
+    text->Draw();
 
-    vHists[0]->Draw(); // "AP" for axis and points
-    for (size_t iHists = 1; iHists < vHists.size(); ++iHists) {
-        vHists[iHists]->Draw("SAME");
+    TLatex latex;
+    latex.SetNDC(); // Use NDC (normalized device coordinates)
+    // latex.SetTextAlign(22); // Centered alignment
+    latex.SetTextSize(0.05); // Set text size
+    latex.DrawLatex(0.1,0.91, "CMS ");  // (#it{...} makes the text italic)
+    latex.SetTextSize(0.035);
+    latex.DrawLatex(0.18,0.91, "#it{Phase-2 Simulation Preliminary}");  // (#it{...} makes the text italic)
+
+    // Remove labels completely
+    graphs[0]->GetXaxis()->SetLabelSize(0);
+
+    // Draw new label information
+    std::vector<std::string> WheelID = {"-2", "-1", " 0", "+1", "+2", "-2", "-1", " 0", "+1", "+2"};
+    std::vector<std::string> StationID = {"MB1", "MB2"};
+    latex.SetTextSize(0.03);
+    double xcoord = 0.16; // 0.19
+    int iMB = 0;
+    for (size_t i = 0; i < WheelID.size(); ++i) {
+        latex.DrawLatex(xcoord, 0.07, WheelID[i].c_str());
+        if ( WheelID[i] == " 0"){
+            latex.DrawLatex(xcoord, 0.04, StationID[iMB].c_str());
+            iMB++;
+        }
+        xcoord = xcoord + 0.074;  //0.665
+    }
+
+    // Get coordinates from the points the the plot
+    std::vector<double> pointXcoords;
+    for (int bin = 1; bin <= vHists[0]->GetNbinsX(); bin++) {
+        double x = vHists[0]->GetBinCenter(bin);
+        if ( bin == 1 || bin == vHists[0]->GetNbinsX() ) continue;
+        pointXcoords.push_back(x);
+        // double y = hTotal1->GetBinContent(bin);
+        // std::cout << "Bin " << bin << ": x = " << x << ", y = " << y << std::endl;
+    }
+
+    // Draw vertical lines in the canvas
+    // for (size_t i = 0; i < pointXcoords.size(); ++i) {
+    for (size_t i = 0; i < pointXcoords.size()/2; ++i) {
+        double x[2] = {pointXcoords[i], pointXcoords[i]};  // Same x coordinate
+        double y[2] = {0, vHists[0]->GetMaximum()};  // From bottom to top
+        TGraph *vline = new TGraph(2, x, y);
+        vline->SetLineColor(kGray);
+        vline->SetLineWidth(1.);
+        vline->SetLineStyle(2);
+        vline->Draw("L");  // "L" option for line only
+    }
+
+    // Draw vertical lines in the canvas
+    // std::vector<double> divisors = {6, 11, 16};
+    std::vector<double> divisors = {6};
+    for (size_t i = 0; i < divisors.size(); ++i) {
+        // double xpos = 6.;
+        double x[2] = {divisors[i], divisors[i]};  // Same x coordinate
+        double y[2] = {0, vHists[0]->GetMaximum()};  // From bottom to top
+        TGraph *vline = new TGraph(2, x, y);
+        vline->SetLineColor(kBlack);
+        vline->SetLineWidth(2);
+        
+        vline->Draw("L");  // "L" option for line only
     }
 
     // Add legend
     TLegend* leg = new TLegend(0.65, 0.15, 0.9, 0.35);
-    for (size_t iHist = 0; iHist < vHists.size(); ++iHist) {
-       leg->AddEntry(vHists[iHist], vLegend[iHist].c_str(), "p");
+    for (size_t iHist = 0; iHist < graphs.size(); ++iHist) {
+       leg->AddEntry(graphs[iHist], vLegend[iHist].c_str(), "p");
     }
     leg->SetTextSize(0.029);
     leg->Draw();
-
+    
     // Save the plot in the output directory as "png" or/and "pdf"
     cEff.SaveAs((saveDir+hName+"sigma.png").c_str());
     cEff.SaveAs((saveDir+hName+"sigma.pdf").c_str());
+    
+    // TCanvas cEff = new TCanvas("cEff", "Efficiency Plot", 800, 600);
+    // cEff.SetGridy();
+    // // cEff.SetGridx();
+
+    // vHists[0]->Draw(); // "AP" for axis and points
+    // for (size_t iHists = 1; iHists < vHists.size(); ++iHists) {
+    //     vHists[iHists]->Draw("SAME");
+    // }
+
+    // // Add legend
+    // TLegend* leg = new TLegend(0.65, 0.15, 0.9, 0.35);
+    // for (size_t iHist = 0; iHist < vHists.size(); ++iHist) {
+    //    leg->AddEntry(vHists[iHist], vLegend[iHist].c_str(), "p");
+    // }
+    // leg->SetTextSize(0.029);
+    // leg->Draw();
+
+    // // Save the plot in the output directory as "png" or/and "pdf"
+    // cEff.SaveAs((saveDir+hName+"sigma.png").c_str());
+    // cEff.SaveAs((saveDir+hName+"sigma.pdf").c_str());
     
 }
 
