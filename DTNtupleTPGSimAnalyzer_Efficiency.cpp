@@ -94,8 +94,8 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
         m_plots["TPMatched"] = new TH1D("TPMatched", "Trigger Primitive Matched per Event; TP Matched per Event; Entries", 40, 0, 40);
         m_plots["hTPMatchedRPCflag"] = new TH1D("hTPMatchedRPCflag", "Trigger Primitive Matched RPC Flag; RPC Flag; Entries", 5, 0, 5);
 
-        m_plots["hTrigFlag"] = new TH1D("hTrigFlag", "Trigger Primitive RPC Flag; RPC Flag; Entries", 5, 0, 5);
-        m_plots["hTrigFlag"]->GetXaxis()->SetNdivisions(5, kFALSE);  // Don't auto-divide
+        m_plots["hTrigFlag"] = new TH1D("hTrigFlag", "Trigger Primitive RPC Flag; RPC Flag; Entries", 4, 0, 4);
+        m_plots["hTrigFlag"]->GetXaxis()->SetNdivisions(4, kFALSE);  // Don't auto-divide
         m_plots["hTrigFlag"]->GetXaxis()->CenterLabels();
 
 

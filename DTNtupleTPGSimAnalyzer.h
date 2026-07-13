@@ -1055,12 +1055,15 @@ void plot_histo(std::string hName,
                 std::initializer_list<std::vector<int>> infolist,
                 std::string saveDir,
                 bool norm=false,
-                bool logYflag=false)
+                bool logYflag=false,
+                std::string LegendCoord="TopRight") // TopRight - TopLeft - BottomRight - BottomLeft
 {
 
     std::vector<TFile *> vFile = fileList;
     std::vector<std::string> vLegend = legendList;
     std::vector<std::vector<int>> vInfo = infolist;
+
+    // bool flagExpo = false;
 
     if (vFile.size() != vLegend.size() || 
         vFile.size() != vInfo.size() || 
@@ -1071,6 +1074,7 @@ void plot_histo(std::string hName,
 
     std::vector<TH1F *> hists;
     std::vector<double> yMax;
+    std::vector<double> flagExpo;
     // for (const auto& file : vFile) {
     for (size_t fileIdx = 0; fileIdx < vFile.size(); ++fileIdx) {
 
@@ -1101,16 +1105,52 @@ void plot_histo(std::string hName,
             }
         }
 
-        hists.push_back(hist);
+      
+        // 2. Fetch the axis and its numerical maximum value
+        TAxis *yaxis = hist->GetYaxis();
+        Double_t ymax = hist->GetMaximum();
+
+        // 3. Compute the scientific exponent mathematically
+        Int_t exp = 0;
+        if (ymax > 0) {
+            exp = (Int_t)floor(log10(ymax));
+        }
+
+        // ROOT defaults to using multiples of 3 for engineering notation
+        exp = (exp / 3) * 3;
+        std::cout << "exp: " << exp <<  std::endl;
+
+        bool flagExpoTemp = false;
+        if ( exp > 1) flagExpoTemp = true;
+
+        // if ( flagExpo == true ){
+
+        //     // 4. Hide the native "x 10^N" floating tag 
+        //     // yaxis->SetNoExponent(kTRUE);
+
+        //     // 5. Update the title with TLatex script formatting
+        //     TString base_title = hist->GetYaxis()->GetTitle();
+        //     TString final_title = TString::Format("%s [#times 10^{%d}]", base_title.Data(), exp);
+        //     yaxis->SetTitle(final_title);
+
+        //     // // 6. Refresh the canvas layout
+        //     // gPad->Modified();
+        //     // gPad->Update();
+        // }
 
         double max = hist->GetMaximum();  // Highest bin in hist
+
+        hists.push_back(hist);
         yMax.push_back(max);
+        flagExpo.push_back(flagExpoTemp);
+
     }
 
     // Create a canvas
     TCanvas *canvas = new TCanvas("canvas", "Histograms from Two Files", 800, 600);
     // Get the standard deviation of each histogram
 
+    
     // Check which histogram has the highest bin
     double histMax = -999.;
     size_t bestIdx = -1;
@@ -1120,6 +1160,40 @@ void plot_histo(std::string hName,
         bestIdx = iMax;
     }
 
+    bool flagExpoTotal = true;
+    for (size_t iflagExpo = 0; iflagExpo < flagExpo.size(); ++iflagExpo) {
+        if ( flagExpo[iflagExpo] == false){
+            flagExpoTotal = false;
+            break;
+        }
+    }
+    if ( flagExpoTotal == true ){
+
+         // 2. Fetch the axis and its numerical maximum value
+        TAxis *yaxis = hists[bestIdx]->GetYaxis();
+        Double_t ymax = hists[bestIdx]->GetMaximum();
+
+        // 3. Compute the scientific exponent mathematically
+        Int_t exp = 0;
+        if (ymax > 0) {
+            exp = (Int_t)floor(log10(ymax));
+        }
+
+        // ROOT defaults to using multiples of 3 for engineering notation
+        exp = (exp / 3) * 3;
+        std::cout << "exp: " << exp <<  std::endl;
+
+        // 5. Update the title with TLatex script formatting
+        TString base_title = hists[bestIdx]->GetYaxis()->GetTitle();
+        TString final_title = TString::Format("%s [#times 10^{%d}]", base_title.Data(), exp);
+        // yaxis->SetTitle(final_title);
+        hists[bestIdx]->GetYaxis()->SetTitle(final_title);
+
+        // // 6. Refresh the canvas layout
+        // gPad->Modified();
+        // gPad->Update();
+    }
+
     // Draw Histograms
     hists[bestIdx]->Draw("HIST"); // "AP" for axis and points
     for (size_t iHist = 0; iHist < hists.size(); ++iHist) {
@@ -1127,9 +1201,14 @@ void plot_histo(std::string hName,
         hists[iHist]->Draw("HIST SAME");
     }
 
-    // Important: Move the exponent 
+    // Important: Move the exponent fom y-axis
     gPad->Update();  
-    TGaxis::SetExponentOffset(-0.07, 0.01, "y");
+    // TGaxis::SetExponentOffset(-0.07, 0.01, "y");
+    // TGaxis::SetExponentOffset(-0.055, -0.04, "y");
+    // TGaxis::SetExponentOffset(-0.09, 0.01, "y");
+    // TGaxis::SetMaxDigits(3);
+    TGaxis::SetExponentOffset(-0.5, 0.01, "y"); // To put out of Canvas
+
 
     TText *text = new TText(0.1,0.92,"CMS Preliminary");
 
@@ -1147,7 +1226,7 @@ void plot_histo(std::string hName,
     text->SetTextAngle(90);
     if (norm) text->Draw();
 
-    text = new TText(0.76,0.91,"PU 200 (14 TeV)");
+    text = new TText(0.75,0.91,"PU 200 (14 TeV)");
     text->SetNDC(); // To use the canvas coordinates
     // text->SetTextAlign(31);
     text->SetTextSize(0.03);
@@ -1155,6 +1234,11 @@ void plot_histo(std::string hName,
 
     // Create a legend
     TLegend* legend = new TLegend(0.73, 0.75, 0.9, 0.9); // Adjust the coordinates as needed
+
+    if ( LegendCoord == "BottomRight"){
+        legend = new TLegend(0.73, 0.1, 0.9, 0.25); // Adjust the coordinates as needed
+    }
+
     for (size_t iLeg = 0; iLeg < hists.size(); ++iLeg) {
         legend->AddEntry(hists[iLeg], vLegend[iLeg].c_str(), "l"); // "DT AM"
         legend->SetTextSize(0.02); // Increase the text size in the legend

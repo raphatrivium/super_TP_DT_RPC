@@ -81,8 +81,8 @@ int RPC_eff_SimLinks() {
 
         m_plots["hNTrigs"] = new TH1D("hNTrigs", "Number of Triggers ; Number of Triggers; Entries / Event", 50, 0, 300);
 
-        m_plots["hTrigFlag"] = new TH1D("hTrigFlag", "Trigger Primitive RPC Flag; RPC Flag; Entries", 5, 0, 5);
-        m_plots["hTrigFlag"]->GetXaxis()->SetNdivisions(5, kFALSE);  // Don't auto-divide
+        m_plots["hTrigFlag"] = new TH1D("hTrigFlag", "Trigger Primitive RPC Flag; RPC Flag; Entries", 4, 0, 4);
+        m_plots["hTrigFlag"]->GetXaxis()->SetNdivisions(4, kFALSE);  // Don't auto-divide
         m_plots["hTrigFlag"]->GetXaxis()->CenterLabels();
 
 
