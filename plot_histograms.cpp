@@ -502,7 +502,7 @@ void plot_histograms() {
                                 {"DT AM", "DT AM + RPC", "RPC Only"},
                                 {{kP6Red, 20}, {kP6Blue, 21}, {kP6Grape, 22}},
                                 saveDir );
-    return;
+    
     // --------------------------------
     saveDir = "plots/DeltaPhiStudies/variables/";
     if (gSystem->AccessPathName(saveDir.c_str())) { 
@@ -512,14 +512,14 @@ void plot_histograms() {
     plot_histo("hNTrigs",
                 {fileDTAMv22, fileRPCv22, fileDTRPCOnlyv22},
                 {"DT AM", "DT AM + RPC", "RPC Only (DT)"},
-                {{kRed, 1}, {kBlue, 1}, {kMagenta, 1}},
+                 {{kP6Red, 1}, {kP6Blue, 1}, {kP6Grape, 1}},
                 saveDir, 
                 false);
 
     plot_histo("hDeltaPhi_AM",
                 {fileDTAMv22, fileRPCv22, fileDTRPCOnlyv22},
-                {"DT AM", "DT AM + RPC", "RPC Only (DT)"},
-                {{kRed, 1}, {kBlue, 1}, {kMagenta, 1}},
+                {"DT AM", "DT AM + RPC", "RPC Only"},
+                {{kP6Red, 1}, {kP6Blue, 1}, {kP6Grape, 1}},
                 saveDir, 
                 false, // normalization by area
                 true); // logY
@@ -527,11 +527,11 @@ void plot_histograms() {
     plot_histo("hSimLinkTPdeltaPhi",
                 {fileRPCOnlyv22},
                 {"RPC Only"},
-                {{kGreen, 1}},
+                {{kP6Grape, 1}},
                 saveDir, 
                 false, // normalization by area
                 true); // logY
-    
+    return;
     // --------------------------------
     saveDir = "plots/DeltaPhiStudies/time/";
     // Create the directory if it doesn't exist
