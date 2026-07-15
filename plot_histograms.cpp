@@ -281,9 +281,9 @@ void plot_histograms() {
     }
 
     plot_histo("hNTrigs",
-                {fileDTAMv22, fileRPCv22, fileRPCcorrectedv22, fileRPCOnlyv22},
-                {"DT AM", "DT AM + RPC", "DT+RPC Corrected", "RPC Only"},
-                {{kP6Red, 1}, {kP6Blue, 1}, {kP6Yellow, 1}, {kP6Grape, 1}},
+                {fileDTAMv22, fileRPCcorrectedv22, fileRPCOnlyv22},
+                {"DT AM", "DT AM + RPC", "RPC Only"},
+                {{kP6Red, 1}, {kP6Blue, 1}, {kP6Grape, 1}},
                 saveDir, 
                 false);
 
