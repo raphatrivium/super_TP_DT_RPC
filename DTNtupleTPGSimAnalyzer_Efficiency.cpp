@@ -16,8 +16,8 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
     std::string inputDir = "input/";
     std::map<std::string,std::string> m_files;
     
-    m_files["DTAM"]              = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
-    m_files["RPC"]               = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
+    // m_files["DTAM"]              = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_noRPC.root";
+    // m_files["RPC"]               = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
 
     // m_files["RPCcorrected"]      = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_RPCcorrected.root";
     // m_files["RPC_Flag0and1"]     = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_step2_RPC.root";
@@ -27,9 +27,9 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
     // m_files["RPCUpdated"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_withRPC_PHASE2_TN_33BX.root";
     // m_files["DTRPCOnly"]         = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
 
-    m_files["DTAMv2.2"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.2_DTAM.root";
-    m_files["RPCv2.2"]           = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.2_RPC.root";
-    m_files["RPCcorrected2.2"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.2_RPCcorrected.root";
+    // m_files["DTAMv2.2"]          = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.2_DTAM.root";
+    // m_files["RPCv2.2"]           = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.2_RPC.root";
+    // m_files["RPCcorrected2.2"]   = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_AM2.2_RPCcorrected.root";
     m_files["DTRPCOnlyv2.2"]     = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_1510pre4_withRPC_correctedFlag1Timing.root";
     
     // m_files["RPCOnly"]        = "DTDPGNtuple_11_1_0_patch2_Phase2_Simulation_Dec2025.root";
@@ -375,15 +375,15 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
         // ------------------------------------------------------------------------------
         // Loop in the events
         // ------------------------------------------------------------------------------
-        // nEntries = 1;   // 100   nEntries
+        nEntries = 1;   // 100   nEntries
 
         std::cout << "Total entries:" << nEntries <<std::endl;
 
         int idxGen = 0;
         for (Long64_t iEvent = 0; iEvent < nEntries; ++iEvent) { 
-
-            tree->GetEntry(iEvent);
             
+            tree->GetEntry(iEvent);
+            std::cout << "Event: " << iEvent << "=======================================" << std::endl;
             m_plots["hNSeg"] -> Fill( ph2Seg_nSegments );
             // m_plots["hNTrigs"] -> Fill( ph2TpgPhiEmuAm_nTrigs );
 
@@ -704,6 +704,27 @@ int DTNtupleTPGSimAnalyzer_Efficiency() { //
                             Double_t segTrigAMDPhi = abs(acos(cos(finalAMDPhi)));
                             if (fdebug) std::cout << "      iTrigAM: " << iTrigAM << " | Wh: "<< trigAMWh << " | Sec: " << trigAMSec << " | St: " << trigAMSt << " | BX: " << trigAMBX << " | segTrigDPhi: " << segTrigAMDPhi <<  std::endl;
                             // if (fdebug) std::cout << "          trigGlbPhi: " << trigGlbPhi << " | finalAMDPhi: " << finalAMDPhi << " | segTrigAMDPhi: " << segTrigAMDPhi <<  std::endl;
+
+
+                            // FOR TEST for Flag 2 TP
+                            // The eff for that flag is too low to be true
+                            // Maybe because of the way the delta Phi is implemented here
+                            // We will try apply the same criteria the DT AM code applies.
+                            
+                            // // Double_t a = phi_DT_MP_conv(rpc_mp_it->global_position.phi(), rpc_det_id.sector()); 
+                            // Double_t a = phi_DT_MP_conv(ph2TpgPhiEmuAm_phi->at(iTrigAM), trigAMSec);
+                            // // b = ( a - dt_metaprimitive->phi);
+                            // Double_t b = ( a - ph2Seg_posGlb_phi->at(iSeg));
+                            // int trick_delta_phi = (int)round( b * PHIBRES_CONV);
+                            // std::cout << "trick_delta_phi: " << trick_delta_phi << std::endl;
+                            // std::cout << "segTrigAMDPhi  : " << segTrigAMDPhi << std::endl;
+
+                            // int delta_phi = (int)round((phi_DT_MP_conv(rpc_mp_it->global_position.phi(), rpc_det_id.sector()) - dt_metaprimitive->phi) *
+                            //             cmsdt::PHIBRES_CONV);
+                            int trick_delta_phi = (int)round((phi_DT_MP_conv(ph2TpgPhiEmuAm_phi->at(iTrigAM), trigAMSec) - ph2Seg_posGlb_phi->at(iSeg)) *
+                                        PHIBRES_CONV);
+                            std::cout << "trick_delta_phi: " << trick_delta_phi << std::endl;
+                            std::cout << "segTrigAMDPhi  : " << segTrigAMDPhi << std::endl;
 
                             m_plots["hPrimPsiAM"] -> Fill( ph2TpgPhiEmuAm_dirLoc_phi->at(iTrigAM) );
                             m_plots["hDeltaPhi_AM"] -> Fill( segTrigAMDPhi );

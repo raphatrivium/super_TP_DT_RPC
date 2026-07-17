@@ -42,6 +42,22 @@ constexpr int TIME_TO_TDC_COUNTS = 32;
 constexpr int LHC_CLK_FREQ = 25; // In nanoseconds
 
 
+constexpr float PHIBRES_CONV = 4096. / 2.;   // 13 bits, [-2, 2]
+double phi_DT_MP_conv(double rpc_global_phi, int rpcSector) {
+  // Adaptation of https://github.com/cms-sw/cmssw/blob/master/L1Trigger/L1TTwinMux/src/RPCtoDTTranslator.cc#L349
+
+  if (rpcSector == 1)
+    return rpc_global_phi;
+  else {
+    float conversion = 1 / 6.;
+    if (rpc_global_phi >= 0)
+      return rpc_global_phi - (rpcSector - 1) * M_PI * conversion;
+    else
+      return rpc_global_phi + (13 - rpcSector) * M_PI * conversion;
+  }
+}
+
+
 class BarrelGeo {  // The class
   private:  // Access specifier
     std::vector<std::vector<double>> barrel_geometry; // Attribute
